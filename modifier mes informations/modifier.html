@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modifier mes informations</title>
+    <link rel="icon" href="image/information-svgrepo-com.svg" />
+    <link rel="stylesheet" href="modifier.css" />
+    <link rel="stylesheet" href="../code footer.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: #f3f5f8;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-left">
+        <img src="image/logo.jpg" alt="logo" id="logo" />
+        <p
+          style="
+            font-family: 'Times New Roman', Times;
+            color: #14532d;
+            font-size: 40px;
+          "
+        >
+          <strong>Modifier mes informations</strong>
+        </p>
+        <nav class="header-nav">
+          <a href="../index/index.html" class="nav-link">Acceuil</a>
+          <a href="../fruits et légumes/fruits et légumes.html" class="nav-link"
+            >Marché</a
+          >
+          <a href="../Epicerie bio/epicerie bio.html" class="nav-link"
+            >Epicerie</a
+          >
+          <a href="../se connecter/bienvenue.html" class="nav-link"
+            >Connexion</a
+          >
+          <a href="../about us/about us.html" class="nav-link">About US</a>
+          <a href="../contact us/contact us.html" class="nav-link"
+            >Contact US</a
+          >
+        </nav>
+      </div>
+      <div class="header-right">
+        <a href="../compte Client/compte.html"
+          ><img
+            src="image/person-svgrepo-com.svg"
+            alt="profile"
+            class="header-profile"
+        /></a>
+        <a href="../mon panier/panier.html"
+          ><img
+            src="image/cart-2-svgrepo-com.svg"
+            alt="cart"
+            class="header-cart"
+        /></a>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="page-container">
+      <div class="card">
+        <h1 class="page-title">Modifier mes informations</h1>
+        <div class="form-group">
+          <label for="nom et prenom">Nom et Prénom</label>
+          <input
+            type="text"
+            value="Jean Dupont"
+            readonly
+            id="nom et prenom"
+            placeholder="nom"
+          />
+        </div>
+        <div class="form-group">
+          <label>Adresse</label>
+          <input type="text" placeholder="123 rue de la République" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="demo@biobladi.com" />
+        </div>
+        <div class="form-group">
+          <label>Téléphone</label>
+          <input type="tel" placeholder="+216 12 345 678" />
+        </div>
+        <div class="buttons">
+          <div>
+            <a href="../compte Client/compte.html"
+              ><button class="btn2">Annuler</button>
+            </a>
+          </div>
+          <div>
+            <a href="../compte Client/compte.html"
+              ><button class="btn1">Enregistrer</button></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <img src="image/logo.jpg" class="logo" alt="BioBladi logo" />
+          <span style="color: white; font-weight: bold"
+            >BioBladi — Du champ à votre assiette, produits locaux et bio
+          </span>
+        </div>
+        <div class="footer-links">
+          <h4>Liens utiles</h4>
+          <a href="../about us/about us.html">About Us</a>
+          <a href="../fruits et légumes/fruits et légumes.html">Marché</a>
+        </div>
+        <div class="footer-contact">
+          <h4>Contactez-nous</h4>
+          <p>
+            <img
+              src="image/phone-svgrepo-com (1).svg"
+              alt="Téléphone"
+              class="footer-icon"
+            />
+            +216 12 345 678
+          </p>
+          <p>
+            <img
+              src="image/mail-check-svgrepo-com.svg"
+              alt="Email"
+              class="footer-icon"
+            />
+            contact@biobladi.tn
+          </p>
+          <p>
+            <img
+              src="image/location-svgrepo-com.svg"
+              alt="Adresse"
+              class="footer-icon"
+            />
+            Tunis, Tunisie
+          </p>
+          <p>
+            <img
+              src="image/time-svgrepo-com.svg"
+              alt="Horaires"
+              class="footer-icon"
+            />
+            Lun-Ven: 8h - 18h
+          </p>
+        </div>
+        <div class="footer-social">
+          <h4>Suivez-nous</h4>
+          <a href="#"
+            ><img
+              src="image/facebook-svgrepo-com (1).svg"
+              alt="Facebook"
+              class="social-icon"
+          /></a>
+          <a href="#"
+            ><img
+              src="image/instagram-167-svgrepo-com.svg"
+              alt="Instagram"
+              class="social-icon"
+          /></a>
+          <a href="#"
+            ><img
+              src="image/linkedin-svgrepo-com (1).svg"
+              alt="LinkedIn"
+              class="social-icon"
+          /></a>
+        </div>
+        <p class="footer-copy">
+          © 2025 BioBladi — Tous droits réservés — Fièrement tunisien 🇹🇳
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon panier</title>
+    <link rel="stylesheet" href="panier.css" />
+    <link rel="icon" href="image/cart-2-svgrepo-com.svg" />
+    <link rel="stylesheet" href="../code footer.css" />
+    <script src="mon panier.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="head">
+        <div class="left">
+          <div>
+            <img src="image/logo.jpg" alt="logo" id="logo" />
+          </div>
+
+          <div>
+            <span
+              style="
+                font-family: 'Times New Roman', Times;
+                color: #14532d;
+                font-size: 40px;
+              "
+            >
+              <strong>Mon Panier</strong>
+            </span>
+            <span
+              style="color: rgb(205, 198, 198); font-size: 25px"
+              class="nb_articles"
+              id="header-article-count"
+              ><strong> 0 article(s)</strong></span
+            >
+          </div>
+          <div>
+            <nav class="header-nav">
+              <a href="../index/index.html" class="lien_nav">Acceuil</a>
+              <a
+                href="../fruits et légumes/fruits et légumes.html"
+                class="lien_nav"
+                >Marché</a
+              >
+              <a href="../Epicerie bio/epicerie bio.html" class="lien_nav"
+                >Epicerie</a
+              >
+              <a href="../se connecter/bienvenue.html" class="lien_nav"
+                >Connexion</a
+              >
+              <a href="../about us/about us.html" class="lien_nav">About US</a>
+              <a href="../contact us/contact us.html" class="lien_nav"
+                >Contact US</a
+              >
+              <a href="../Questionnaire/questionnaire.html" class="lien_nav"
+                >Questionnaire</a
+              >
+            </nav>
+          </div>
+        </div>
+        <div class="right">
+          <div>
+            <a href="../compte Client/compte.html"
+              ><img src="image/person-svgrepo-com.svg" alt="person" id="person"
+            /></a>
+          </div>
+          <div>
+            <a href="../mon panier/panier.html"
+              ><img src="image/cart-2-svgrepo-com.svg" alt="cart" id="cart"
+            /></a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <hr style="color: 14532d" />
+
+    <div class="container">
+      <div class="leftC">
+        <div class="row1">
+          <div style="margin-left: 20px">Produits</div>
+          <div style="margin-left: 50px">Quantité</div>
+          <div style="margin-right: 20px">Total</div>
+        </div>
+
+        <div id="cart-items-container"></div>
+
+        <div class="row4">
+          <div>Total</div>
+          <div class="sum" id="cart-subtotal-left">0 DT</div>
+        </div>
+      </div>
+
+      <div class="rightC">
+        <div class="top">
+          <p style="color: #14532d"><b>Récapitulatif</b></p>
+          <p><b>Adresse de livraison</b></p>
+          <p>Tunis,El Manar,2092</p>
+          <hr />
+        </div>
+        <div class="middle">
+          <div>Total des articles:</div>
+          <div id="cart-subtotal-right">0 DT</div>
+
+          <div style="color: #c6c1c1">Livraison:</div>
+          <div style="color: #c6c1c1">3 DT</div>
+
+          <div>Total à payer</div>
+          <div id="cart-final-total">0 DT</div>
+        </div>
+        <div class="bottom">
+          <a href="../finaliser ma commande/finaliser ma commande.html"
+            ><button class="valider">Valider ma commande</button></a
+          >
+          <a href="../fruits et légumes/fruits et légumes.html"
+            ><button class="continuer">Continuer mes achats</button></a
+          >
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <img src="image/logo.jpg" class="logo" alt="BioBladi logo" />
+          <span style="color: white; font-weight: bold"
+            >BioBladi — Du champ à votre assiette, produits locaux et bio
+          </span>
+        </div>
+        <div class="footer-links">
+          <h4>Liens utiles</h4>
+          <a href="../about us/about us.html">About Us</a>
+          <a href="../fruits et légumes/fruits et légumes.html">Marché</a>
+        </div>
+        <div class="footer-contact">
+          <h4>Contactez-nous</h4>
+          <p>
+            <img
+              src="image/phone-svgrepo-com (1).svg"
+              alt="Téléphone"
+              class="footer-icon"
+            />
+            +216 12 345 678
+          </p>
+          <p>
+            <img
+              src="image/mail-check-svgrepo-com.svg"
+              alt="Email"
+              class="footer-icon"
+            />
+            contact@biobladi.tn
+          </p>
+          <p>
+            <img
+              src="image/location-svgrepo-com.svg"
+              alt="Adresse"
+              class="footer-icon"
+            />
+            Tunis, Tunisie
+          </p>
+          <p>
+            <img
+              src="image/time-svgrepo-com.svg"
+              alt="Horaires"
+              class="footer-icon"
+            />
+            Lun-Ven: 8h - 18h
+          </p>
+        </div>
+        <div class="footer-social">
+          <h4>Suivez-nous</h4>
+          <a href="#"
+            ><img
+              src="image/facebook-svgrepo-com (1).svg"
+              alt="Facebook"
+              class="social-icon"
+          /></a>
+          <a href="#"
+            ><img
+              src="image/instagram-167-svgrepo-com.svg"
+              alt="Instagram"
+              class="social-icon"
+          /></a>
+          <a href="#"
+            ><img
+              src="image/linkedin-svgrepo-com (1).svg"
+              alt="LinkedIn"
+              class="social-icon"
+          /></a>
+        </div>
+        <p class="footer-copy">
+          © 2025 BioBladi — Tous droits réservés — Fièrement tunisien 🇹🇳
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

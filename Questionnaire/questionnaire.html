@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Questionnaire</title>
+    <link rel="stylesheet" href="questionnaire.css" />
+    <link rel="stylesheet" href="../code footer.css" />
+    <script src="questionnaire.js" defer></script>
+  </head>
+  <body>
+    <div class="head">
+      <div class="left">
+        <div>
+          <img src="../fruits et légumes/image/logo.jpg" alt="logo" id="logo" />
+        </div>
+        <div>
+          <span
+            style="
+              font-family: 'Times New Roman', Times;
+              color: #14532d;
+              font-size: 40px;
+            "
+          >
+            <strong> Avis</strong>
+          </span>
+        </div>
+        <div>
+          <nav class="header-nav">
+            <a href="../index/index.html" class="lien_nav">Acceuil</a>
+            <a
+              href="../fruits et légumes/fruits et légumes.html"
+              class="lien_nav"
+              >Marché</a
+            >
+            <a href="../Epicerie bio/epicerie bio.html" class="lien_nav"
+              >Epicerie</a
+            >
+            <a href="../se connecter/bienvenue.html" class="lien_nav"
+              >Connexion</a
+            >
+            <a href="../contact us/contact us.html" class="lien_nav"
+              >Contact us</a
+            >
+            <a href="../about us/about us.html" class="lien_nav">About US</a>
+          </nav>
+        </div>
+      </div>
+      <div class="right">
+        <div>
+          <a href="../compte Client/compte.html"
+            ><img
+              src="../fruits et légumes/image/person-svgrepo-com.svg"
+              alt="person"
+              id="person"
+          /></a>
+        </div>
+        <div>
+          <a href="../mon panier/panier.html"
+            ><img
+              src="../fruits et légumes/image/cart-2-svgrepo-com.svg"
+              alt="cart"
+              id="cart"
+          /></a>
+        </div>
+      </div>
+    </div>
+    <hr />
+
+    <div class="Container">
+      <div class="formulaire">
+        <h1 class="title">Donnez-nous votre avis</h1>
+        <p>Aidez-nous à améliorer la qualité de nos produits Bio</p>
+
+        <form id="formulaire-avis" action="#" method="post">
+          <div class="input">
+            <label for="nom">Nom complet *</label>
+            <input
+              type="text"
+              id="nom"
+              name="Nom"
+              class="text"
+              placeholder="Votre nom"
+              required
+            />
+          </div>
+
+          <div class="input">
+            <label for="mail">Email *</label>
+            <input
+              type="email"
+              id="mail"
+              name="Email"
+              class="text"
+              placeholder="votre@email.com"
+              required
+            />
+          </div>
+
+          <div class="input">
+            <label>Appréciation globale *</label>
+            <div class="choix1">
+              <label
+                ><input type="radio" name="note" value="satisfait" />
+                Satisfait</label
+              >
+              <label
+                ><input type="radio" name="note" value="moyen" /> Moyen</label
+              >
+              <label
+                ><input type="radio" name="note" value="decu" /> Déçu</label
+              >
+            </div>
+          </div>
+          <div class="input">
+            <label>Quels produits avez-vous achetés ?</label>
+            <div class="choix2">
+              <label
+                ><input type="checkbox" name="produits" value="fruits" /> Fruits
+              </label>
+              <label
+                ><input type="checkbox" name="produits" value="Légumes" />
+                Légumes
+              </label>
+              <label
+                ><input type="checkbox" name="produits" value="epicerie" />
+                Épicerie</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  name="produits"
+                  value="produits laitiers"
+                />
+                Produits Laitiers
+              </label>
+            </div>
+          </div>
+          <div class="input">
+            <label>Comment vous évaluez nos prix ?</label>
+            <div class="choix2">
+              <label
+                ><input
+                  type="radio"
+                  name="prix"
+                  value="Raisonable"
+                />Raisonable</label
+              >
+              <label
+                ><input type="radio" name="prix" value="Cher" />Plutôt
+                cher</label
+              >
+            </div>
+          </div>
+          <div class="input">
+            <label for="date"
+              >Veuillez indiquer la date de votre dernière commande</label
+            >
+            <div class="date">
+              <input type="date" id="date" name="date" required />
+            </div>
+          </div>
+          <div class="input">
+            <label>Evaluez votre dernière expérience avec notre site :</label>
+            <div class="choix1">
+              <label
+                ><input type="radio" name="experience" value="1" required />
+                1</label
+              >
+              <label
+                ><input type="radio" name="experience" value="2" /> 2</label
+              >
+              <label
+                ><input type="radio" name="experience" value="3" /> 3</label
+              >
+              <label
+                ><input type="radio" name="experience" value="4" /> 4</label
+              >
+              <label
+                ><input type="radio" name="experience" value="5" /> 5</label
+              >
+            </div>
+          </div>
+          <div class="input">
+            <label for="msg">Avez-vous des suggestions?</label>
+            <textarea
+              id="msg"
+              name="Message"
+              class="text"
+              rows="4"
+              placeholder="Votre expérience..."
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn-valider">Envoyer mon avis</button>
+          <button
+            type="reset"
+            class="effacer"
+            style="background-color: #f3f5f8; color: #2e8b57; margin-top: 10px"
+          >
+            Effacer
+          </button>
+        </form>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <img
+            src="../fruits et légumes/image/logo.jpg"
+            class="logo"
+            alt="BioBladi logo"
+          />
+          <span style="color: white; font-weight: bold"
+            >BioBladi — Du champ à votre assiette, produits locaux et bio
+          </span>
+        </div>
+        <div class="footer-links">
+          <h4>Liens utiles</h4>
+          <a href="../about us/about us.html">About Us</a>
+          <a href="../fruits et légumes/fruits et légumes.html">Marché</a>
+        </div>
+        <div class="footer-contact">
+          <h4>Contactez-nous</h4>
+          <p>
+            <img
+              src="../fruits et légumes/image/phone-svgrepo-com (1).svg"
+              alt="Téléphone"
+              class="footer-icon"
+            />
+            +216 12 345 678
+          </p>
+          <p>
+            <img
+              src="../fruits et légumes/image/mail-check-svgrepo-com.svg"
+              alt="Email"
+              class="footer-icon"
+            />
+            contact@biobladi.tn
+          </p>
+          <p>
+            <img
+              src="../fruits et légumes/image/location-svgrepo-com.svg"
+              alt="Adresse"
+              class="footer-icon"
+            />
+            Tunis, Tunisie
+          </p>
+          <p>
+            <img
+              src="../fruits et légumes/image/time-svgrepo-com.svg"
+              alt="Horaires"
+              class="footer-icon"
+            />
+            Lun-Ven: 8h - 18h
+          </p>
+        </div>
+        <div class="footer-social">
+          <h4>Suivez-nous</h4>
+          <a href="#"
+            ><img
+              src="../fruits et légumes/image/facebook-svgrepo-com (1).svg"
+              alt="Facebook"
+              class="social-icon"
+          /></a>
+          <a href="#"
+            ><img
+              src="../fruits et légumes/image/instagram-167-svgrepo-com.svg"
+              alt="Instagram"
+              class="social-icon"
+          /></a>
+          <a href="#"
+            ><img
+              src="../fruits et légumes/image/linkedin-svgrepo-com (1).svg"
+              alt="LinkedIn"
+              class="social-icon"
+          /></a>
+        </div>
+        <p class="footer-copy">
+          © 2025 BioBladi — Tous droits réservés — Fièrement tunisien 🇹🇳
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

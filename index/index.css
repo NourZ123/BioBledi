@@ -1,0 +1,236 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Segoe UI", Arial, sans-serif;
+    color:#1b1b1b;
+    background:#fdfcf8;
+    line-height:1.5;
+}
+
+.head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 40px;
+    background:white;
+}
+
+.head-left{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.head-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.brand-logo{
+    width:50px;
+    border-radius:50%;
+}
+
+.user-icon, .cart-icon{
+    width:34px;
+    cursor:pointer;
+}
+
+.main-menu{
+    display:flex;
+    gap:2rem;
+}
+
+.main-menu a{
+    text-decoration:none;
+    color:#2c3e2f;
+    font-size:0.95rem;
+    font-weight:500;
+    transition:0.3s;
+}
+
+.main-menu a:hover{
+    color:#4caf50;
+}
+
+.btn-connexion{
+    padding:8px 18px;
+    border-radius:20px;
+    background:#14532d;
+    color:white;
+    text-decoration:none;
+    transition:0.25s;
+}
+
+.btn-connexion:hover{
+    background:#1b5e20;
+}
+
+hr{
+    border:none;
+    height:1px;
+    background:#14532d;
+}
+
+.intro-area{
+    text-align:center;
+    padding:80px 20px;
+    max-width:900px;
+    margin:auto;
+}
+
+.location-badge{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.badge-text{
+    color:#2e7d32;
+    font-weight:600;
+    font-size:14px;
+}
+
+.intro-area h1{
+    font-size:42px;
+    font-weight:700;
+}
+
+.intro-area h2{
+    font-size:38px;
+    font-weight:700;
+    color:#2e7d32;
+    margin-bottom:15px;
+}
+
+.slogan{
+    font-size:18px;
+    margin-top:10px;
+}
+
+.details{
+    margin-top:8px;
+    color:#555;
+}
+
+.order-btn{
+    display:inline-block;
+    margin-top:30px;
+    padding:14px 28px;
+    background:#14532d;
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+    border-radius:30px;
+    transition:all 0.3s ease;
+    box-shadow:0 6px 18px rgba(46,125,50,0.25);
+}
+
+.order-btn:hover{
+    transform:translateY(-4px) scale(1.05);
+    box-shadow:0 12px 28px rgba(46,125,50,0.35);
+    background:#063c0a;
+}
+
+.order-btn:active{
+    transform:translateY(0) scale(0.97);
+    box-shadow:none;
+}
+
+.gallery-slider{
+    overflow:hidden;
+    width:100%;
+    padding:20px 0;
+}
+
+.slider-move{
+    display:flex;
+    gap:15px;
+    animation:scroll 20s linear infinite;
+}
+.badge-icon{
+    width: 40px;
+    height: 40px;
+}
+.slider-move img{
+    width:250px;
+    height:150px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+@keyframes scroll{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+}
+
+.gallery-img{
+    width:300px;
+    height:300px;
+    border-radius:50px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+@media (max-width:1024px){
+    .head{
+        padding:15px 25px;
+    }
+
+    .intro-area h1{
+        font-size:34px;
+    }
+
+    .intro-area h2{
+        font-size:30px;
+    }
+}
+
+@media (max-width:768px){
+
+    .head{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+        gap:15px;
+    }
+
+    .head-left{
+        flex-direction:column;
+        align-items:center;
+        gap:15px;
+    }
+
+    .main-menu{
+        flex-wrap:wrap;        /* IMPORTANT pour que les liens descendent */
+        justify-content:center;
+        gap:1rem;
+    }
+
+    .head-right{
+        justify-content:center;
+        gap:15px;
+    }
+
+    .intro-area{
+        padding:60px 15px;
+    }
+
+    .intro-area h1{
+        font-size:28px;
+    }
+
+    .intro-area h2{
+        font-size:24px;
+    }
+
+    .order-btn{
+        padding:12px 22px;
+    }
+}

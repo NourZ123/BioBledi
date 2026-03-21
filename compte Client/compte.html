@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BioBladi - Tableau de bord</title>
+    <link rel="stylesheet" href="compte.css" />
+    <link rel="icon" href="image/screen-alt-2-svgrepo-com.svg" />
+    <link rel="stylesheet" href="../code footer.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      hr {
+        color: #14532d;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f3f5f8;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        overflow-x: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-left">
+        <img src="image/logo.jpg" alt="logo" class="header-logo" id="logo" />
+        <p
+          style="
+            font-family: 'Times New Roman', Times;
+            color: #14532d;
+            font-size: 40px;
+          "
+        >
+          <strong>Compte Client</strong>
+        </p>
+        <nav class="header-nav">
+          <a href="../index/index.html" class="lien_nav">Acceuil</a>
+          <a href="../fruits et légumes/fruits et légumes.html" class="lien_nav"
+            >Marché</a
+          >
+          <a href="../Epicerie bio/epicerie bio.html" class="lien_nav"
+            >Epicerie</a
+          >
+          <a href="../se connecter/bienvenue.html" class="lien_nav"
+            >Connexion</a
+          >
+          <a href="../about us/about us.html" class="lien_nav">About US</a>
+          <a href="../contact us/contact us.html" class="lien_nav">Contact</a>
+        </nav>
+      </div>
+      <div class="header-right">
+        <a href="../compte Client/compte.html"
+          ><img src="image/person-svgrepo-com.svg" alt="profile" class="icon"
+        /></a>
+        <a href="../mon panier/panier.html"
+          ><img src="image/cart-2-svgrepo-com.svg" alt="cart" class="icon"
+        /></a>
+      </div>
+    </div>
+    <hr />
+    <div class="page-compte">
+      <div class="menu-lateral">
+        <div class="titre-section">
+          <img
+            src="image/person-svgrepo-com.svg"
+            alt="user"
+            class="icone-titre"
+          />
+          Compte client
+        </div>
+        <div class="liste-options">
+          <div class="option-menu">
+            <img
+              src="image/screen-alt-2-svgrepo-com (1).svg"
+              alt="dashboard"
+              class="icone-menu"
+            />
+            Tableau de bord
+          </div>
+          <div class="option-menu">
+            <img
+              src="image/information-point-svgrepo-com.svg"
+              alt="info"
+              class="icone-menu"
+            />
+            Mes informations
+          </div>
+          <div class="option-menu">
+            <img
+              src="image/cart-large-2-svgrepo-com.svg"
+              alt="orders"
+              class="icone-menu"
+            />
+            Mes commandes
+          </div>
+          <div class="option-menu">
+            <img
+              src="image/log-out-svgrepo-com.svg"
+              alt="logout"
+              class="icone-menu"
+            />
+            <a href="../se connecter/bienvenue.html " class="lien_nav"
+              >Déconnexion</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="zone-principale">
+        <div class="bloc-bienvenue">
+          <h1 class="titre-bienvenue">Bonjour Nour !</h1>
+          <p class="sous-titre-bienvenue">
+            Bienvenue dans votre espace client.
+          </p>
+        </div>
+        <div class="grille-trois-cartes">
+          <div class="carte-info carte-total">
+            <h4 class="titre-carte">Total des commandes</h4>
+            <p class="nombre-total">8 commandes</p>
+          </div>
+          <div class="carte-info carte-derniere">
+            <h4 class="titre-carte">Dernière commande</h4>
+            <p class="ref-derniere">CMD1025-120 dt</p>
+            <p class="adresse-derniere">Tunis, El Manar, 2092</p>
+          </div>
+          <div class="carte-info carte-adresse">
+            <h4 class="titre-carte">Adresse de livraison</h4>
+            <p class="libelle-adresse">Adresse de livraison</p>
+            <p class="details-adresse">Tunis, El Manar, 2092</p>
+          </div>
+        </div>
+        <div class="grille-deux-colonnes">
+          <div class="carte-info carte-personnelles">
+            <h4 class="titre-carte">Informations personnelles</h4>
+            <div class="grille-personnelles">
+              <p class="element-personnel">
+                <span class="label-personnel">Nom :</span> Zahrouni
+              </p>
+              <p class="element-personnel">
+                <span class="label-personnel">Prénom :</span> Nour
+              </p>
+              <p class="element-personnel">
+                <span class="label-personnel">Email :</span>
+                biobladi@gmail.com
+              </p>
+              <p class="element-personnel">
+                <span class="label-personnel">Téléphone :</span> +216 12 345 678
+              </p>
+              <p class="element-personnel">
+                <span class="label-personnel">Adresse :</span> Tunis, El Manar,
+                2092
+              </p>
+            </div>
+            <div class="conteneur-modifier">
+              <a
+                href="../modifier mes informations/modifier.html"
+                class="lien-modifier"
+                >Modifier mes informations</a
+              >
+            </div>
+          </div>
+          <div class="zone-commandes">
+            <h3 class="titre-commandes">Mes Commandes Récentes</h3>
+            <table class="tableau-commandes">
+              <thead>
+                <tr class="ligne-en-tete">
+                  <th class="colonne-commande">N°Commande</th>
+                  <th class="colonne-date">Date</th>
+                  <th class="colonne-montant">Montant</th>
+                  <th class="colonne-statut">Statut</th>
+                  <th class="colonne-action">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="ligne-table">
+                  <td class="cellule-commande">CMD1025</td>
+                  <td class="cellule-date">12/01/2026</td>
+                  <td class="cellule-montant">120 DT</td>
+                  <td class="cellule-statut statut-encours">Non Livré</td>
+                  <td class="cellule-action">
+                    <a href="#" class="bouton-modifier-commande"
+                      >Modifier ma commande</a
+                    >
+                  </td>
+                </tr>
+                <tr class="ligne-table">
+                  <td class="cellule-commande">CMD1010</td>
+                  <td class="cellule-date">05/01/2026</td>
+                  <td class="cellule-montant">65 DT</td>
+                  <td class="cellule-statut statut-livre">Livré</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <img src="image/logo.jpg" class="logo" alt="BioBladi logo" />
+          <span style="color: white; font-weight: bold"
+            >BioBladi — Du champ à votre assiette, produits locaux et bio
+          </span>
+        </div>
+        <div class="footer-links">
+          <h4>Liens utiles</h4>
+          <a href="../about us/about us.html">About Us</a>
+          <a href="../fruits et légumes/fruits et légumes.html">Marché</a>
+        </div>
+        <div class="footer-contact">
+          <h4>Contactez-nous</h4>
+          <p>
+            <img
+              src="image/phone-svgrepo-com (1).svg"
+              alt="Téléphone"
+              class="footer-icon"
+            />
+            +216 12 345 678
+          </p>
+          <p>
+            <img
+              src="image/mail-check-svgrepo-com.svg"
+              alt="Email"
+              class="footer-icon"
+            />
+            contact@biobladi.tn
+          </p>
+          <p>
+            <img
+              src="image/location-svgrepo-com.svg"
+              alt="Adresse"
+              class="footer-icon"
+            />
+            Tunis, Tunisie
+          </p>
+          <p>
+            <img
+              src="image/time-svgrepo-com.svg"
+              alt="Horaires"
+              class="footer-icon"
+            />
+            Lun-Ven: 8h - 18h
+          </p>
+        </div>
+        <div class="footer-social">
+          <h4>Suivez-nous</h4>
+          <a href="#"
+            ><img
+              src="image/facebook-svgrepo-com (1).svg"
+              alt="Facebook"
+              class="social-icon"
+          /></a>
+          <a href="#"
+            ><img
+              src="image/instagram-167-svgrepo-com.svg"
+              alt="Instagram"
+              class="social-icon"
+          /></a>
+          <a href="#"
+            ><img
+              src="image/linkedin-svgrepo-com (1).svg"
+              alt="LinkedIn"
+              class="social-icon"
+          /></a>
+        </div>
+        <p class="footer-copy">
+          © 2025 BioBladi — Tous droits réservés — Fièrement tunisien 🇹🇳
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

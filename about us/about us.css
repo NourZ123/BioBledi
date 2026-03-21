@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: "Poppins", sans-serif;
+    background:#f6f9f6;
+    color:#2f3e2f;
+}
+
+.head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:25px 5%;
+    background-color:#f3f5f8;
+    width:100%;
+}
+
+.left{
+    display:flex;
+    column-gap:30px;
+    align-items:center;
+    white-space:nowrap;
+}
+
+.right{
+    display:flex;
+    column-gap:20px;
+    align-items:center;
+}
+.header-nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.lien_nav {
+    text-decoration: none;
+    color: #2c3e2f;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+.lien_nav:hover {
+    color: #4caf50;
+}
+
+#logo{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+#person,#cart{
+    width:40px;
+    height:40px;
+}
+.entete-carte{
+    display: flex;
+    column-gap: 5px;
+    justify-content: center;
+
+}
+#offre{
+background-color: #c8e6c9;
+}
+.icone-small{
+    width: 20px;
+    height: 20px;
+}
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo{
+    width:50px;
+    height: 50px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.site-title{
+    font-size:22px;
+    font-weight:600;
+    color:#2e7d32;
+}
+
+.header-nav a{
+    margin-left:25px;
+    text-decoration:none;
+    color:#2f3e2f;
+    font-weight:500;
+    transition:0.3s;
+}
+
+.header-nav a:hover{
+    color:#2e7d32;
+}
+
+.divider{
+    border:none;
+    height:1px;
+    background:#e0e0e0;
+}
+.section-presentation{
+    display:flex;
+    justify-content:center;
+    padding:60px 20px;
+}
+
+.carte-presentation{
+    max-width:750px;
+    background:white;
+    padding:40px;
+    border-radius:16px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.05);
+    text-align:center;
+}
+
+.carte-presentation h2{
+    margin-bottom:20px;
+    color:#2e7d32;
+}
+
+.carte-presentation p{
+    margin-bottom:15px;
+    line-height:1.7;
+}
+
+.phrase-accroche{
+    font-weight:600;
+    color:#388e3c;
+}
+.section-produits{
+    padding:40px 20px 70px;
+    display:flex;
+    justify-content:center;
+}
+
+.conteneur-tableau{
+    width:95%;
+    max-width:1000px;
+}
+.tableau-produits{
+    width:100%;
+    background:white;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+    border-collapse:collapse;
+    
+}
+td{
+    border:solid #c8e6c9;
+}
+.titre-tableau{
+    font-size:18px;
+    font-weight:600;
+    text-align:center;
+    color:#2e7d32;
+}
+
+.footer-logo{
+    width:40px;
+    vertical-align:middle;
+    margin-right:10px;
+}
+
+.en-tete-section{
+    background:#f0f7f0;
+    font-weight:600;
+    color:#2e7d32;
+}
+
+.ligne-entete th{
+    background:#e8f5e9;
+    padding:10px;
+}
+
+.ligne-produit td{
+    padding:12px;
+    border-bottom:1px solid #f1f1f1;
+}
+
+.ligne-produit:hover{
+    background:#fafafa;
+}
+
+.nom-produit{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.icone-produit{
+    width:28px;
+}
+a{
+    font-family:'Poppins';
+}
+
+
+.footer-copy{
+    font-size:14px;
+    opacity:0.8;
+}
+@media (max-width:768px){
+
+    .head{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+        gap:15px;
+    }
+
+    .left{
+        flex-direction:column;
+        align-items:center;
+        gap:15px;
+    }
+
+    .header-nav{
+        flex-wrap:wrap;   /* IMPORTANT */
+        justify-content:center;
+        gap:1rem;
+    }
+
+    .right{
+        justify-content:center;
+    }
+
+    .login-card{
+        max-width:90%;
+    }
+}

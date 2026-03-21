@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BioBladi - Espace Agriculteur</title>
+    <link rel="stylesheet" href="agriculteur (1).css" />
+    <link rel="stylesheet" href="../code footer.css" />
+    <link rel="icon" href="image/farm-svgrepo-com.svg" />
+  </head>
+  <body>
+    <div class="head">
+      <div class="left">
+        <div>
+          <img src="image/logo.jpg" alt="logo" id="logo" />
+        </div>
+        <div>
+          <p
+            style="
+              font-family: 'Times New Roman', Times;
+              color: #14532d;
+              font-size: 40px;
+            "
+          >
+            <strong>Espace Agriculteur</strong>
+          </p>
+        </div>
+        <div>
+          <nav class="header-nav">
+            <a href="../index/index.html" class="lien_nav">Acceuil</a>
+            <a
+              href="../fruits et légumes/fruits et légumes.html"
+              class="lien_nav"
+              >Marché</a
+            >
+            <a href="../se connecter/bienvenue.html" class="lien_nav"
+              >Connexion</a
+            >
+            <a href="../about us/about us.html" class="lien_nav">About US</a>
+            <a href="../contact us/contact us.html" class="lien_nav">Contact</a>
+          </nav>
+        </div>
+      </div>
+      <div class="right">
+        <div>
+          <a href="../compte Client/compte.html">
+            <img src="image/person-svgrepo-com.svg" alt="person" id="person" />
+          </a>
+        </div>
+        <div>
+          <a href="../mon panier/panier.html">
+            <img src="image/cart-2-svgrepo-com.svg" alt="cart" id="cart" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+
+    <main class="page-agriculteur">
+      <div class="entete-page">
+        <h1 class="titre-page">Espace Agriculteur</h1>
+        <p class="sous-titre-page">Gérez vos produits et vos stocks</p>
+      </div>
+
+      <div class="conteneur-formulaire">
+        <h2 class="titre-section">Nouveau Produit</h2>
+
+        <form class="formulaire-produit">
+          <div class="groupe-champ">
+            <label for="nom-produit" class="label-champ">Nom du produit</label>
+            <input
+              type="text"
+              id="nom-produit"
+              class="champ-saisie"
+              placeholder="Ex: Pommes Gala"
+            />
+          </div>
+
+          <div class="groupe-champ">
+            <label for="prix-produit" class="label-champ">Prix (DT)</label>
+            <input
+              type="number"
+              id="prix-produit"
+              class="champ-saisie"
+              placeholder="0.00"
+              step="0.01"
+              min="0"
+            />
+          </div>
+
+          <div class="groupe-champ">
+            <label for="stock-produit" class="label-champ">Stock initial</label>
+            <input
+              type="number"
+              id="stock-produit"
+              class="champ-saisie"
+              placeholder="Quantité disponible"
+              min="0"
+            />
+          </div>
+
+          <div class="ligne-deux-colonnes">
+            <div class="groupe-champ">
+              <label for="categorie-produit" class="label-champ"
+                >Catégorie</label
+              >
+              <select id="categorie-produit" class="champ-select">
+                <option value="fruits">Fruits</option>
+                <option value="legumes">Légumes</option>
+                <option value="epicerie">Épicerie</option>
+                <option value="produits-laitiers">Produits laitiers</option>
+                <option value="oeufs">Œufs</option>
+                <option value="miel">Miel</option>
+              </select>
+            </div>
+
+            <div class="groupe-champ">
+              <label for="unite-produit" class="label-champ">Unité</label>
+              <select id="unite-produit" class="champ-select">
+                <option value="kg">kg</option>
+                <option value="g">g</option>
+                <option value="piece">pièce</option>
+                <option value="botte">botte</option>
+                <option value="litre">litre</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="ligne-boutons">
+            <button type="button" class="bouton-annuler">
+              <span class="symbole-plus">+</span> Annuler
+            </button>
+            <button type="submit" class="bouton-valider">
+              Mettre en vente
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <img src="image/logo.jpg" class="logo" alt="BioBladi logo" />
+          <span style="color: white; font-weight: bold"
+            >BioBladi — Du champ à votre assiette, produits locaux et bio</span
+          >
+        </div>
+        <div class="footer-links">
+          <h4>Liens utiles</h4>
+          <a href="../about us/about us.html">About Us</a>
+          <a href="../fruits et légumes/fruits et légumes.html">Marché</a>
+        </div>
+        <div class="footer-contact">
+          <h4>Contactez-nous</h4>
+          <p>
+            <img
+              src="image/phone-svgrepo-com (1).svg"
+              alt="Téléphone"
+              class="footer-icon"
+            />
+            +216 12 345 678
+          </p>
+          <p>
+            <img
+              src="image/mail-check-svgrepo-com.svg"
+              alt="Email"
+              class="footer-icon"
+            />
+            contact@biobladi.tn
+          </p>
+          <p>
+            <img
+              src="image/location-svgrepo-com.svg"
+              alt="Adresse"
+              class="footer-icon"
+            />
+            Tunis, Tunisie
+          </p>
+          <p>
+            <img
+              src="image/time-svgrepo-com.svg"
+              alt="Horaires"
+              class="footer-icon"
+            />
+            Lun-Ven: 8h - 18h
+          </p>
+        </div>
+        <div class="footer-social">
+          <h4>Suivez-nous</h4>
+          <a href="#"
+            ><img
+              src="image/facebook-svgrepo-com (1).svg"
+              alt="Facebook"
+              class="social-icon"
+          /></a>
+          <a href="#"
+            ><img
+              src="image/instagram-167-svgrepo-com.svg"
+              alt="Instagram"
+              class="social-icon"
+          /></a>
+          <a href="#"
+            ><img
+              src="image/linkedin-svgrepo-com (1).svg"
+              alt="LinkedIn"
+              class="social-icon"
+          /></a>
+        </div>
+        <p class="footer-copy">
+          © 2025 BioBladi — Tous droits réservés — Fièrement tunisien 🇹🇳
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

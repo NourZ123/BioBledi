@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BioBladi - Contact</title>
+    <link rel="stylesheet" href="contact us.css" />
+    <link rel="icon" href="image/logo.jpg" />
+    <link rel="stylesheet" href="../code footer.css" />
+  </head>
+  <body>
+    <div class="head">
+      <div class="left">
+        <div>
+          <img src="image/logo.jpg" alt="logo" id="logo" />
+        </div>
+        <div>
+          <p
+            style="
+              font-family: 'Times New Roman', Times;
+              color: #14532d;
+              font-size: 40px;
+            "
+          >
+            <strong>Contact US</strong>
+          </p>
+        </div>
+        <div>
+          <nav class="header-nav">
+            <a href="../index/index.html" class="lien_nav">Acceuil</a>
+            <a
+              href="../fruits et légumes/fruits et légumes.html"
+              class="lien_nav"
+              >Marché</a
+            >
+            <a href="../Epicerie bio/epicerie bio.html" class="lien_nav"
+              >Epicerie</a
+            >
+            <a href="../se connecter/bienvenue.html" class="lien_nav"
+              >Connexion</a
+            >
+            <a href="../about us/about us.html" class="lien_nav">About US</a>
+            <a href="../Questionnaire/questionnaire.html" class="lien_nav"
+              >Questionnaire</a
+            >
+          </nav>
+        </div>
+      </div>
+      <div class="right">
+        <div>
+          <a href="../compte Client/compte.html"
+            ><img src="image/person-svgrepo-com.svg" alt="person" id="person"
+          /></a>
+        </div>
+        <div>
+          <a href="../mon panier/panier.html"
+            ><img src="image/cart-2-svgrepo-com.svg" alt="cart" id="cart"
+          /></a>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="login-container">
+      <div class="login-card">
+        <h1 class="login-title">Contactez-nous</h1>
+        <p class="login-subtitle">
+          Remplissez le formulaire et nous vous répondrons rapidement
+        </p>
+
+        <form
+          action="https://httpbin.org/get"
+          method="post"
+          enctype="text/plain"
+        >
+          <div class="form-group">
+            <label class="form-label" for="name">Nom complet</label>
+            <input
+              type="text"
+              id="name"
+              name="Nom"
+              class="form-input"
+              placeholder="Votre nom"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="Email"
+              class="form-input"
+              placeholder="votre@email.com"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="phone">Téléphone</label>
+            <input
+              type="tel"
+              id="phone"
+              name="Téléphone"
+              class="form-input"
+              placeholder="+216 12 345 678"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="message">Message</label>
+            <textarea
+              id="message"
+              name="Message"
+              class="form-input"
+              rows="5"
+              placeholder="Votre message..."
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="login-btn">Envoyer le message</button>
+          <button
+            type="reset"
+            class="login-btn"
+            style="background-color: #f3f5f8; color: #2e8b57; margin-top: 10px"
+          >
+            Effacer
+          </button>
+        </form>
+
+        <p class="signup-link">
+          Besoin d'aide ? Contactez-nous via
+          <a href="mailto:contact@biobladi.tn">email</a>
+        </p>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <img src="image/logo.jpg" class="logo" alt="BioBladi logo" />
+          <span style="color: white; font-weight: bold"
+            >BioBladi — Du champ à votre assiette, produits locaux et bio
+          </span>
+        </div>
+        <div class="footer-links">
+          <h4>Liens utiles</h4>
+          <a href="../about us/about us.html">About Us</a>
+          <a href="../fruits et légumes/fruits et légumes.html">Marché</a>
+        </div>
+        <div class="footer-contact">
+          <h4>Contactez-nous</h4>
+          <p>
+            <img
+              src="image/phone-svgrepo-com (1).svg"
+              alt="Téléphone"
+              class="footer-icon"
+            />
+            +216 12 345 678
+          </p>
+          <p>
+            <img
+              src="image/mail-check-svgrepo-com.svg"
+              alt="Email"
+              class="footer-icon"
+            />
+            contact@biobladi.tn
+          </p>
+          <p>
+            <img
+              src="image/location-svgrepo-com.svg"
+              alt="Adresse"
+              class="footer-icon"
+            />
+            Tunis, Tunisie
+          </p>
+          <p>
+            <img
+              src="image/time-svgrepo-com.svg"
+              alt="Horaires"
+              class="footer-icon"
+            />
+            Lun-Ven: 8h - 18h
+          </p>
+        </div>
+        <div class="footer-social">
+          <h4>Suivez-nous</h4>
+          <a href="#"
+            ><img
+              src="image/facebook-svgrepo-com (1).svg"
+              alt="Facebook"
+              class="social-icon"
+          /></a>
+          <a href="#"
+            ><img
+              src="image/instagram-167-svgrepo-com.svg"
+              alt="Instagram"
+              class="social-icon"
+          /></a>
+          <a href="#"
+            ><img
+              src="image/linkedin-svgrepo-com (1).svg"
+              alt="LinkedIn"
+              class="social-icon"
+          /></a>
+        </div>
+        <p class="footer-copy">
+          © 2025 BioBladi — Tous droits réservés — Fièrement tunisien 🇹🇳
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
