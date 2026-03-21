@@ -88,7 +88,7 @@
     flex-direction: column;
     gap: 1rem;
 }
-.option-menu {
+#btn-infos,#btn-Commande,#btn-dashboard {
     font-size: 1rem;
     color: #2c3e2f;
     font-weight: 400;
@@ -104,7 +104,7 @@
     height: 20px;
     object-fit: contain;
 }
-.option-menu:hover {
+#btn-infos:hover,#btn-Commande:hover,#btn-dashboard:hover {
     color: #2E8B57;
     font-weight: 500;
     transform: translateX(5px);
@@ -193,7 +193,7 @@
     font-size: 0.95rem;
     color: #334155;
 }
-.label-personnel {
+.client {
     font-weight: 600;
     color: #0F172A;
     margin-right: 0.5rem;
@@ -222,6 +222,9 @@
     padding: 1.5rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     border: 1px solid #2E8B57;
+}
+.label-personnel{
+    font-weight: bold;
 }
 .titre-commandes {
     font-size: 1.2rem;
