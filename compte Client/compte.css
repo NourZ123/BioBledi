@@ -104,7 +104,12 @@
     height: 20px;
     object-fit: contain;
 }
-#btn-infos:hover,#btn-Commande:hover,#btn-dashboard:hover {
+.option-menu{
+    display: flex;
+    gap: 10px;
+}
+
+#btn-infos:hover,#btn-Commande:hover,#btn-dashboard:hover,#btn-deconnexion:hover {
     color: #2E8B57;
     font-weight: 500;
     transform: translateX(5px);

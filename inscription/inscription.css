@@ -39,7 +39,7 @@
 hr {
   color: #14532D;
 }
-.signup-container {
+.Container {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -67,7 +67,6 @@ hr {
     position: relative;
     padding-bottom: 15px;
 }
-
 .signup-title::after {
     content: '';
     position: absolute;
@@ -114,7 +113,11 @@ hr {
     color: #94A3B8;
     font-weight: 300;
 }
-
+form-radio{
+    display: flex;
+    gap: 70px;
+    
+}
 .signup-btn {
     width: 100%;
     background-color: #1f3b2c;

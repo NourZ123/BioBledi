@@ -90,7 +90,7 @@
       </div>
     </div>
     <hr />
-    <div class="signup-container">
+    <div class="Container">
       <div class="signup-card">
         <h1 class="signup-title">Inscription</h1>
         <div class="form-group">
@@ -117,6 +117,32 @@
         <div class="form-group">
           <label class="form-label">Téléphone</label>
           <input type="tel" class="form-input" placeholder="+216 12 345 678" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="P/A">
+            Etes-vous particulier ou agriculteur?</label
+          >
+          <div class="form-radio">
+            <label for="particulier" class="form-label">
+              <input
+                type="radio"
+                id="particulier"
+                name="type"
+                value="particulier"
+              />
+              Particulier
+            </label>
+
+            <label class="form-label" for="agriculteur">
+              <input
+                type="radio"
+                id="agriculteur"
+                name="type"
+                value="agriculteur"
+              />
+              Agriculteur
+            </label>
+          </div>
         </div>
         <button class="signup-btn">S'inscrire</button>
         <p class="login-link">
