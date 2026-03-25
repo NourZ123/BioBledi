@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioBladi - Pêche aux légumes</title>
+    <link rel="stylesheet" href="funpage.css">
+    <link rel="stylesheet" href="../code footer.css">
+    <link rel="icon" href="image/logo.jpg">
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <img src="image/logo.jpg" alt="logo" id="logo" />
+            <p style="font-family: 'Times New Roman', Times; color: #14532d; font-size: 40px;">
+                <strong>BioBladi</strong>
+            </p>
+            <nav class="header-nav">
+                <a href="../index/index.html" class="nav-link">Accueil</a>
+                <a href="../fruits et légumes/fruits et légumes.html" class="nav-link">Marché</a>
+                <a href="../Epicerie bio/epicerie bio.html" class="nav-link">Epicerie</a>
+                <a href="../se connecter/bienvenue.html" class="nav-link">Connexion</a>
+                <a href="../about us/about us.html" class="nav-link">About US</a>
+                <a href="../contact us/contact us.html" class="nav-link">Contact US</a>
+                <a href="funpage.html" class="nav-link active">Jeu</a>
+            </nav>
+        </div>
+        <div class="header-right">
+            <a href="../compte/compte.html">
+                <img src="image/person-svgrepo-com.svg" alt="profile" class="header-icon" />
+            </a>
+            <a href="../mon panier/panier.html">
+                <img src="image/cart-2-svgrepo-com.svg" alt="cart" class="header-icon" />
+            </a>
+        </div>
+    </div>
+    <hr />
+
+    <main class="game-container">
+        <div class="game-header">
+            <h1 class="game-title">
+                <img src="image/vegetables-salad-svgrepo-com.svg" class="icon-score">
+                  Pêche aux légumes 
+                <img src="image/vegetables-salad-svgrepo-com.svg" class="icon-score">
+            </h1>
+            <p class="game-subtitle">Clique sur les fruits et légumes qui tombent pour les récolter !<br>
+            Plus ils tombent vite, plus ils rapportent de points !</p>
+            <!--on un flex (score-board) qui va contenir 4 éléments:le score , le nombre de légumes récoltés et manqués et le temps restants-->
+            <!-- ces valeurs seront changées dynamiquement lors du jeu -->
+            <!--ces éléments ont les memes caractéristiques c'est pourquoi ils ont les memes classes-->
+            
+            <div class="score-board">
+                <div class="score-card">
+                    <span class="score-label">
+                        <img src="image/winner.svg" class="icon-score" alt="winner">
+                         SCORE</span>
+                    <span class="score-value" id="score">0</span>
+                </div>
+                <div class="score-card">
+                    <span class="score-label">
+                        <img src="image/shield-done-svgrepo-com.svg" class="icon-score">
+                         RÉCOLTÉS</span>
+                    <span class="score-value" id="collected">0</span>
+                </div>
+                <div class="score-card">
+                    <span class="score-label">
+                        <img src="image/manque.svg" class="icon-score" alt="recolte">
+                         MANQUÉS</span>
+                    <span class="score-value" id="missed">0</span>
+                </div>
+                <div class="score-card timer-card">
+                    <span class="score-label">
+                        <img src="image/hourglass-not-done-svgrepo-com.svg" class="icon-score" alt="temps">
+                        TEMPS</span>
+                    <span class="score-value" id="timer">40</span>
+                </div>
+            </div>
+            <!--c'est un autre flex(game-controls) qui contient 3 éléments-->
+            <div class="game-controls">
+                <button id="startGame" class="start-btn">
+                    <img src="image/start.svg" class="btn-icon" alt="démarrer"> Démarrer la pêche
+                </button>
+                <button id="resetGame" class="reset-btn">
+                    <img src="image/repeat.svg" class="btn-icon" alt="réinitialiser"> Réinitialiser
+                </button>
+                <div class="difficulty-selector">
+                    <label>
+                        <img src="image/fast-launch-svgrepo-com (1).svg" class="icon-score">
+                         Difficulté :</label>
+                    <select id="difficulty">
+                        <option value="slow"> Facile (ralenti)</option>
+                        <option value="normal" selected> Normal</option>
+                        <option value="fast"> Difficile (accéléré)</option>
+                        <option value="crazy"> Crazy !</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone de jeu -->
+        <div class="game-area" id="gameArea">
+            <div class="iconegauche">
+                <img src="image/vegetables-salad-svgrepo-com.svg" class="icon-score">
+            </div>
+            <div id="vegetablesContainer" class="vegetables-container"></div>
+        </div>
+
+        <!-- Message de feedback -->
+        <div id="feedbackMessage" class="feedback-message"></div>
+        
+        <!-- Message de fin de jeu -->
+        <div id="gameOverMessage" class="gameover-message"></div>
+        
+        <!-- Zone des scores personnels -->
+        <div class="personal-scores-section">
+            <div class="score-card-personal">
+                <span class="score-label-personal">🎯 SCORE ACTUEL</span>
+                <span class="score-value-personal" id="currentGameScore">0</span>
+            </div>
+            <div class="score-card-personal best">
+                <span class="score-label-personal">
+                    <img src="image/winner.svg" class="icon-score" alt="winner"> MEILLEUR SCORE</span>
+                <span class="score-value-personal" id="bestScore">0</span>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="image/logo.jpg" class="logo" alt="BioBladi logo" />
+                <span>BioBladi — Du champ à votre assiette, produits locaux et bio</span>
+            </div>
+            <div class="footer-links">
+                <h4>Liens utiles</h4>
+                <a href="../about us/about us.html">About Us</a>
+                <a href="../fruits et légumes/fruits et légumes.html">Marché</a>
+            </div>
+            <div class="footer-contact">
+                <h4>Contactez-nous</h4>
+                <p><img src="image/phone-svgrepo-com (1).svg" alt="Téléphone" class="footer-icon" /> +216 12 345 678</p>
+                <p><img src="image/mail-check-svgrepo-com.svg" alt="Email" class="footer-icon" /> contact@biobladi.tn</p>
+                <p><img src="image/location-svgrepo-com.svg" alt="Adresse" class="footer-icon" /> Tunis, Tunisie</p>
+            </div>
+            <div class="footer-social">
+                <h4>Suivez-nous</h4>
+                <a href="#"><img src="image/facebook-svgrepo-com (1).svg" alt="Facebook" class="social-icon" /></a>
+                <a href="#"><img src="image/instagram-167-svgrepo-com.svg" alt="Instagram" class="social-icon" /></a>
+                <a href="#"><img src="image/linkedin-svgrepo-com (1).svg" alt="LinkedIn" class="social-icon" /></a>
+            </div>
+            <p class="footer-copy">© 2025 BioBladi — Tous droits réservés — Fièrement tunisien 🇹🇳</p>
+        </div>
+    </footer>
+
+    <script src="funpage.js"></script>
+</body>
+</html>
