@@ -105,6 +105,15 @@ hr{
     justify-content:space-between;
     align-items:flex-start;
 }
+.Row2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#Id{
+    color: #cfcfcf;
+    margin-right: 40px;
+}
 .Row3{
     display:flex;
     align-items: center;

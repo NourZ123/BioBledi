@@ -57,87 +57,97 @@
 
     <hr />
 
-    <main class="page-agriculteur">
-      <div class="entete-page">
-        <h1 class="titre-page">Espace Agriculteur</h1>
-        <p class="sous-titre-page">Gérez vos produits et vos stocks</p>
+    <div class="container">
+      <div class="entete">
+        <h1 id="titre">Bienvenue Mr l'Agriculteur</h1>
+        <p>Gérez vos produits et vos stocks</p>
       </div>
 
       <div class="conteneur-formulaire">
         <h2 class="titre-section">Nouveau Produit</h2>
 
         <form class="formulaire-produit">
-          <div class="groupe-champ">
-            <label for="nom-produit" class="label-champ">Nom du produit</label>
+          <div class="ligne-deux-colonnes">
+            <div class="champs">
+              <label for="nom-produit">Nom du produit</label>
+              <input
+                type="text"
+                id="nom-produit"
+                class="input"
+                placeholder="Ex: Framboises"
+              />
+            </div>
+            <div class="champs">
+              <label for="id-produit">Id du produit</label>
+              <input
+                type="text"
+                id="id-produit"
+                class="input"
+                placeholder="#1"
+              />
+            </div>
+          </div>
+          <div class="champs">
+            <label for="URL">Lien de l'image du produit</label>
             <input
               type="text"
-              id="nom-produit"
-              class="champ-saisie"
-              placeholder="Ex: Pommes Gala"
+              id="URL"
+              class="input"
+              placeholder="https://www.bing.com/images/search?view=detailV2&ccid=iXYRSNy%2B&id=386F65FA4F68C241023159C3F4F071E52DFD9D9D&thid=OIP.iXYRSNy-0TtNrx78c-y50gHaE8&mediaurl=https%3A%2F%2Fwww.rosello-fils.fr%2Fwp-content%2Fuploads%2F2024%2F07%2FTout-savoir-sur-la-framboise-Rosello-Fils.jpg&cdnurl=https%3A%2F%2Fth.bing.com%2Fth%2Fid%2FR.89761148dcbed13b4daf1efc73ecb9d2%3Frik%3DnZ39LeVx8PTDWQ%26pid%3DImgRaw%26r%3D0&exph=1707&expw=2560&q=framboises+nabe&form=IRPRST&ck=55D0E25168B07B8D40E45FC357A759DB&selectedindex=1&itb=0&cw=1375&ch=745&ajaxhist=0&ajaxserp=0&vt=0&sim=11"
             />
           </div>
-
-          <div class="groupe-champ">
-            <label for="prix-produit" class="label-champ">Prix (DT)</label>
+          <div class="champs">
+            <label for="prix-produit">Prix (DT)</label>
             <input
               type="number"
               id="prix-produit"
-              class="champ-saisie"
-              placeholder="0.00"
-              step="0.01"
-              min="0"
+              class="input"
+              placeholder="1.00DT"
+              step="0.1"
+              min="1"
             />
           </div>
 
-          <div class="groupe-champ">
-            <label for="stock-produit" class="label-champ">Stock initial</label>
+          <div class="champs">
+            <label for="stock-produit">Stock initial</label>
             <input
               type="number"
               id="stock-produit"
-              class="champ-saisie"
+              class="input"
               placeholder="Quantité disponible"
-              min="0"
+              min="1"
             />
           </div>
 
           <div class="ligne-deux-colonnes">
-            <div class="groupe-champ">
-              <label for="categorie-produit" class="label-champ"
-                >Catégorie</label
-              >
-              <select id="categorie-produit" class="champ-select">
-                <option value="fruits">Fruits</option>
-                <option value="legumes">Légumes</option>
+            <div class="champs">
+              <label for="categorie-produit">Catégorie</label>
+              <select id="categorie-produit">
+                <option value="fruits">Fruits & Légumes</option>
                 <option value="epicerie">Épicerie</option>
-                <option value="produits-laitiers">Produits laitiers</option>
-                <option value="oeufs">Œufs</option>
-                <option value="miel">Miel</option>
               </select>
             </div>
-
-            <div class="groupe-champ">
-              <label for="unite-produit" class="label-champ">Unité</label>
-              <select id="unite-produit" class="champ-select">
+            <div class="champs">
+              <label for="unite-produit">Unité</label>
+              <select id="unite-produit">
                 <option value="kg">kg</option>
-                <option value="g">g</option>
+                <option value="gr">gr</option>
                 <option value="piece">pièce</option>
-                <option value="botte">botte</option>
+                <option value="barquette">barquette</option>
                 <option value="litre">litre</option>
               </select>
             </div>
           </div>
 
-          <div class="ligne-boutons">
-            <button type="button" class="bouton-annuler">
+          <div class="btn">
+            <button type="button" id="btn-annuler">
               <span class="symbole-plus">+</span> Annuler
             </button>
-            <button type="submit" class="bouton-valider">
-              Mettre en vente
-            </button>
+            <button type="submit" id="btn-valider">Mettre en vente</button>
           </div>
         </form>
       </div>
-    </main>
+    </div>
 
     <footer class="footer">
       <div class="footer-container">
