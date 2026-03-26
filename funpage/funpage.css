@@ -28,6 +28,11 @@ body {
     gap: 30px;
     flex-wrap: wrap;
 }
+.header-left p :nth-child(1){
+    font-family: 'Times New Roman', Times;
+    color: #14532d;
+    font-size: 40px;
+}
 .header-nav {
     display: flex;
     gap: 2rem;
@@ -394,55 +399,109 @@ hr {
 .score-card-personal.best .score-value-personal {
     color: #D4A017;
 }
+/*CSS de la Roue*/
+.roue-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto 30px; /* espace entre roue et bouton */
+  }
+  #second-container {
+    text-align: center;
+    display: none;
+    
+  }
+  .roue {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+  }
 
+  #spin {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #14532d;
+    width: 200px;
+    height: 40px;
+    border-radius: 40px;
+    color: white;
+    border: none;
+    box-shadow: rgba(31, 59, 44, 0.3);
+    transition: 0.3s;
+    margin-top: 30px;
+    margin-bottom: 60px;
+  }
+  #spin:hover {
+    transform: translateY(-3px);
+  }
+
+  #result,#eligibilité {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: green;
+  }
+  #arrow {
+    width: 20px;
+    height: 20px;
+    margin-top: 20px;
+  }
+  /*Fin CSS de la Roue
 /* Responsive */
-@media (max-width: 768px) {
-    .header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
+
+
+
+@media (max-width:768px){
+
+    .head{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+        gap:15px;
     }
-    
-    .header-left {
-        flex-direction: column;
-        gap: 15px;
-        width: 100%;
+
+    .left{
+        flex-direction:column;
+        align-items:center;
+        gap:15px;
     }
-    
-    .header-nav {
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
+
+    .header-nav{
+        flex-wrap:wrap;   /* IMPORTANT */
+        justify-content:center;
+        gap:1rem;
     }
-    
-    .score-board {
-        gap: 10px;
+
+    .right{
+        justify-content:center;
     }
-    
-    .score-card {
-        min-width: 80px;
-        padding: 8px 15px;
+
+    .login-card{
+        max-width:90%;
     }
-    
-    .score-value {
-        font-size: 1.5rem;
-    }
-    
-    .vegetable-img {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .vegetable {
-        min-width: 55px;
-        padding: 5px;
-    }
-    
-    .game-title {
-        font-size: 1.5rem;
-    }
-    
-    .game-controls {
-        flex-direction: column;
+    .btn{
+        background:#1f3b2c;
+        color:white;
+        border:none;
+        border-radius:40px;
+        font-size:12px;
+        font-weight:400;
+        cursor:pointer;
+        transition:all 0.3s ease;
+        box-shadow:0 8px 20px rgba(31,59,44,0.25);
+        margin-left: 15px;
+        margin-right: 20px;
+        }
+}
+
+@media (max-width:480px){
+    .head{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
     }
 }
