@@ -77,10 +77,10 @@
     <hr />
     <div class="login-container">
       <div class="login-card">
-        <h1 class="login-title">Bienvenue sur BioBladi</h1>
-        <p class="login-subtitle">Connectez-vous pour continuer</p>
+        <h1 id="login-title">Bienvenue sur BioBladi</h1>
+        <p id="login-subtitle">Connectez-vous pour continuer</p>
         <div class="user-type">
-          <button class="type-btn client-btn">
+          <button type="button" id="client-btn">
             <img
               src="image/person-line-drawing-svgrepo-com (1).svg"
               alt="client"
@@ -88,7 +88,7 @@
             />
             Client
           </button>
-          <button class="type-btn agriculteur-btn">
+          <button type="button" id="agriculteur-btn">
             <img
               src="image/tractor-svgrepo-com.svg"
               alt="agriculteur"
@@ -104,7 +104,7 @@
               type="email"
               id="email"
               class="form-input"
-              value="demo@biobladi.com"
+              placeholder="demo@biobladi.com"
             />
           </div>
 
@@ -114,11 +114,11 @@
               type="password"
               id="password"
               class="form-input"
-              value="......"
+              placeholder="......"
             />
           </div>
 
-          <button type="submit" class="login-btn">Se connecter</button>
+          <button type="submit" id="connexion">Se connecter</button>
         </form>
         <p class="signup-link">
           Pas de compte encore ?
@@ -128,79 +128,108 @@
         </p>
       </div>
     </div>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <img src="image/logo.jpg" class="logo" alt="BioBladi logo" />
+          <span style="color: white; font-weight: bold"
+            >BioBladi — Du champ à votre assiette, produits locaux et bio
+          </span>
+        </div>
+        <div class="footer-links">
+          <h4>Liens utiles</h4>
+          <a href="../about us/about us.html">About Us</a>
+          <a href="../fruits et légumes/fruits et légumes.html">Marché</a>
+        </div>
+        <div class="footer-contact">
+          <h4>Contactez-nous</h4>
+          <p>
+            <img
+              src="image/phone-svgrepo-com (1).svg"
+              alt="Téléphone"
+              class="footer-icon"
+            />
+            +216 12 345 678
+          </p>
+          <p>
+            <img
+              src="image/mail-check-svgrepo-com.svg"
+              alt="Email"
+              class="footer-icon"
+            />
+            contact@biobladi.tn
+          </p>
+          <p>
+            <img
+              src="image/location-svgrepo-com.svg"
+              alt="Adresse"
+              class="footer-icon"
+            />
+            Tunis, Tunisie
+          </p>
+          <p>
+            <img
+              src="image/time-svgrepo-com.svg"
+              alt="Horaires"
+              class="footer-icon"
+            />
+            Lun-Ven: 8h - 18h
+          </p>
+        </div>
+        <div class="footer-social">
+          <h4>Suivez-nous</h4>
+          <a href="#"
+            ><img
+              src="image/facebook-svgrepo-com (1).svg"
+              alt="Facebook"
+              class="social-icon"
+          /></a>
+          <a href="#"
+            ><img
+              src="image/instagram-167-svgrepo-com.svg"
+              alt="Instagram"
+              class="social-icon"
+          /></a>
+          <a href="#"
+            ><img
+              src="image/linkedin-svgrepo-com (1).svg"
+              alt="LinkedIn"
+              class="social-icon"
+          /></a>
+        </div>
+        <p class="footer-copy">
+          © 2025 BioBladi — Tous droits réservés — Fièrement tunisien 🇹🇳
+        </p>
+      </div>
+    </footer>
+    <script>
+      const btnClient = document.getElementById("client-btn");
+      const btnAgri = document.getElementById("agriculteur-btn");
+      const btnconnexion = document.getElementById("connexion");
+      let typeclient = "";
+      btnClient.addEventListener("click", () => {
+        typeclient = "client";
+        btnClient.style.border = "2px solid #14532d";
+        btnAgri.style.border = "1px  solid #ccc ";
+      });
+      btnAgri.addEventListener("click", () => {
+        typeclient = "agriculteur";
+        btnAgri.style.border = "2px solid #14532d";
+        btnClient.style.border = "1px solid #ccc";
+      });
+      btnconnexion.addEventListener("click", () => {
+        event.preventDefault();
+        if (typeclient === "") {
+          alert("veuillez choisir un type de client");
+          return;
+        }
+        if (typeclient === "agriculteur") {
+          window.location.href = "../agriculteur/agriculteur (1).html";
+        } else {
+          window.location.href = "../fruits et légumes/fruits et légumes.html";
+        }
+      });
+    </script>
   </body>
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-brand">
-        <img src="image/logo.jpg" class="logo" alt="BioBladi logo" />
-        <span style="color: white; font-weight: bold"
-          >BioBladi — Du champ à votre assiette, produits locaux et bio
-        </span>
-      </div>
-      <div class="footer-links">
-        <h4>Liens utiles</h4>
-        <a href="../about us/about us.html">About Us</a>
-        <a href="../fruits et légumes/fruits et légumes.html">Marché</a>
-      </div>
-      <div class="footer-contact">
-        <h4>Contactez-nous</h4>
-        <p>
-          <img
-            src="image/phone-svgrepo-com (1).svg"
-            alt="Téléphone"
-            class="footer-icon"
-          />
-          +216 12 345 678
-        </p>
-        <p>
-          <img
-            src="image/mail-check-svgrepo-com.svg"
-            alt="Email"
-            class="footer-icon"
-          />
-          contact@biobladi.tn
-        </p>
-        <p>
-          <img
-            src="image/location-svgrepo-com.svg"
-            alt="Adresse"
-            class="footer-icon"
-          />
-          Tunis, Tunisie
-        </p>
-        <p>
-          <img
-            src="image/time-svgrepo-com.svg"
-            alt="Horaires"
-            class="footer-icon"
-          />
-          Lun-Ven: 8h - 18h
-        </p>
-      </div>
-      <div class="footer-social">
-        <h4>Suivez-nous</h4>
-        <a href="#"
-          ><img
-            src="image/facebook-svgrepo-com (1).svg"
-            alt="Facebook"
-            class="social-icon"
-        /></a>
-        <a href="#"
-          ><img
-            src="image/instagram-167-svgrepo-com.svg"
-            alt="Instagram"
-            class="social-icon"
-        /></a>
-        <a href="#"
-          ><img
-            src="image/linkedin-svgrepo-com (1).svg"
-            alt="LinkedIn"
-            class="social-icon"
-        /></a>
-      </div>
-      <p class="footer-copy">
-        © 2025 BioBladi — Tous droits réservés — Fièrement tunisien 🇹🇳
-      </p>
-    </div>
-  </footer>
 </html>
