@@ -37,14 +37,14 @@ body{
     gap: 2rem;
 }
 
-.lien_nav {
+.lien_nav,#email {
     text-decoration: none;
     color: #2c3e2f;
     font-size: 0.95rem;
     font-weight: 500;
     transition: color 0.3s ease;
 }
-.lien_nav:hover {
+.lien_nav:hover,#email:hover {
     color: #4caf50;
 }
 
@@ -65,10 +65,7 @@ body{
     justify-content: center;
 
 }
-#offre{
-background-color: #c8e6c9;
-}
-.icone-small{
+.icone{
     width: 20px;
     height: 20px;
 }
@@ -84,25 +81,17 @@ background-color: #c8e6c9;
     border-radius:50%;
     object-fit:cover;
 }
+/* Fin Partie header*/
+#offre{
+background-color: #c8e6c9;
+}
+
 
 .site-title{
     font-size:22px;
     font-weight:600;
     color:#2e7d32;
 }
-
-.header-nav a{
-    margin-left:25px;
-    text-decoration:none;
-    color:#2f3e2f;
-    font-weight:500;
-    transition:0.3s;
-}
-
-.header-nav a:hover{
-    color:#2e7d32;
-}
-
 .divider{
     border:none;
     height:1px;
@@ -110,9 +99,13 @@ background-color: #c8e6c9;
 }
 .section-presentation{
     display:flex;
+    flex-direction: column;
     justify-content:center;
     padding:60px 20px;
+    align-items: center;
+    gap: 20px;
 }
+
 
 .carte-presentation{
     max-width:750px;
@@ -142,7 +135,20 @@ background-color: #c8e6c9;
     display:flex;
     justify-content:center;
 }
+.liste {
+    padding: 20px;
+    width: 60%;
+    text-align: center;
+    margin: 10px auto;
+  }
+h3{
+    color: #2e7d32;
+    margin-bottom: 10px;
 
+}
+ul{
+    text-align: left;
+}
 .conteneur-tableau{
     width:95%;
     max-width:1000px;
