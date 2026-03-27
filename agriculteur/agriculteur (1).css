@@ -184,7 +184,7 @@ label{
     font-weight: 400;
 }
 
-#btn-valider {
+#btn-valider ,#log-out{
     padding: 14px 40px;
     background: #14532d;
     color: white;
@@ -197,10 +197,14 @@ label{
     
 }
 
-#btn-valider:hover {
+#btn-valider:hover,#log-out:hover {
     background: #1e6b3f;
     transform: translateY(-2px);
     box-shadow: 0 8px 18px rgba(20, 83, 45, 0.3);
+}
+#dec{
+    margin-top: 40px;
+    text-align: center;
 }
 
 .btn-valider:active {
