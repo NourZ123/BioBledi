@@ -77,64 +77,66 @@
     <hr />
 
     <div class="page-container">
-      <div class="card">
-        <h1 class="page-title">Finaliser ma commande</h1>
+      <form action="#" method="post" name="finaliser ma commande">
+        <div class="card">
+          <h1 class="page-title">Finaliser ma commande</h1>
 
-        <div class="section">
-          <h3>Mode de livraison</h3>
+          <div class="section">
+            <h3>Mode de livraison</h3>
 
-          <div class="choice-group">
-            <div class="choice">A domicile</div>
-            <div class="choice">Point relais</div>
-            <div class="choice">Retirer de la ferme</div>
-          </div>
-        </div>
-
-        <div class="section">
-          <h3>Mode de paiement</h3>
-
-          <div class="choice-group">
-            <div class="choice payment">
-              <img src="image/credit-card-svgrepo-com.svg" alt="card" />
-              Carte bancaire
-            </div>
-
-            <div class="choice payment">
-              <img src="image/truck-svgrepo-com.svg" alt="truck" />
-              A la livraison
+            <div class="choice-group">
+              <div class="choice">A domicile</div>
+              <div class="choice">Point relais</div>
+              <div class="choice">Retirer de la ferme</div>
             </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label>Titulaire</label>
-          <input type="text" placeholder="Jean Dupont" />
-        </div>
+          <div class="section">
+            <h3>Mode de paiement</h3>
 
-        <div class="form-group">
-          <label>Numéro de carte</label>
-          <input type="text" placeholder="XXXX XXXX XXXX XXXX" />
-        </div>
+            <div class="choice-group">
+              <div class="choice payment">
+                <img src="image/credit-card-svgrepo-com.svg" alt="card" />
+                Carte bancaire
+              </div>
 
-        <div class="row">
-          <div class="form-group">
-            <label>Date expiration</label>
-            <input type="text" placeholder="MM/YY" />
+              <div class="choice payment">
+                <img src="image/truck-svgrepo-com.svg" alt="truck" />
+                A la livraison
+              </div>
+            </div>
           </div>
 
           <div class="form-group">
-            <label>CVC</label>
-            <input type="text" placeholder="123" />
+            <label>Titulaire</label>
+            <input type="text" placeholder="Jean Dupont" />
+          </div>
+
+          <div class="form-group">
+            <label>Numéro de carte</label>
+            <input type="text" placeholder="XXXX XXXX XXXX XXXX" />
+          </div>
+
+          <div class="row">
+            <div class="form-group">
+              <label>Date expiration</label>
+              <input type="text" placeholder="MM/YY" />
+            </div>
+
+            <div class="form-group">
+              <label>CVC</label>
+              <input type="text" placeholder="123" />
+            </div>
+          </div>
+
+          <div class="buttons">
+            <a href="../mon panier/panier.html"
+              ><button class="btn2">Retour</button></a
+            >
+            <a href="#"><button class="btn1">Continuer</button></a>
           </div>
         </div>
-
-        <div class="buttons">
-          <a href="../mon panier/panier.html"
-            ><button class="btn2">Retour</button></a
-          >
-          <a href="#"><button class="btn1">Continuer</button></a>
-        </div>
-      </div>
+      </form>
     </div>
 
     <footer class="footer">
