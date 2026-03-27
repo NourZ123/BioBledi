@@ -43,6 +43,10 @@
               >Contact us</a
             >
             <a href="../about us/about us.html" class="lien_nav">About US</a>
+            <a href="../Questionnaire/questionnaire.html" class="lien_nav"
+              >Questionnaire</a
+            >
+            <a href="../funpage/funpage.html" class="lien_nav">Fun page</a>
           </nav>
         </div>
       </div>
@@ -81,7 +85,6 @@
               name="Nom"
               class="text"
               placeholder="Votre nom"
-              required
             />
           </div>
 
@@ -93,7 +96,6 @@
               name="Email"
               class="text"
               placeholder="votre@email.com"
-              required
             />
           </div>
 
@@ -157,29 +159,20 @@
               >Veuillez indiquer la date de votre dernière commande</label
             >
             <div class="date">
-              <input type="date" id="date" name="date" required />
+              <input type="date" id="date" name="date" />
             </div>
           </div>
-          <div class="input">
-            <label>Evaluez votre dernière expérience avec notre site :</label>
-            <div class="choix1">
-              <label
-                ><input type="radio" name="experience" value="1" required />
-                1</label
-              >
-              <label
-                ><input type="radio" name="experience" value="2" /> 2</label
-              >
-              <label
-                ><input type="radio" name="experience" value="3" /> 3</label
-              >
-              <label
-                ><input type="radio" name="experience" value="4" /> 4</label
-              >
-              <label
-                ><input type="radio" name="experience" value="5" /> 5</label
-              >
-            </div>
+          <div class="note">
+            <label for="note"
+              >Evaluez votre dernière expérience avec notre site :</label
+            >
+            <select name="note" id="note">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
           </div>
           <div class="input">
             <label for="msg">Avez-vous des suggestions?</label>
