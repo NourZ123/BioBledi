@@ -2,28 +2,32 @@
 
 // définition du constructeur
 function Produit(nom, region, saison, agriculteur, note, stock, prix, offre) {
+    //on veut créer un id unique pour chaque produit
     this.id = Date.now() + Math.random();
     this.nom = nom;
     this.region = region;
     this.saison = saison;
     this.agriculteur = agriculteur;
+    //convertir la note et le stock en entiers
     this.note = parseInt(note);
     this.stock = parseInt(stock);
+    //convertir le prix en float
     this.prix = parseFloat(prix);
+    //si l'offre n'est pas fournie on met false par défaut
     this.offre = offre || false;
 
-    // Afficher la note simplement (ex: "Note: 4/5")
+    // C'est une méthode pour afficher la note simplement (ex: "Note: 4/5")
     this.getNoteTexte = function() {
         return `📝 Note: ${this.note}/5`;
     };
-
+    // Méthode qui retourne le texte de l'offre s'il existe
     this.getOffreTexte = function() {
         if (this.offre) return `🎉 Offre spéciale -${this.offre}% sur 2kg`;
         return "";
     };
 }
 
-// 2. COLLECTION DE DONNÉES
+// La collecte des données des produits
 let produits = [
     new Produit("Miel", "Kef", "Printemps/Été", "Miel Boumiza", 4, 45, 25, false),
     new Produit("Huile d'olive", "Sfax", "Automne/Hiver", "Coopérative Errayhan", 5, 120, 18, false),
@@ -35,28 +39,32 @@ let produits = [
     new Produit("Pommes", "Jendouba", "Automne", "Ferme El Khir", 5, 90, 4.5, false),
     new Produit("Amandes", "Sidi Bouzid", "Automne", "Coopérative El Amel", 5, 75, 22, 15)
 ];
+//on fait une copie dans produitsOriginal pour le retrouver plus tard après les changements appliqués
 
 let produitsOriginal = [...produits];
 
-// 3. REGROUPER PAR RÉGION
+// Regrouppement par région
 function grouperParRegion(produitsList) {
     const groupes = [];
     let i = 0;
     while (i < produitsList.length) {
         let groupe = { region: produitsList[i].region, produits: [] };
         while (i < produitsList.length && produitsList[i].region === groupe.region) {
+            //tant qu'il reste des produits 
             groupe.produits.push(produitsList[i]);
             i++;
-        }
+        }//une fois qu'on a fini de regrouper les produits de la même région, on ajoute le groupe au tableau des groupes
         groupes.push(groupe);
     }
     return groupes;
 }
 
-// 4. AFFICHER LE TABLEAU
+// Affichage du tableau
 function afficherTableau() {
+    //on récupère le corps du tableau (tbody) pour pouvoir y ajouter les lignes dynamiquement
     const tbody = document.getElementById('table-body');
     if (!tbody) return;
+    //on vide le tableau avant de le remplir à nouveau pour éviter les doublons
     tbody.innerHTML = '';
 
     const groupes = grouperParRegion(produits);
@@ -74,7 +82,11 @@ function afficherTableau() {
             // Produit
             const tdNom = document.createElement('td');
             tdNom.className = 'nom-produit';
-            const nomImage = produit.nom.toLowerCase().replace(/[éèêë]/g, 'e').replace(/[^a-z]/g, '_');
+            //on veut afficher une icône à côté du nom du produit si l'image existe, sinon on affiche juste le nom
+            //on suppose que les images sont nommées avec le nom du produit en minuscule et sans espaces 
+            //onerror est un événement qui se déclenche lorsque l'image ne peut pas être chargée, dans ce cas l'image est invisible
+            // "none" va cacher l'image si elle n'existe pas"
+            
             tdNom.innerHTML = `<img src="image/${nomImage}.jpg" class="icone-produit" onerror="this.style.display='none'"> ${produit.nom}`;
             ligne.appendChild(tdNom);
 

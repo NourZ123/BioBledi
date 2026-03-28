@@ -1,7 +1,4 @@
 
-
-
-
 // définition du constructeur
 function Produit(nom, region, saison, agriculteur, note, stock, prix, offre) {
     this.id = Date.now() + Math.random();
