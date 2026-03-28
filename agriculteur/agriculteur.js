@@ -1,242 +1,279 @@
 
-// définition du constructeur
-function Produit(nom, region, saison, agriculteur, note, stock, prix, offre) {
-    this.id = Date.now() + Math.random();
-    this.nom = nom;
-    this.region = region;
-    this.saison = saison;
-    this.agriculteur = agriculteur;
-    this.note = parseInt(note);
-    this.stock = parseInt(stock);
-    this.prix = parseFloat(prix);
-    this.offre = offre || false;
+// declaration d'un objet qui contient les informations de l'agriculteur
+//les données ne vont pas changer donc on utilise const
+const farmerData = {
+    nom: "Ben",
+    prenom: "Ali",
+    email: "agri@test.com",
+    telephone: "+216 12 345 678",
+    adresse: "Tunis, Tunisie",
+    ferme: "Ferme Bio Test",
+    typeProduction: "Fruits & Légumes",
+    description: "Ferme biologique certifiée"
+};
 
-    // Afficher la note simplement (ex: "Note: 4/5")
-    this.getNoteTexte = function() {
-        return `📝 Note: ${this.note}/5`;
-    };
+let produitsAgriculteur = [];
 
-    this.getOffreTexte = function() {
-        if (this.offre) return `🎉 Offre spéciale -${this.offre}% sur 2kg`;
-        return "";
-    };
+function chargerInfosAgriculteur() {
+    //on cherche la balise qui va contenir les infos de l'agriculteur
+    const infoGrid = document.getElementById('farmerInfo');
+    //si elle n'existe pas, on arrête la fonction
+    if (!infoGrid) return;
+    //on remplace le contenu de la grille par les infos de l'agriculteur 
+    infoGrid.innerHTML = `
+        <div class="info-card">
+            <span class="info-label">👤 Nom complet</span>
+            <span class="info-value">${farmerData.nom} ${farmerData.prenom}</span>
+        </div>
+        <div class="info-card">
+            <span class="info-label">📧 Email</span>
+            <span class="info-value">${farmerData.email}</span>
+        </div>
+        <div class="info-card">
+            <span class="info-label">📞 Téléphone</span>
+            <span class="info-value">${farmerData.telephone}</span>
+        </div>
+        <div class="info-card">
+            <span class="info-label">📍 Adresse</span>
+            <span class="info-value">${farmerData.adresse}</span>
+        </div>
+        <div class="info-card">
+            <span class="info-label">🏠 Nom de la ferme</span>
+            <span class="info-value">${farmerData.ferme}</span>
+        </div>
+        <div class="info-card">
+            <span class="info-label">🌾 Type de production</span>
+            <span class="info-value">${farmerData.typeProduction}</span>
+        </div>
+        <div class="info-card">
+            <span class="info-label">📝 Description</span>
+            <span class="info-value">${farmerData.description}</span>
+        </div>
+    `;
 }
+//gestion des produits
 
-// 2. COLLECTION DE DONNÉES
-let produits = [
-    new Produit("Miel", "Kef", "Printemps/Été", "Miel Boumiza", 4, 45, 25, false),
-    new Produit("Huile d'olive", "Sfax", "Automne/Hiver", "Coopérative Errayhan", 5, 120, 18, false),
-    new Produit("Harissa", "Sfax", "Toute l'année", "Ferme Châabane", 5, 80, 12, false),
-    new Produit("Deglet Nour", "Tozeur", "Automne", "Ferme El Bey", 5, 200, 15, 25),
-    new Produit("Figues de barbarie", "Zaghouan", "Été", "Jardin de Montagne", 4, 60, 8, false),
-    new Produit("Oeufs", "Nabeul", "Toute l'année", "Plusieurs producteurs", 4, 500, 5, false),
-    new Produit("Menthe fraîche", "Nabeul", "Toute l'année", "Plusieurs producteurs", 4, 150, 3, false),
-    new Produit("Pommes", "Jendouba", "Automne", "Ferme El Khir", 5, 90, 4.5, false),
-    new Produit("Amandes", "Sidi Bouzid", "Automne", "Coopérative El Amel", 5, 75, 22, 15)
-];
-
-let produitsOriginal = [...produits];
-
-// 3. REGROUPER PAR RÉGION
-function grouperParRegion(produitsList) {
-    const groupes = [];
-    let i = 0;
-    while (i < produitsList.length) {
-        let groupe = { region: produitsList[i].region, produits: [] };
-        while (i < produitsList.length && produitsList[i].region === groupe.region) {
-            groupe.produits.push(produitsList[i]);
-            i++;
+function chargerProduitsAgriculteur() {
+    // Produits par défaut pour le test
+    produitsAgriculteur = [
+        {
+            id: 1,
+            nom: "Fraise",
+            prix: 15,
+            stock: 50,
+            unite: "kg",
+            region: "Nabeul",
+            saison: "Printemps",
+            offre: false,
+            description: "Fraises fraîches"
+        },
+        {
+            id: 2,
+            nom: "Tomates",
+            prix: 4.5,
+            stock: 120,
+            unite: "kg",
+            region: "Nabeul",
+            saison: "Été",
+            offre: false,
+            description: "Tomates cerises"
+        },
+        {
+            id: 3,
+            nom: "Huile d'olive",
+            prix: 18,
+            stock: 80,
+            unite: "litre",
+            region: "Sfax",
+            saison: "Automne",
+            offre: 15,
+            description: "Huile d'olive extra vierge"
         }
-        groupes.push(groupe);
-    }
-    return groupes;
+    ];
+    //pour afficher les produits dans la page
+    afficherProduits();
+    //pour mettre à jour les compteurs
+    mettreAJourStatistiques();
 }
 
-// 4. AFFICHER LE TABLEAU
-function afficherTableau() {
-    const tbody = document.getElementById('table-body');
-    if (!tbody) return;
-    tbody.innerHTML = '';
-
-    const groupes = grouperParRegion(produits);
-
-    for (let g = 0; g < groupes.length; g++) {
-        const groupe = groupes[g];
-        const produitsRegion = groupe.produits;
-        const nbProduits = produitsRegion.length;
-
-        for (let p = 0; p < nbProduits; p++) {
-            const produit = produitsRegion[p];
-            const ligne = document.createElement('tr');
-            ligne.className = 'ligne-produit';
-
-            // Produit
-            const tdNom = document.createElement('td');
-            tdNom.className = 'nom-produit';
-            const nomImage = produit.nom.toLowerCase().replace(/[éèêë]/g, 'e').replace(/[^a-z]/g, '_');
-            tdNom.innerHTML = `<img src="image/${nomImage}.jpg" class="icone-produit" onerror="this.style.display='none'"> ${produit.nom}`;
-            ligne.appendChild(tdNom);
-
-            // Région (rowspan)
-            if (p === 0) {
-                const tdRegion = document.createElement('td');
-                if (nbProduits > 1) tdRegion.setAttribute('rowspan', nbProduits);
-                tdRegion.textContent = produit.region;
-                ligne.appendChild(tdRegion);
-            }
-
-            // Saison
-            const tdSaison = document.createElement('td');
-            tdSaison.textContent = produit.saison;
-            ligne.appendChild(tdSaison);
-
-            // Agriculteur
-            const tdAgriculteur = document.createElement('td');
-            tdAgriculteur.textContent = produit.agriculteur;
-            ligne.appendChild(tdAgriculteur);
-
-            // Note / Prix / Stock
-            const tdInfos = document.createElement('td');
-            let offreHtml = produit.getOffreTexte() ? `<div class="offre-badge">${produit.getOffreTexte()}</div>` : '';
-            if (produit.offre) tdInfos.setAttribute('colspan', '2');
-            tdInfos.innerHTML = `
-                <div class="product-details">
-                    <div class="note-simple">${produit.getNoteTexte()}</div>
-                    <div class="product-price">💰 ${produit.prix} DT</div>
-                    <div class="product-stock">📦 Stock: ${produit.stock}</div>
-                    ${offreHtml}
-                </div>
-            `;
-            ligne.appendChild(tdInfos);
-
-            tbody.appendChild(ligne);
-        }
+function afficherProduits() {
+    //on cherche la balise avec l'id productsContainer
+    const container = document.getElementById('productsContainer');
+    //si elle n'existe pas on arrete
+    if (!container) return;
+    //si on n'a aucun produit
+    if (produitsAgriculteur.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <p>Aucun produit ajouté pour le moment.</p>
+                <p>Utilisez le formulaire ci-dessus pour ajouter vos produits.</p>
+            </div>
+        `;
+        return;
     }
+    //on parcourt chaque produit et on crée une carte pour l'afficher
+    container.innerHTML = produitsAgriculteur.map(
+        //pour chaque produit on exécute ce code
+        produit => `
+        <div class="product-card" data-id="${produit.id}">
+        //
+            <div class="product-name">${produit.nom}</div>
+            <div class="product-price">💰 ${produit.prix} DT / ${produit.unite || 'kg'}</div>
+            <div class="product-stock">📦 Stock: ${produit.stock}</div>
+            <div class="product-location">📍 ${produit.region || 'Tunisie'}</div>
+            <div class="product-season">🌱 ${produit.saison || 'Toute l\'année'}</div>
+            // si le produit a une offre, on affiche une étiquette spéciale
+            ${produit.offre ? `<div class="product-offer">🎉 Offre spéciale -${produit.offre}%</div>` : ''}
+            <div class="product-actions">
+                <button class="edit-btn" onclick="modifierProduit(${produit.id})">✏️ Modifier</button>
+                <button class="delete-btn" onclick="supprimerProduit(${produit.id})">🗑️ Supprimer</button>
+            </div>
+        </div>
+    `).join('');
+    //joindre tous les éléments du tableau en une seule chaîne de caractères pour l'afficher dans le conteneur
 }
-
-// 5. AJOUTER UN PRODUIT
-function ajouterProduit(nom, region, saison, agriculteur, note, stock, prix, offre) {
-    if (!nom || !region || !saison || !agriculteur) {
-        alert("Veuillez remplir tous les champs !");
-        return false;
-    }
-    const nouveau = new Produit(nom, region, saison, agriculteur, note, stock, prix, offre);
-    produits.push(nouveau);
-    //localeCompare est une fonction prédéfinie qui compare deux chaînes de caractères 
-    //elle retourne -1 si a < b, 0 si a == b et 1 si a > b
-    produits.sort((a, b) => a.region.localeCompare(b.region));
-    // on veut regrouper les produits par région pour pouvoir les fussionner dans le tableau avec rowspan
-    //on utilise la méthode spread pour créer une vraie copie
-    produitsOriginal = [...produits];
-    afficherTableau();
-    alert(`✅ "${nom}" ajouté avec succès !`);
-    return true;
-}
-
-function ajouterDepuisFormulaire() {
-    const select = document.getElementById('produit-select');
-    const nom = select.value;
-    if (!nom) { alert("Choisissez un produit !"); return; }
-
-    const note = parseInt(document.getElementById('note-produit').value);
-    const prix = parseFloat(document.getElementById('prix-produit').value);
-
-    const produitsInfo = {
-        "Miel": { region: "Kef", saison: "Printemps/Été", agriculteur: "Miel Boumiza" },
-        "Huile d'olive": { region: "Sfax", saison: "Automne/Hiver", agriculteur: "Coopérative Errayhan" },
-        "Harissa": { region: "Sfax", saison: "Toute l'année", agriculteur: "Ferme Châabane" },
-        "Deglet Nour": { region: "Tozeur", saison: "Automne", agriculteur: "Ferme El Bey" },
-        "Figues de barbarie": { region: "Zaghouan", saison: "Été", agriculteur: "Jardin de Montagne" },
-        "Oeufs": { region: "Nabeul", saison: "Toute l'année", agriculteur: "Plusieurs producteurs" },
-        "Menthe fraîche": { region: "Nabeul", saison: "Toute l'année", agriculteur: "Plusieurs producteurs" },
-        "Pommes": { region: "Jendouba", saison: "Automne", agriculteur: "Ferme El Khir" },
-        "Amandes": { region: "Sidi Bouzid", saison: "Automne", agriculteur: "Coopérative El Amel" }
-    };
-    const info = produitsInfo[nom];
-    if (info) {
-        ajouterProduit(nom, info.region, info.saison, info.agriculteur, note, 50, prix, false);
-    }
-    select.value = "";
-    document.getElementById('note-produit').value = 4;
-    document.getElementById('prix-produit').value = 10;
-}
-
-// 6. RECHERCHER
-
-
-function rechercherProduits(critere, valeur) {
-    let resultats = [];
+function mettreAJourStatistiques() {
+    const totalProducts = produitsAgriculteur.length;
     
-    for (let produit of produitsOriginal) {
-        switch(critere) {
-            case "nom":
-                //si le critère est le nom, on vérifie si le nom du produit contient la valeur recherchée (en ignorant la casse)
-                //dans ce cas on ajoute le produit aux résultats
-                if (produit.nom.toLowerCase().includes(valeur.toLowerCase())) {
-                    resultats.push(produit);
-                }
-                break;
-            case "region":
-                if (produit.region.toLowerCase().includes(valeur.toLowerCase())) {
-                    resultats.push(produit);
-                }
-                break;
-            case "noteMin":
-                //parseInt pour convertir la valeur en entier car les notes sont des entiers
-                if (produit.note >= parseInt(valeur)) {
-                    resultats.push(produit);
-                }
-                break;
-            case "prixMax":
-                //parseFloat pour convertir la valeur en décimal
-                if (produit.prix <= parseFloat(valeur)) {
-                    resultats.push(produit);
-                }
-                break;
-            default:
-                resultats.push(produit);  // Tous les produits
-                break;
-        }
+    let totalStock = 0;
+    let totalSales = 0;
+    
+    for (let produit of produitsAgriculteur) {
+        totalStock = totalStock + (produit.stock || 0);
+        totalSales = totalSales + (produit.vendu || 0);
     }
     
-    return resultats;
-}
-function afficherRecherche() {
-    const critere = document.getElementById('recherche-critere').value;
-    const valeur = document.getElementById('recherche-valeur').value;
-    if (!valeur && critere !== 'noteMin' && critere !== 'prixMax') { 
-        alert("Entrez une valeur"); 
-        return; 
-    }
-    const resultats = rechercherProduits(critere, valeur);
-    if (resultats.length === 0) { 
-        alert("Aucun produit trouvé"); 
-        return; 
-    }
-    produits = [...resultats].sort((a, b) => a.region.localeCompare(b.region));
-    afficherTableau();
-    const msg = document.createElement('div');
-    msg.className = 'feedback-message';
-    msg.textContent = `🔍 ${resultats.length} produit(s) trouvé(s)`;
-    const container = document.querySelector('.conteneur-tableau');
-    container.insertBefore(msg, container.firstChild);
-    setTimeout(() => msg.remove(), 3000);
-}
-
-function afficherTous() {
-    produits = [...produitsOriginal];
-    afficherTableau();
-    alert(" Affichage de tous les produits");
-}
-
-// 7. INITIALISATION
-document.addEventListener('DOMContentLoaded', () => {
-    produits.sort((a, b) => a.region.localeCompare(b.region));
-    produitsOriginal = [...produits];
-    afficherTableau();
+    const totalproduits = document.getElementById('totalProducts');
+    const totalStockF = document.getElementById('totalStock');
+    const totalSalesEl = document.getElementById('totalSales');
     
-    document.getElementById('btn-ajouter')?.addEventListener('click', ajouterDepuisFormulaire);
-    document.getElementById('btn-rechercher')?.addEventListener('click', afficherRecherche);
-    document.getElementById('btn-afficher-tous')?.addEventListener('click', afficherTous);
+    if (totalproduits) totalproduits.textContent = totalProducts;
+    if (totalStockF) totalStockF.textContent = totalStock;
+    if (totalSalesEl) totalSalesEl.textContent = totalSales;
+}
+
+
+
+// ============================================
+// 3. AJOUTER UN PRODUIT
+// ============================================
+
+function ajouterProduit(event) {
+    //event est le clic sur le bouton du formulaire
+    //on empeche la page de se recharger automatiquement
+    event.preventDefault();
+    //on récupère les valeurs du formulaire à travers .value
+    const nom = document.getElementById('nom-produit').value;
+    const prix = document.getElementById('prix-produit').value;
+    const stock = document.getElementById('stock-produit').value;
+    const categorie = document.getElementById('categorie-produit').value;
+    const saison = document.getElementById('saison-produit').value;
+    const offre = document.getElementById('offre-produit').value;
+    const description = document.getElementById('description-produit').value;
+    //si l'un de ces champs est vide on affiche une alerte et on arrete
+    if (!nom || !prix || !stock) {
+        alert('Veuillez remplir tous les champs obligatoires');
+        return;
+    }
+    
+    const nouveauProduit = {
+        //l'id doit etre unique
+        id: Date.now(),
+        nom: nom,
+        prix: parseFloat(prix),
+        stock: parseInt(stock),
+        categorie: categorie,
+        saison: saison,
+        region: farmerData.adresse || 'Tunisie',
+        agriculteur: `${farmerData.nom} ${farmerData.prenom}`,
+        unite: 'kg',
+        offre: offre ? parseInt(offre) : false,
+        description: description || '',
+        dateAjout: new Date().toLocaleDateString(),
+        vendu: 0
+    };
+    //on ajoute le nouveau produit à la liste des produits de l'agriculteur
+    produitsAgriculteur.push(nouveauProduit);
+    
+    // Réinitialiser le formulaire
+    document.getElementById('productForm').reset();
+    
+    // Recharger l'affichage
+    afficherProduits();
+    mettreAJourStatistiques();
+    
+    alert(`✅ "${nom}" a été ajouté avec succès !`);
+}
+
+function modifierProduit(id) {
+    // Chercher le produit
+    let produit = null;
+    for (let p of produitsAgriculteur) {
+        if (p.id === id) {
+            produit = p;
+            break;
+        }
+    }
+    if (!produit) return;
+    
+    // Demander les nouvelles valeurs
+    const nouveauNom = prompt('Nouveau nom du produit:', produit.nom);
+    if (nouveauNom === null) return;
+    
+    const nouveauPrix = prompt('Nouveau prix (DT):', produit.prix);
+    if (nouveauPrix === null) return;
+    
+    const nouveauStock = prompt('Nouveau stock:', produit.stock);
+    if (nouveauStock === null) return;
+    
+    // Modifier le produit
+    produit.nom = nouveauNom;
+    produit.prix = parseFloat(nouveauPrix);
+    produit.stock = parseInt(nouveauStock);
+    
+    // Recharger l'affichage
+    afficherProduits();
+    mettreAJourStatistiques();
+    
+    alert(`✅ "${produit.nom}" a été modifié avec succès !`);
+}
+// Supprimer un produit
+function supprimerProduit(id) {
+    // Chercher l'index du produit
+    let index = -1;
+    for (let i = 0; i < produitsAgriculteur.length; i++) {
+        if (produitsAgriculteur[i].id === id) {
+            index = i;
+            break;
+        }
+    }
+    if (index === -1) return;
+    
+    // Supprimer 1 élément qui a la position index
+    produitsAgriculteur.splice(index, 1);
+    
+    // Recharger l'affichage
+    afficherProduits();
+    mettreAJourStatistiques();
+    
+    alert('✅ Produit supprimé avec succès !');
+}
+
+
+//quand la page est complètement chargée, on exécute cette fonction 
+document.addEventListener('DOMContentLoaded', function() {
+    // Charger les informations de l'agriculteur
+    chargerInfosAgriculteur();
+    
+    // Charger les produits
+    chargerProduitsAgriculteur();
+    
+    //on cherche le formulaire de l'id productForm
+    const form = document.getElementById('productForm');
+    //quand on soumet le formulaire, on exécute la fonction ajouterProduit
+    if (form) {
+        form.addEventListener('submit', ajouterProduit);
+    }
+    
+    
 });
-
