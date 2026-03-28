@@ -114,102 +114,123 @@
         </a>
       </div>
     </section>
+    <section class="section-gestion">
+      <div class="conteneur-gestion">
+        <!-- Formulaire d'ajout -->
+        <div class="formulaire-ajout">
+          <h3>➕ Ajouter un produit</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="produit-select">Choisir un produit :</label>
+              <select id="produit-select" class="form-select">
+                <option value="">-- Sélectionnez --</option>
+                <option value="Miel">🍯 Miel</option>
+                <option value="Huile d'olive">🫒 Huile d'olive</option>
+                <option value="Harissa">🌶️ Harissa</option>
+                <option value="Deglet Nour">🌴 Deglet Nour</option>
+                <option value="Figues de barbarie">
+                  🍐 Figues de barbarie
+                </option>
+                <option value="Oeufs">🥚 Oeufs</option>
+                <option value="Menthe fraîche">🌿 Menthe fraîche</option>
+                <option value="Pommes">🍎 Pommes</option>
+                <option value="Amandes">🥜 Amandes</option>
+                <option value="Grenades">🍎 Grenades</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="note-produit">Note (1-5) :</label>
+              <input
+                type="number"
+                id="note-produit"
+                class="form-input"
+                min="1"
+                max="5"
+                value="4"
+              />
+            </div>
+            <div class="form-group">
+              <label for="prix-produit">Prix (DT) :</label>
+              <input
+                type="number"
+                id="prix-produit"
+                class="form-input"
+                min="0"
+                step="0.5"
+                value="10"
+              />
+            </div>
+          </div>
+          <button id="btn-ajouter" class="btn-ajouter">
+            ➕ Ajouter au tableau
+          </button>
+        </div>
+
+        <!-- Formulaire de recherche -->
+        <div class="formulaire-recherche">
+          <h3>🔍 Rechercher un produit</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="recherche-critere">Critère :</label>
+              <select id="recherche-critere" class="form-select">
+                <option value="nom">Par nom</option>
+                <option value="region">Par région</option>
+                <option value="noteMin">Note minimum (≥)</option>
+                <option value="prixMax">Prix maximum (≤)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="recherche-valeur">Valeur :</label>
+              <input
+                type="text"
+                id="recherche-valeur"
+                class="form-input"
+                placeholder="Ex: Sfax"
+              />
+            </div>
+          </div>
+          <div class="btn-group-recherche">
+            <button id="btn-rechercher" class="btn-rechercher">
+              🔍 Rechercher
+            </button>
+            <button id="btn-afficher-tous" class="btn-tous">
+              📋 Afficher tous
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABLEAU DES PRODUITS -->
     <section class="section-produits">
       <div class="conteneur-tableau">
-        <table class="tableau-produits" cellspacing="10" cellpadding="12">
-          <tr>
-            <td colspan="5" class="titre-tableau">
-              <img src="image/logo.jpg" class="logo" alt="logo" />
-              Du champ à votre assiette, sans intermédiaire
-            </td>
-          </tr>
-
-          <tr>
-            <td colspan="5" class="en-tete-section">
-              Nos produits vedettes par région
-            </td>
-          </tr>
-
-          <tr class="ligne-entete">
-            <th>Produit</th>
-            <th>Région</th>
-            <th>Saison</th>
-            <th>Agriculteur</th>
-            <th>Note</th>
-          </tr>
-
-          <tr class="ligne-produit">
-            <td class="nom-produit">
-              <img src="image/miel.jpg" class="icone-produit" alt="miel" /> Miel
-            </td>
-            <td>Kef</td>
-            <td>Printemps / Été</td>
-            <td>Miel Boumiza</td>
-            <td>⭐⭐⭐⭐☆</td>
-          </tr>
-
-          <tr class="ligne-produit">
-            <td class="nom-produit">
-              <img src="image/olive.jpg" class="icone-produit" alt="olive" />
-              Huile d'olive
-            </td>
-            <td rowspan="2">Sfax</td>
-            <td>Automne / Hiver</td>
-            <td>Coopérative Errayhan</td>
-            <td>⭐⭐⭐⭐⭐</td>
-          </tr>
-
-          <tr class="ligne-produit">
-            <td class="nom-produit">
-              <img src="image/piment.jpg" class="icone-produit" alt="piment" />
-              Harissa
-            </td>
-            <td>Toute l'année</td>
-            <td>Ferme Châabane</td>
-            <td>⭐⭐⭐⭐☆</td>
-          </tr>
-
-          <tr class="ligne-produit">
-            <td class="nom-produit">
-              <img src="image/dattes.jpg" class="icone-produit" alt="dattes" />
-              Deglet Nour
-            </td>
-            <td>Tozeur</td>
-            <td>Automne</td>
-            <td id="offre" colspan="2">🌟 Offre spéciale -25% sur 2kg</td>
-          </tr>
-          <tr class="ligne-produit">
-            <td class="nom-produit">
-              <img
-                src="image/figue de barbarie.webp"
-                alt="Figue"
-                class="icone-produit"
-              />
-              Figues de barbarie
-            </td>
-            <td class="cell-region">Zaghouan</td>
-            <td class="cell-saison">Été</td>
-            <td class="cell-producteur">Jardin de Montagne</td>
-            <td class="cell-note">⭐⭐⭐⭐☆</td>
-          </tr>
-          <tr class="ligne-produit">
-            <td class="nom-produit">
-              <img src="image/oeufs.jpg" alt="oeufs" class="icone-produit" />
-              oeufs
-            </td>
-            <td class="cell-region" rowspan="2">Nabeul</td>
-            <td class="cell-saison">Toute l'année</td>
-            <td class="cell-producteur">Plusieurs producteurs</td>
-            <td class="cell-note">⭐⭐⭐☆☆</td>
-          </tr>
-          <tr class="ligne-produit">
-            <td class="nom-produit">
-              <img src="image/menthe.jpg" alt="Menthe" class="icone-produit" />
-              Menthe fraîche
-            </td>
-            <td class="cell-saison">Toute l'année</td>
-            <td class="cell-producteur" colspan="2">Plusieurs producteurs</td>
-          </tr>
+        <table
+          class="tableau-produits"
+          cellspacing="10"
+          cellpadding="12"
+          id="tableau-produits"
+        >
+          <thead>
+            <tr class="titre-tableau">
+              <td colspan="5" class="titre-cellule">
+                <img src="image/logo.jpg" class="logo" alt="logo" />
+                Du champ à votre assiette, sans intermédiaire
+              </td>
+            </tr>
+            <tr class="en-tete-section">
+              <td colspan="5">🌟 Nos produits vedettes par région</td>
+            </tr>
+            <tr class="ligne-entete">
+              <th>Produit</th>
+              <th>Région</th>
+              <th>Saison</th>
+              <th>Agriculteur</th>
+              <th>Note / Prix / Stock</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <!-- Les lignes seront générées dynamiquement par JavaScript -->
+          </tbody>
         </table>
       </div>
     </section>

@@ -258,32 +258,312 @@ a{
     font-size:14px;
     opacity:0.8;
 }
-@media (max-width:768px){
+/* nouveau css*/
+/* ============================================
+   SECTION GESTION (FORMULAIRES)
+   ============================================ */
 
-    .head{
-        flex-direction:column;
-        align-items:center;
-        text-align:center;
-        gap:15px;
+   .section-gestion {
+    padding: 20px 20px 0 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.conteneur-gestion {
+    width: 95%;
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.formulaire-ajout, .formulaire-recherche {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    flex: 1;
+    min-width: 300px;
+    border: 1px solid #c8e6c9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.formulaire-ajout h3, .formulaire-recherche h3 {
+    color: #14532d;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #c8e6c9;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #475569;
+    font-size: 0.85rem;
+}
+
+.form-select, .form-input {
+    padding: 10px 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+}
+
+.form-select:focus, .form-input:focus {
+    outline: none;
+    border-color: #2e8b57;
+    box-shadow: 0 0 0 3px rgba(46, 139, 86, 0.1);
+}
+
+.btn-ajouter, .btn-rechercher, .btn-tous {
+    padding: 12px 24px;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    width: 100%;
+}
+
+.btn-ajouter {
+    background: #14532d;
+    color: white;
+    box-shadow: 0 2px 8px rgba(20, 83, 45, 0.2);
+}
+
+.btn-ajouter:hover {
+    background: #1e6b3f;
+    transform: translateY(-2px);
+}
+
+.btn-rechercher {
+    background: #2e8b57;
+    color: white;
+}
+
+.btn-rechercher:hover {
+    background: #1e6b3f;
+    transform: translateY(-2px);
+}
+
+.btn-tous {
+    background: #f3f5f8;
+    color: #14532d;
+    border: 1px solid #c8e6c9;
+}
+
+.btn-tous:hover {
+    background: #e8f0e5;
+    transform: translateY(-2px);
+}
+
+.btn-group-recherche {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* ============================================
+   SECTION TABLEAU
+   ============================================ */
+
+.section-produits {
+    padding: 20px 20px 70px;
+    display: flex;
+    justify-content: center;
+}
+
+.conteneur-tableau {
+    width: 95%;
+    max-width: 1200px;
+    overflow-x: auto;
+}
+
+.tableau-produits {
+    width: 100%;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.tableau-produits td, .tableau-produits th {
+    padding: 12px;
+    border: 1px solid #c8e6c9;
+    text-align: left;
+}
+
+.titre-tableau td {
+    background: linear-gradient(135deg, #2e8b57, #1e6b3f);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+}
+
+.en-tete-section td {
+    background: #1f3b2c;
+    color: white;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.ligne-entete th {
+    background: #e8f5e9;
+    color: #2e7d32;
+    font-weight: 600;
+}
+
+.ligne-produit:hover {
+    background: #fafafa;
+}
+
+.nom-produit {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+}
+
+.icone-produit {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.note-simple {
+    font-weight: 600;
+    color: #ff9800;
+}
+
+.product-price {
+    font-weight: 600;
+    color: #14532d;
+}
+
+.product-stock {
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+.offre-badge {
+    background: #ffd700;
+    color: #14532d;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.feedback-message {
+    background: #e8f5e9;
+    color: #14532d;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 500;
+}
+
+
+@media (max-width: 1200px) {
+    .head-left { width: 700px; }
+    .main-menu { gap: 1.2rem; }
+}
+
+@media (max-width: 1100px) {
+    .head-left { width: 660px; }
+    .main-menu { gap: 1rem; }
+    .main-menu a { font-size: 0.85rem; }
+}
+
+@media (max-width: 1000px) {
+    .head-left { width: 620px; }
+    .main-menu { gap: 0.9rem; }
+}
+
+@media (max-width: 900px) {
+    .head-left { width: 580px; }
+    .main-menu { gap: 0.8rem; }
+    .main-menu a { font-size: 0.8rem; }
+    .page-title { font-size: 24px; }
+    .page-title-container { width: 160px; }
+}
+
+@media (max-width: 768px) {
+    .head {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 20px;
     }
-
-    .left{
-        flex-direction:column;
-        align-items:center;
-        gap:15px;
+    .head-left {
+        width: 100%;
+        flex-direction: column;
+        gap: 15px;
     }
-
-    .header-nav{
-        flex-wrap:wrap;   /* IMPORTANT */
-        justify-content:center;
-        gap:1rem;
+    .main-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8rem;
     }
-
-    .right{
-        justify-content:center;
+    .head-right {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
     }
-
-    .login-card{
-        max-width:90%;
+    .page-title-container {
+        width: auto;
+        min-width: 150px;
+        text-align: center;
+    }
+    .page-title {
+        font-size: 24px;
+        text-align: center;
+    }
+    .conteneur-gestion {
+        flex-direction: column;
+    }
+    .form-row {
+        flex-direction: column;
+    }
+    .btn-group-recherche {
+        flex-direction: column;
+    }
+    .carte-presentation {
+        padding: 25px;
+    }
+    .tableau-produits {
+        font-size: 13px;
+    }
+    .icone-produit {
+        width: 24px;
+        height: 24px;
     }
 }
