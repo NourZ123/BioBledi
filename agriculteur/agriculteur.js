@@ -22,31 +22,31 @@ function chargerInfosAgriculteur() {
     //on remplace le contenu de la grille par les infos de l'agriculteur 
     infoGrid.innerHTML = `
         <div class="info-card">
-            <span class="info-label">👤 Nom complet</span>
+            <span class="info-label"> Nom complet</span>
             <span class="info-value">${farmerData.nom} ${farmerData.prenom}</span>
         </div>
         <div class="info-card">
-            <span class="info-label">📧 Email</span>
+            <span class="info-label"> Email</span>
             <span class="info-value">${farmerData.email}</span>
         </div>
         <div class="info-card">
-            <span class="info-label">📞 Téléphone</span>
+            <span class="info-label"> Téléphone</span>
             <span class="info-value">${farmerData.telephone}</span>
         </div>
         <div class="info-card">
-            <span class="info-label">📍 Adresse</span>
+            <span class="info-label"> Adresse</span>
             <span class="info-value">${farmerData.adresse}</span>
         </div>
         <div class="info-card">
-            <span class="info-label">🏠 Nom de la ferme</span>
+            <span class="info-label">Nom de la ferme</span>
             <span class="info-value">${farmerData.ferme}</span>
         </div>
         <div class="info-card">
-            <span class="info-label">🌾 Type de production</span>
+            <span class="info-label"> Type de production</span>
             <span class="info-value">${farmerData.typeProduction}</span>
         </div>
         <div class="info-card">
-            <span class="info-label">📝 Description</span>
+            <span class="info-label"> Description</span>
             <span class="info-value">${farmerData.description}</span>
         </div>
     `;
@@ -118,15 +118,15 @@ function afficherProduits() {
         <div class="product-card" data-id="${produit.id}">
         //
             <div class="product-name">${produit.nom}</div>
-            <div class="product-price">💰 ${produit.prix} DT / ${produit.unite || 'kg'}</div>
-            <div class="product-stock">📦 Stock: ${produit.stock}</div>
-            <div class="product-location">📍 ${produit.region || 'Tunisie'}</div>
-            <div class="product-season">🌱 ${produit.saison || 'Toute l\'année'}</div>
+            <div class="product-price"> ${produit.prix} DT / ${produit.unite || 'kg'}</div>
+            <div class="product-stock"> Stock: ${produit.stock}</div>
+            <div class="product-location"> ${produit.region || 'Tunisie'}</div>
+            <div class="product-season"> ${produit.saison || 'Toute l\'année'}</div>
             // si le produit a une offre, on affiche une étiquette spéciale
-            ${produit.offre ? `<div class="product-offer">🎉 Offre spéciale -${produit.offre}%</div>` : ''}
+            ${produit.offre ? `<div class="product-offer"> Offre spéciale -${produit.offre}%</div>` : ''}
             <div class="product-actions">
-                <button class="edit-btn" onclick="modifierProduit(${produit.id})">✏️ Modifier</button>
-                <button class="delete-btn" onclick="supprimerProduit(${produit.id})">🗑️ Supprimer</button>
+                <button class="edit-btn" onclick="modifierProduit(${produit.id})"> Modifier</button>
+                <button class="delete-btn" onclick="supprimerProduit(${produit.id})"> Supprimer</button>
             </div>
         </div>
     `).join('');
@@ -152,11 +152,7 @@ function mettreAJourStatistiques() {
     if (totalSalesEl) totalSalesEl.textContent = totalSales;
 }
 
-
-
-// ============================================
-// 3. AJOUTER UN PRODUIT
-// ============================================
+//ajouter un produit
 
 function ajouterProduit(event) {
     //event est le clic sur le bouton du formulaire
@@ -202,7 +198,7 @@ function ajouterProduit(event) {
     afficherProduits();
     mettreAJourStatistiques();
     
-    alert(`✅ "${nom}" a été ajouté avec succès !`);
+    alert(` "${nom}" a été ajouté avec succès !`);
 }
 
 function modifierProduit(id) {
@@ -235,7 +231,7 @@ function modifierProduit(id) {
     afficherProduits();
     mettreAJourStatistiques();
     
-    alert(`✅ "${produit.nom}" a été modifié avec succès !`);
+    alert(`"${produit.nom}" a été modifié avec succès !`);
 }
 // Supprimer un produit
 function supprimerProduit(id) {
@@ -256,7 +252,7 @@ function supprimerProduit(id) {
     afficherProduits();
     mettreAJourStatistiques();
     
-    alert('✅ Produit supprimé avec succès !');
+    alert('Produit supprimé avec succès !');
 }
 
 

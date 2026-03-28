@@ -1,5 +1,3 @@
-
-
 // définition du constructeur
 function Produit(nom, region, saison, agriculteur, note, stock, prix, offre) {
     //on veut créer un id unique pour chaque produit
@@ -18,11 +16,11 @@ function Produit(nom, region, saison, agriculteur, note, stock, prix, offre) {
 
     // C'est une méthode pour afficher la note simplement (ex: "Note: 4/5")
     this.getNoteTexte = function() {
-        return `📝 Note: ${this.note}/5`;
+        return ` Note: ${this.note}/5`;
     };
     // Méthode qui retourne le texte de l'offre s'il existe
     this.getOffreTexte = function() {
-        if (this.offre) return `🎉 Offre spéciale -${this.offre}% sur 2kg`;
+        if (this.offre) return ` Offre spéciale -${this.offre}% sur 2kg`;
         return "";
     };
 }
@@ -82,6 +80,7 @@ function afficherTableau() {
             // Produit
             const tdNom = document.createElement('td');
             tdNom.className = 'nom-produit';
+            const nomImage = produit.nom.toLowerCase().replace(/ /g, '_');
             //on veut afficher une icône à côté du nom du produit si l'image existe, sinon on affiche juste le nom
             //on suppose que les images sont nommées avec le nom du produit en minuscule et sans espaces 
             //onerror est un événement qui se déclenche lorsque l'image ne peut pas être chargée, dans ce cas l'image est invisible
@@ -115,8 +114,8 @@ function afficherTableau() {
             tdInfos.innerHTML = `
                 <div class="product-details">
                     <div class="note-simple">${produit.getNoteTexte()}</div>
-                    <div class="product-price">💰 ${produit.prix} DT</div>
-                    <div class="product-stock">📦 Stock: ${produit.stock}</div>
+                    <div class="product-price"> ${produit.prix} DT</div>
+                    <div class="product-stock"> Stock: ${produit.stock}</div>
                     ${offreHtml}
                 </div>
             `;
@@ -127,7 +126,7 @@ function afficherTableau() {
     }
 }
 
-// 5. AJOUTER UN PRODUIT
+// ajouter un produit
 function ajouterProduit(nom, region, saison, agriculteur, note, stock, prix, offre) {
     if (!nom || !region || !saison || !agriculteur) {
         alert("Veuillez remplir tous les champs !");
@@ -142,7 +141,7 @@ function ajouterProduit(nom, region, saison, agriculteur, note, stock, prix, off
     //on utilise la méthode spread pour créer une vraie copie
     produitsOriginal = [...produits];
     afficherTableau();
-    alert(`✅ "${nom}" ajouté avec succès !`);
+    alert(` "${nom}" ajouté avec succès !`);
     return true;
 }
 
@@ -174,9 +173,7 @@ function ajouterDepuisFormulaire() {
     document.getElementById('prix-produit').value = 10;
 }
 
-// 6. RECHERCHER
-
-
+//rechercher des produits
 function rechercherProduits(critere, valeur) {
     let resultats = [];
     
@@ -242,13 +239,30 @@ function afficherTous() {
     alert(" Affichage de tous les produits");
 }
 
-// 7. INITIALISATION
-document.addEventListener('DOMContentLoaded', () => {
-    produits.sort((a, b) => a.region.localeCompare(b.region));
-    produitsOriginal = [...produits];
+//initialisation du tableau avec les produits de départ
+document.addEventListener('DOMContentLoaded', function() {
+    // Sauvegarder une copie
+    produitsOriginal = [];
+    for (let i = 0; i < produits.length; i++) {
+        produitsOriginal.push(produits[i]);
+    }
+    
+    // Afficher le tableau
     afficherTableau();
     
-    document.getElementById('btn-ajouter')?.addEventListener('click', ajouterDepuisFormulaire);
-    document.getElementById('btn-rechercher')?.addEventListener('click', afficherRecherche);
-    document.getElementById('btn-afficher-tous')?.addEventListener('click', afficherTous);
+    // Ajouter les événements
+    const btnAjouter = document.getElementById('btn-ajouter');
+    if (btnAjouter) {
+        btnAjouter.addEventListener('click', ajouterDepuisFormulaire);
+    }
+    
+    const btnRechercher = document.getElementById('btn-rechercher');
+    if (btnRechercher) {
+        btnRechercher.addEventListener('click', afficherRecherche);
+    }
+    
+    const btnAfficherTous = document.getElementById('btn-afficher-tous');
+    if (btnAfficherTous) {
+        btnAfficherTous.addEventListener('click', afficherTous);
+    }
 });
