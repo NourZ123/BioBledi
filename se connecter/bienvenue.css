@@ -1,59 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-.header {
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family: "Poppins", sans-serif;
+    background-color:#f3f5f8;
+}
+.head {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 5%;
-    width: 100%;
-    background-color: #F3F5F8;
+    padding: 18px 40px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
-.header-left {
+
+.head-left {
     display: flex;
     align-items: center;
     gap: 30px;
+    width: 740px;        
+    flex-shrink: 0;     
 }
-.header-left p{
-    font-family: 'Times New Roman', Times;
-    color: #14532d;
-    font-size: 36px;
-    font-weight: bold;
-}
-#logo {
+
+
+.brand-logo {
     width: 50px;
     height: 50px;
-    border-radius: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
 }
-.header-menu {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-}
-.header-nav {
+
+
+.main-menu {
     display: flex;
-    gap: 2rem;
+    gap: 1.4rem;
+    flex-wrap: nowrap;   
 }
-.lien_nav {
+
+.main-menu a {
     text-decoration: none;
     color: #2c3e2f;
     font-size: 0.95rem;
     font-weight: 500;
     transition: color 0.3s ease;
+    white-space: nowrap; 
 }
-.lien_nav:hover {
+
+.main-menu a:hover {
     color: #4caf50;
 }
-.header-right {
+
+
+.head-right {
     display: flex;
-    gap: 20px;
     align-items: center;
+    gap: 30px;
+    flex-shrink: 1;      
 }
-.header-profile,.header-cart {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
+
+.page-title-container {
+    width: 300px;
+    text-align: right;
+    flex-shrink: 0;
 }
-.header-divider {
+
+.page-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #14532d;
+    font-size: 28px;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.head-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.user-icon, .cart-icon {
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.user-icon:hover, .cart-icon:hover {
+    transform: scale(1.1);
+}
+
+hr {
     border: none;
     border-top: 2px solid #cbd5c0;
     width: 100%;
