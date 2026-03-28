@@ -70,7 +70,7 @@ body{
     flex-shrink: 0;
 }
 
-.page-title {
+.page-title ,.title{
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     color: #14532d;
@@ -78,7 +78,6 @@ body{
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; 
 }
 
 .head-actions {
