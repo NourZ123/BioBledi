@@ -32,7 +32,7 @@ body {
 }
 
 /* Logo */
-.brand-logo {
+.logo {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -40,13 +40,13 @@ body {
     flex-shrink: 0;
 }
 
-.main-menu {
+.navigation {
     display: flex;
     gap: 1.4rem;
     flex-wrap: nowrap;  
 }
 
-.main-menu a {
+.navigation a {
     text-decoration: none;
     color: #2c3e2f;
     font-size: 0.95rem;
@@ -55,7 +55,7 @@ body {
     white-space: nowrap;  
 }
 
-.main-menu a:hover {
+.navigation a:hover {
     color: #4caf50;
 }
 
@@ -237,7 +237,7 @@ a{
         text-align: center;
     }
 
-    .main-menu {
+    .navigation {
         flex-wrap: wrap; 
         justify-content: center;
         gap: 10px;
@@ -261,7 +261,7 @@ a{
     }
 
     
-    .main-menu {
+    .navigation {
         display: flex;
         flex-wrap: wrap; 
         justify-content: center;
@@ -269,7 +269,7 @@ a{
         width: 100%;
     }
 
-    .main-menu a {
+    .navigation a {
         background: none;
         border: none;     
         font-size: 0.9rem;
@@ -279,7 +279,7 @@ a{
         transition: all 0.3s ease;
     }
 
-    .main-menu a:hover {
+    .navigation a:hover {
         color: #4caf50;
         text-decoration: underline #4caf50;
     }
