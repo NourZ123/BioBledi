@@ -60,12 +60,12 @@ body{
 .head-right {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 15px;
     flex-shrink: 1;      
 }
 
 .page-title-container {
-    width: 300px;
+    width: 140px;
     text-align: right;
     flex-shrink: 0;
 }
@@ -366,75 +366,170 @@ hr {
     height: fit-content;
 }
 
-@media (max-width: 1024px) {
-    .fixed-column {
-        width: 250px;
+@media (max-width: 1275px) {
+    .head {
+        flex-direction:column ; 
+        padding: 15px;
+        gap: 15px;
     }
-    
-    .scrollable-content {
-        width: calc(100% - 250px);
+    .page-title-container {
+        width: 150px;
+        text-align: left;
+        flex-shrink: 0;
     }
-    
-    .cards-row-three {
+
+    .head-left {
+        width: 100%; 
+        flex-direction:column;
+       
+        gap: 10px;
+    }
+
+    .page-title-container {
+        width: auto;
+        text-align: center;
+    }
+
+    .main-menu {
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .intro-area h1, .intro-area h2 {
+        font-size: 32px; 
+    }
+    .page-compte {
+        flex-direction: column;
+    }
+
+    .menu-lateral {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .liste-options {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .zone-principale {
+        width: 100%;
+        padding: 2rem;
+    }
+
+    .grille-trois-cartes {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .grille-deux-colonnes {
         grid-template-columns: 1fr;
     }
+
 }
 
-@media (max-width: 768px) {
-    .dashboard-wrapper {
+   @media (max-width: 690px) {
+    .head {
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .head-left {
         flex-direction: column;
-    }
-    
-    .fixed-column {
-        position: relative;
         width: 100%;
-        top: 0;
-        height: auto;
-        margin-bottom: 1rem;
+        gap: 15px;
     }
+
     
-    .account-column {
-        padding: 1.5rem;
-    }
-    
-    .scrollable-content {
-        width: 100%;
-        padding: 1rem;
-    }
-    
-    .header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-    }
-    
-    .header-left {
-        flex-wrap: wrap;
+    .main-menu {
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 12px 20px; 
         width: 100%;
     }
-    
-    .header-nav {
-        flex-wrap: wrap;
+
+    .main-menu a {
+        background: none;
+        border: none;     
+        font-size: 0.9rem;
+        color: #2c3e2f;
+        padding: 5px 0;   
+        text-decoration: underline transparent; 
+        transition: all 0.3s ease;
     }
-    
-    .grille-trois-cartes {
-        grid-template-columns: 1fr;
+
+    .main-menu a:hover {
+        color: #4caf50;
+        text-decoration: underline #4caf50;
     }
-    
-    .grille-personnelles {
-        grid-template-columns: 1fr;
+
+    .head-right {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+        gap: 40px; 
     }
-    
+
+    .intro-area h1 {
+        font-size: 24px;
+    }
     .titre-bienvenue {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
-    
+
+    .menu-lateral {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .liste-options {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    .zone-commandes {
+        padding: 10px;
+        overflow-x: auto; 
+    }
+
+    .titre-commandes {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
     .tableau-commandes {
-        display: block;
-        overflow-x: auto;
+        font-size: 11px; 
+    }
+
+    .ligne-en-tete th, 
+    .ligne-table td {
+        padding: 8px 4px; 
+        letter-spacing: -0.5px;
+    }
+    .colonne-date, .cellule-date {
+        width: 70px;
+    }
+
+    .colonne-montant, .cellule-montant {
+        width: 55px;
+        white-space: nowrap;
+    }
+    .bouton-modifier-commande {
+        padding: 4px 8px;
+        font-size: 10px;
+        border-radius: 4px;
+    }
+    .menu-lateral {
+        padding: 10px;
+        gap: 8px;
     }
 }

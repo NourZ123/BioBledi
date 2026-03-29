@@ -60,12 +60,12 @@ body{
 .head-right {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
     flex-shrink: 1;      
 }
 
 .page-title-container {
-    width: 300px;
+    width: 120px;
     text-align: right;
     flex-shrink: 0;
 }
@@ -150,6 +150,7 @@ hr {
     overflow:hidden;
     height: 100%;
     padding-bottom: 20px;
+    justify-content: flex-start;
     
 }
 .Row1{
@@ -157,6 +158,7 @@ hr {
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
+    flex-grow: 1;
 }
 .Row2{
     display: flex;
@@ -208,68 +210,124 @@ margin-left: 0px !important;
     background:#0e2a1a;
     transform:translateY(-2px);
 }
-@media (max-width:1200px){
-    .container{
-        grid-template-columns:repeat(3,1fr);
+@media (max-width: 1275px) {
+    .head {
+        flex-direction:column ; 
+        padding: 15px;
+        gap: 15px;
+    }
+    .page-title-container {
+        width: 150px;
+        text-align: left;
+        flex-shrink: 0;
+    }
+
+    .head-left {
+        width: 100%; 
+        flex-direction:column;
+       
+        gap: 10px;
+    }
+
+    .page-title-container {
+        width: auto;
+        text-align: center;
+    }
+
+    .main-menu {
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .intro-area h1, .intro-area h2 {
+        font-size: 32px; 
+    }
+    .container {
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 25px;
+        padding: 20px 4%;
+    }
+
+    .Row1 strong, .Row1 div div strong {
+        font-size: 18px !important;
+    }
+
+    .btn {
+        padding: 10px 18px;
+        margin-left: auto;
+        width: 100px;
+        font-size: 14px;
+        margin-right: 10px;
     }
 }
 
-@media (max-width:992px){
-    .container{
-        grid-template-columns:repeat(2,1fr);
+   @media (max-width: 650px) {
+    .head {
+        padding: 15px;
+        gap: 10px;
     }
 
-    .head{
-        padding:20px 4%;
-    }
-}
-@media (max-width:768px){
-
-    .head{
-        flex-direction:column;
-        align-items:center;
-        text-align:center;
-        gap:15px;
+    .head-left {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
     }
 
-    .left{
-        flex-direction:column;
-        align-items:center;
-        gap:15px;
+    .main-menu {
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 12px 20px; 
+        width: 100%;
     }
 
-    .header-nav{
-        flex-wrap:wrap;   /* IMPORTANT */
-        justify-content:center;
-        gap:1rem;
+    .main-menu a {
+        background: none; 
+        border: none;    
+        font-size: 0.9rem;
+        color: #2c3e2f;
+        padding: 5px 0;   
+        text-decoration: underline transparent; 
+        transition: all 0.3s ease;
     }
 
-    .right{
-        justify-content:center;
+    .main-menu a:hover {
+        color: #4caf50;
+        text-decoration: underline #4caf50;
     }
 
-    .login-card{
-        max-width:90%;
+    .head-right {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+        gap: 40px; 
     }
-    .btn{
-        background:#1f3b2c;
-        color:white;
-        border:none;
-        border-radius:40px;
-        font-size:12px;
-        font-weight:400;
-        cursor:pointer;
-        transition:all 0.3s ease;
-        box-shadow:0 8px 20px rgba(31,59,44,0.25);
-        margin-left: 15px;
+
+    .intro-area h1 {
+        font-size: 24px;
+    }
+    .container {
+        grid-template-columns: 1fr; 
+        gap: 20px;
+        padding: 15px 8%;
+    }
+
+    .item img:first-child {
+        height: 220px;
+        width: calc(100% - 40px);
+        margin: 20px;
+    }
+
+    .Row3 {
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+
+    .btn {
+        margin-left: auto;
         margin-right: 20px;
-        }
-}
-
-@media (max-width:480px){
-    .head{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:15px;
+        padding: 12px 25px;
+        font-size: 15px;
     }
 }

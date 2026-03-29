@@ -60,12 +60,12 @@ body{
 .head-right {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
     flex-shrink: 1;      
 }
 
 .page-title-container {
-    width: 300px;
+    width: 120px;
     text-align: right;
     flex-shrink: 0;
 }
@@ -249,32 +249,94 @@ label{
 .signup-link a:hover{
     text-decoration:underline;
 }
-@media (max-width:768px){
+@media (max-width: 1275px) {
+    .head {
+        flex-direction:column ; 
+        padding: 15px;
+        gap: 15px;
+    }
+    .page-title-container {
+        width: 150px;
+        text-align: left;
+        flex-shrink: 0;
+    }
 
-    .head{
+    .head-left {
+        width: 100%; 
         flex-direction:column;
-        align-items:center;
-        text-align:center;
-        gap:15px;
+       
+        gap: 10px;
     }
 
-    .left{
-        flex-direction:column;
-        align-items:center;
-        gap:15px;
+    .page-title-container {
+        width: auto;
+        text-align: center;
     }
 
-    .header-nav{
-        flex-wrap:wrap;   
-        justify-content:center;
-        gap:1rem;
+    .main-menu {
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 10px;
     }
 
-    .right{
-        justify-content:center;
+    .intro-area h1, .intro-area h2 {
+        font-size: 32px; 
+    }
+}
+
+   @media (max-width: 600px) {
+    .head {
+        padding: 15px;
+        gap: 10px;
     }
 
-    .login-card{
-        max-width:90%;
+    .head-left {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
     }
+
+    
+    .main-menu {
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 12px 20px; 
+        width: 100%;
+    }
+
+    .main-menu a {
+        background: none;
+        border: none;     
+        font-size: 0.9rem;
+        color: #2c3e2f;
+        padding: 5px 0;   
+        text-decoration: underline transparent; 
+        transition: all 0.3s ease;
+    }
+
+    .main-menu a:hover {
+        color: #4caf50;
+        text-decoration: underline #4caf50;
+    }
+
+    .head-right {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+        gap: 40px; 
+    }
+
+    .intro-area h1 {
+        font-size: 24px;
+    }
+    .item {
+        display: none;
+        width:350px;
+        max-width: 600px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 20px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
 }
