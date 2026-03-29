@@ -1,51 +1,113 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-.header-menu {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.header{
+
+body {
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    background-color: #f5f7f2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.head {
     display: flex;
     justify-content: space-between;
-    margin: 30px;
+    align-items: center;
+    padding: 18px 40px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.header-nav {
+.head-left {
     display: flex;
-    gap: 2rem;
+    align-items: center;
+    gap: 30px;
+    width: 740px;        
+    flex-shrink: 0;      
 }
 
-.nav-link {
+/* Logo */
+.brand-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.main-menu {
+    display: flex;
+    gap: 1.4rem;
+    flex-wrap: nowrap;  
+}
+
+.main-menu a {
     text-decoration: none;
     color: #2c3e2f;
     font-size: 0.95rem;
     font-weight: 500;
     transition: color 0.3s ease;
+    white-space: nowrap;  
 }
 
-.nav-link:hover {
+.main-menu a:hover {
     color: #4caf50;
 }
 
-.header-right,.header-left {
+/* Partie droite : titre + icônes */
+.head-right {
     display: flex;
-    gap: 20px;
     align-items: center;
+    gap: 15px;
+    flex-shrink: 1;      /* Peut se rétrécir si besoin */
+}
+.page-title-container {
+    width: 150px;
+    text-align: right;
+    flex-shrink: 0;
+}
+.page-title,.title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #14532d;
+    font-size: 28px;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  /* Ajoute "..." si trop long */
 }
 
-.header-profile,
-.header-cart {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
+/* Conteneur des icônes (profil + panier) */
+.head-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
 }
-#logo{
-    width: 50px;
-    border-radius: 50%;
+
+/* Icônes utilisateur et panier */
+.user-icon, .cart-icon {
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
-hr{
-    color: #14532D;
+
+.user-icon:hover, .cart-icon:hover {
+    transform: scale(1.1);
+}
+
+
+hr {
+    border: none;
+    border-top: 2px solid #cbd5c0;
+    width: 100%;
+    margin: 0;
 }
 .page-container{
     display:flex;
@@ -151,31 +213,87 @@ a{
     display:block;
     text-align: center;
 }
-@media (max-width: 768px) {
-    .header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
+@media (max-width: 1290px) {
+    .head {
+        flex-direction:column ; 
+        padding: 15px;
+        gap: 15px;
     }
-    
-    .header-left {
-        flex-wrap: wrap;
-        width: 100%;
-    }
-    
-    .header-nav {
-        flex-wrap:nowrap;
-    }
-    
-    .signup-card {
-        padding: 30px 20px;
-    }
-    
-    .signup-title {
-        font-size: 28px;
-    }
-    
-    .signup-title::after {
+    .page-title-container {
         width: 150px;
+        text-align: left;
+        flex-shrink: 0;
+    }
+
+    .head-left {
+        width: 100%; 
+        flex-direction:column;
+       
+        gap: 10px;
+    }
+
+    .page-title-container {
+        width: auto;
+        text-align: center;
+    }
+
+    .main-menu {
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .intro-area h1, .intro-area h2 {
+        font-size: 32px; 
     }
 }
+
+   @media (max-width: 600px) {
+    .head {
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .head-left {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+    }
+
+    
+    .main-menu {
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 12px 20px; 
+        width: 100%;
+    }
+
+    .main-menu a {
+        background: none;
+        border: none;     
+        font-size: 0.9rem;
+        color: #2c3e2f;
+        padding: 5px 0;   
+        text-decoration: underline transparent; 
+        transition: all 0.3s ease;
+    }
+
+    .main-menu a:hover {
+        color: #4caf50;
+        text-decoration: underline #4caf50;
+    }
+
+    .head-right {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+        gap: 40px; 
+    }
+
+    .intro-area h1 {
+        font-size: 24px;
+    }
+.card{
+    width: 400px;
+}}
