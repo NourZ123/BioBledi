@@ -109,6 +109,28 @@ hr {
     width: 100%;
     margin: 0;
 }
+
+/* Icônes utilisateur et panier */
+.user-icon, .cart-icon {
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.user-icon:hover, .cart-icon:hover {
+    transform: scale(1.1);
+}
+
+
+hr {
+    border: none;
+    border-top: 2px solid #cbd5c0;
+    width: 100%;
+    margin: 0;
+}
+/**/
+
 .page-container{
     display:flex;
     justify-content:center;
@@ -132,16 +154,6 @@ hr {
     padding-bottom:15px;
 }
 
-.page-title::after{
-    content:"";
-    width:180px;
-    height:4px;
-    background:#2E8B57;
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    bottom:0;
-}
 
 .form-group{
     margin-bottom:20px;
@@ -162,17 +174,6 @@ input{
     background:#F8FAFC;
     margin-top:5px;
     font-size:15px;
-}
-
-input:focus{
-    border-color:#2E8B57;
-    background:white;
-    outline:none;
-}
-
-input[readonly]{
-    background:#e5e7eb;
-    cursor:not-allowed;
 }
 
 .buttons{

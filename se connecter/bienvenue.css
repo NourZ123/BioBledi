@@ -74,7 +74,7 @@ body{
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     color: #14532d;
-    font-size: 28px;
+    font-size: 20px;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
@@ -166,16 +166,14 @@ hr {
     object-fit: contain;
     margin-bottom: 4px;
 }
-.type-btn:hover,#client-btn:hover,#agriculteur-btn:hover {
+#client-btn:hover,#agriculteur-btn:hover {
     background-color: #2E8B57;
     color: white;
     border-color: #2E8B57;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(46, 139, 86, 0.3);
 }
-.type-btn:hover .btn-icon {
-    filter: brightness(0) invert(1);
-}
+
 .form-group {
     margin-bottom: 22px;
 }
@@ -207,12 +205,9 @@ label {
 .form-input::placeholder {
     color: #94A3B8;
 }
-#btn-ajouter-produdit{
-    background-color: #2e8b57; 
-    margin-bottom: 20px
-}
 
-#connexion,#btn-ajouter-produit,#btn-sauvegarder-produit {
+
+#connexion {
     width: 100%;
     background-color: #1f3b2c;
     color: white;
@@ -227,11 +222,6 @@ label {
     letter-spacing: 0.5px;
     font-family: 'Poppins', sans-serif;
     box-shadow: 0 8px 20px rgba(31, 59, 44, 0.3);
-}
-.login-btn:hover,#btn-ajouter-produit:hover {
-    background-color: #0e2a1a;
-    transform: translateY(-2px);
-    box-shadow: 0 12px 25px rgba(31, 59, 44, 0.4);
 }
 
 .signup-link {

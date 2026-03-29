@@ -137,7 +137,7 @@ hr {
     border-bottom: 2px solid #c8e6c9;
 }
 
-/* SECTION 1 : Informations personnelles */
+/* Partie informations personnelles */
 .info-section {
     background: white;
     border-radius: 20px;
@@ -206,7 +206,7 @@ hr {
     opacity: 0.9;
 }
 
-/* SECTION 3 : Formulaire */
+/* Partie formulaire */
 .form-section {
     background: white;
     border-radius: 20px;
@@ -280,7 +280,7 @@ textarea.form-input {
     box-shadow: 0 5px 15px rgba(20, 83, 45, 0.3);
 }
 
-/* SECTION 4 : Produits */
+/* Partie produits */
 .products-section {
     background: white;
     border-radius: 20px;

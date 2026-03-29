@@ -61,10 +61,6 @@ const reglagesDifficulte = {
   },
 };
 
-// ---------------------------------------------------------------------
-// PARTIE 4 : FONCTION POUR AFFICHER UN MESSAGE TEMPORAIRE
-// ---------------------------------------------------------------------
-
 // Affiche un message qui disparaît après 1.5 secondes à travers setTimeout
 
 function afficherMessage(message, type) {
@@ -183,7 +179,7 @@ function faireTomberLegume(legume) {
   elementLegume.style.left = positionGauche + "px";
   elementLegume.style.top = "0px"; // On commence tout en haut : 0px depuis le haut de la zone de jeu
 
-  // ÉTAPE 6 : Ajouter l'image et le nom du légume à l'intérieur
+  //  Ajouter l'image et le nom du légume à l'intérieur
   elementLegume.innerHTML = `
         <img src="image/${legume.image}" class="vegetable-img" alt="${legume.nom}">
         <div class="vegetable-name">${legume.nom}</div>
@@ -534,9 +530,9 @@ function initialiserPage() {
 // "Quand la page est chargée, exécute cette fonction"
 //  On attend que la page soit chargée pour lancer initialiserPage
 document.addEventListener("DOMContentLoaded", initialiserPage);
-//---------------------------------------------------------------------------------------------------------------------
-//------------------------------Début JS pour la roue-----------------------------------------------------------------
-//--------------------------------------------------------------------------------------------------------------------
+
+//Debut js pour la roue
+
 const roue = document.getElementById("roue");
 const button = document.getElementById("spin");
 const result = document.getElementById("result");
