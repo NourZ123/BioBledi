@@ -28,7 +28,7 @@ body{
 }
 
 
-.brand-logo {
+.logo {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -37,13 +37,13 @@ body{
 }
 
 
-.main-menu {
+.navigation {
     display: flex;
     gap: 1.4rem;
     flex-wrap: nowrap;   
 }
 
-.main-menu a {
+.navigation a {
     text-decoration: none;
     color: #2c3e2f;
     font-size: 0.95rem;
@@ -52,7 +52,7 @@ body{
     white-space: nowrap; 
 }
 
-.main-menu a:hover {
+.navigation a:hover {
     color: #4caf50;
 }
 
@@ -65,7 +65,7 @@ body{
 }
 
 .page-title-container {
-    width: 300px;
+    width: 130px;
     text-align: right;
     flex-shrink: 0;
 }
@@ -244,45 +244,107 @@ input[type="password"] {
     font-family: 'Poppins', sans-serif;
     letter-spacing: 2px;
 }
-
-@media (max-width: 768px) {
-    .header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+/* partiee agriculteuuur*/
+#agriculteur{
+    display: none; 
+    margin-top: 20px;
+}
+#formulaire-produit{
+    display: none;
+}
+legend{
+    color: #14532d; 
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    
+}
+fieldset{
+    text-align: left;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+@media (max-width: 1275px) {
+    .head {
+        flex-direction:column ; 
+        padding: 15px;
         gap: 15px;
     }
-    
-    .header-left {
-    flex-wrap: wrap;
-    width: 100%;
-    flex-direction:column;
-    align-items:center;
-    gap:15px;
+    .page-title-container {
+        width: 150px;
+        text-align: left;
+        flex-shrink: 0;
     }
-    
-    .header-nav {
-        flex-wrap: wrap;
-        justify-content:center;
-        gap:1rem;
-    }
-    
-    .login-card {
-        padding: 30px 20px;
-        max-width:90%;
 
+    .head-left {
+        width: 100%; 
+        flex-direction:column;
+       
+        gap: 10px;
     }
-    
-    .login-title {
-        font-size: 24px;
+
+    .page-title-container {
+        width: auto;
+        text-align: center;
     }
-    
-    .user-type {
-        display: flex;
-        gap: 12px;
-    }
-    .header-right{
+
+    .navigation {
+        flex-wrap: wrap; 
         justify-content: center;
+        gap: 10px;
+    }
+
+    .intro-area h1, .intro-area h2 {
+        font-size: 32px; 
     }
 }
 
+   @media (max-width: 600px) {
+    .head {
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .head-left {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+    }
+
+    
+    .navigation {
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 12px 20px; 
+        width: 100%;
+    }
+
+    .navigation a {
+        background: none;
+        border: none;     
+        font-size: 0.9rem;
+        color: #2c3e2f;
+        padding: 5px 0;   
+        text-decoration: underline transparent; 
+        transition: all 0.3s ease;
+    }
+
+    .navigation a:hover {
+        color: #4caf50;
+        text-decoration: underline #4caf50;
+    }
+
+    .head-right {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+        gap: 40px; 
+    }
+
+    .intro-area h1 {
+        font-size: 24px;
+    }
+}

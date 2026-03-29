@@ -28,7 +28,7 @@ body{
 }
 
 
-.brand-logo {
+.logo {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -37,13 +37,13 @@ body{
 }
 
 
-.main-menu {
+.navigation {
     display: flex;
     gap: 1.4rem;
     flex-wrap: nowrap;   
 }
 
-.main-menu a {
+.navigation a {
     text-decoration: none;
     color: #2c3e2f;
     font-size: 0.95rem;
@@ -52,7 +52,7 @@ body{
     white-space: nowrap; 
 }
 
-.main-menu a:hover {
+.navigation a:hover {
     color: #4caf50;
 }
 
@@ -65,7 +65,7 @@ body{
 }
 
 .page-title-container {
-    width: 300px;
+    width: 100px;
     text-align: right;
     flex-shrink: 0;
 }
@@ -473,54 +473,84 @@ hr {
 
 
 
+@media (max-width: 1275px) {
+    .head {
+        flex-direction:column ; 
+        padding: 15px;
+        gap: 15px;
+    }
+    .page-title-container {
+        width: 150px;
+        text-align: left;
+        flex-shrink: 0;
+    }
 
-@media (max-width:768px){
-
-    .head{
+    .head-left {
+        width: 100%; 
         flex-direction:column;
-        align-items:center;
-        text-align:center;
-        gap:15px;
+       
+        gap: 10px;
     }
 
-    .left{
-        flex-direction:column;
-        align-items:center;
-        gap:15px;
+    .page-title-container {
+        width: auto;
+        text-align: center;
     }
 
-    .header-nav{
-        flex-wrap:wrap;   /* IMPORTANT */
-        justify-content:center;
-        gap:1rem;
+    .navigation {
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 10px;
     }
 
-    .right{
-        justify-content:center;
+    .intro-area h1, .intro-area h2 {
+        font-size: 32px; 
     }
-
-    .login-card{
-        max-width:90%;
-    }
-    .btn{
-        background:#1f3b2c;
-        color:white;
-        border:none;
-        border-radius:40px;
-        font-size:12px;
-        font-weight:400;
-        cursor:pointer;
-        transition:all 0.3s ease;
-        box-shadow:0 8px 20px rgba(31,59,44,0.25);
-        margin-left: 15px;
-        margin-right: 20px;
-        }
 }
 
-@media (max-width:480px){
-    .head{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:15px;
+   @media (max-width: 600px) {
+    .head {
+        padding: 15px;
+        gap: 10px;
     }
-}
+
+    .head-left {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+    }
+
+    
+    .navigation {
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 12px 20px; 
+        width: 100%;
+    }
+
+    .navigation a {
+        background: none;
+        border: none;     
+        font-size: 0.9rem;
+        color: #2c3e2f;
+        padding: 5px 0;   
+        text-decoration: underline transparent; 
+        transition: all 0.3s ease;
+    }
+
+    .navigation a:hover {
+        color: #4caf50;
+        text-decoration: underline #4caf50;
+    }
+
+    .head-right {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+        gap: 40px; 
+    }
+
+    .intro-area h1 {
+        font-size: 24px;
+    }}
