@@ -180,7 +180,7 @@ hr {
     color: #94A3B8;
     font-weight: 300;
 }
-form-radio{
+.form-radio{
     display: flex;
     gap: 70px;
     

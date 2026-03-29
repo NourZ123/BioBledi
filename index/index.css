@@ -106,19 +106,6 @@ hr {
     margin: 0;
 }
 
-.btn-connexion{
-    padding:8px 18px;
-    border-radius:20px;
-    background:#14532d;
-    color:white;
-    text-decoration:none;
-    transition:0.25s;
-}
-
-.btn-connexion:hover{
-    background:#1b5e20;
-}
-
 
 .intro-area{
     text-align:center;
@@ -251,7 +238,7 @@ hr {
     }
 
     .main-menu{
-        flex-wrap:wrap;        /* IMPORTANT pour que les liens descendent */
+        flex-wrap:wrap;        /*  pour que les liens descendent */
         justify-content:center;
         gap:1rem;
     }

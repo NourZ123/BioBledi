@@ -1,9 +1,4 @@
 
-
-/* ============================================
-   ESPACE AGRICULTEUR - STYLES COMPLETS
-   ============================================ */
-
 * {
     margin: 0;
     padding: 0;
@@ -18,11 +13,6 @@ body {
     flex-direction: column;
 }
 
-/* ============================================
-   HEADER - BARRE FIXE AVEC NAVIGATION À GAUCHE
-   ============================================ */
-
-/* Conteneur principal du header */
 .head {
     display: flex;
     justify-content: space-between;
@@ -32,16 +22,15 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* Partie gauche : logo + navigation */
+
 .head-left {
     display: flex;
     align-items: center;
     gap: 30px;
-    width: 740px;        /* Largeur FIXE pour que la navigation ne bouge pas */
-    flex-shrink: 0;      /* Empêche de rétrécir */
+    width: 740px;        
+    flex-shrink: 0;      
 }
 
-/* Logo */
 .brand-logo {
     width: 50px;
     height: 50px;
@@ -50,7 +39,6 @@ body {
     flex-shrink: 0;
 }
 
-/* Menu de navigation */
 .main-menu {
     display: flex;
     gap: 1.4rem;
@@ -117,7 +105,7 @@ body {
     transform: scale(1.1);
 }
 
-/* Ligne de séparation sous le header */
+
 hr {
     border: none;
     border-top: 2px solid #cbd5c0;
@@ -148,7 +136,7 @@ hr {
     border-bottom: 2px solid #c8e6c9;
 }
 
-/* SECTION 1 : Informations personnelles */
+/* Partie informations personnelles */
 .info-section {
     background: white;
     border-radius: 20px;
@@ -217,7 +205,7 @@ hr {
     opacity: 0.9;
 }
 
-/* SECTION 3 : Formulaire */
+/* Partie formulaire */
 .form-section {
     background: white;
     border-radius: 20px;
@@ -291,7 +279,7 @@ textarea.form-input {
     box-shadow: 0 5px 15px rgba(20, 83, 45, 0.3);
 }
 
-/* SECTION 4 : Produits */
+/* Partie produits */
 .products-section {
     background: white;
     border-radius: 20px;
@@ -400,7 +388,7 @@ textarea.form-input {
     margin: 5px 0;
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
     .head {
         flex-direction: column;
