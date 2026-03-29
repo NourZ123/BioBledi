@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="panier.css" />
     <link rel="icon" href="image/cart-2-svgrepo-com.svg" />
     <link rel="stylesheet" href="../code footer.css" />
-    <script src="mon panier.js" defer></script>
   </head>
   <body>
     <header>
@@ -72,45 +71,95 @@
     <hr style="color: 14532d" />
 
     <div class="container">
-      <div class="leftC">
-        <div class="row1">
-          <div style="margin-left: 20px">Produits</div>
-          <div style="margin-left: 50px">Quantité</div>
-          <div style="margin-right: 20px">Total</div>
+      <div class="container">
+        <div class="leftC">
+          <div class="row1">
+            <div style="margin-left: 20px">Produits</div>
+            <div style="margin-left: 50px">Quantité</div>
+            <div style="margin-right: 20px">Total</div>
+          </div>
+          <div class="row2">
+            <div class="produits">
+              <img
+                src="image/framboises.webp"
+                alt="framboises"
+                class="img_panier"
+              />
+              <div class="info">
+                <p>Framboises</p>
+                <p class="price">15DT/barquette</p>
+              </div>
+              <div class="quantité">
+                <button>-</button>
+                <span class="Q">2</span>
+                <button>+</button>
+              </div>
+            </div>
+
+            <div class="Total">
+              <div class="price">30DT</div>
+              <div style="margin-right: 20px">
+                <img src="image/bin-svgrepo-com.svg" alt="bin" />
+                <span>Retirer</span>
+              </div>
+            </div>
+          </div>
+          <div class="row2">
+            <div class="produits">
+              <img
+                src="image/tomate_cerise.jpg"
+                alt="Tomates"
+                class="img_panier"
+              />
+              <div class="info">
+                <p>Tomates Cerises</p>
+                <p class="price">12DT/barquette</p>
+              </div>
+              <div class="quantité">
+                <button>-</button>
+                <span class="Q">1</span>
+                <button>+</button>
+              </div>
+            </div>
+
+            <div class="Total">
+              <div class="price">12DT</div>
+              <div style="margin-right: 20px">
+                <img src="image/bin-svgrepo-com.svg" alt="bin" />
+                <span class="Retirer">Retirer</span>
+              </div>
+            </div>
+          </div>
+          <div class="row4">
+            <div>Total</div>
+            <div class="sum">42 DT</div>
+          </div>
         </div>
 
-        <div id="cart-items-container"></div>
+        <div class="rightC">
+          <div class="top">
+            <p style="color: #14532d"><b>Récapitulatif</b></p>
+            <p><b>Adresse de livraison</b></p>
+            <p>Tunis,El Manar,2092</p>
+            <hr />
+          </div>
+          <div class="middle">
+            <div>Total des articles:</div>
 
-        <div class="row4">
-          <div>Total</div>
-          <div class="sum" id="cart-subtotal-left">0 DT</div>
-        </div>
-      </div>
-
-      <div class="rightC">
-        <div class="top">
-          <p style="color: #14532d"><b>Récapitulatif</b></p>
-          <p><b>Adresse de livraison</b></p>
-          <p>Tunis,El Manar,2092</p>
-          <hr />
-        </div>
-        <div class="middle">
-          <div>Total des articles:</div>
-          <div id="cart-subtotal-right">0 DT</div>
-
-          <div style="color: #c6c1c1">Livraison:</div>
-          <div style="color: #c6c1c1">3 DT</div>
-
-          <div>Total à payer</div>
-          <div id="cart-final-total">0 DT</div>
-        </div>
-        <div class="bottom">
-          <a href="../finaliser ma commande/finaliser ma commande.html"
-            ><button class="valider">Valider ma commande</button></a
-          >
-          <a href="../fruits et légumes/fruits et légumes.html"
-            ><button class="continuer">Continuer mes achats</button></a
-          >
+            <div>42 DT</div>
+            <div style="color: #c6c1c1">Livraison:</div>
+            <div style="color: #c6c1c1">3 DT</div>
+            <div>Total à payer</div>
+            <div>45dt</div>
+          </div>
+          <div class="bottom">
+            <a href="../finaliser ma commande/finaliser ma commande.html"
+              ><button class="valider">Valider ma commande</button></a
+            >
+            <a href="../fruits et légumes/fruits et légumes.html"
+              ><button class="continuer">Continuer mes achats</button></a
+            >
+          </div>
         </div>
       </div>
     </div>
