@@ -64,7 +64,7 @@ body{
 .navigation a {
     text-decoration: none; /* par défaut le lien est souligné donc on enlève les lignes avec cette propriété */
     color: #2c3e2f;
-    font-size: 0.95rem;
+    font-size:16px;
     font-weight: 500;
     transition: color 0.3s ease;/* la couleur change progressivement en 0.3 secondes -- ease decrit le type d'accélération par défaut rapide puis lent puis rapide */
     white-space: nowrap; /* pas de retour à la ligne */
@@ -169,7 +169,7 @@ ul{
 #email {
     text-decoration: none;
     color: #14532d;
-    font-size: 0.95rem;
+    font-size:16px;
     font-weight: 500;
     transition: color 0.3s ease;
 }

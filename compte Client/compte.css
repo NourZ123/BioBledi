@@ -46,7 +46,7 @@ body{
 .navigation a {
     text-decoration: none;
     color: #2c3e2f;
-    font-size: 0.95rem;
+    font-size:16px;
     font-weight: 500;
     transition: color 0.3s ease;
     white-space: nowrap; 
@@ -92,7 +92,7 @@ body{
     width: 34px;
     height: 34px;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .user-icon:hover, .cart-icon:hover {
@@ -254,7 +254,7 @@ hr {
     margin-bottom: 1.5rem;
 }
 .element-personnel {
-    font-size: 0.95rem;
+    font-size:16px;
     color: #334155;
 }
 .client {
@@ -320,7 +320,7 @@ hr {
 }
 .ligne-table td {
     padding: 1rem;
-    font-size: 0.95rem;
+    font-size:16px;
     color: #334155;
 }
 .statut-encours {
