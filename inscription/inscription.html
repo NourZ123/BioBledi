@@ -82,16 +82,30 @@
     </div>
     <hr />
     <div class="Container">
-      <form action="https://httpbin.org/get" method="post" name="inscription">
+      <form action="inscription.php" method="post" id="inscription">
         <div class="signup-card">
           <h1 class="signup-title">Inscription</h1>
           <div class="form-group">
-            <label class="form-label">Nom et Prénom</label>
+            <label class="form-label">Nom</label>
             <input
               type="text"
               class="form-input"
-              placeholder="ex: Jean Dupont"
+              id="nom"
+              name="nom"
+              placeholder="ex : Dupont"
             />
+            <span id="errNom" class="error"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Prénom</label>
+            <input
+              type="text"
+              class="form-input"
+              id="nom"
+              name="prename"
+              placeholder="ex: Jean"
+            />
+            <span id="errNom" class="error"></span>
           </div>
 
           <div class="form-group">
@@ -99,28 +113,46 @@
             <input
               type="email"
               class="form-input"
+              id="email"
+              name="email"
               placeholder="demo@biobladi.com"
             />
+            <span id="errEmail" class="error"></span>
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-input" placeholder="......" />
+            <input
+              type="password"
+              class="form-input"
+              id="password"
+              placeholder="................."
+              minlength="8"
+              name="password"
+            />
+            <span id="errPass" class="error"></span>
           </div>
           <div class="form-group">
             <label class="form-label">Adresse</label>
             <input
               type="text"
               class="form-input"
+              id="adress"
               placeholder="ex: 123 rue de la Paix"
+              name="adress"
             />
+            <span id="errAdress" class="error"></span>
           </div>
           <div class="form-group">
             <label class="form-label">Téléphone</label>
             <input
               type="tel"
               class="form-input"
-              placeholder="+216 12 345 678"
+              id="phone"
+              placeholder="12 345 678"
+              name="phone"
+              pattern="[0-9]{2} [0-9]{3} [0-9]{3}"
             />
+            <span id="errPhone" class="error"></span>
           </div>
           <div class="form-group">
             <label class="form-label" for="P/A">
@@ -143,12 +175,13 @@
                   id="agriculteur"
                   name="type"
                   value="agriculteur"
+                  required
                 />
                 Agriculteur
               </label>
             </div>
           </div>
-          <button class="signup-btn">S'inscrire</button>
+          <button class="signup-btn" name="signupbtn">S'inscrire</button>
           <p class="login-link">
             Déjà un compte ?
             <a href="../se connecter/bienvenue.html">Se connecter</a>
@@ -231,5 +264,64 @@
         </p>
       </div>
     </footer>
+    <script>
+      let form = document.getElementById("inscription");
+      let phone = document.getElementById("phone");
+      phone.addEventListener("input", function (e) {
+        let digits = e.target.value.replace(/\D/g, "").substring(0, 8);
+        let formatted = "";
+
+        if (digits.length > 0) {
+          formatted = digits.substring(0, 2);
+          if (digits.length > 2) formatted += " " + digits.substring(2, 5);
+          if (digits.length > 5) formatted += " " + digits.substring(5, 8);
+        }
+        e.target.value = formatted;
+      });
+      form.addEventListener("submit", function (event) {
+        document.getElementsByClassName("error").innerHTML = "";
+        let nom = document.getElementById("nom");
+        let email = document.getElementById("email");
+        let password = document.getElementById("password");
+        let adress = document.getElementById("adress");
+        let alpha = /^[a-zA-Z ]+$/;
+        if (
+          nom.value === "" ||
+          email.value === "" ||
+          adress.value === "" ||
+          phone.value === "" ||
+          password.value === ""
+        ) {
+          alert(
+            "Veuillez remplir tous les champs obligatoires (Nom, Email, Password , Adresse  et Téléphone)."
+          );
+          event.preventDefault();
+          return;
+        }
+        // Le nom du client doit etre valide: ne contient que des caractères alphabétiques
+        if (!alpha.test(nom.value)) {
+          document.getElementById("errNom").innerHTML =
+            "Veuillez saisir un nom  et prénom valides.";
+          event.preventDefault();
+        }
+        // l'adressse mail doit être valide
+        if (!email.value.includes("@")) {
+          document.getElementById("errEmail").innerHTML =
+            "Veuillez saisir une adresse mail valide.";
+          event.preventDefault();
+        }
+        let regexPass = /(?=.*[A-Z])(?=.*[!@#$%^&*(),.?\s])$/;
+        if (!regexPass.test(password.value) || password.value.length < 8) {
+          document.getElementById("errPass").innerHTML =
+            "Veuillez saisir un password qui commence par une majus et contient une majus(min 8 lettres) ";
+        }
+        let regexTel = /^\+?[0-9][0-9\s]*[0-9]$/;
+        if (!regexTel.test(phone.value)) {
+          document.getElementById("errPhone").innerHTML =
+            "Veuillez saisir un numéro de téléphone valide.";
+          event.preventDefault();
+        }
+      });
+    </script>
   </body>
 </html>

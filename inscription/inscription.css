@@ -148,7 +148,14 @@ hr {
 .form-group {
     margin-bottom: 20px;
 }
-
+.error{
+    color: red;
+    font-size:16px;
+    font-weight: bold;
+    font-family: inherit;
+    display: block;
+    margin-top: 10px;
+}
 .form-label {
     display: block;
     font-size: 14px;

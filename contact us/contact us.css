@@ -141,6 +141,14 @@ hr {
 .form-group{
     margin-bottom:18px;
 }
+.error{
+    color: red;
+    font-size:16px;
+    font-weight: bold;
+    font-family: inherit;
+    display: block;
+    margin-top: 10px;
+}
 #bienvenue {
     color:#14532d;
     padding: 12px 0;

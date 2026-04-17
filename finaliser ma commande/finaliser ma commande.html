@@ -86,7 +86,7 @@
     <hr />
 
     <div class="page-container">
-      <form action="#" method="post" name="finaliser ma commande">
+      <form action="#" method="post" name="finaliser ma commande" id="form">
         <div class="card">
           <h1 class="page-title">Finaliser ma commande</h1>
 
@@ -104,37 +104,52 @@
             <h3>Mode de paiement</h3>
 
             <div class="choice-group">
-              <div class="choice payment">
+              <div class="choice payment" id="cardpayment">
                 <img src="image/credit-card-svgrepo-com.svg" alt="card" />
                 Carte bancaire
               </div>
 
-              <div class="choice payment">
+              <div class="choice payment" id="cash">
                 <img src="image/truck-svgrepo-com.svg" alt="truck" />
                 A la livraison
               </div>
             </div>
           </div>
 
-          <div class="form-group">
-            <label>Titulaire</label>
-            <input type="text" placeholder="Jean Dupont" />
-          </div>
-
-          <div class="form-group">
-            <label>Numéro de carte</label>
-            <input type="text" placeholder="XXXX XXXX XXXX XXXX" />
-          </div>
-
-          <div class="row">
+          <div class="card-payment">
             <div class="form-group">
-              <label>Date expiration</label>
-              <input type="text" placeholder="MM/YY" />
+              <label>Titulaire</label>
+              <input type="text" placeholder="Jean Dupont" id="nom" />
+              <span class="error" id="errNom"></span>
             </div>
 
             <div class="form-group">
-              <label>CVC</label>
-              <input type="text" placeholder="123" />
+              <label>Numéro de carte</label>
+              <input
+                type="text"
+                id="card-number"
+                placeholder="XXXX XXXX XXXX XXXX"
+                length="16"
+              />
+              <span class="error" id="errCardNumber"></span>
+            </div>
+
+            <div class="row">
+              <div class="form-group">
+                <label>Date expiration</label>
+                <input type="text" placeholder="MM/YY" id="expi-date" />
+                <span class="error" id="errDate"></span>
+              </div>
+
+              <div class="form-group">
+                <label>CVC</label>
+                <input
+                  type="text"
+                  placeholder="123"
+                  maxlength="3"
+                  minlength="3"
+                />
+              </div>
             </div>
           </div>
 
@@ -222,5 +237,95 @@
         </p>
       </div>
     </footer>
+    <script>
+      let form = document.getElementById("form");
+      const date = document.getElementById("expi-date");
+      let cash = document.getElementById("cash");
+      let card = document.getElementById("cardpayment");
+      let paymentform = document.getElementsByClassName("card-payment")[0];
+      let payment = "";
+
+      form.addEventListener("submit", function (event) {
+        document.getElementsByClassName("error").innerHTML = "";
+
+        let nom = document.getElementById("nom");
+        let number = document.getElementById("card-number");
+        let alpha = /^[a-zA-Z ]+$/;
+
+        if (nom.value === "" || number.value === "" || date.value === "") {
+          alert("Veuillez remplir tous les champs obligatoires.");
+          event.preventDefault();
+          return;
+        }
+
+        if (!alpha.test(nom.value)) {
+          document.getElementById("errNom").innerHTML =
+            "Veuillez saisir un nom et prénom valides.";
+          event.preventDefault();
+        }
+      });
+
+      date.addEventListener("input", (event) => {
+        let v = event.target.value.replace(/\D/g, "");
+        if (v.length > 2) {
+          event.target.value = v.substring(0, 2) + "/" + v.substring(2, 4);
+        } else {
+          event.target.value = v;
+        }
+      });
+
+      date.addEventListener("blur", () => {
+        const val = date.value;
+        const errDate = document.getElementById("errDate");
+        errDate.innerHTML = "";
+
+        if (val.length === 5) {
+          const [mSaisi, ySaisi] = val.split("/").map(Number);
+
+          if (mSaisi < 1 || mSaisi > 12) {
+            errDate.innerHTML = "Mois invalide (01-12)";
+            date.value = "";
+            return;
+          }
+
+          const currentdate = new Date();
+          const Cmonth = currentdate.getMonth() + 1;
+          const Cyear = currentdate.getFullYear() % 100;
+
+          if (ySaisi < Cyear || (ySaisi === Cyear && mSaisi < Cmonth)) {
+            errDate.innerHTML = "Votre carte est expirée !";
+            date.value = "";
+          }
+        }
+      });
+      let number = document.getElementById("card-number");
+
+      number.addEventListener("input", (e) => {
+        let v = e.target.value.replace(/\D/g, "");
+        if (v.length > 16) {
+          v = v.substring(0, 16);
+        }
+        let number = v.match(/.{1,4}/g)?.join(" ") || "";
+        e.target.value = number;
+      });
+
+      card.addEventListener("click", () => {
+        payment = "card";
+        paymentform.style.display = "block";
+        card.style.border = "solid 2px #14532d";
+        card.style.color = "#14532d";
+        cash.style.border = "2px solid #E2E8F0";
+        cash.style.color = "black";
+      });
+
+      cash.addEventListener("click", () => {
+        payment = "cash";
+        paymentform.style.display = "none";
+        cash.style.border = "solid 2px #14532d";
+        cash.style.color = "#14532d";
+        card.style.border = "2px solid #E2E8F0";
+        card.style.color = "black";
+      });
+    </script>
   </body>
 </html>

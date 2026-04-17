@@ -122,7 +122,14 @@ hr {
     transform: scale(1.1);
 }
 
-
+.error{
+    color: red;
+    font-size:16px;
+    font-weight: bold;
+    font-family: inherit;
+    display: block;
+    margin-top: 10px;
+}
 hr {
     border: none;
     border-top: 2px solid #cbd5c0;
