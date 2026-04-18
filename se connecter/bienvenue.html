@@ -105,7 +105,7 @@
             Agriculteur
           </button>
         </div>
-        <form action="https://httpbin.org/get" method="post" name="connexion">
+        <form action="bienvenue.php" method="post" name="connexion">
           <div class="form-group">
             <label for="email" class="form-label">EMAIL</label>
             <input
@@ -113,8 +113,14 @@
               id="email"
               class="form-input"
               placeholder="demo@biobladi.com"
+              name="email"
               required
             />
+            <span
+              id="errEmail"
+              name="errEmail"
+              style="color: red; font-weight: bold"
+            ></span>
           </div>
 
           <div class="form-group">
@@ -124,11 +130,19 @@
               id="password"
               class="form-input"
               placeholder="......"
+              name="password"
               required
             />
+            <span
+              id="errPass"
+              name="errPass"
+              style="color: red; font-weight: bold"
+            ></span>
           </div>
 
-          <button type="submit" id="connexion">Se connecter</button>
+          <button type="submit" id="connexion" name="connexion">
+            Se connecter
+          </button>
         </form>
         <p class="signup-link">
           Pas de compte encore ?
@@ -229,17 +243,23 @@
         btnClient.style.border = "1px solid #ccc";
       });
       btnconnexion.addEventListener("click", () => {
-        event.preventDefault();
-        if (typeclient === "") {
-          alert("veuillez choisir un type de client");
-          return;
-        }
-        if (typeclient === "agriculteur") {
-          window.location.href = "../agriculteur/agriculteur (1).html";
-        } else {
-          window.location.href = "../fruits et légumes/fruits et légumes.html";
-        }
+        errEmail = document.getElementById("errEmail");
+        errPass = document.getElementById("errPass");
+        errEmail.style.color = "red";
       });
+      // 1. On récupère les paramètres de l'URL
+      const params = new URLSearchParams(window.location.search);
+      // 2. On vérifie si "error" existe
+      if (params.has("error")) {
+        const type = params.get("error");
+        if (type === "email") {
+          document.getElementById("errEmail").innerHTML =
+            "Aucun compte client trouvé !";
+        } else if (type === "pass") {
+          document.getElementById("errPass").innerHTML =
+            "Mot de passe erroné !";
+        }
+      }
     </script>
   </body>
 </html>

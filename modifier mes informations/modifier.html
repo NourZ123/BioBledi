@@ -99,11 +99,15 @@
           </div>
           <div class="form-group">
             <label>Adresse</label>
-            <input type="text" placeholder="123 rue de la République" />
+            <input
+              type="text"
+              name="adress"
+              placeholder="123 rue de la République"
+            />
           </div>
           <div class="form-group">
             <label>Email</label>
-            <input type="email" placeholder="demo@biobladi.com" />
+            <input type="email" name="email" placeholder="demo@biobladi.com" />
           </div>
           <div class="form-group">
             <label>Téléphone</label>
@@ -112,6 +116,7 @@
               placeholder=" 12 345 678"
               id="phone"
               maxlength="10"
+              name="phone"
             />
             <span class="error" id="errPhone"></span>
           </div>
@@ -123,7 +128,9 @@
             </div>
             <div>
               <a href="../compte Client/compte.html"
-                ><button class="btn1" type="submit">Enregistrer</button></a
+                ><button class="btn1" type="submit" name="submit">
+                  Enregistrer
+                </button></a
               >
             </div>
           </div>
