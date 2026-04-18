@@ -87,25 +87,26 @@
       <div class="login-card">
         <h1 id="login-title">Bienvenue sur BioBladi</h1>
         <p id="login-subtitle">Connectez-vous pour continuer</p>
-        <div class="user-type">
-          <button type="button" id="client-btn">
-            <img
-              src="image/person-line-drawing-svgrepo-com (1).svg"
-              alt="client"
-              class="btn-icon"
-            />
-            Client
-          </button>
-          <button type="button" id="agriculteur-btn">
-            <img
-              src="image/tractor-svgrepo-com.svg"
-              alt="agriculteur"
-              class="btn-icon"
-            />
-            Agriculteur
-          </button>
-        </div>
         <form action="bienvenue.php" method="post" name="connexion">
+          <div class="user-type">
+            <button type="button" id="client-btn" name="client">
+              <img
+                src="image/person-line-drawing-svgrepo-com (1).svg"
+                alt="client"
+                class="btn-icon"
+              />
+              Client
+            </button>
+            <button type="button" id="agriculteur-btn" name="agriculteur">
+              <img
+                src="image/tractor-svgrepo-com.svg"
+                alt="agriculteur"
+                class="btn-icon"
+              />
+              Agriculteur
+            </button>
+          </div>
+          <input type="hidden" name="user_type" id="user_type" value="client" />
           <div class="form-group">
             <label for="email" class="form-label">EMAIL</label>
             <input
@@ -233,11 +234,13 @@
       const btnconnexion = document.getElementById("connexion");
       let typeclient = "";
       btnClient.addEventListener("click", () => {
+        document.getElementById("user_type").value = "client";
         typeclient = "client";
         btnClient.style.border = "2px solid #14532d";
         btnAgri.style.border = "1px  solid #ccc ";
       });
       btnAgri.addEventListener("click", () => {
+        document.getElementById("user_type").value = "agriculteur";
         typeclient = "agriculteur";
         btnAgri.style.border = "2px solid #14532d";
         btnClient.style.border = "1px solid #ccc";

@@ -1,28 +1,31 @@
 <?php
 session_start();
 require "../database_connection.php";
-$errEmail="";
-$errPass="";
-if (isset($_POST["connexion"])){
-$email=$_POST["email"];
-$password=$_POST["password"];
-$query=$db->prepare("SELECT password from client where email= ?");
-$query->execute([$email]);
-$row=$query->fetch();
-if(!$row)
-{
-    header("Location: bienvenue.html?error=email");
-    exit();
-   
-}else{
-    if($row['password'] === $password)
-    {
-    header("Location: ../fruits et légumes/fruits et légumes.html");
-    exit();
-    }else{
-        header("Location: bienvenue.html?error=pass");
+if (isset($_POST["connexion"])) {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $user_type = isset($_POST["user_type"]) ? $_POST["user_type"] : "client";
+    $table = ($user_type === "agriculteur") ? "agriculteur" : "client";
+    $query = $db->prepare("SELECT * FROM $table WHERE email = ?");
+    $query->execute([$email]);
+    $user = $query->fetch();
+    if (!$user) {
+        header("Location: bienvenue.html?error=email");
         exit();
+    } else {
+        if ($user['Password'] === $password) {
+            $_SESSION['user_data'] = $user; 
+            $_SESSION['type'] = $user_type; 
+            if ($user_type === "agriculteur") {
+                header("Location: ../agriculteur/agriculteur (1).html");
+            } else {
+                header("Location: ../fruits et légumes/fruits et légumes.html");
+            }
+            exit();
+        } else {
+            header("Location: bienvenue.html?error=pass");
+            exit();
+        }
     }
-}
 }
 ?>
