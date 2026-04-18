@@ -1,9 +1,9 @@
 <?php
 
-$host = 'localhost';
-$dbname = 'biobledi';
-$user = 'root';
-$password = '';
+$host = 'sql112.infinityfree.com';
+$dbname = 'if0_41693542_biobledi';
+$user = 'if0_41693542';
+$password = 'm885hRfjbJ0YAt';
 
 try {
     $db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $password);
