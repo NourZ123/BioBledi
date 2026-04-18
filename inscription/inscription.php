@@ -1,16 +1,5 @@
 <?php
-
-$host = 'sql112.infinityfree.com';
-$dbname = 'if0_41693542_biobledi';
-$user = 'if0_41693542';
-$password = 'm885hRfjbJ0YAt';
-
-try {
-    $db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $password);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (Exception $e) {
-    die("Erreur : " . $e->getMessage());
-}
+require "../database_connection.php";
 
 if (isset($_POST["signupbtn"]))
 {
