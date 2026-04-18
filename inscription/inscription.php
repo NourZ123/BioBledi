@@ -21,10 +21,16 @@ if (isset($_POST["signupbtn"]))
     $type=$_POST['type'];
     $phone=$_POST['phone'];
     $prename=$_POST['prename'];
-/*if($type=="client"){*/
+if($type=="particulier"){
     $requete = $db->prepare("INSERT INTO client (Nom, Prénom, Email, Telephone, Adresse, Password) 
    VALUES (?, ?, ?, ?, ?, ?)");
+}
+else {
+    $requete = $db->prepare("INSERT INTO agriculteur (Nom, Prénom, Email, Telephone, Adresse, Password) 
+   VALUES (?, ?, ?, ?, ?, ?)");
+}
 $requete->execute([$nom, $prename, $email,$phone,$adress,$password]);
-echo "Bravo, vous êtes inscrit !";
+header("Location: ../fruits et légumes/fruits et légumes.html");
+    exit();
 }
 ?>

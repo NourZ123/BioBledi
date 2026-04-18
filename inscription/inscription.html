@@ -85,6 +85,7 @@
       <form action="inscription.php" method="post" id="inscription">
         <div class="signup-card">
           <h1 class="signup-title">Inscription</h1>
+
           <div class="form-group">
             <label class="form-label">Nom</label>
             <input
@@ -101,13 +102,12 @@
             <input
               type="text"
               class="form-input"
-              id="nom"
+              id="prename"
               name="prename"
               placeholder="ex: Jean"
             />
-            <span id="errNom" class="error"></span>
+            <span id="errPrename" class="error"></span>
           </div>
-
           <div class="form-group">
             <label class="form-label">Email</label>
             <input
@@ -279,21 +279,26 @@
         e.target.value = formatted;
       });
       form.addEventListener("submit", function (event) {
-        document.getElementsByClassName("error").innerHTML = "";
+        let error = document.getElementsByClassName("error");
+        for (let span of error) {
+          span.innerHTML = "";
+        }
         let nom = document.getElementById("nom");
+        let prename = document.getElementById("prename");
         let email = document.getElementById("email");
         let password = document.getElementById("password");
         let adress = document.getElementById("adress");
         let alpha = /^[a-zA-Z ]+$/;
         if (
           nom.value === "" ||
+          prename.value === "" ||
           email.value === "" ||
           adress.value === "" ||
           phone.value === "" ||
           password.value === ""
         ) {
           alert(
-            "Veuillez remplir tous les champs obligatoires (Nom, Email, Password , Adresse  et Téléphone)."
+            "Veuillez remplir tous les champs obligatoires (Nom,Prenom, Email, Password , Adresse  et Téléphone)."
           );
           event.preventDefault();
           return;
@@ -301,7 +306,12 @@
         // Le nom du client doit etre valide: ne contient que des caractères alphabétiques
         if (!alpha.test(nom.value)) {
           document.getElementById("errNom").innerHTML =
-            "Veuillez saisir un nom  et prénom valides.";
+            "Veuillez saisir un nom valide.";
+          event.preventDefault();
+        }
+        if (!alpha.test(prename.value)) {
+          document.getElementById("errPrename").innerHTML =
+            "Veuillez saisir prénom valide.";
           event.preventDefault();
         }
         // l'adressse mail doit être valide
@@ -310,11 +320,28 @@
             "Veuillez saisir une adresse mail valide.";
           event.preventDefault();
         }
-        let regexPass = /(?=.*[A-Z])(?=.*[!@#$%^&*(),.?\s])$/;
-        if (!regexPass.test(password.value) || password.value.length < 8) {
+        let reg = /[!@#$%^&*(),.?":{}|<>]/;
+        if (password.value.length > 7) {
+          if (!/[A-Z]/.test(password.value)) {
+            document.getElementById("errPass").innerHTML =
+              "Veuillez saisir un password qui contient une lettre majuscule ";
+            event.preventDefault();
+          }
+          if (!/[0-9]/.test(password.value)) {
+            document.getElementById("errPass").innerHTML =
+              "Veuillez saisir un password qui contient un chiffre ";
+            event.preventDefault();
+          }
+          if (!/[!@#$%^&*(),.?":{}|<>]/.test(password.value)) {
+            document.getElementById("errPass").innerHTML =
+              "Veuillez saisir un password qui contient un carac spécial ";
+            event.preventDefault();
+          }
+        } else {
           document.getElementById("errPass").innerHTML =
-            "Veuillez saisir un password qui commence par une majus et contient une majus(min 8 lettres) ";
+            "saisir un password de 8 caractères min !!";
         }
+
         let regexTel = /^\+?[0-9][0-9\s]*[0-9]$/;
         if (!regexTel.test(phone.value)) {
           document.getElementById("errPhone").innerHTML =
