@@ -1,3 +1,19 @@
+<?php
+session_start();
+require "../database_connection.php"; 
+$connexion= $_SESSION['user_data'] ?? null;
+if ($connexion){
+  $user = $_SESSION['user_data'];
+  $type=$_SESSION['type'];
+  if($connexion && $type==="client"){
+    $name=$user['Nom'];
+    $prename=$user['Prénom'];
+    $adress=$user['Adresse'];
+    $phone=$user['Telephone'];
+    $email=$user['Email'];
+  }}
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -86,7 +102,7 @@
       </div>
       <div class="head-right">
         <div class="head-actions">
-          <a href="../compte Client/compte.html">
+          <a href="../compte Client/compte.php">
             <img
               src="image/person-svgrepo-com.svg"
               alt="person"
@@ -145,7 +161,7 @@
               class="icone-menu"
             />
             <a
-              href="../se connecter/bienvenue.html "
+              href="logout.php "
               class="lien_nav"
               style="color: inherit"
               >Déconnexion</a
@@ -157,7 +173,11 @@
       <div class="zone-principale">
         <div id="vue-dashboard">
           <div class="bloc-bienvenue">
-            <h1 class="titre-bienvenue">Bonjour Nour !</h1>
+            <?php if($connexion):?>
+            <h1 class="titre-bienvenue">Bonjour <?php echo $prename ?> !</h1>
+            <?php else: ?>
+              <h1 class="titre-bienvenue">Bonjour Visiteur !</h1>
+              <?php endif; ?>
             <p class="sous-titre-bienvenue">
               Bienvenue dans votre espace client.
             </p>
@@ -175,7 +195,11 @@
             <div class="carte-info carte-adresse">
               <h4 class="titre-carte">Adresse de livraison</h4>
               <p class="libelle-adresse">Adresse de livraison</p>
-              <p class="details-adresse">Tunis, El Manar, 2092</p>
+              <?php if($connexion): ?>
+              <p class="details-adresse"> <?php echo $adress?></p>
+              <?php else : ?>
+                <p class="details-adresse"> Votre Adresse</p>
+              <?php endif;?>
             </div>
           </div>
           <div class="grille-deux-colonnes">
@@ -183,22 +207,41 @@
               <h4 class="titre-carte">Informations personnelles</h4>
               <div class="grille-personnelles">
                 <p class="element-personnel">
-                  <span class="label-personnel">Nom :</span> Zahrouni
+                  <?php if($connexion): ?>
+                  <span class="label-personnel">Nom :</span> <?php echo $name?>
+                  <?php else: ?> 
+                    <span class="label-personnel">Nom :</span> Fouleni
+                    <?php endif; ?>
                 </p>
                 <p class="element-personnel">
-                  <span class="label-personnel">Prénom :</span> Nour
+                <?php if($connexion): ?>
+                  <span class="label-personnel">Prénom :</span> <?php echo $prename?>
+                  <?php else: ?> 
+                    <span class="label-personnel">Prénom :</span> Foulen
+                    <?php endif; ?>
                 </p>
                 <p class="element-personnel">
-                  <span class="label-personnel">Email :</span>
-                  biobladi@gmail.com
+                <?php if($connexion): ?>
+                  <span class="label-personnel">Email :</span> <?php echo $email?>
+                  <?php else: ?> 
+                    <span class="label-personnel">Email :</span> Foulen.Fouleni@gmail.com
+                    <?php endif; ?>
                 </p>
                 <p class="element-personnel">
-                  <span class="label-personnel">Téléphone :</span> +216 12 345
-                  678
+                <?php if($connexion): ?>
+                  <span class="label-personnel">Téléphone :</span> <?php echo $phone?>
+                  <?php else: ?> 
+                    <span class="label-personnel">Téléphone :</span> 12 345 678
+                    <?php endif; ?>
                 </p>
                 <p class="element-personnel">
-                  <span class="label-personnel">Adresse :</span> Tunis, El
+                <?php if($connexion): ?>
+                  <span class="label-personnel">Adresse :</span> <?php echo $adress?>
+                  <?php else: ?> 
+                    <span class="label-personnel">Adresse :</span> Tunis, El
                   Manar, 2092
+                    <?php endif; ?>
+                  
                 </p>
               </div>
               <div class="conteneur-modifier">
@@ -264,7 +307,7 @@
               class="titre-carte"
               style="font-size: 24px; margin-bottom: 20px"
             >
-              Vos coordonnées
+              Mes coordonnées
             </h4>
             <div
               style="
@@ -275,20 +318,40 @@
               "
             >
               <p class="element-personnel">
-                <span class="label-personnel">Nom :</span> Zahrouni
+              <?php if($connexion): ?>
+                  <span class="label-personnel">Nom :</span> <?php echo $name?>
+                  <?php else: ?> 
+                    <span class="label-personnel">Nom :</span> Fouleni
+                    <?php endif; ?>
               </p>
               <p class="element-personnel">
-                <span class="label-personnel">Prénom :</span> Nour
+              <?php if($connexion): ?>
+              <span class="label-personnel">Prénom :</span> <?php echo $prename?>
+                  <?php else: ?> 
+                    <span class="label-personnel">Prénom :</span> Foulen
+                    <?php endif; ?>
               </p>
               <p class="element-personnel">
-                <span class="label-personnel">Email :</span> biobladi@gmail.com
+              <?php if($connexion): ?>
+                  <span class="label-personnel">Email :</span> <?php echo $email?>
+                  <?php else: ?> 
+                    <span class="label-personnel">Email :</span> Foulen.Fouleni@gmail.com
+                    <?php endif; ?>
               </p>
               <p class="element-personnel">
-                <span class="label-personnel">Téléphone :</span> +216 12 345 678
+              <?php if($connexion): ?>
+                  <span class="label-personnel">Téléphone :</span> <?php echo $phone?>
+                  <?php else: ?> 
+                    <span class="label-personnel">Téléphone :</span> 12 345 678
+                    <?php endif; ?>
               </p>
               <p class="element-personnel" style="grid-column: span 2">
-                <span class="label-personnel">Adresse :</span> Tunis, El Manar,
-                2092
+              <?php if($connexion): ?>
+                  <span class="label-personnel">Adresse :</span> <?php echo $adress?>
+                  <?php else: ?> 
+                    <span class="label-personnel">Adresse :</span> Tunis, El
+                  Manar, 2092
+                    <?php endif; ?>
               </p>
             </div>
 
