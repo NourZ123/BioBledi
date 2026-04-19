@@ -36,7 +36,16 @@ body{
     flex-shrink: 0;
 }
 
-
+#modif{
+    display: inline;
+    color: #E2E8F0;
+    font-size: 12px;
+    font-weight: bold;
+}
+#row_infosp{
+    display: flex;
+    flex-direction: row;
+}
 .navigation {
     display: flex;
     gap: 1.4rem;

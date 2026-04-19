@@ -84,10 +84,10 @@
     <hr />
 
     <div class="page-container">
-      <form action="#" id="form">
+      <form action="modifier.php" id="form" name="modification" method="post">
         <div class="card">
           <h1 class="page-title">Modifier mes informations</h1>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="nom et prenom">Nom et Prénom</label>
             <input
               type="text"
@@ -96,7 +96,7 @@
               id="nom et prenom"
               placeholder="nom"
             />
-          </div>
+          </div>-->
           <div class="form-group">
             <label>Adresse</label>
             <input
@@ -108,6 +108,7 @@
           <div class="form-group">
             <label>Email</label>
             <input type="email" name="email" placeholder="demo@biobladi.com" />
+            <span id="errEmail"></span>
           </div>
           <div class="form-group">
             <label>Téléphone</label>
@@ -219,6 +220,11 @@
 
         e.target.value = formatted;
       });
+      const params = new URLSearchParams(window.location.search);
+      if (params.has("error")) {
+        document.getElementById("errEmail").innerHTML =
+          "Email déjà existant ! ";
+      }
     </script>
   </body>
 </html>

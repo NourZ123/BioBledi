@@ -205,6 +205,7 @@ if ($connexion){
           <div class="grille-deux-colonnes">
             <div class="carte-info carte-personnelles">
               <h4 class="titre-carte">Informations personnelles</h4>
+               <span style="margin-top:0px;color:darkgrey;" id="modif"></span> 
               <div class="grille-personnelles">
                 <p class="element-personnel">
                   <?php if($connexion): ?>
@@ -521,7 +522,7 @@ if ($connexion){
       const vueDashboard = document.getElementById("vue-dashboard");
       const vueInfos = document.getElementById("vue-infos");
       const vueCommandes = document.getElementById("vue-commandes");
-
+      document.getElementById("modif").innerHTML = "";
       function cacherToutesLesVues() {
         vueDashboard.style.display = "none";
         vueInfos.style.display = "none";
@@ -544,6 +545,10 @@ if ($connexion){
         cacherToutesLesVues();
         vueCommandes.style.display = "block";
       });
+      const params = new URLSearchParams(window.location.search);
+      if (params.has("modif")) {
+        document.getElementById("modif").innerHTML = "modification réussie !";
+      }
     </script>
   </body>
 </html>
