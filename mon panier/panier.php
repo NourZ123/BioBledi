@@ -202,7 +202,7 @@ if (!empty($_SESSION['panier'])) {
             </div>
           </div>
           <div class="bottom">
-            <a href="../finaliser ma commande/finaliser ma commande.html">
+            <a href="../finaliser ma commande/finaliser ma commande.php">
               <button class="valider">Valider ma commande</button>
             </a>
             <a href="../fruits et légumes/fruits et légumes.php">

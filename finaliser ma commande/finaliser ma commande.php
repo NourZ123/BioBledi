@@ -1,3 +1,8 @@
+<?php  
+session_start();
+require_once '../database_connection.php';
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -92,12 +97,22 @@
             <h3>Mode de livraison</h3>
 
             <div class="choice-group">
-              <div class="choice">A domicile</div>
-              <div class="choice">Point relais</div>
-              <div class="choice">Retirer de la ferme</div>
+              <div class="choice" id='adress'>A domicile</div>
+              <div class="choice" id='PR'>Point relais</div>
+              <div class="choice" id='surplace'>Retirer de la ferme</div>
             </div>
           </div>
-
+          <div id="adr" style="display: none;"><div class="form-group">
+            <label>Adresse</label>
+            <input
+              type="text"
+              class="form-input"
+              id="point_relais"
+              placeholder="ex: 123 rue de la Paix"
+              name="adress"
+            />
+            <span id="errAdress" class="error"></span>
+          </div></div>
           <div class="section">
             <h3>Mode de paiement</h3>
 
@@ -324,6 +339,38 @@
         card.style.border = "2px solid #E2E8F0";
         card.style.color = "black";
       });
+      let adresse=document.getElementById('adress');
+      let surplace=document.getElementById('surplace');
+      let Pr =document.getElementById('PR');
+      let adr_pointR=document.getElementById('adr')
+      adresse.addEventListener("click", ()=>{
+        adresse.style.border= "solid 2px #14532d";
+        adresse.style.color="#14532d";
+        surplace.style.border="2px solid #E2E8F0";
+        surplace.style.color="black";
+        Pr.style.border="2px solid #E2E8F0";
+        Pr.style.color="black";
+        adr_pointR.style.display="none";
+      })
+      PR.addEventListener("click", ()=>{
+        Pr.style.border= "solid 2px #14532d";
+        Pr.style.color="#14532d";
+        surplace.style.border="2px solid #E2E8F0";
+        surplace.style.color="black";
+        adresse.style.border="2px solid #E2E8F0";
+        adresse.style.color="black";
+        adr_pointR.style.display="block";
+      })
+      surplace.addEventListener("click", ()=>{
+        surplace.style.border= "solid 2px #14532d";
+        surplace.style.color="#14532d";
+        adresse.style.border="2px solid #E2E8F0";
+        adresse.style.color="black";
+        Pr.style.border="2px solid #E2E8F0";
+        Pr.style.color="black";
+        adr_pointR.style.display="none";
+      })
+
     </script>
   </body>
 </html>
