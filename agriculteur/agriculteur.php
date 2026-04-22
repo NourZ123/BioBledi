@@ -1,9 +1,6 @@
 <?php
 require_once '../database_connection.php';
-
-$id_agriculteur = 1; // À remplacer par $_SESSION['id_agriculteur'] après connexion
-
-// ─── Charger les infos de l'agriculteur ───────────────────────────────────────
+$id_agriculteur = 1; 
 $stmt = $db->prepare("SELECT * FROM agriculteur WHERE ID = ?");
 $stmt->execute([$id_agriculteur]);
 $agriculteur = $stmt->fetch();
@@ -16,12 +13,10 @@ if (!$agriculteur) {
     ];
 }
 
-// ─── Charger les produits ─────────────────────────────────────────────────────
 $stmt2 = $db->prepare("SELECT * FROM produit WHERE ID_agriculteur = ?");
 $stmt2->execute([$id_agriculteur]);
 $produits = $stmt2->fetchAll();
 
-// ─── Statistiques ─────────────────────────────────────────────────────────────
 $total_produits = count($produits);
 $total_stock    = array_sum(array_column($produits, 'quantité'));
 ?>
@@ -113,7 +108,6 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
 
     <main class="page-agriculteur">
 
-      <!-- ═══ SECTION 1 : INFORMATIONS ═══ -->
       <div class="info-section">
         <h2 class="section-title">
           <img src="image/person-svgrepo-com (2).svg" alt="personne" class="icone1" />
@@ -147,7 +141,6 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
         </div>
       </div>
 
-      <!-- ═══ SECTION 2 : STATISTIQUES ═══ -->
       <div class="stats-section">
         <h2 class="section-title">
           <img src="image/increase-stats-svgrepo-com.svg" alt="stat" class="icone1" />
@@ -169,7 +162,6 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
         </div>
       </div>
 
-      <!-- ═══ SECTION 3 : FORMULAIRE ═══ -->
       <div class="form-section">
         <h2 class="section-title">
           <img src="image/plus-large-svgrepo-com.svg" alt="plus" class="icone1" />
@@ -243,7 +235,6 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
             <textarea id="description-produit" name="description" class="form-input" rows="3" placeholder="Décrivez votre produit..."></textarea>
           </div>
 
-          <!-- ── Photo obligatoire ── -->
           <div class="form-group">
             <label>Photo du produit *</label>
             <div class="upload-zone" id="uploadZone">
@@ -263,7 +254,6 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
         </form>
       </div>
 
-      <!-- ═══ SECTION 4 : MES PRODUITS ═══ -->
       <div class="products-section">
         <h2 class="section-title">
           <img src="image/package-svgrepo-com.svg" alt="boite" class="icone1" />
@@ -279,7 +269,6 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
             <?php foreach ($produits as $produit): ?>
               <div class="product-card" data-id="<?= $produit['ID'] ?>">
                 <?php if (!empty($produit['image'])): ?>
-                  <!-- Le chemin en BDD est relatif à BioBledi/, on remonte depuis agriculteur/ -->
                   <img src="<?= htmlspecialchars('../' . $produit['image']) ?>"
                        alt="<?= htmlspecialchars($produit['nom_produit']) ?>"
                        class="product-img" />
@@ -339,7 +328,6 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
     <script>
       const ID_AGRICULTEUR = <?= $id_agriculteur ?>;
 
-      // ─── Aperçu photo ─────────────────────────────────────────────────────────
       document.getElementById('photo-produit').addEventListener('change', function() {
         const file = this.files[0];
         if (!file) return;
@@ -375,7 +363,6 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
         setTimeout(() => { el.style.display = 'none'; }, 4000);
       }
 
-      // ─── Soumettre le formulaire ───────────────────────────────────────────────
       document.getElementById('productForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const photoInput = document.getElementById('photo-produit');
@@ -401,7 +388,6 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
           .catch(() => afficherMessage('Erreur réseau', false));
       });
 
-      // ─── Recharger les produits ───────────────────────────────────────────────
       function rechargerProduits() {
         fetch(`agriculteur_api.php?action=get_produits&id_agriculteur=${ID_AGRICULTEUR}`)
           .then(r => r.json())
