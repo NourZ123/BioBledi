@@ -1,8 +1,8 @@
 <?php
-require_once '../agriculteur/db.php';
+require_once '../database_connection.php';
 
 // ─── Récupérer les produits Fruits et Légumes ─────────────────────────────────
-$stmt = $pdo->query("
+$stmt = $db->query("
     SELECT * FROM produit 
     WHERE `catégorie` IN ('Fruits', 'Légumes')
     ORDER BY ID ASC
@@ -32,7 +32,7 @@ $produits = $stmt->fetchAll();
         <nav class="navigation">
           <a href="../index/index.html" class="menu-item">Accueil</a>
           <a href="../fruits et légumes/fruits et légumes.php" class="menu-item">Marché</a>
-          <a href="../Epicerie bio/epicerie bio.html" class="menu-item">Epicerie</a>
+          <a href="../Epicerie bio/epicerie bio.php" class="menu-item">Epicerie</a>
           <a href="../se connecter/bienvenue.html" class="menu-item">Connexion</a>
           <a href="../inscription/inscription.html" class="menu-item">Inscription</a>
           <a href="../about us/about us.html" class="menu-item">About US</a>

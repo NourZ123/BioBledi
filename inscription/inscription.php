@@ -19,7 +19,7 @@ else {
    VALUES (?, ?, ?, ?, ?, ?)");
 }
 $requete->execute([$nom, $prename, $email,$phone,$adress,$password]);
-header("Location: ../fruits et légumes/fruits et légumes.html");
+header("Location: ../fruits et légumes/fruits et légumes.php");
     exit();
 }
 ?>

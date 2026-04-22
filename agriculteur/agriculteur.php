@@ -1,10 +1,10 @@
 <?php
-require_once 'db.php';
+require_once '../database_connection.php';
 
 $id_agriculteur = 1; // À remplacer par $_SESSION['id_agriculteur'] après connexion
 
 // ─── Charger les infos de l'agriculteur ───────────────────────────────────────
-$stmt = $pdo->prepare("SELECT * FROM agriculteur WHERE ID = ?");
+$stmt = $db->prepare("SELECT * FROM agriculteur WHERE ID = ?");
 $stmt->execute([$id_agriculteur]);
 $agriculteur = $stmt->fetch();
 
@@ -17,7 +17,7 @@ if (!$agriculteur) {
 }
 
 // ─── Charger les produits ─────────────────────────────────────────────────────
-$stmt2 = $pdo->prepare("SELECT * FROM produit WHERE ID_agriculteur = ?");
+$stmt2 = $db->prepare("SELECT * FROM produit WHERE ID_agriculteur = ?");
 $stmt2->execute([$id_agriculteur]);
 $produits = $stmt2->fetchAll();
 
@@ -88,7 +88,7 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
         <nav class="navigation">
           <a href="../index/index.html" class="menu-item">Accueil</a>
           <a href="../fruits et légumes/fruits et légumes.php" class="menu-item">Marché</a>
-          <a href="../Epicerie bio/epicerie bio.html" class="menu-item">Epicerie</a>
+          <a href="../Epicerie bio/epicerie bio.php" class="menu-item">Epicerie</a>
           <a href="../se connecter/bienvenue.html" class="menu-item">Connexion</a>
           <a href="../inscription/inscription.html" class="menu-item">Inscription</a>
           <a href="../about us/about us.html" class="menu-item">About US</a>

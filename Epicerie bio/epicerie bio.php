@@ -1,25 +1,6 @@
 <?php
-// Connexion à la base de données
-$host = "localhost";
-$dbname = "biobledi";
-$user = "root";
-$password = "";
-
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
-}
-
-// Récupérer uniquement les produits de catégorie Miel, Oeufs et Epicerie
-$stmt = $pdo->prepare("
-    SELECT * FROM `produit` 
-    WHERE `catégorie` IN ('Miel', 'Oeufs', 'Epicerie')
-    ORDER BY `ID` ASC
-");
-$stmt->execute();
-$produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
+session_start();
+require_once '../database_connection.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -46,7 +27,7 @@ $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <nav class="navigation">
           <a href="../index/index.html" class="menu-item">Accueil</a>
-          <a href="../fruits et légumes/fruits et légumes.html" class="menu-item">Marché</a>
+          <a href="../fruits et légumes/fruits et légumes.php" class="menu-item">Marché</a>
           <a href="../Epicerie bio/epicerie bio.php" class="menu-item">Epicerie</a>
           <a href="../se connecter/bienvenue.html" class="menu-item">Connexion</a>
           <a href="../inscription/inscription.html" class="menu-item">Inscription</a>
@@ -165,7 +146,7 @@ $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="footer-links">
           <h4>Liens utiles</h4>
           <a href="../about us/about us.html">About Us</a>
-          <a href="../fruits et légumes/fruits et légumes.html">Marché</a>
+          <a href="../fruits et légumes/fruits et légumes.php">Marché</a>
         </div>
         <div class="footer-contact">
           <h4>Contactez-nous</h4>

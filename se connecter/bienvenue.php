@@ -19,7 +19,7 @@ if (isset($_POST["connexion"])) {
             if ($user_type === "agriculteur") {
                 header("Location: ../agriculteur/agriculteur (1).html");
             } else {
-                header("Location: ../fruits et légumes/fruits et légumes.html");
+                header("Location: ../fruits et légumes/fruits et légumes.php");
             }
             exit();
         } else {

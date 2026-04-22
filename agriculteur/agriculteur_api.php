@@ -12,7 +12,7 @@ switch ($action) {
     // ─── INFOS AGRICULTEUR ────────────────────────────────────────────────────
     case 'get_agriculteur':
         $id   = intval($_GET['id'] ?? 1);
-        $stmt = $pdo->prepare("SELECT * FROM agriculteur WHERE ID = ?");
+        $stmt = $db->prepare("SELECT * FROM agriculteur WHERE ID = ?");
         $stmt->execute([$id]);
         $agri = $stmt->fetch();
         echo json_encode($agri
@@ -24,7 +24,7 @@ switch ($action) {
     // ─── PRODUITS D'UN AGRICULTEUR ────────────────────────────────────────────
     case 'get_produits':
         $id   = intval($_GET['id_agriculteur'] ?? 1);
-        $stmt = $pdo->prepare("SELECT * FROM produit WHERE ID_agriculteur = ?");
+        $stmt = $db->prepare("SELECT * FROM produit WHERE ID_agriculteur = ?");
         $stmt->execute([$id]);
         echo json_encode(['succes' => true, 'produits' => $stmt->fetchAll()]);
         break;
@@ -96,7 +96,7 @@ switch ($action) {
         }
 
         // Insertion en BDD
-        $stmt = $pdo->prepare("
+        $stmt = $db->prepare("
             INSERT INTO produit
                 (nom_produit, prix, `quantité`, `catégorie`, offre, `région`, description, `unité`, ID_agriculteur, image)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -106,7 +106,7 @@ switch ($action) {
         echo json_encode([
             'succes'  => true,
             'message' => "\"$nom\" a été ajouté avec succès !",
-            'id'      => $pdo->lastInsertId(),
+            'id'      => $db->lastInsertId(),
             'image'   => $cheminBDD
         ]);
         break;
@@ -123,7 +123,7 @@ switch ($action) {
             break;
         }
 
-        $stmt = $pdo->prepare("
+        $stmt = $db->prepare("
             UPDATE produit SET nom_produit = ?, prix = ?, `quantité` = ?
             WHERE ID = ?
         ");
@@ -142,7 +142,7 @@ switch ($action) {
         }
 
         // Récupérer le chemin image pour supprimer le fichier
-        $stmt = $pdo->prepare("SELECT image FROM produit WHERE ID = ?");
+        $stmt = $db->prepare("SELECT image FROM produit WHERE ID = ?");
         $stmt->execute([$id]);
         $produit = $stmt->fetch();
 
@@ -154,7 +154,7 @@ switch ($action) {
             }
         }
 
-        $stmt = $pdo->prepare("DELETE FROM produit WHERE ID = ?");
+        $stmt = $db->prepare("DELETE FROM produit WHERE ID = ?");
         $stmt->execute([$id]);
 
         echo json_encode(['succes' => true, 'message' => 'Produit supprimé avec succès !']);
