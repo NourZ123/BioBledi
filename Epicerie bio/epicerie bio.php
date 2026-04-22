@@ -42,7 +42,7 @@ require_once '../database_connection.php';
           <a href="../compte Client/compte.php">
             <img src="image/person-svgrepo-com.svg" alt="person" class="user-icon" />
           </a>
-          <a href="../mon panier/panier.html">
+          <a href="../mon panier/panier.php">
             <img src="image/cart-2-svgrepo-com.svg" alt="cart" class="cart-icon" />
           </a>
         </div>

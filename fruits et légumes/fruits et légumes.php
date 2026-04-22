@@ -1,7 +1,24 @@
 <?php
+session_start();
 require_once '../database_connection.php';
+if (isset($_GET['action']) && $_GET['action'] === 'ajouter' && isset($_GET['id'])) {
+    $id = intval($_GET['id']); 
 
-// ─── Récupérer les produits Fruits et Légumes ─────────────────────────────────
+    if (!isset($_SESSION['panier'])) {
+        $_SESSION['panier'] = [];
+    }
+
+    if (isset($_SESSION['panier'][$id])) {
+        $_SESSION['panier'][$id]++;
+    } else {
+        $_SESSION['panier'][$id] = 1;
+    }
+
+    header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));
+    exit();
+}
+
+
 $stmt = $db->query("
     SELECT * FROM produit 
     WHERE `catégorie` IN ('Fruits', 'Légumes')
@@ -46,7 +63,7 @@ $produits = $stmt->fetchAll();
           <a href="../compte Client/compte.php">
             <img src="image/person-svgrepo-com.svg" alt="person" class="user-icon" />
           </a>
-          <a href="../mon panier/panier.html">
+          <a href="../mon panier/panier.php">
             <img src="image/cart-2-svgrepo-com.svg" alt="cart" class="cart-icon" />
           </a>
         </div>
@@ -64,9 +81,6 @@ $produits = $stmt->fetchAll();
         <?php foreach ($produits as $produit): ?>
           <div class="item">
 
-            <!-- Photo du produit -->
-            <!-- Le chemin en BDD est : images/produits/nom.jpg (relatif à BioBledi/) -->
-            <!-- Depuis fruits et légumes/, on remonte d'un niveau avec ../ -->
             <?php if (!empty($produit['image'])): ?>
               <img
                 src="<?= htmlspecialchars('../' . $produit['image']) ?>"
@@ -80,7 +94,6 @@ $produits = $stmt->fetchAll();
                 font-size:3rem;">🌿</div>
             <?php endif; ?>
 
-            <!-- Ligne 1 : Nom + Prix -->
             <div class="Row1">
               <div>
                 <p style="font-size: 20px; margin: 0%">
@@ -107,7 +120,6 @@ $produits = $stmt->fetchAll();
               </div>
             </div>
 
-            <!-- Ligne 2 : Région + ID -->
             <div class="Row2">
               <div class="loc">
                 <img src="image/location-pin-svgrepo-com (1).svg" alt="loc" class="icon" />
@@ -116,14 +128,14 @@ $produits = $stmt->fetchAll();
               <div id="Id">#<?= $produit['ID'] ?></div>
             </div>
 
-            <!-- Ligne 3 : Stock + Bouton -->
             <div class="Row3">
-              <img src="image/box.svg" alt="stock" class="icon" />
-              <p><?= intval($produit['quantité']) ?></p>
-              <button class="btn" onclick="ajouterAuPanier(<?= $produit['ID'] ?>)">
-                <b>+Ajouter</b>
-              </button>
-            </div>
+    <img src="image/box.svg" alt="stock" class="icon" />
+    <p><?= intval($produit['quantité']) ?></p>
+    
+    <a href="?action=ajouter&id=<?= $produit['ID'] ?>" class="btn" style="text-decoration: none;">
+        <b>+Ajouter</b>
+    </a>
+</div>
 
           </div>
         <?php endforeach; ?>
@@ -158,11 +170,5 @@ $produits = $stmt->fetchAll();
       </div>
     </footer>
 
-    <script>
-      function ajouterAuPanier(id) {
-        // À connecter avec le système de panier plus tard
-        alert('Produit #' + id + ' ajouté au panier !');
-      }
-    </script>
   </body>
 </html>

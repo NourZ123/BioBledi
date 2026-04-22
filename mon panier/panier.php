@@ -1,3 +1,64 @@
+
+<?php
+session_start();
+require "../database_connection.php";
+
+if (!isset($_SESSION['panier'])) {
+    $_SESSION['panier'] = [];
+}
+
+if (isset($_GET['action'], $_GET['id'])) {
+    $id = intval($_GET['id']);
+    $action = $_GET['action'];
+
+    if ($action === 'plus') {
+        $_SESSION['panier'][$id]++;
+    } elseif ($action === 'moins') {
+        if ($_SESSION['panier'][$id] > 1) {
+            $_SESSION['panier'][$id]--;
+        } else {
+            unset($_SESSION['panier'][$id]);
+        }
+    } elseif ($action === 'supprimer') {
+        unset($_SESSION['panier'][$id]);
+    }
+
+    header("Location: panier.php");
+    exit();
+}
+
+$produits_panier = [];
+$total_articles = 0;
+$frais_livraison = 3;
+
+if (!empty($_SESSION['panier'])) {
+    $ids = array_keys($_SESSION['panier']);
+    $stmt = $db->query("SELECT * FROM produit WHERE ID IN (" . implode(',', $ids) . ")");
+    
+    foreach ($stmt->fetchAll() as $item) {
+        $id = $item['ID'];
+        $qte = $_SESSION['panier'][$id];
+        
+        $prix_u = (!empty($item['offre']) && $item['offre'] > 0) 
+                  ? $item['prix'] * (1 - $item['offre'] / 100) 
+                  : $item['prix'];
+
+        $sous_total = $prix_u * $qte;
+        $total_articles += $sous_total;
+
+        $produits_panier[] = [
+            'id'         => $id,
+            'nom'        => $item['nom_produit'],
+            'image'      => $item['image'],
+            'prix_u'     => $prix_u,
+            'qte'        => $qte,
+            'sous_total' => $sous_total
+        ];
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -57,7 +118,7 @@
                 class="user-icon"
               />
             </a>
-            <a href="../mon panier/panier.html">
+            <a href="../mon panier/panier.php">
               <img
                 src="image/cart-2-svgrepo-com.svg"
                 alt="cart"
@@ -78,61 +139,42 @@
             <div style="margin-left: 50px">Quantité</div>
             <div style="margin-right: 20px">Total</div>
           </div>
-          <div class="row2">
-            <div class="produits">
-              <img
-                src="image/framboises.webp"
-                alt="framboises"
-                class="img_panier"
-              />
-              <div class="info">
-                <p>Framboises</p>
-                <p class="price">15DT/barquette</p>
-              </div>
-              <div class="quantité">
-                <button>-</button>
-                <span class="Q">2</span>
-                <button>+</button>
-              </div>
-            </div>
 
-            <div class="Total">
-              <div class="price">30DT</div>
-              <div style="margin-right: 20px">
-                <img src="image/bin-svgrepo-com.svg" alt="bin" />
-                <span>Retirer</span>
+          <?php if (!empty($produits_panier)): ?>
+            <?php foreach ($produits_panier as $item): ?>
+              <div class="row2">
+                <div class="produits">
+                  <img src="../<?= htmlspecialchars($item['image']) ?>" class="img_panier" />
+                  <div class="info">
+                    <p><strong><?= htmlspecialchars($item['nom']) ?></strong></p>
+                    <p class="price"><?= number_format($item['prix_u'], 2) ?> DT/unité</p>
+                  </div>
+                </div>
+                <div class="quantité">
+                  <a href="?action=moins&id=<?= $item['id'] ?>"><button>-</button></a>
+                  <span class="Q"><?= $item['qte'] ?></span>
+                  <a href="?action=plus&id=<?= $item['id'] ?>"><button>+</button></a>
+                </div>
+                <div class="Total">
+                  <div class="price"><?= number_format($item['sous_total'], 2) ?> DT</div>
+                  <div style="margin-right: 20px">
+                    <a href="?action=supprimer&id=<?= $item['id'] ?>" style="text-decoration:none; color:inherit;">
+                      <img src="image/bin-svgrepo-com.svg" alt="bin" />
+                      <span>Retirer</span>
+                    </a>
+                  </div>
+                </div>
               </div>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <div class="produits" style="width: 100%; justify-content: center; padding: 50px;">
+              <p>Votre panier est vide.</p>
             </div>
-          </div>
-          <div class="row2">
-            <div class="produits">
-              <img
-                src="image/tomate_cerise.jpg"
-                alt="Tomates"
-                class="img_panier"
-              />
-              <div class="info">
-                <p>Tomates Cerises</p>
-                <p class="price">12DT/barquette</p>
-              </div>
-              <div class="quantité">
-                <button>-</button>
-                <span class="Q">1</span>
-                <button>+</button>
-              </div>
-            </div>
-
-            <div class="Total">
-              <div class="price">12DT</div>
-              <div style="margin-right: 20px">
-                <img src="image/bin-svgrepo-com.svg" alt="bin" />
-                <span class="Retirer">Retirer</span>
-              </div>
-            </div>
-          </div>
+          <?php endif; ?>
+          
           <div class="row4">
             <div>Total</div>
-            <div class="sum">42 DT</div>
+            <div class="sum"><?= number_format($total_articles, 2) ?> DT</div>
           </div>
         </div>
 
@@ -140,25 +182,32 @@
           <div class="top">
             <p style="color: #14532d"><b>Récapitulatif</b></p>
             <p><b>Adresse de livraison</b></p>
-            <p>Tunis,El Manar,2092</p>
+            <?php if(isset($_SESSION['user_data'])) : ?>
+            <p>
+              <?php echo $_SESSION['user_data']['Adresse'] ?>
+            </p>
+            <?php else :?>
+              <p> Votre adresse</p>
+            <?php endif; ?>
             <hr />
           </div>
           <div class="middle">
             <div>Total des articles:</div>
-
-            <div>42 DT</div>
+            <div><?= number_format($total_articles, 2) ?> DT</div>
             <div style="color: #c6c1c1">Livraison:</div>
-            <div style="color: #c6c1c1">3 DT</div>
-            <div>Total à payer</div>
-            <div>45dt</div>
+            <div style="color: #c6c1c1"><?= number_format($frais_livraison, 2) ?> DT</div>
+            <div style="font-weight: bold;">Total à payer</div>
+            <div style="font-weight: bold; color: #14532d;">
+              <?= number_format($total_articles + $frais_livraison, 2) ?> DT
+            </div>
           </div>
           <div class="bottom">
-            <a href="../finaliser ma commande/finaliser ma commande.html"
-              ><button class="valider">Valider ma commande</button></a
-            >
-            <a href="../fruits et légumes/fruits et légumes.php"
-              ><button class="continuer">Continuer mes achats</button></a
-            >
+            <a href="../finaliser ma commande/finaliser ma commande.html">
+              <button class="valider">Valider ma commande</button>
+            </a>
+            <a href="../fruits et légumes/fruits et légumes.php">
+              <button class="continuer">Continuer mes achats</button>
+            </a>
           </div>
         </div>
       </div>
@@ -174,7 +223,7 @@
         <div class="footer-links">
           <h4>Liens utiles</h4>
           <a href="../about us/about us.html">About Us</a>
-          <a href="../fruits et légumes/fruits et légumes.php">Marché</a>
+          <a href="../fruitsetlegumes//fruits et légumes.html">Marché</a>
         </div>
         <div class="footer-contact">
           <h4>Contactez-nous</h4>

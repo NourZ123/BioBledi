@@ -109,7 +109,7 @@ if ($connexion){
               class="user-icon"
             />
           </a>
-          <a href="../mon panier/panier.html">
+          <a href="../mon panier/panier.php">
             <img
               src="image/cart-2-svgrepo-com.svg"
               alt="cart"
