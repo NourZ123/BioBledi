@@ -1,18 +1,54 @@
 <?php
 session_start();
 require "../database_connection.php"; 
-$connexion= $_SESSION['user_data'] ?? null;
-if ($connexion){
-  $user = $_SESSION['user_data'];
-  $type=$_SESSION['type'];
-  if($connexion && $type==="client"){
-    $name=$user['Nom'];
-    $prename=$user['Prénom'];
-    $adress=$user['Adresse'];
-    $phone=$user['Telephone'];
-    $email=$user['Email'];
-  }}
 
+$connexion = $_SESSION['user_data'] ?? null;
+
+// Initialisation des variables
+$name = $prename = $adress = $phone = $email = '';
+$total_commandes = 0;
+$derniere_commande = null;
+$commandes = [];
+
+if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
+    $user = $_SESSION['user_data'];
+    $name = $user['Nom'] ?? '';
+    $prename = $user['Prénom'] ?? '';
+    $adress = $user['Adresse'] ?? '';
+    $phone = $user['Telephone'] ?? '';
+    $email = $user['Email'] ?? '';
+    
+    // Récupérer l'ID client
+    $id_client = $user['id_client'] ?? $user['ID'] ?? $user['id'] ?? null;
+    
+    if ($id_client) {
+        // Récupérer le nombre total de commandes
+        $stmt = $db->prepare("SELECT COUNT(*) as total FROM commande WHERE id_client = ?");
+        $stmt->execute([$id_client]);
+        $total_commandes = $stmt->fetch(PDO::FETCH_ASSOC)['total'] ?? 0;
+        
+        // Récupérer la dernière commande
+        $stmt = $db->prepare("
+            SELECT id_commande, montant, adresse, date_commande, statut 
+            FROM commande 
+            WHERE id_client = ? 
+            ORDER BY date_commande DESC 
+            LIMIT 1
+        ");
+        $stmt->execute([$id_client]);
+        $derniere_commande = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        // Récupérer toutes les commandes pour l'historique
+        $stmt = $db->prepare("
+            SELECT id_commande, montant, adresse, date_commande, statut 
+            FROM commande 
+            WHERE id_client = ? 
+            ORDER BY date_commande DESC
+        ");
+        $stmt->execute([$id_client]);
+        $commandes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -161,7 +197,7 @@ if ($connexion){
               class="icone-menu"
             />
             <a
-              href="logout.php "
+              href="logout.php"
               class="lien_nav"
               style="color: inherit"
               >Déconnexion</a
@@ -174,10 +210,10 @@ if ($connexion){
         <div id="vue-dashboard">
           <div class="bloc-bienvenue">
             <?php if($connexion):?>
-            <h1 class="titre-bienvenue">Bonjour <?php echo $prename ?> !</h1>
+            <h1 class="titre-bienvenue">Bonjour <?php echo htmlspecialchars($prename) ?> !</h1>
             <?php else: ?>
               <h1 class="titre-bienvenue">Bonjour Visiteur !</h1>
-              <?php endif; ?>
+            <?php endif; ?>
             <p class="sous-titre-bienvenue">
               Bienvenue dans votre espace client.
             </p>
@@ -185,64 +221,66 @@ if ($connexion){
           <div class="grille-trois-cartes">
             <div class="carte-info carte-total">
               <h4 class="titre-carte">Total des commandes</h4>
-              <p class="nombre-total">8 commandes</p>
+              <p class="nombre-total"><?= $total_commandes ?> commande<?= $total_commandes > 1 ? 's' : '' ?></p>
             </div>
             <div class="carte-info carte-derniere">
               <h4 class="titre-carte">Dernière commande</h4>
-              <p class="ref-derniere">CMD1025-120 dt</p>
-              <p class="adresse-derniere">Tunis, El Manar, 2092</p>
+              <?php if($derniere_commande): ?>
+                <p class="ref-derniere">CMD<?= $derniere_commande['id_commande'] ?> - <?= number_format($derniere_commande['montant'], 2) ?> dt</p>
+                <p class="adresse-derniere"><?= htmlspecialchars($derniere_commande['adresse']) ?></p>
+              <?php else: ?>
+                <p class="ref-derniere">Aucune commande</p>
+              <?php endif; ?>
             </div>
             <div class="carte-info carte-adresse">
               <h4 class="titre-carte">Adresse de livraison</h4>
               <p class="libelle-adresse">Adresse de livraison</p>
               <?php if($connexion): ?>
-              <p class="details-adresse"> <?php echo $adress?></p>
+                <p class="details-adresse"><?php echo htmlspecialchars($adress)?></p>
               <?php else : ?>
-                <p class="details-adresse"> Votre Adresse</p>
+                <p class="details-adresse">Votre Adresse</p>
               <?php endif;?>
             </div>
           </div>
           <div class="grille-deux-colonnes">
             <div class="carte-info carte-personnelles">
               <h4 class="titre-carte">Informations personnelles</h4>
-               <span style="margin-top:0px;color:darkgrey;" id="modif"></span> 
+              <span style="margin-top:0px;color:darkgrey;" id="modif"></span> 
               <div class="grille-personnelles">
                 <p class="element-personnel">
                   <?php if($connexion): ?>
-                  <span class="label-personnel">Nom :</span> <?php echo $name?>
+                    <span class="label-personnel">Nom :</span> <?php echo htmlspecialchars($name)?>
                   <?php else: ?> 
                     <span class="label-personnel">Nom :</span> Fouleni
-                    <?php endif; ?>
+                  <?php endif; ?>
                 </p>
                 <p class="element-personnel">
-                <?php if($connexion): ?>
-                  <span class="label-personnel">Prénom :</span> <?php echo $prename?>
+                  <?php if($connexion): ?>
+                    <span class="label-personnel">Prénom :</span> <?php echo htmlspecialchars($prename)?>
                   <?php else: ?> 
                     <span class="label-personnel">Prénom :</span> Foulen
-                    <?php endif; ?>
+                  <?php endif; ?>
                 </p>
                 <p class="element-personnel">
-                <?php if($connexion): ?>
-                  <span class="label-personnel">Email :</span> <?php echo $email?>
+                  <?php if($connexion): ?>
+                    <span class="label-personnel">Email :</span> <?php echo htmlspecialchars($email)?>
                   <?php else: ?> 
                     <span class="label-personnel">Email :</span> Foulen.Fouleni@gmail.com
-                    <?php endif; ?>
+                  <?php endif; ?>
                 </p>
                 <p class="element-personnel">
-                <?php if($connexion): ?>
-                  <span class="label-personnel">Téléphone :</span> <?php echo $phone?>
+                  <?php if($connexion): ?>
+                    <span class="label-personnel">Téléphone :</span> <?php echo htmlspecialchars($phone)?>
                   <?php else: ?> 
                     <span class="label-personnel">Téléphone :</span> 12 345 678
-                    <?php endif; ?>
+                  <?php endif; ?>
                 </p>
                 <p class="element-personnel">
-                <?php if($connexion): ?>
-                  <span class="label-personnel">Adresse :</span> <?php echo $adress?>
+                  <?php if($connexion): ?>
+                    <span class="label-personnel">Adresse :</span> <?php echo htmlspecialchars($adress)?>
                   <?php else: ?> 
-                    <span class="label-personnel">Adresse :</span> Tunis, El
-                  Manar, 2092
-                    <?php endif; ?>
-                  
+                    <span class="label-personnel">Adresse :</span> Tunis, El Manar, 2092
+                  <?php endif; ?>
                 </p>
               </div>
               <div class="conteneur-modifier">
@@ -262,25 +300,25 @@ if ($connexion){
                     <th class="colonne-date">Date</th>
                     <th class="colonne-montant">Montant</th>
                     <th class="colonne-statut">Statut</th>
-                    <th class="colonne-action">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="ligne-table">
-                    <td class="cellule-commande">CMD1025</td>
-                    <td class="cellule-date">12/01/2026</td>
-                    <td class="cellule-montant">120 DT</td>
-                    <td class="cellule-statut statut-encours">Non Livré</td>
-                    <td class="cellule-action">
-                      <a href="#" class="bouton-modifier-commande">Modifier</a>
-                    </td>
-                  </tr>
-                  <tr class="ligne-table">
-                    <td class="cellule-commande">CMD1010</td>
-                    <td class="cellule-date">05/01/2026</td>
-                    <td class="cellule-montant">65 DT</td>
-                    <td class="cellule-statut statut-livre">Livré</td>
-                  </tr>
+                  <?php if(empty($commandes)): ?>
+                    <tr class="ligne-table">
+                      <td colspan="4" style="text-align: center;">Aucune commande passée</td>
+                    </tr>
+                  <?php else: ?>
+                    <?php foreach(array_slice($commandes, 0, 2) as $commande): ?>
+                      <tr class="ligne-table">
+                        <td class="cellule-commande">CMD<?= $commande['id_commande'] ?></td>
+                        <td class="cellule-date"><?= date('d/m/Y', strtotime($commande['date_commande'])) ?></td>
+                        <td class="cellule-montant"><?= number_format($commande['montant'], 2) ?> DT</td>
+                        <td class="cellule-statut <?= $commande['statut'] == 'Livré' ? 'statut-livre' : 'statut-encours' ?>">
+                          <?= htmlspecialchars($commande['statut'] ?? 'En attente') ?>
+                        </td>
+                      </tr>
+                    <?php endforeach; ?>
+                  <?php endif; ?>
                 </tbody>
               </table>
             </div>
@@ -319,40 +357,39 @@ if ($connexion){
               "
             >
               <p class="element-personnel">
-              <?php if($connexion): ?>
-                  <span class="label-personnel">Nom :</span> <?php echo $name?>
-                  <?php else: ?> 
-                    <span class="label-personnel">Nom :</span> Fouleni
-                    <?php endif; ?>
+                <?php if($connexion): ?>
+                  <span class="label-personnel">Nom :</span> <?php echo htmlspecialchars($name)?>
+                <?php else: ?> 
+                  <span class="label-personnel">Nom :</span> Fouleni
+                <?php endif; ?>
               </p>
               <p class="element-personnel">
-              <?php if($connexion): ?>
-              <span class="label-personnel">Prénom :</span> <?php echo $prename?>
-                  <?php else: ?> 
-                    <span class="label-personnel">Prénom :</span> Foulen
-                    <?php endif; ?>
+                <?php if($connexion): ?>
+                  <span class="label-personnel">Prénom :</span> <?php echo htmlspecialchars($prename)?>
+                <?php else: ?> 
+                  <span class="label-personnel">Prénom :</span> Foulen
+                <?php endif; ?>
               </p>
               <p class="element-personnel">
-              <?php if($connexion): ?>
-                  <span class="label-personnel">Email :</span> <?php echo $email?>
-                  <?php else: ?> 
-                    <span class="label-personnel">Email :</span> Foulen.Fouleni@gmail.com
-                    <?php endif; ?>
+                <?php if($connexion): ?>
+                  <span class="label-personnel">Email :</span> <?php echo htmlspecialchars($email)?>
+                <?php else: ?> 
+                  <span class="label-personnel">Email :</span> Foulen.Fouleni@gmail.com
+                <?php endif; ?>
               </p>
               <p class="element-personnel">
-              <?php if($connexion): ?>
-                  <span class="label-personnel">Téléphone :</span> <?php echo $phone?>
-                  <?php else: ?> 
-                    <span class="label-personnel">Téléphone :</span> 12 345 678
-                    <?php endif; ?>
+                <?php if($connexion): ?>
+                  <span class="label-personnel">Téléphone :</span> <?php echo htmlspecialchars($phone)?>
+                <?php else: ?> 
+                  <span class="label-personnel">Téléphone :</span> 12 345 678
+                <?php endif; ?>
               </p>
               <p class="element-personnel" style="grid-column: span 2">
-              <?php if($connexion): ?>
-                  <span class="label-personnel">Adresse :</span> <?php echo $adress?>
-                  <?php else: ?> 
-                    <span class="label-personnel">Adresse :</span> Tunis, El
-                  Manar, 2092
-                    <?php endif; ?>
+                <?php if($connexion): ?>
+                  <span class="label-personnel">Adresse :</span> <?php echo htmlspecialchars($adress)?>
+                <?php else: ?> 
+                  <span class="label-personnel">Adresse :</span> Tunis, El Manar, 2092
+                <?php endif; ?>
               </p>
             </div>
 
@@ -397,37 +434,25 @@ if ($connexion){
                   <th class="colonne-date">Date</th>
                   <th class="colonne-montant">Montant</th>
                   <th class="colonne-statut">Statut</th>
-                  <th class="colonne-action">Action</th>
-                </tr>
+                 </tr>
               </thead>
               <tbody>
-                <tr class="ligne-table">
-                  <td class="cellule-commande">CMD1025</td>
-                  <td class="cellule-date">12/01/2026</td>
-                  <td class="cellule-montant">120 DT</td>
-                  <td class="cellule-statut statut-encours">Non Livré</td>
-                  <td class="cellule-action">
-                    <a href="#" class="bouton-modifier-commande">Détails</a>
-                  </td>
-                </tr>
-                <tr class="ligne-table">
-                  <td class="cellule-commande">CMD1010</td>
-                  <td class="cellule-date">05/01/2026</td>
-                  <td class="cellule-montant">65 DT</td>
-                  <td class="cellule-statut statut-livre">Livré</td>
-                  <td class="cellule-action">
-                    <a href="#" class="bouton-modifier-commande">Détails</a>
-                  </td>
-                </tr>
-                <tr class="ligne-table">
-                  <td class="cellule-commande">CMD0998</td>
-                  <td class="cellule-date">15/12/2025</td>
-                  <td class="cellule-montant">45 DT</td>
-                  <td class="cellule-statut statut-livre">Livré</td>
-                  <td class="cellule-action">
-                    <a href="#" class="bouton-modifier-commande">Détails</a>
-                  </td>
-                </tr>
+                <?php if(empty($commandes)): ?>
+                  <tr class="ligne-table">
+                    <td colspan="4" style="text-align: center;">Aucune commande passée</td>
+                  </tr>
+                <?php else: ?>
+                  <?php foreach($commandes as $commande): ?>
+                    <tr class="ligne-table">
+                      <td class="cellule-commande">CMD<?= $commande['id_commande'] ?></td>
+                      <td class="cellule-date"><?= date('d/m/Y', strtotime($commande['date_commande'])) ?></td>
+                      <td class="cellule-montant"><?= number_format($commande['montant'], 2) ?> DT</td>
+                      <td class="cellule-statut <?= $commande['statut'] == 'Livré' ? 'statut-livre' : 'statut-encours' ?>">
+                        <?= htmlspecialchars($commande['statut'] ?? 'En attente') ?>
+                      </td>
+                    </tr>
+                  <?php endforeach; ?>
+                <?php endif; ?>
               </tbody>
             </table>
           </div>
@@ -523,6 +548,7 @@ if ($connexion){
       const vueInfos = document.getElementById("vue-infos");
       const vueCommandes = document.getElementById("vue-commandes");
       document.getElementById("modif").innerHTML = "";
+      
       function cacherToutesLesVues() {
         vueDashboard.style.display = "none";
         vueInfos.style.display = "none";
@@ -545,6 +571,7 @@ if ($connexion){
         cacherToutesLesVues();
         vueCommandes.style.display = "block";
       });
+      
       const params = new URLSearchParams(window.location.search);
       if (params.has("modif")) {
         document.getElementById("modif").innerHTML = "modification réussie !";
