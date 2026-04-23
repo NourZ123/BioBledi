@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 header('Content-Type: application/json; charset=utf-8');
 
-require_once 'db.php';
+require_once '../database_connection.php';
 
 $action = $_GET['action'] ?? $_POST['action'] ?? '';
 

@@ -17,7 +17,7 @@ if (isset($_POST["connexion"])) {
             $_SESSION['user_data'] = $user; 
             $_SESSION['type'] = $user_type; 
             if ($user_type === "agriculteur") {
-                header("Location: ../agriculteur/agriculteur (1).html");
+                header("Location: ../agriculteur/agriculteur.php");
             } else {
                 header("Location: ../fruits et légumes/fruits et légumes.php");
             }
