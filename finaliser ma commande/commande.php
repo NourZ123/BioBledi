@@ -26,11 +26,22 @@
 $sql = "INSERT INTO commande (montant, adresse, id_client, statut) VALUES (?, ?, ?, ?)";
 $stmt = $db->prepare($sql);
 $stmt->execute([$montant, $adresse, $id, $status]);
+
+$id_commande = $db->lastInsertId();
+if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
+    $sql_panier = "INSERT INTO paniers_commande (id_commande, id_produit, quantite_produit) VALUES (?, ?, ?)";
+    $stmt_panier = $db->prepare($sql_panier);
+
+    foreach ($_SESSION['panier'] as $id_produit => $quantite) {
+        $stmt_panier->execute([$id_commande, $id_produit, $quantite]);
+    }
+}
+        
+}
 header("Location: ../compte Client/compte.php");
 if (isset($_SESSION['panier'])) {
     unset($_SESSION['panier']); 
-}
-        exit();
+    exit();
 }
     }
     }
