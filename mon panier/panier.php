@@ -177,8 +177,8 @@ if (!empty($_SESSION['panier'])) {
             <div class="sum"><?= number_format($total_articles, 2) ?> DT</div>
           </div>
         </div>
-
-        <div class="rightC">
+        <div class="rightC" style="height: 550px !important; width: 1000px !important">
+        
           <div class="top">
             <p style="color: #14532d"><b>Récapitulatif</b></p>
             <p><b>Adresse de livraison</b></p>
