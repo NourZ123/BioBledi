@@ -1,8 +1,3 @@
-<?php  
-session_start();
-require_once '../database_connection.php';
-
-?>
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -44,7 +39,7 @@ require_once '../database_connection.php';
 
         <nav class="navigation">
           <a href="../index/index.html" class="menu-item">Accueil</a>
-          <a href="../fruitsetlegumesfruits et légumes.php" class="menu-item"
+          <a href="../fruits et légumes/fruits et légumes.php" class="menu-item"
             >Marché</a
           >
           <a href="../Epicerie bio/epicerie bio.php" class="menu-item"
@@ -89,7 +84,7 @@ require_once '../database_connection.php';
     <hr />
 
     <div class="page-container">
-      <form action="#" method="post" name="finaliser ma commande" id="form">
+      <form action="commande.php" method="post" name="finaliser ma commande" id="form">
         <div class="card">
           <h1 class="page-title">Finaliser ma commande</h1>
 
@@ -97,9 +92,9 @@ require_once '../database_connection.php';
             <h3>Mode de livraison</h3>
 
             <div class="choice-group">
-              <div class="choice" id='adress'>A domicile</div>
-              <div class="choice" id='PR'>Point relais</div>
-              <div class="choice" id='surplace'>Retirer de la ferme</div>
+              <div class="choice" id='adress' name='ADomicile'>A domicile</div>
+              <div class="choice" id='PR' name='PR'>Point relais</div>
+              <div class="choice" id='surplace' name='surplace'>Retirer de la ferme</div>
             </div>
           </div>
           <div id="adr" style="display: none;"><div class="form-group">
@@ -117,12 +112,12 @@ require_once '../database_connection.php';
             <h3>Mode de paiement</h3>
 
             <div class="choice-group">
-              <div class="choice payment" id="cardpayment">
+              <div class="choice payment" id="cardpayment" name='card'>
                 <img src="image/credit-card-svgrepo-com.svg" alt="card" />
                 Carte bancaire
               </div>
 
-              <div class="choice payment" id="cash">
+              <div class="choice payment" id="cash" name="cash">
                 <img src="image/truck-svgrepo-com.svg" alt="truck" />
                 A la livraison
               </div>
@@ -132,7 +127,7 @@ require_once '../database_connection.php';
           <div class="card-payment">
             <div class="form-group">
               <label>Titulaire</label>
-              <input type="text" placeholder="Jean Dupont" id="nom" />
+              <input type="text" placeholder="Jean Dupont" id="nom" name="nom" />
               <span class="error" id="errNom"></span>
             </div>
 
@@ -143,6 +138,7 @@ require_once '../database_connection.php';
                 id="card-number"
                 placeholder="XXXX XXXX XXXX XXXX"
                 length="16"
+                name="cardnumber"
               />
               <span class="error" id="errCardNumber"></span>
             </div>
@@ -150,7 +146,7 @@ require_once '../database_connection.php';
             <div class="row">
               <div class="form-group">
                 <label>Date expiration</label>
-                <input type="text" placeholder="MM/YY" id="expi-date" />
+                <input type="text" placeholder="MM/YY" id="expi-date" name="dateexp" />
                 <span class="error" id="errDate"></span>
               </div>
 
@@ -161,6 +157,7 @@ require_once '../database_connection.php';
                   placeholder="123"
                   maxlength="3"
                   minlength="3"
+                  name="cvc"
                 />
               </div>
             </div>
@@ -170,13 +167,14 @@ require_once '../database_connection.php';
             <a href="../mon panier/panier.php"
               ><button class="btn2">Retour</button></a
             >
-            <a href="#"><button class="btn1">Continuer</button></a>
+            <a href="../compte Client/compte.php"><button class="btn1" name="btn1">Continuer</button></a>
           </div>
         </div>
       </form>
     </div>
-
+    
     <footer class="footer">
+      
       <div class="footer-container">
         <div class="footer-brand">
           <img src="image/logo.jpg" class="logo" alt="BioBladi logo" />

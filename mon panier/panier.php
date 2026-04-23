@@ -198,7 +198,8 @@ if (!empty($_SESSION['panier'])) {
             <div style="color: #c6c1c1"><?= number_format($frais_livraison, 2) ?> DT</div>
             <div style="font-weight: bold;">Total à payer</div>
             <div style="font-weight: bold; color: #14532d;">
-              <?= number_format($total_articles + $frais_livraison, 2) ?> DT
+              <?= number_format($total_articles + $frais_livraison, 2) ;
+              $_SESSION['totalàpayer']= $total_articles + $frais_livraison ;?> DT
             </div>
           </div>
           <div class="bottom">
