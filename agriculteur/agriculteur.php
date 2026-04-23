@@ -191,8 +191,8 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
               <input type="number" id="stock-produit" name="quantite" class="form-input" placeholder="Quantité" required />
             </div>
             <div class="form-group">
-              <label for="categorie-produit">Catégorie</label>
-              <select id="categorie-produit" name="categorie" class="form-input">
+              <label for="categorie-produit">Catégorie*</label>
+              <select id="categorie-produit" name="categorie" class="form-input" required>
                 <option value="Fruits">Fruits</option>
                 <option value="Légumes">Légumes</option>
                 <option value="Epicerie">Épicerie</option>
@@ -222,19 +222,46 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
 
           <div class="form-row">
             <div class="form-group">
-              <label for="unite-produit">Unité</label>
-              <input type="text" id="unite-produit" name="unite" class="form-input" placeholder="kg, litre, pièce..." />
+              <label for="unite-produit">Unité*</label>
+              <input type="text" id="unite-produit" name="unite" class="form-input" placeholder="kg, litre, pièce..." required />
             </div>
+          
+            
+            
             <div class="form-group">
-              <label for="region-produit">Région du produit</label>
-              <input type="text" id="region-produit" name="region" class="form-input" placeholder="Sousse" />
+              <label for="region-produit">Région du produit *</label>
+              <select id="region-produit" name="region" class="form-input" required>
+                <option value="">-- Sélectionnez un gouvernorat --</option>
+                <option value="Tunis">Tunis</option>
+                <option value="Ariana">Ariana</option>
+                <option value="Ben Arous">Ben Arous</option>
+                <option value="Manouba">Manouba</option>
+                <option value="Nabeul">Nabeul</option>
+                <option value="Zaghouan">Zaghouan</option>
+                <option value="Bizerte">Bizerte</option>
+                <option value="Béja">Béja</option>
+                <option value="Jendouba">Jendouba</option>
+                <option value="Le Kef">Le Kef</option>
+                <option value="Siliana">Siliana</option>
+                <option value="Kairouan">Kairouan</option>
+                <option value="Kasserine">Kasserine</option>
+                <option value="Sidi Bouzid">Sidi Bouzid</option>
+                <option value="Sousse">Sousse</option>
+                <option value="Monastir">Monastir</option>
+                <option value="Mahdia">Mahdia</option>
+                <option value="Sfax">Sfax</option>
+                <option value="Gabès">Gabès</option>
+                <option value="Médenine">Médenine</option>
+                <option value="Tataouine">Tataouine</option>
+                <option value="Gafsa">Gafsa</option>
+                <option value="Tozeur">Tozeur</option>
+                <option value="Kébili">Kébili</option>
+              </select>
             </div>
           </div>
+            
 
-          <div class="form-group">
-            <label for="description-produit">Description</label>
-            <textarea id="description-produit" name="description" class="form-input" rows="3" placeholder="Décrivez votre produit..."></textarea>
-          </div>
+        
 
           <div class="form-group">
             <label>Photo du produit *</label>
