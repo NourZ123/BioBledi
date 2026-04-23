@@ -203,9 +203,10 @@ if (!empty($_SESSION['panier'])) {
             </div>
           </div>
           <div class="bottom">
-            <a href="../finaliser ma commande/finaliser ma commande.php">
-              <button class="valider">Valider ma commande</button>
-            </a>
+          <a href="../finaliser ma commande/finaliser ma commande.php" 
+       onclick="return verifierPanierVide(event)">
+        <button class="valider">Valider ma commande</button>
+    </a>
             <a href="../fruits et légumes/fruits et légumes.php">
               <button class="continuer">Continuer mes achats</button>
             </a>
@@ -287,5 +288,15 @@ if (!empty($_SESSION['panier'])) {
         </p>
       </div>
     </footer>
+    <script>function verifierPanierVide(event) {
+    // On regarde s'il y a des lignes de produits dans le panier
+    const produits = document.querySelectorAll('.row2');
+    if (produits.length === 0) {
+        alert("Votre panier est vide ! Ajoutez des produits avant de valider.");
+        event.preventDefault(); // Bloque la redirection
+        return false;
+    }
+    return true;
+}</script>
   </body>
 </html>

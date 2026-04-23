@@ -90,11 +90,12 @@
 
           <div class="section">
             <h3>Mode de livraison</h3>
-
+            <input type="hidden" name="choix_livraison" id="hidden_livraison" value="">
             <div class="choice-group">
-              <div class="choice" id='adress' name='ADomicile'>A domicile</div>
-              <div class="choice" id='PR' name='PR'>Point relais</div>
-              <div class="choice" id='surplace' name='surplace'>Retirer de la ferme</div>
+              <button type="button" class="choice" id='adress' name='ADomicile'style="font-weight: bold; font-size: 16px; height: 90px">A domicile</button>
+              <button type="button" class="choice" id='PR' name='PR' style="font-weight: bold; font-size: 16px; height: 90px">Point relais</button>
+              <button type="button" class="choice" id='surplace' name='surplace' style="font-weight: bold; font-size: 16px; height: 90px">Retirer de la ferme</button>
+            
             </div>
           </div>
           <div id="adr" style="display: none;"><div class="form-group">
@@ -109,20 +110,21 @@
             <span id="errAdress" class="error"></span>
           </div></div>
           <div class="section">
-            <h3>Mode de paiement</h3>
+    
+</div>
 
-            <div class="choice-group">
-              <div class="choice payment" id="cardpayment" name='card'>
-                <img src="image/credit-card-svgrepo-com.svg" alt="card" />
-                Carte bancaire
-              </div>
-
-              <div class="choice payment" id="cash" name="cash">
-                <img src="image/truck-svgrepo-com.svg" alt="truck" />
-                A la livraison
-              </div>
-            </div>
-          </div>
+<div class="section">
+    <h3>Mode de paiement</h3>
+    <input type="hidden" name="choix_paiement" id="hidden_paiement" value="">
+    <div class="choice-group">
+        <button type="button"" name="mode_paiement" value="carte" class="choice payment" id="cardpayment" style="font-weight: bold;  font-size: 16px;">
+            <img src="image/credit-card-svgrepo-com.svg" alt="card" /> Carte bancaire
+        </button>
+        <button type="button" name="mode_paiement" value="cash" class="choice payment" id="cash" style="font-weight: bold;  font-size: 16px;">
+            <img src="image/truck-svgrepo-com.svg" alt="truck" /> A la livraison
+        </button>
+    </div>
+</div>
 
           <div class="card-payment">
             <div class="form-group">
@@ -249,126 +251,121 @@
       </div>
     </footer>
     <script>
-      let form = document.getElementById("form");
-      const date = document.getElementById("expi-date");
-      let cash = document.getElementById("cash");
-      let card = document.getElementById("cardpayment");
-      let paymentform = document.getElementsByClassName("card-payment")[0];
-      let payment = "";
+  let form = document.getElementById("form");
+  const date = document.getElementById("expi-date");
+  let cash = document.getElementById("cash");
+  let card = document.getElementById("cardpayment");
+  let paymentform = document.getElementsByClassName("card-payment")[0];
+  
+  let hiddenLiv = document.getElementById("hidden_livraison");
+  let hiddenPay = document.getElementById("hidden_paiement");
 
-      form.addEventListener("submit", function (event) {
-        document.getElementsByClassName("error").innerHTML = "";
+  form.addEventListener("submit", function (event) {
+    let errorElements = document.getElementsByClassName("error");
+    for(let el of errorElements) { el.innerHTML = ""; }
+    
+    let nom = document.getElementById("nom");
+    let number = document.getElementById("card-number");
+    let alpha = /^[a-zA-Z ]+$/;
 
-        let nom = document.getElementById("nom");
-        let number = document.getElementById("card-number");
-        let alpha = /^[a-zA-Z ]+$/;
+    if (hiddenPay.value === "card") {
+      if (nom.value.trim() === "" || number.value.trim() === "" || date.value.trim() === "") {
+        alert("Veuillez remplir tous les champs de la carte bancaire.");
+        event.preventDefault();
+        return;
+      }
 
-        if (nom.value === "" || number.value === "" || date.value === "") {
-          alert("Veuillez remplir tous les champs obligatoires.");
-          event.preventDefault();
-          return;
-        }
+      if (!alpha.test(nom.value)) {
+        document.getElementById("errNom").innerHTML = "Veuillez saisir un nom valide.";
+        event.preventDefault();
+        return;
+      }
+    }
+  });
 
-        if (!alpha.test(nom.value)) {
-          document.getElementById("errNom").innerHTML =
-            "Veuillez saisir un nom et prénom valides.";
-          event.preventDefault();
-        }
-      });
+  date.addEventListener("input", (event) => {
+    let v = event.target.value.replace(/\D/g, "");
+    if (v.length > 2) {
+      event.target.value = v.substring(0, 2) + "/" + v.substring(2, 4);
+    } else {
+      event.target.value = v;
+    }
+  });
 
-      date.addEventListener("input", (event) => {
-        let v = event.target.value.replace(/\D/g, "");
-        if (v.length > 2) {
-          event.target.value = v.substring(0, 2) + "/" + v.substring(2, 4);
-        } else {
-          event.target.value = v;
-        }
-      });
+  date.addEventListener("blur", () => {
+    const val = date.value;
+    const errDate = document.getElementById("errDate");
+    if (val.length === 5) {
+      const [mSaisi, ySaisi] = val.split("/").map(Number);
+      if (mSaisi < 1 || mSaisi > 12) {
+        errDate.innerHTML = "Mois invalide";
+        date.value = "";
+        return;
+      }
+      const currentdate = new Date();
+      const Cmonth = currentdate.getMonth() + 1;
+      const Cyear = currentdate.getFullYear() % 100;
+      if (ySaisi < Cyear || (ySaisi === Cyear && mSaisi < Cmonth)) {
+        errDate.innerHTML = "Carte expirée !";
+        date.value = "";
+      }
+    }
+  });
 
-      date.addEventListener("blur", () => {
-        const val = date.value;
-        const errDate = document.getElementById("errDate");
-        errDate.innerHTML = "";
+  let numberInput = document.getElementById("card-number");
+  numberInput.addEventListener("input", (e) => {
+    let v = e.target.value.replace(/\D/g, "");
+    if (v.length > 16) v = v.substring(0, 16);
+    let formatted = v.match(/.{1,4}/g)?.join(" ") || "";
+    e.target.value = formatted;
+  });
 
-        if (val.length === 5) {
-          const [mSaisi, ySaisi] = val.split("/").map(Number);
+  card.addEventListener("click", () => {
+    hiddenPay.value = "card";
+    paymentform.style.display = "block";
+    card.style.border = "solid 2px #14532d";
+    card.style.color = "#14532d";
+    cash.style.border = "2px solid #E2E8F0";
+    cash.style.color = "black";
+  });
 
-          if (mSaisi < 1 || mSaisi > 12) {
-            errDate.innerHTML = "Mois invalide (01-12)";
-            date.value = "";
-            return;
-          }
+  cash.addEventListener("click", () => {
+    hiddenPay.value = "cash";
+    paymentform.style.display = "none";
+    cash.style.border = "solid 2px #14532d";
+    cash.style.color = "#14532d";
+    card.style.border = "2px solid #E2E8F0";
+    card.style.color = "black";
+  });
 
-          const currentdate = new Date();
-          const Cmonth = currentdate.getMonth() + 1;
-          const Cyear = currentdate.getFullYear() % 100;
+  let adresse = document.getElementById('adress');
+  let surplace = document.getElementById('surplace');
+  let Pr = document.getElementById('PR');
+  let adr_pointR = document.getElementById('adr');
 
-          if (ySaisi < Cyear || (ySaisi === Cyear && mSaisi < Cmonth)) {
-            errDate.innerHTML = "Votre carte est expirée !";
-            date.value = "";
-          }
-        }
-      });
-      let number = document.getElementById("card-number");
+  adresse.addEventListener("click", () => {
+    hiddenLiv.value = "domicile";
+    adresse.style.border = "solid 2px #14532d";
+    adresse.style.color = "#14532d";
+    [surplace, Pr].forEach(el => { el.style.border = "2px solid #E2E8F0"; el.style.color = "black"; });
+    adr_pointR.style.display = "none";
+  });
 
-      number.addEventListener("input", (e) => {
-        let v = e.target.value.replace(/\D/g, "");
-        if (v.length > 16) {
-          v = v.substring(0, 16);
-        }
-        let number = v.match(/.{1,4}/g)?.join(" ") || "";
-        e.target.value = number;
-      });
+  Pr.addEventListener("click", () => {
+    hiddenLiv.value = "PR";
+    Pr.style.border = "solid 2px #14532d";
+    Pr.style.color = "#14532d";
+    [surplace, adresse].forEach(el => { el.style.border = "2px solid #E2E8F0"; el.style.color = "black"; });
+    adr_pointR.style.display = "block";
+  });
 
-      card.addEventListener("click", () => {
-        payment = "card";
-        paymentform.style.display = "block";
-        card.style.border = "solid 2px #14532d";
-        card.style.color = "#14532d";
-        cash.style.border = "2px solid #E2E8F0";
-        cash.style.color = "black";
-      });
-
-      cash.addEventListener("click", () => {
-        payment = "cash";
-        paymentform.style.display = "none";
-        cash.style.border = "solid 2px #14532d";
-        cash.style.color = "#14532d";
-        card.style.border = "2px solid #E2E8F0";
-        card.style.color = "black";
-      });
-      let adresse=document.getElementById('adress');
-      let surplace=document.getElementById('surplace');
-      let Pr =document.getElementById('PR');
-      let adr_pointR=document.getElementById('adr')
-      adresse.addEventListener("click", ()=>{
-        adresse.style.border= "solid 2px #14532d";
-        adresse.style.color="#14532d";
-        surplace.style.border="2px solid #E2E8F0";
-        surplace.style.color="black";
-        Pr.style.border="2px solid #E2E8F0";
-        Pr.style.color="black";
-        adr_pointR.style.display="none";
-      })
-      PR.addEventListener("click", ()=>{
-        Pr.style.border= "solid 2px #14532d";
-        Pr.style.color="#14532d";
-        surplace.style.border="2px solid #E2E8F0";
-        surplace.style.color="black";
-        adresse.style.border="2px solid #E2E8F0";
-        adresse.style.color="black";
-        adr_pointR.style.display="block";
-      })
-      surplace.addEventListener("click", ()=>{
-        surplace.style.border= "solid 2px #14532d";
-        surplace.style.color="#14532d";
-        adresse.style.border="2px solid #E2E8F0";
-        adresse.style.color="black";
-        Pr.style.border="2px solid #E2E8F0";
-        Pr.style.color="black";
-        adr_pointR.style.display="none";
-      })
-
-    </script>
+  surplace.addEventListener("click", () => {
+    hiddenLiv.value = "surplace";
+    surplace.style.border = "solid 2px #14532d";
+    surplace.style.color = "#14532d";
+    [adresse, Pr].forEach(el => { el.style.border = "2px solid #E2E8F0"; el.style.color = "black"; });
+    adr_pointR.style.display = "none";
+  });
+</script>
   </body>
 </html>

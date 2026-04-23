@@ -149,21 +149,30 @@ gap:15px;
 margin-top:10px;
 font-weight: bold;
 }
-.choice{
-flex:1;
-padding:15px;
-border-radius:12px;
-background:#F8FAFC;
-border:2px solid #E2E8F0;
-text-align:center;
-cursor:pointer;
-transition:0.3s;
+/*test*/
+button.choice {
+    background: white;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    width: 100%; 
 }
 
-.choice:hover{
-border-color:#2E8B57;
-background:white;
+button.choice:hover {
+    border-color: #14532d;
+    background-color: #f0fdf4;
 }
+
+button.choice:focus {
+    border: 2px solid #14532d;
+    color: #14532d;
+    outline: none;
+}
+/*test*/
 
 .payment img{
 width:30px;
