@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../PHP/database_connection.php';
+require_once '../PHP/recherche_produits.php';
 
 if (isset($_GET['ajax']) && $_GET['ajax'] === '1' && isset($_GET['id'])) {
     $id = intval($_GET['id']);
@@ -22,16 +23,10 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === '1' && isset($_GET['id'])) {
     }
     exit();
 }
+$donnees = recupererProduitsEtFiltre($db, ['Fruits', 'Légumes']);
 
-$categorie_filter = isset($_GET['categorie']) ? $_GET['categorie'] : '';
-if (!empty($categorie_filter) && $categorie_filter != 'tous') {
-    $stmt = $db->prepare("SELECT * FROM `produit` WHERE `catégorie` = ?");
-    $stmt->execute([$categorie_filter]);
-} else {
-    $stmt = $db->prepare("SELECT * FROM `produit` WHERE `catégorie` IN ('Fruits','Légumes')");
-    $stmt->execute();
-}
-$produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$produits = $donnees['items'];
+$categorie_filter = $donnees['filtre_actif'];
 ?>
 
 <!DOCTYPE html>
