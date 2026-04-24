@@ -25,7 +25,7 @@
     flex-shrink: 0;
 }
 .page-title-container {
-    width: 130px;
+    width: 170px;
     text-align: right;
     flex-shrink: 0;
 }
@@ -38,12 +38,12 @@
     margin: 0; /* car les <p> ont une marge automatique */
     white-space: nowrap; /* pas de retour à la ligne */
     overflow: hidden; /* quand le titre est trop long il sera masqué */
-    text-overflow: ellipsis; /* afficher ... quand le texte est long / utilisé pour savoir quand le titre n'est pas complet */
 }
 .navigation {
     display: flex;
     gap: 1.4rem;
-    flex-wrap: nowrap; /* les éléments ne retournent jamais à la ligne */  
+    flex-wrap: nowrap; /* les éléments ne retournent jamais à la ligne */ 
+    margin-left: 30px; 
 }
 
 .navigation a {
@@ -145,6 +145,7 @@ hr {
         justify-content: center;
         gap: 12px 20px; 
         width: 100%;
+        
     }
 
     .navigation a {
