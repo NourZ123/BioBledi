@@ -1,26 +1,19 @@
 <?php
 session_start();
 require_once '../database_connection.php';
-
-// ✅ Gestion de l'ajout au panier + diminution du stock (API AJAX)
 if (isset($_GET['ajax']) && $_GET['ajax'] === '1' && isset($_GET['action']) && $_GET['action'] === 'ajouter' && isset($_GET['id'])) {
     $id = intval($_GET['id']);
-    
-    // Vérifier le stock actuel
+
     $stmt = $db->prepare("SELECT quantité FROM produit WHERE ID = ?");
     $stmt->execute([$id]);
     $produit = $stmt->fetch(PDO::FETCH_ASSOC);
     
     if ($produit && $produit['quantité'] > 0) {
-        // Diminuer le stock dans la base de données
         $stmt = $db->prepare("UPDATE produit SET quantité = quantité - 1 WHERE ID = ?");
         $stmt->execute([$id]);
-        
-        // Gérer le panier en session
         if (!isset($_SESSION['panier'])) {
             $_SESSION['panier'] = [];
         }
-        
         if (isset($_SESSION['panier'][$id])) {
             $_SESSION['panier'][$id]++;
         } else {
@@ -34,10 +27,8 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === '1' && isset($_GET['action']) && $
     exit();
 }
 
-// Récupérer la catégorie sélectionnée (par défaut : toutes)
 $categorie_filter = isset($_GET['categorie']) ? $_GET['categorie'] : '';
 
-// Requête avec filtre
 if (!empty($categorie_filter) && $categorie_filter != 'tous') {
     $stmt = $db->prepare("SELECT * FROM `produit` WHERE `catégorie` = ?");
     $stmt->execute([$categorie_filter]);
@@ -130,8 +121,6 @@ $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <hr />
-
-    <!-- Barre de recherche par catégorie -->
     <div class="search-bar">
         <select id="categorieSelect" class="categorie-select" onchange="window.location.href='?categorie=' + this.value">
             <option value="tous" <?= ($categorie_filter == '' || $categorie_filter == 'tous') ? 'selected' : '' ?>>Toutes les catégories</option>

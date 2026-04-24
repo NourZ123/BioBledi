@@ -2,22 +2,16 @@
 session_start();
 require_once '../database_connection.php';
 
-// ✅ Gestion de l'ajout au panier + diminution du stock (API AJAX)
 if (isset($_GET['ajax']) && $_GET['ajax'] === '1' && isset($_GET['action']) && $_GET['action'] === 'ajouter' && isset($_GET['id'])) {
     $id = intval($_GET['id']);
-    
-    // Vérifier le stock actuel
     $stmt = $db->prepare("SELECT quantité FROM produit WHERE ID = ?");
     $stmt->execute([$id]);
     $produit = $stmt->fetch(PDO::FETCH_ASSOC);
     
     if ($produit && $produit['quantité'] > 0) {
-        // Diminuer le stock dans la base de données
         $stmt = $db->prepare("UPDATE produit SET quantité = quantité - 1 WHERE ID = ?");
         $stmt->execute([$id]);
-        
-        // Gérer le panier en session
-        if (!isset($_SESSION['panier'])) {
+         if (!isset($_SESSION['panier'])) {
             $_SESSION['panier'] = [];
         }
         
@@ -34,13 +28,17 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === '1' && isset($_GET['action']) && $
     exit();
 }
 
-// Requête normale pour affichage
-$stmt = $db->query("
-    SELECT * FROM produit 
-    WHERE `catégorie` IN ('Fruits', 'Légumes')
-    ORDER BY ID ASC
-");
-$produits = $stmt->fetchAll();
+$categorie_filter = isset($_GET['categorie']) ? $_GET['categorie'] : '';
+
+if (!empty($categorie_filter) && $categorie_filter != 'tous') {
+    $stmt = $db->prepare("SELECT * FROM `produit` WHERE `catégorie` = ?");
+    $stmt->execute([$categorie_filter]);
+} else {
+    $stmt = $db->prepare("SELECT * FROM `produit` WHERE `catégorie` IN ('Fruits','Légumes')");
+    $stmt->execute();
+}
+$produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -65,6 +63,33 @@ $produits = $stmt->fetchAll();
         }
         a.btn {
             text-decoration: none !important;
+        }
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            padding: 0 5%;
+        }
+        .categorie-select {
+            padding: 12px 24px;
+            font-size: 16px;
+            font-family: "Poppins", sans-serif;
+            border: 2px solid #2E8B57;
+            border-radius: 40px;
+            background-color: white;
+            color: #14532d;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        .categorie-select:hover {
+            background-color: #e8f5e9;
+            border-color: #14532d;
+        }
+        .categorie-select:focus {
+            border-color: #14532d;
+            box-shadow: 0 0 5px rgba(46, 139, 86, 0.3);
         }
     </style>
 </head>
@@ -96,8 +121,15 @@ $produits = $stmt->fetchAll();
     </div>
 
     <hr />
-
+    <div class="search-bar">
+        <select id="categorieSelect" class="categorie-select" onchange="window.location.href='?categorie=' + this.value">
+            <option value="tous" <?= ($categorie_filter == '' || $categorie_filter == 'tous') ? 'selected' : '' ?>>Toutes les catégories</option>
+            <option value="Fruits" <?= ($categorie_filter == 'Fruits') ? 'selected' : '' ?>>Fruits</option>
+            <option value="Légumes" <?= ($categorie_filter == 'Légumes') ? 'selected' : '' ?>>Légumes</option>
+        </select>
+    </div>
     <div class="container">
+        
         <?php if (empty($produits)): ?>
             <div style="grid-column: 1/-1; text-align:center; padding: 60px; color: #64748b;">
                 <p style="font-size: 1.2rem;">Aucun produit disponible pour le moment.</p>
