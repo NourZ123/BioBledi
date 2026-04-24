@@ -171,7 +171,7 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
 
         <div id="form-message" style="display:none; padding:12px 16px; border-radius:10px; margin-bottom:15px; font-weight:500;"></div>
 
-        <form class="product-form" id="productForm" enctype="multipart/form-data">
+        <form action="../PHP/ajoutproduit.php" method="post" class="product-form" id="productForm" enctype="multipart/form-data">
           <input type="hidden" name="id_agriculteur" value="<?= $id_agriculteur ?>" />
 
           <div class="form-row">
@@ -259,10 +259,6 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
               </select>
             </div>
           </div>
-            
-
-        
-
           <div class="form-group">
             <label>Photo du produit *</label>
             <div class="upload-zone" id="uploadZone">
@@ -314,8 +310,14 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
                   <div class="product-offer">Offre spéciale -<?= intval($produit['offre']) ?>%</div>
                 <?php endif; ?>
                 <div class="product-actions">
-                  <button class="edit-btn" onclick="modifierProduit(<?= $produit['ID'] ?>)">Modifier</button>
-                  <button class="delete-btn" onclick="supprimerProduit(<?= $produit['ID'] ?>)">Supprimer</button>
+                <a href="../PHP/modifierproduit.php?id=<?= $produit['ID'] ?>" class="edit-btn">
+    Modifier
+</a>
+                  <a href="../PHP/supprimerproduit.php?id=<?= $produit['ID'] ?>" 
+   class="delete-btn" 
+   onclick="return confirm('Voulez-vous vraiment supprimer ce produit ?');">
+   Supprimer
+</a>
                 </div>
               </div>
             <?php endforeach; ?>
