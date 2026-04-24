@@ -6,7 +6,35 @@ $connexion = $_SESSION['user_data'] ?? null;
 $name = $prename = $adress = $phone = $email = '';
 $total_commandes = 0;
 $derniere_commande = null;
-$commandes = [];
+$commandesObjets = [];
+
+class CommandeObjet {
+    public $id_commande;
+    public $montant;
+    public $date_commande;
+    public $statut;
+    public $adresse;
+
+    public function getDateFormat() {
+        return date('d/m/Y', strtotime($this->date_commande));
+    }
+}
+
+function afficherTableauCommandes($liste) {
+    if (empty($liste)) {
+        echo '<tr><td colspan="4" style="text-align: center; padding: 20px;">Aucune commande passée</td></tr>';
+        return;
+    }
+    foreach ($liste as $cmd) {
+        $classeStatut = ($cmd->statut == 'Livré') ? 'statut-livre' : 'statut-encours';
+        echo "<tr class='ligne-table'>";
+        echo "<td class='cellule-commande'>CMD{$cmd->id_commande}</td>";
+        echo "<td class='cellule-date'>{$cmd->getDateFormat()}</td>";
+        echo "<td class='cellule-montant'>" . number_format($cmd->montant, 2) . " DT</td>";
+        echo "<td class='cellule-statut {$classeStatut}'>" . htmlspecialchars($cmd->statut ?? 'En attente') . "</td>";
+        echo "</tr>";
+    }
+}
 
 if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
     $user = $_SESSION['user_data'];
@@ -15,64 +43,24 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
     $adress = $user['Adresse'] ?? '';
     $phone = $user['Telephone'] ?? '';
     $email = $user['Email'] ?? '';
-        $id_client = $user['id_client'] ?? $user['ID'] ?? $user['id'] ?? null;
+    $id_client = $user['id_client'] ?? $user['ID'] ?? $user['id'] ?? null;
     
     if ($id_client) {
-        $stmt = $db->prepare("SELECT COUNT(*) as total FROM commande WHERE id_client = ?");
+        $stmtCount = $db->prepare("SELECT COUNT(*) as total FROM commande WHERE id_client = ?");
+        $stmtCount->execute([$id_client]);
+        $total_commandes = $stmtCount->fetch(PDO::FETCH_ASSOC)['total'] ?? 0;
+
+        $stmt = $db->prepare("SELECT id_commande, montant, date_commande, statut, adresse FROM commande WHERE id_client = ? ORDER BY date_commande DESC");
         $stmt->execute([$id_client]);
-        $total_commandes = $stmt->fetch(PDO::FETCH_ASSOC)['total'] ?? 0;
-                $stmt = $db->prepare("
-            SELECT id_commande, montant, adresse, date_commande, statut 
-            FROM commande 
-            WHERE id_client = ? 
-            ORDER BY date_commande DESC 
-            LIMIT 1
-        ");
-        $stmt->execute([$id_client]);
-        $derniere_commande = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        $stmt = $db->prepare("
-            SELECT id_commande, montant, adresse, date_commande, statut 
-            FROM commande 
-            WHERE id_client = ? 
-            ORDER BY date_commande DESC
-        ");
-        $stmt->execute([$id_client]);
-        $commandes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        while ($obj = $stmt->fetchObject('CommandeObjet')) {
+            $commandesObjets[] = $obj;
+        }
+        
+        if (!empty($commandesObjets)) {
+            $derniere_commande = $commandesObjets[0];
+        }
     }
-}
-class CommandeObjet {
-  public $id;
-  public $date;
-  public $montant;
-  public $statut;
-
-  public function __construct($data) {
-      $this->id = $data['id_commande'];
-      $this->date = date('d/m/Y', strtotime($data['date_commande']));
-      $this->montant = number_format($data['montant'], 2);
-      $this->statut = $data['statut'] ?? 'En attente';
-  }
-}
-$commandesObjets = [];
-foreach ($commandes as $c) {
-  $commandesObjets[] = new CommandeObjet($c);
-}
-function afficherTableauCommandes($liste) {
-  if (empty($liste)) {
-      echo '<tr class="ligne-table"><td colspan="4" style="text-align: center;">Aucune commande</td></tr>';
-      return;
-  }
-
-  foreach ($liste as $cmd) {
-      $classeStatut = ($cmd->statut == 'Livré') ? 'statut-livre' : 'statut-encours';
-      echo "<tr class='ligne-table'>";
-      echo "<td class='cellule-commande'>CMD{$cmd->id}</td>";
-      echo "<td class='cellule-date'>{$cmd->date}</td>";
-      echo "<td class='cellule-montant'>{$cmd->montant} DT</td>";
-      echo "<td class='cellule-statut {$classeStatut}'>{$cmd->statut}</td>";
-      echo "</tr>";
-  }
 }
 ?>
 <!DOCTYPE html>
