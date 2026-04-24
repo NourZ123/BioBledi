@@ -73,186 +73,60 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
     <link rel="icon" href="image/screen-alt-2-svgrepo-com.svg" />
     <link rel="stylesheet" href="../code footer.css" />
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: "Poppins", sans-serif;
-        background-color: #f3f5f8;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        overflow-x: hidden;
-      }
-
-      hr {
-        border: none;
-        border-top: 2px solid #cbd5c0;
-        width: 100%;
-        margin: 0;
-      }
-      .option-menu {
-        cursor: pointer;
-      }
-      .option-menu:hover {
-        background-color: #e2e8f0;
-        border-radius: 8px;
-      }
-      .lien_nav {
-        text-decoration: none;
-        color: #2c3e2f;
-        font-size: 16px;
-        font-weight: 500;
-        transition: color 0.3s ease;
-      }
-.zone-commandes {
-    max-height: 300px; 
-    overflow-y: auto; 
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    background: white;
-}
-.tableau-commandes thead {
-    position: sticky;
-    top: 0;
-    background-color: #f8fafc;
-    z-index: 10;
-}
-.zone-commandes::-webkit-scrollbar {
-    width: 6px;
-}
-.zone-commandes::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-.zone-commandes::-webkit-scrollbar-thumb {
-    background: #14532d;
-    border-radius: 10px;
-}
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font-family: "Poppins", sans-serif; background-color: #f3f5f8; min-height: 100vh; display: flex; flex-direction: column; width: 100%; overflow-x: hidden; }
+      hr { border: none; border-top: 2px solid #cbd5c0; width: 100%; margin: 0; }
+      .option-menu { cursor: pointer; }
+      .option-menu:hover { background-color: #e2e8f0; border-radius: 8px; }
+      .lien_nav { text-decoration: none; color: #2c3e2f; font-size: 16px; font-weight: 500; transition: color 0.3s ease; }
+      
+      .zone-commandes { max-height: 300px; overflow-y: auto; border: 1px solid #e2e8f0; border-radius: 8px; background: white; }
+      .tableau-commandes thead { position: sticky; top: 0; background-color: #f8fafc; z-index: 10; }
+      .zone-commandes::-webkit-scrollbar { width: 6px; }
+      .zone-commandes::-webkit-scrollbar-thumb { background: #14532d; border-radius: 10px; }
     </style>
   </head>
   <body>
     <div class="head">
       <div class="head-left">
-        <div>
-          <img src="image/logo.jpg" alt="logo" class="logo" />
-        </div>
-        <div class="page-title-container">
-          <p class="page-title">
-            <strong>Mon Compte</strong>
-          </p>
-        </div>
-
+        <img src="image/logo.jpg" alt="logo" class="logo" />
+        <div class="page-title-container"><p class="page-title"><strong>Mon Compte</strong></p></div>
         <nav class="navigation">
           <a href="../index/index.html" class="menu-item">Accueil</a>
-          <a
-            href="../fruits et légumes/fruits et légumes.php"
-            class="menu-item"
-            >Marché</a
-          >
-          <a href="../Epicerie bio/epicerie bio.php" class="menu-item"
-            >Epicerie</a
-          >
-          <a href="../se connecter/bienvenue.html" class="menu-item"
-            >Connexion</a
-          >
-          <a href="../inscription/inscription.html" class="menu-item"
-            >Inscription</a
-          >
+          <a href="../fruits et légumes/fruits et légumes.php" class="menu-item">Marché</a>
+          <a href="../Epicerie bio/epicerie bio.php" class="menu-item">Epicerie</a>
+          <a href="../se connecter/bienvenue.html" class="menu-item">Connexion</a>
+          <a href="../inscription/inscription.html" class="menu-item">Inscription</a>
           <a href="../about us/about us.html" class="menu-item">About US</a>
-          <a href="../contact us/contact us.html" class="menu-item"
-            >Contact US</a
-          >
-          <a href="../Questionnaire/questionnaire.html" class="menu-item"
-            >Questionnaire</a
-          >
+          <a href="../contact us/contact us.html" class="menu-item">Contact US</a>
+          <a href="../Questionnaire/questionnaire.html" class="menu-item">Questionnaire</a>
           <a href="../funpage/funpage.html" class="menu-item">Fun page</a>
         </nav>
       </div>
       <div class="head-right">
         <div class="head-actions">
-          <a href="../compte Client/compte.php">
-            <img
-              src="image/person-svgrepo-com.svg"
-              alt="person"
-              class="user-icon"
-            />
-          </a>
-          <a href="../mon panier/panier.php">
-            <img
-              src="image/cart-2-svgrepo-com.svg"
-              alt="cart"
-              class="cart-icon"
-            />
-          </a>
+          <a href="../compte Client/compte.php"><img src="image/person-svgrepo-com.svg" class="user-icon" /></a>
+          <a href="../mon panier/panier.php"><img src="image/cart-2-svgrepo-com.svg" class="cart-icon" /></a>
         </div>
       </div>
     </div>
+
     <div class="page-compte">
       <div class="menu-lateral">
-        <div class="titre-section">
-          <img
-            src="image/person-svgrepo-com.svg"
-            alt="Icône"
-            class="icone-titre"
-          />
-          Compte client
-        </div>
+        <div class="titre-section"><img src="image/person-svgrepo-com.svg" class="icone-titre" /> Compte client</div>
         <div class="liste-options">
-          <div id="btn-dashboard" style="padding: 10px">
-            <img
-              src="image/screen-alt-2-svgrepo-com (1).svg"
-              alt="Icône du tableau de bord"
-              class="icone-menu"
-            />
-            Tableau de bord
-          </div>
-          <div class="option-menu" id="btn-infos" style="padding: 10px">
-            <img
-              src="image/information-point-svgrepo-com.svg"
-              alt="Icône des informations personnelles"
-              class="icone-menu"
-            />
-            Mes informations
-          </div>
-          <div class="option-menu" id="btn-Commande" style="padding: 10px">
-            <img
-              src="image/cart-large-2-svgrepo-com.svg"
-              alt="Icône de l'historique des commandes"
-              class="icone-menu"
-            />
-            Mes commandes
-          </div>
-          <div class="option-menu" id="btn-deconnexion" style="padding: 10px">
-            <img
-              src="image/log-out-svgrepo-com.svg"
-              alt="Icône de déconnexion du compte"
-              class="icone-menu"
-            />
-            <a
-              href="logout.php"
-              class="lien_nav"
-              style="color: inherit"
-              >Déconnexion</a
-            >
-          </div>
+          <div id="btn-dashboard" class="option-menu" style="padding: 10px"><img src="image/screen-alt-2-svgrepo-com (1).svg" class="icone-menu" /> Tableau de bord</div>
+          <div id="btn-infos" class="option-menu" style="padding: 10px"><img src="image/information-point-svgrepo-com.svg" class="icone-menu" /> Mes informations</div>
+          <div id="btn-Commande" class="option-menu" style="padding: 10px"><img src="image/cart-large-2-svgrepo-com.svg" class="icone-menu" /> Mes commandes</div>
+          <div class="option-menu" style="padding: 10px"><a href="logout.php" class="lien_nav">Déconnexion</a></div>
         </div>
       </div>
 
       <div class="zone-principale">
         <div id="vue-dashboard">
           <div class="bloc-bienvenue">
-            <?php if($connexion):?>
-            <h1 class="titre-bienvenue">Bonjour <?php echo htmlspecialchars($prename) ?> !</h1>
-            <?php else: ?>
-              <h1 class="titre-bienvenue">Bonjour Visiteur !</h1>
-            <?php endif; ?>
-            <p class="sous-titre-bienvenue">
-              Bienvenue dans votre espace client.
-            </p>
+            <h1 class="titre-bienvenue">Bonjour <?php echo htmlspecialchars($prename ?: 'Visiteur') ?> !</h1>
+            <p class="sous-titre-bienvenue">Bienvenue dans votre espace client.</p>
           </div>
           <div class="grille-trois-cartes">
             <div class="carte-info carte-total">
@@ -262,85 +136,35 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
             <div class="carte-info carte-derniere">
               <h4 class="titre-carte">Dernière commande</h4>
               <?php if($derniere_commande): ?>
-                <p class="ref-derniere">CMD<?= $derniere_commande['id_commande'] ?> - <?= number_format($derniere_commande['montant'], 2) ?> dt</p>
-                <p class="adresse-derniere"><?= htmlspecialchars($derniere_commande['adresse']) ?></p>
+                <p class="ref-derniere">CMD<?= $derniere_commande->id_commande ?> - <?= number_format($derniere_commande->montant, 2) ?> dt</p>
+                <p class="adresse-derniere"><?= htmlspecialchars($derniere_commande->adresse) ?></p>
               <?php else: ?>
                 <p class="ref-derniere">Aucune commande</p>
               <?php endif; ?>
             </div>
             <div class="carte-info carte-adresse">
               <h4 class="titre-carte">Adresse de livraison</h4>
-              <p class="libelle-adresse">Adresse de livraison</p>
-              <?php if($connexion): ?>
-                <p class="details-adresse"><?php echo htmlspecialchars($adress)?></p>
-              <?php else : ?>
-                <p class="details-adresse">Votre Adresse</p>
-              <?php endif;?>
+              <p class="details-adresse"><?php echo htmlspecialchars($adress ?: 'Votre Adresse')?></p>
             </div>
           </div>
           <div class="grille-deux-colonnes">
             <div class="carte-info carte-personnelles">
               <h4 class="titre-carte">Informations personnelles</h4>
-              <span style="margin-top:0px;color:darkgrey;" id="modif"></span> 
+              <span id="modif" style="color:darkgrey;"></span> 
               <div class="grille-personnelles">
-                <p class="element-personnel">
-                  <?php if($connexion): ?>
-                    <span class="label-personnel">Nom :</span> <?php echo htmlspecialchars($name)?>
-                  <?php else: ?> 
-                    <span class="label-personnel">Nom :</span> Fouleni
-                  <?php endif; ?>
-                </p>
-                <p class="element-personnel">
-                  <?php if($connexion): ?>
-                    <span class="label-personnel">Prénom :</span> <?php echo htmlspecialchars($prename)?>
-                  <?php else: ?> 
-                    <span class="label-personnel">Prénom :</span> Foulen
-                  <?php endif; ?>
-                </p>
-                <p class="element-personnel">
-                  <?php if($connexion): ?>
-                    <span class="label-personnel">Email :</span> <?php echo htmlspecialchars($email)?>
-                  <?php else: ?> 
-                    <span class="label-personnel">Email :</span> Foulen.Fouleni@gmail.com
-                  <?php endif; ?>
-                </p>
-                <p class="element-personnel">
-                  <?php if($connexion): ?>
-                    <span class="label-personnel">Téléphone :</span> <?php echo htmlspecialchars($phone)?>
-                  <?php else: ?> 
-                    <span class="label-personnel">Téléphone :</span> 12 345 678
-                  <?php endif; ?>
-                </p>
-                <p class="element-personnel">
-                  <?php if($connexion): ?>
-                    <span class="label-personnel">Adresse :</span> <?php echo htmlspecialchars($adress)?>
-                  <?php else: ?> 
-                    <span class="label-personnel">Adresse :</span> Tunis, El Manar, 2092
-                  <?php endif; ?>
-                </p>
+                <p class="element-personnel"><span class="label-personnel">Nom :</span> <?= htmlspecialchars($name ?: 'Fouleni') ?></p>
+                <p class="element-personnel"><span class="label-personnel">Prénom :</span> <?= htmlspecialchars($prename ?: 'Foulen') ?></p>
+                <p class="element-personnel"><span class="label-personnel">Email :</span> <?= htmlspecialchars($email ?: 'Foulen.Fouleni@gmail.com') ?></p>
+                <p class="element-personnel"><span class="label-personnel">Téléphone :</span> <?= htmlspecialchars($phone ?: '12 345 678') ?></p>
+                <p class="element-personnel"><span class="label-personnel">Adresse :</span> <?= htmlspecialchars($adress ?: 'Tunis, El Manar, 2092') ?></p>
               </div>
-              <div class="conteneur-modifier">
-                <a
-                  href="../modifier mes informations/modifier.html"
-                  class="lien-modifier"
-                  >Modifier mes informations</a
-                >
-              </div>
+              <div class="conteneur-modifier"><a href="../modifier mes informations/modifier.html" class="lien-modifier">Modifier mes informations</a></div>
             </div>
             <div class="zone-commandes">
-              <h3 class="titre-commandes">Mes Commandes Récentes</h3>
+              <h3 class="titre-commandes" style="padding:15px;">Mes Commandes Récentes</h3>
               <table class="tableau-commandes">
-                <thead>
-                  <tr class="ligne-en-tete">
-                    <th class="colonne-commande">N°Commande</th>
-                    <th class="colonne-date">Date</th>
-                    <th class="colonne-montant">Montant</th>
-                    <th class="colonne-statut">Statut</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <?php afficherTableauCommandes($commandesObjets); ?>
-                </tbody>
+                <thead><tr><th>N°Commande</th><th>Date</th><th>Montant</th><th>Statut</th></tr></thead>
+                <tbody><?php afficherTableauCommandes($commandesObjets); ?></tbody>
               </table>
             </div>
           </div>
@@ -349,84 +173,19 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
         <div id="vue-infos" style="display: none">
           <div class="bloc-bienvenue">
             <h1 class="titre-bienvenue">Mes Informations Personnelles</h1>
-            <p class="sous-titre-bienvenue">
-              Consultez et gérez vos données personnelles ici.
-            </p>
+            <p class="sous-titre-bienvenue">Consultez et gérez vos données personnelles ici.</p>
           </div>
-
-          <div
-            class="carte-info"
-            style="
-              width: 100%;
-              max-width: 100%;
-              margin-top: 20px;
-              padding: 30px;
-            "
-          >
-            <h4
-              class="titre-carte"
-              style="font-size: 24px; margin-bottom: 20px"
-            >
-              Mes coordonnées
-            </h4>
-            <div
-              style="
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 20px;
-                font-size: 18px;
-              "
-            >
-              <p class="element-personnel">
-                <?php if($connexion): ?>
-                  <span class="label-personnel">Nom :</span> <?php echo htmlspecialchars($name)?>
-                <?php else: ?> 
-                  <span class="label-personnel">Nom :</span> Fouleni
-                <?php endif; ?>
-              </p>
-              <p class="element-personnel">
-                <?php if($connexion): ?>
-                  <span class="label-personnel">Prénom :</span> <?php echo htmlspecialchars($prename)?>
-                <?php else: ?> 
-                  <span class="label-personnel">Prénom :</span> Foulen
-                <?php endif; ?>
-              </p>
-              <p class="element-personnel">
-                <?php if($connexion): ?>
-                  <span class="label-personnel">Email :</span> <?php echo htmlspecialchars($email)?>
-                <?php else: ?> 
-                  <span class="label-personnel">Email :</span> Foulen.Fouleni@gmail.com
-                <?php endif; ?>
-              </p>
-              <p class="element-personnel">
-                <?php if($connexion): ?>
-                  <span class="label-personnel">Téléphone :</span> <?php echo htmlspecialchars($phone)?>
-                <?php else: ?> 
-                  <span class="label-personnel">Téléphone :</span> 12 345 678
-                <?php endif; ?>
-              </p>
-              <p class="element-personnel" style="grid-column: span 2">
-                <?php if($connexion): ?>
-                  <span class="label-personnel">Adresse :</span> <?php echo htmlspecialchars($adress)?>
-                <?php else: ?> 
-                  <span class="label-personnel">Adresse :</span> Tunis, El Manar, 2092
-                <?php endif; ?>
-              </p>
+          <div class="carte-info" style="width: 100%; max-width: 100%; margin-top: 20px; padding: 30px;">
+            <h4 class="titre-carte" style="font-size: 24px; margin-bottom: 20px">Mes coordonnées</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 18px;">
+              <p class="element-personnel"><span class="label-personnel">Nom :</span> <?= htmlspecialchars($name ?: 'Fouleni') ?></p>
+              <p class="element-personnel"><span class="label-personnel">Prénom :</span> <?= htmlspecialchars($prename ?: 'Foulen') ?></p>
+              <p class="element-personnel"><span class="label-personnel">Email :</span> <?= htmlspecialchars($email ?: 'Foulen.Fouleni@gmail.com') ?></p>
+              <p class="element-personnel"><span class="label-personnel">Téléphone :</span> <?= htmlspecialchars($phone ?: '12 345 678') ?></p>
+              <p class="element-personnel" style="grid-column: span 2"><span class="label-personnel">Adresse :</span> <?= htmlspecialchars($adress ?: 'Tunis, El Manar, 2092') ?></p>
             </div>
-
             <div class="conteneur-modifier" style="margin-top: 30px">
-              <a
-                href="../modifier mes informations/modifier.html"
-                class="lien-modifier"
-                style="
-                  padding: 10px 20px;
-                  background-color: #14532d;
-                  color: white;
-                  border-radius: 5px;
-                  text-decoration: none;
-                "
-                >Modifier mes informations</a
-              >
+              <a href="../modifier mes informations/modifier.html" class="lien-modifier" style="padding: 10px 20px; background-color: #14532d; color: white; border-radius: 5px; text-decoration: none;">Modifier mes informations</a>
             </div>
           </div>
         </div>
@@ -434,32 +193,12 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
         <div id="vue-commandes" style="display: none">
           <div class="bloc-bienvenue">
             <h1 class="titre-bienvenue">Historique de mes commandes</h1>
-            <p class="sous-titre-bienvenue">
-              Retrouvez ici toutes vos commandes passées et en cours.
-            </p>
+            <p class="sous-titre-bienvenue">Retrouvez ici toutes vos commandes passées et en cours.</p>
           </div>
-
-          <div
-            class="carte-info"
-            style="
-              width: 100%;
-              max-width: 100%;
-              margin-top: 20px;
-              padding: 30px;
-            "
-          >
+          <div class="carte-info" style="width: 100%; max-width: 100%; margin-top: 20px; padding: 30px;">
             <table class="tableau-commandes" style="width: 100%">
-              <thead>
-                <tr class="ligne-en-tete">
-                  <th class="colonne-commande">N°Commande</th>
-                  <th class="colonne-date">Date</th>
-                  <th class="colonne-montant">Montant</th>
-                  <th class="colonne-statut">Statut</th>
-                 </tr>
-              </thead>
-              <tbody>
-              <?php afficherTableauCommandes($commandesObjets); ?>
-              </tbody>
+              <thead><tr class="ligne-en-tete"><th>N°Commande</th><th>Date</th><th>Montant</th><th>Statut</th></tr></thead>
+              <tbody><?php afficherTableauCommandes($commandesObjets); ?></tbody>
             </table>
           </div>
         </div>
@@ -546,7 +285,7 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
     </footer>
 
     <script>
-      const btnDashboard = document.getElementById("btn-dashboard");
+     const btnDashboard = document.getElementById("btn-dashboard");
       const btnInfos = document.getElementById("btn-infos");
       const btnCommande = document.getElementById("btn-Commande");
 
