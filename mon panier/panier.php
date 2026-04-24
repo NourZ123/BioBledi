@@ -100,7 +100,7 @@ if (!empty($_SESSION['panier'])) {
             <a href="../inscription/inscription.html" class="menu-item"
               >Inscription</a
             >
-            <a href="../about us/about us.html" class="menu-item">About US</a>
+            <a href="../about us/about us.php" class="menu-item">About US</a>
             <a href="../contact us/contact us.html" class="menu-item"
               >Contact US</a
             >
