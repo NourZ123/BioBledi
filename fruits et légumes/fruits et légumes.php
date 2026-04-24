@@ -39,14 +39,14 @@ if (!empty($categorie_filter) && $categorie_filter != 'tous') {
 }
 $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fruits & Légumes</title>
-    <link rel="stylesheet" href="fruits et légumes.css" />
+    <link rel="stylesheet" href="../Epicerie bio/epicerie bio.css" />
     <link rel="icon" href="image/carrot-svgrepo-com.svg" />
     <link rel="stylesheet" href="../code footer.css" />
     <style>
