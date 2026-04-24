@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "../database_connection.php"; 
+require "../PHP/database_connection.php"; 
 
 $connexion = $_SESSION['user_data'] ?? null;
 

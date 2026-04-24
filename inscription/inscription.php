@@ -1,5 +1,5 @@
 <?php
-require "../database_connection.php";
+require "../PHP/database_connection.php";
 
 if (isset($_POST["signupbtn"]))
 {

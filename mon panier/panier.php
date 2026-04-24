@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-require "../database_connection.php";
+require "../PHP/database_connection.php";
 
 if (!isset($_SESSION['panier'])) {
     $_SESSION['panier'] = [];

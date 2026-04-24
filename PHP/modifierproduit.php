@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../database_connection.php';
+require_once '../PHP/database_connection.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_produit'])) {
     $id = intval($_POST['id_produit']);
     

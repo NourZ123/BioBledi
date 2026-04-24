@@ -1,6 +1,6 @@
 <?php 
 session_start();
-require_once '../database_connection.php';
+require_once '../PHP/database_connection.php';
 if (isset($_SESSION['user_data']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $id = $_SESSION['user_data']['ID'];

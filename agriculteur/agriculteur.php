@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../database_connection.php';
+require_once '../PHP/database_connection.php';
 $id_agriculteur = 1; 
 $stmt = $db->prepare("SELECT * FROM agriculteur WHERE ID = ?");
 $stmt->execute([$id_agriculteur]);

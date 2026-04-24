@@ -1,36 +1,29 @@
 <?php
 session_start();
-require_once '../database_connection.php';
+require_once '../PHP/database_connection.php';
 
-if (isset($_GET['ajax']) && $_GET['ajax'] === '1' && isset($_GET['action']) && $_GET['action'] === 'ajouter' && isset($_GET['id'])) {
+if (isset($_GET['ajax']) && $_GET['ajax'] === '1' && isset($_GET['id'])) {
     $id = intval($_GET['id']);
-    
     $stmt = $db->prepare("SELECT quantité FROM produit WHERE ID = ?");
     $stmt->execute([$id]);
     $produit = $stmt->fetch(PDO::FETCH_ASSOC);
     
     if ($produit) {
         if (!isset($_SESSION['panier'])) { $_SESSION['panier'] = []; }
-
         $qte_panier = isset($_SESSION['panier'][$id]) ? $_SESSION['panier'][$id] : 0;
         $stock_reel = intval($produit['quantité']);
 
         if ($qte_panier < $stock_reel) {
             $_SESSION['panier'][$id] = $qte_panier + 1;
-            
-            echo json_encode([
-                'success' => true, 
-                'new_stock' => $stock_reel - $_SESSION['panier'][$id]
-            ]);
+            echo ($stock_reel - $_SESSION['panier'][$id]);
         } else {
-            echo json_encode(['success' => false, 'message' => 'Stock épuisé']);
+            echo "erreur_stock";
         }
     }
     exit();
 }
 
 $categorie_filter = isset($_GET['categorie']) ? $_GET['categorie'] : '';
-
 if (!empty($categorie_filter) && $categorie_filter != 'tous') {
     $stmt = $db->prepare("SELECT * FROM `produit` WHERE `catégorie` = ?");
     $stmt->execute([$categorie_filter]);
@@ -51,47 +44,11 @@ $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="icon" href="image/carrot-svgrepo-com.svg" />
     <link rel="stylesheet" href="../code footer.css" />
     <style>
-        .container {
-            display: grid !important;
-            grid-template-columns: repeat(5, 1fr) !important;
-            gap: 30px !important;
-            padding: 30px 5% !important;
-        }
-        .btn:disabled {
-            background: #ccc !important;
-            cursor: not-allowed !important;
-            opacity: 0.6;
-        }
-        a.btn {
-            text-decoration: none !important;
-        }
-        .search-bar {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-            padding: 0 5%;
-        }
-        .categorie-select {
-            padding: 12px 24px;
-            font-size: 16px;
-            font-family: "Poppins", sans-serif;
-            border: 2px solid #2E8B57;
-            border-radius: 40px;
-            background-color: white;
-            color: #14532d;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            outline: none;
-        }
-        .categorie-select:hover {
-            background-color: #e8f5e9;
-            border-color: #14532d;
-        }
-        .categorie-select:focus {
-            border-color: #14532d;
-            box-shadow: 0 0 5px rgba(46, 139, 86, 0.3);
-        }
+        .container { display: grid !important; grid-template-columns: repeat(5, 1fr) !important; gap: 30px !important; padding: 30px 5% !important; }
+        .btn:disabled { background: #ccc !important; cursor: not-allowed !important; opacity: 0.6; }
+        a.btn { text-decoration: none !important; }
+        .search-bar { display: flex; justify-content: center; margin: 20px 0; padding: 0 5%; }
+        .categorie-select { padding: 12px 24px; font-size: 16px; font-family: "Poppins", sans-serif; border: 2px solid #2E8B57; border-radius: 40px; background-color: white; color: #14532d; font-weight: 500; cursor: pointer; transition: all 0.3s ease; outline: none; }
     </style>
 </head>
 <body>
@@ -129,41 +86,24 @@ $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <option value="Légumes" <?= ($categorie_filter == 'Légumes') ? 'selected' : '' ?>>Légumes</option>
         </select>
     </div>
+
     <div class="container">
-        
         <?php if (empty($produits)): ?>
             <div style="grid-column: 1/-1; text-align:center; padding: 60px; color: #64748b;">
-                <p style="font-size: 1.2rem;">Aucun produit disponible pour le moment.</p>
+                <p style="font-size: 1.2rem;">Aucun produit disponible.</p>
             </div>
         <?php else: ?>
             <?php foreach ($produits as $produit): ?>
                 <div class="item" data-id="<?= $produit['ID'] ?>">
-                    <?php if (!empty($produit['image'])): ?>
-                        <img src="<?= htmlspecialchars('../' . $produit['image']) ?>"
-                             alt="<?= htmlspecialchars($produit['nom_produit']) ?>"
-                             onerror="this.src='image/default.webp'" />
-                    <?php else: ?>
-                        <div style="margin:20px; width:calc(100% - 40px); height:170px; background:#e8f5e9; border-radius:18px; display:flex; align-items:center; justify-content:center; font-size:3rem;">🌿</div>
-                    <?php endif; ?>
-
+                    <img src="<?= htmlspecialchars('../' . $produit['image']) ?>" onerror="this.src='image/default.webp'" />
                     <div class="Row1">
-                        <div>
-                            <p style="font-size: 20px; margin: 0%">
-                                <strong><?= htmlspecialchars($produit['nom_produit']) ?></strong>
-                            </p>
-                        </div>
+                        <div><p style="font-size: 20px; margin: 0%"><strong><?= htmlspecialchars($produit['nom_produit']) ?></strong></p></div>
                         <div>
                             <div style="color: #14532d; font-size: 20px; margin: 0%">
-                                <?php if (!empty($produit['offre']) && $produit['offre'] > 0):
-                                    $prixReduit = $produit['prix'] * (1 - $produit['offre'] / 100);
-                                ?>
+                                <?php if (!empty($produit['offre']) && $produit['offre'] > 0): 
+                                    $prixReduit = $produit['prix'] * (1 - $produit['offre'] / 100); ?>
                                     <strong><?= number_format($prixReduit, 2) ?> dt</strong>
-                                    <span style="text-decoration:line-through; color:#aaa; font-size:14px; margin-left:5px;">
-                                        <?= number_format($produit['prix'], 2) ?> dt
-                                    </span>
-                                    <span style="background:#ffd700; color:#14532d; border-radius:10px; padding:2px 7px; font-size:12px; margin-left:4px;">
-                                        -<?= intval($produit['offre']) ?>%
-                                    </span>
+                                    <span style="text-decoration:line-through; color:#aaa; font-size:14px; margin-left:5px;"><?= number_format($produit['prix'], 2) ?> dt</span>
                                 <?php else: ?>
                                     <strong><?= number_format($produit['prix'], 2) ?> dt</strong>
                                 <?php endif; ?>
@@ -171,7 +111,6 @@ $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div style="color: #777; font-size: 15px">\<?= htmlspecialchars($produit['unité'] ?? 'kg') ?></div>
                         </div>
                     </div>
-
                     <div class="Row2">
                         <div class="loc">
                             <img src="image/location-pin-svgrepo-com (1).svg" alt="loc" class="icon" />
@@ -179,25 +118,19 @@ $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                         <div id="Id">#<?= $produit['ID'] ?></div>
                     </div>
-
                     <div class="Row3">
-    <img src="image/box.svg" alt="stock" class="icon" />
-    <?php 
-        $qte_session = isset($_SESSION['panier'][$produit['ID']]) ? $_SESSION['panier'][$produit['ID']] : 0;
-        $stock_virtuel = intval($produit['quantité']) - $qte_session;
-    ?>
-    <p class="stock-value" id="stock-<?= $produit['ID'] ?>"><?= $stock_virtuel ?></p>
-
-    <?php if ($stock_virtuel > 0): ?>
-        <button class="btn add-to-cart" data-id="<?= $produit['ID'] ?>">
-            <b>+Ajouter</b>
-        </button>
-    <?php else: ?>
-        <button class="btn" disabled style="background: #ccc;">
-            <b>Rupture</b>
-        </button>
-    <?php endif; ?>
-</div>
+                        <img src="image/box.svg" alt="stock" class="icon" />
+                        <?php 
+                            $qte_sess = isset($_SESSION['panier'][$produit['ID']]) ? $_SESSION['panier'][$produit['ID']] : 0;
+                            $stock_v = intval($produit['quantité']) - $qte_sess;
+                        ?>
+                        <p class="stock-value" id="stock-<?= $produit['ID'] ?>"><?= $stock_v ?></p>
+                        <?php if ($stock_v > 0): ?>
+                            <button class="btn add-to-cart" data-id="<?= $produit['ID'] ?>"><b>+Ajouter</b></button>
+                        <?php else: ?>
+                            <button class="btn" disabled style="background: #ccc;"><b>Rupture</b></button>
+                        <?php endif; ?>
+                    </div>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
@@ -216,16 +149,14 @@ $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
             <div class="footer-contact">
                 <h4>Contactez-nous</h4>
-                <p><img src="image/phone-svgrepo-com (1).svg" alt="Téléphone" class="footer-icon" /> +216 12 345 678</p>
-                <p><img src="image/mail-check-svgrepo-com.svg" alt="Email" class="footer-icon" /> contact@biobladi.tn</p>
-                <p><img src="image/location-svgrepo-com.svg" alt="Adresse" class="footer-icon" /> Tunis, Tunisie</p>
-                <p><img src="image/time-svgrepo-com.svg" alt="Horaires" class="footer-icon" /> Lun-Ven: 8h - 18h</p>
+                <p><img src="image/phone-svgrepo-com (1).svg" alt="Tél" class="footer-icon" /> +216 12 345 678</p>
+                <p><img src="image/mail-check-svgrepo-com.svg" alt="Mail" class="footer-icon" /> contact@biobladi.tn</p>
+                <p><img src="image/location-svgrepo-com.svg" alt="Loc" class="footer-icon" /> Tunis, Tunisie</p>
             </div>
             <div class="footer-social">
                 <h4>Suivez-nous</h4>
-                <a href="#"><img src="image/facebook-svgrepo-com (1).svg" alt="Facebook" class="social-icon" /></a>
-                <a href="#"><img src="image/instagram-167-svgrepo-com.svg" alt="Instagram" class="social-icon" /></a>
-                <a href="#"><img src="image/linkedin-svgrepo-com (1).svg" alt="LinkedIn" class="social-icon" /></a>
+                <a href="#"><img src="image/facebook-svgrepo-com (1).svg" alt="FB" class="social-icon" /></a>
+                <a href="#"><img src="image/instagram-167-svgrepo-com.svg" alt="IG" class="social-icon" /></a>
             </div>
             <p class="footer-copy">© 2025 BioBladi — Tous droits réservés — Fièrement tunisien 🇹🇳</p>
         </div>
@@ -236,26 +167,17 @@ $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
             button.addEventListener('click', function() {
                 const productId = this.dataset.id;
                 const stockSpan = document.getElementById(`stock-${productId}`);
-                
-                fetch(`?ajax=1&action=ajouter&id=${productId}`)
-                    .then(response => response.json())
+                fetch(`?ajax=1&id=${productId}`)
+                    .then(r => r.text())
                     .then(data => {
-                        if (data.success) {
-                            stockSpan.textContent = data.new_stock;
-                            if (data.new_stock === 0) {
-                                const newButton = document.createElement('button');
-                                newButton.className = 'btn';
-                                newButton.disabled = true;
-                                newButton.style.background = '#ccc';
-                                newButton.style.cursor = 'not-allowed';
-                                newButton.innerHTML = '<b>Rupture</b>';
-                                this.replaceWith(newButton);
+                        if (data === "erreur_stock") { alert('Stock épuisé !'); }
+                        else {
+                            stockSpan.textContent = data;
+                            if (parseInt(data) <= 0) {
+                                this.disabled = true; this.style.background = '#ccc'; this.innerHTML = '<b>Rupture</b>';
                             }
-                        } else {
-                            alert('Stock épuisé !');
                         }
-                    })
-                    .catch(error => console.error('Erreur:', error));
+                    });
             });
         });
     </script>

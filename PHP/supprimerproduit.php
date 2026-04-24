@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../database_connection.php';
+require_once '../PHP/database_connection.php';
 
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);

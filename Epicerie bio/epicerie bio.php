@@ -1,28 +1,26 @@
 <?php
 session_start();
-require_once '../database_connection.php';
-if (isset($_GET['ajax']) && $_GET['ajax'] === '1' && isset($_GET['action']) && $_GET['action'] === 'ajouter' && isset($_GET['id'])) {
-    $id = intval($_GET['id']);
+require_once '../PHP/database_connection.php';
 
+if (isset($_GET['ajax']) && $_GET['ajax'] === '1' && isset($_GET['id'])) {
+    $id = intval($_GET['id']);
+    
     $stmt = $db->prepare("SELECT quantité FROM produit WHERE ID = ?");
     $stmt->execute([$id]);
     $produit = $stmt->fetch(PDO::FETCH_ASSOC);
     
-    if ($produit && $produit['quantité'] > 0) {
-        $stmt = $db->prepare("UPDATE produit SET quantité = quantité - 1 WHERE ID = ?");
-        $stmt->execute([$id]);
-        if (!isset($_SESSION['panier'])) {
-            $_SESSION['panier'] = [];
-        }
-        if (isset($_SESSION['panier'][$id])) {
-            $_SESSION['panier'][$id]++;
+    if ($produit) {
+        if (!isset($_SESSION['panier'])) { $_SESSION['panier'] = []; }
+
+        $qte_panier = isset($_SESSION['panier'][$id]) ? $_SESSION['panier'][$id] : 0;
+        $stock_reel = intval($produit['quantité']);
+
+        if ($qte_panier < $stock_reel) {
+            $_SESSION['panier'][$id] = $qte_panier + 1;
+            echo ($stock_reel - $_SESSION['panier'][$id]);
         } else {
-            $_SESSION['panier'][$id] = 1;
+            echo "erreur_stock";
         }
-        
-        echo json_encode(['success' => true, 'new_stock' => $produit['quantité'] - 1]);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Stock épuisé']);
     }
     exit();
 }
@@ -38,6 +36,7 @@ if (!empty($categorie_filter) && $categorie_filter != 'tous') {
 }
 $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -59,11 +58,6 @@ $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
             cursor: not-allowed !important;
             opacity: 0.6;
         }
-        a.btn {
-            text-decoration: none !important;
-        }
-        
-        /* Barre de recherche */
         .search-bar {
             display: flex;
             justify-content: center;
@@ -80,16 +74,7 @@ $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
             color: #14532d;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
             outline: none;
-        }
-        .categorie-select:hover {
-            background-color: #e8f5e9;
-            border-color: #14532d;
-        }
-        .categorie-select:focus {
-            border-color: #14532d;
-            box-shadow: 0 0 5px rgba(46, 139, 86, 0.3);
         }
     </style>
 </head>
@@ -134,54 +119,41 @@ $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="container">
         <?php if (empty($produits)): ?>
             <div style="grid-column: 1/-1; text-align:center; padding: 60px; color: #64748b;">
-                <p style="font-size: 1.2rem;">Aucun produit disponible dans cette catégorie.</p>
+                <p style="font-size: 1.2rem;">Aucun produit disponible.</p>
             </div>
         <?php else: ?>
             <?php foreach ($produits as $produit): ?>
                 <div class="item" data-id="<?= $produit['ID'] ?>">
-                    <img src="<?= htmlspecialchars('../' . $produit['image']) ?>"
-                         alt="<?= htmlspecialchars($produit['nom_produit']) ?>"
-                         onerror="this.src='image/default.webp'" />
-
+                    <img src="<?= htmlspecialchars('../' . $produit['image']) ?>" onerror="this.src='image/default.webp'" />
                     <div class="Row1">
                         <div>
-                            <p style="font-size: 20px; margin: 0%">
-                                <strong><?= htmlspecialchars($produit['nom_produit']) ?></strong>
-                            </p>
+                            <p style="font-size: 20px; margin: 0%"><strong><?= htmlspecialchars($produit['nom_produit']) ?></strong></p>
                         </div>
                         <div>
                             <div style="color: #14532d; font-size: 20px; margin: 0%">
                                 <strong><?= number_format($produit['prix'], 2) ?> dt</strong>
-                                <?php if (!empty($produit['offre']) && $produit['offre'] > 0): ?>
-                                    <span style="background:#ffd700; color:#14532d; border-radius:10px; padding:2px 7px; font-size:12px; margin-left:6px;">
-                                        -<?= intval($produit['offre']) ?>%
-                                    </span>
-                                <?php endif; ?>
                             </div>
                             <div style="color: #777; font-size: 15px">\<?= htmlspecialchars($produit['unité'] ?? '') ?></div>
                         </div>
                     </div>
-
                     <div class="Row2">
                         <div class="loc">
                             <img src="image/location-pin-svgrepo-com (1).svg" alt="loc" class="icon" />
-                            <div><p style="font-size: 16px"><?= htmlspecialchars($produit['région'] ?? 'N/A') ?></p></div>
+                            <div><p style="font-size: 16px"><?= htmlspecialchars($produit['région'] ?? 'Tunisie') ?></p></div>
                         </div>
-                        <div id="Id">#<?= (int)$produit['ID'] ?></div>
+                        <div id="Id">#<?= $produit['ID'] ?></div>
                     </div>
-
                     <div class="Row3">
                         <img src="image/box.svg" alt="stock" class="icon" />
-                        <p class="stock-value" id="stock-<?= $produit['ID'] ?>"><?= (int)$produit['quantité'] ?></p>
-
-                        <?php if ($produit['quantité'] > 0): ?>
-                            <button class="btn add-to-cart" data-id="<?= $produit['ID'] ?>" style="text-decoration: none;">
-                                <b>+Ajouter</b>
-                            </button>
+                        <?php 
+                            $qte_sess = isset($_SESSION['panier'][$produit['ID']]) ? $_SESSION['panier'][$produit['ID']] : 0;
+                            $stock_v = intval($produit['quantité']) - $qte_sess;
+                        ?>
+                        <p class="stock-value" id="stock-<?= $produit['ID'] ?>"><?= $stock_v ?></p>
+                        <?php if ($stock_v > 0): ?>
+                            <button class="btn add-to-cart" data-id="<?= $produit['ID'] ?>"><b>+Ajouter</b></button>
                         <?php else: ?>
-                            <button class="btn" disabled style="background: #ccc; cursor: not-allowed;">
-                                <b>Rupture</b>
-                            </button>
+                            <button class="btn" disabled style="background: #ccc;"><b>Rupture</b></button>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -202,48 +174,39 @@ $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
             <div class="footer-contact">
                 <h4>Contactez-nous</h4>
-                <p><img src="image/phone-svgrepo-com (1).svg" alt="Téléphone" class="footer-icon" /> +216 12 345 678</p>
-                <p><img src="image/mail-check-svgrepo-com.svg" alt="Email" class="footer-icon" /> contact@biobladi.tn</p>
-                <p><img src="image/location-svgrepo-com.svg" alt="Adresse" class="footer-icon" /> Tunis, Tunisie</p>
-                <p><img src="image/time-svgrepo-com.svg" alt="Horaires" class="footer-icon" /> Lun-Ven: 8h - 18h</p>
+                <p><img src="image/phone-svgrepo-com (1).svg" alt="Tél" class="footer-icon" /> +216 12 345 678</p>
+                <p><img src="image/mail-check-svgrepo-com.svg" alt="Mail" class="footer-icon" /> contact@biobladi.tn</p>
+                <p><img src="image/location-svgrepo-com.svg" alt="Loc" class="footer-icon" /> Tunis, Tunisie</p>
+                <p><img src="image/time-svgrepo-com.svg" alt="Time" class="footer-icon" /> Lun-Ven: 8h - 18h</p>
             </div>
             <div class="footer-social">
                 <h4>Suivez-nous</h4>
-                <a href="#"><img src="image/facebook-svgrepo-com (1).svg" alt="Facebook" class="social-icon" /></a>
-                <a href="#"><img src="image/instagram-167-svgrepo-com.svg" alt="Instagram" class="social-icon" /></a>
-                <a href="#"><img src="image/linkedin-svgrepo-com (1).svg" alt="LinkedIn" class="social-icon" /></a>
+                <a href="#"><img src="image/facebook-svgrepo-com (1).svg" alt="FB" class="social-icon" /></a>
+                <a href="#"><img src="image/instagram-167-svgrepo-com.svg" alt="IG" class="social-icon" /></a>
+                <a href="#"><img src="image/linkedin-svgrepo-com (1).svg" alt="IN" class="social-icon" /></a>
             </div>
             <p class="footer-copy">© 2025 BioBladi — Tous droits réservés — Fièrement tunisien 🇹🇳</p>
         </div>
     </footer>
 
     <script>
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', function() {
-            const productId = this.dataset.id;
-            const stockSpan = document.getElementById(`stock-${productId}`);
-            
-            fetch(`?ajax=1&action=ajouter&id=${productId}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        stockSpan.textContent = data.new_stock;
-                        if (data.new_stock === 0) {
-                            const newButton = document.createElement('button');
-                            newButton.className = 'btn';
-                            newButton.disabled = true;
-                            newButton.style.background = '#ccc';
-                            newButton.style.cursor = 'not-allowed';
-                            newButton.innerHTML = '<b>Rupture</b>';
-                            this.replaceWith(newButton);
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = this.dataset.id;
+                const stockSpan = document.getElementById(`stock-${productId}`);
+                fetch(`?ajax=1&id=${productId}`)
+                    .then(r => r.text())
+                    .then(data => {
+                        if (data === "erreur_stock") { alert('Stock épuisé !'); }
+                        else {
+                            stockSpan.textContent = data;
+                            if (parseInt(data) <= 0) {
+                                this.disabled = true; this.style.background = '#ccc'; this.innerHTML = '<b>Rupture</b>';
+                            }
                         }
-                    } else {
-                        alert('Stock épuisé !');
-                    }
-                })
-                .catch(error => console.error('Erreur:', error));
+                    });
+            });
         });
-    });
     </script>
 </body>
 </html>
