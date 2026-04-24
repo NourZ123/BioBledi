@@ -3,8 +3,6 @@ session_start();
 require "../PHP/database_connection.php"; 
 
 $connexion = $_SESSION['user_data'] ?? null;
-
-// Initialisation des variables
 $name = $prename = $adress = $phone = $email = '';
 $total_commandes = 0;
 $derniere_commande = null;
@@ -17,18 +15,13 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
     $adress = $user['Adresse'] ?? '';
     $phone = $user['Telephone'] ?? '';
     $email = $user['Email'] ?? '';
-    
-    // Récupérer l'ID client
-    $id_client = $user['id_client'] ?? $user['ID'] ?? $user['id'] ?? null;
+        $id_client = $user['id_client'] ?? $user['ID'] ?? $user['id'] ?? null;
     
     if ($id_client) {
-        // Récupérer le nombre total de commandes
         $stmt = $db->prepare("SELECT COUNT(*) as total FROM commande WHERE id_client = ?");
         $stmt->execute([$id_client]);
         $total_commandes = $stmt->fetch(PDO::FETCH_ASSOC)['total'] ?? 0;
-        
-        // Récupérer la dernière commande
-        $stmt = $db->prepare("
+                $stmt = $db->prepare("
             SELECT id_commande, montant, adresse, date_commande, statut 
             FROM commande 
             WHERE id_client = ? 
@@ -38,7 +31,6 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
         $stmt->execute([$id_client]);
         $derniere_commande = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        // Récupérer toutes les commandes pour l'historique
         $stmt = $db->prepare("
             SELECT id_commande, montant, adresse, date_commande, statut 
             FROM commande 
@@ -48,6 +40,39 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
         $stmt->execute([$id_client]);
         $commandes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+}
+class CommandeObjet {
+  public $id;
+  public $date;
+  public $montant;
+  public $statut;
+
+  public function __construct($data) {
+      $this->id = $data['id_commande'];
+      $this->date = date('d/m/Y', strtotime($data['date_commande']));
+      $this->montant = number_format($data['montant'], 2);
+      $this->statut = $data['statut'] ?? 'En attente';
+  }
+}
+$commandesObjets = [];
+foreach ($commandes as $c) {
+  $commandesObjets[] = new CommandeObjet($c);
+}
+function afficherTableauCommandes($liste) {
+  if (empty($liste)) {
+      echo '<tr class="ligne-table"><td colspan="4" style="text-align: center;">Aucune commande</td></tr>';
+      return;
+  }
+
+  foreach ($liste as $cmd) {
+      $classeStatut = ($cmd->statut == 'Livré') ? 'statut-livre' : 'statut-encours';
+      echo "<tr class='ligne-table'>";
+      echo "<td class='cellule-commande'>CMD{$cmd->id}</td>";
+      echo "<td class='cellule-date'>{$cmd->date}</td>";
+      echo "<td class='cellule-montant'>{$cmd->montant} DT</td>";
+      echo "<td class='cellule-statut {$classeStatut}'>{$cmd->statut}</td>";
+      echo "</tr>";
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -96,6 +121,29 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
         font-weight: 500;
         transition: color 0.3s ease;
       }
+.zone-commandes {
+    max-height: 300px; 
+    overflow-y: auto; 
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: white;
+}
+.tableau-commandes thead {
+    position: sticky;
+    top: 0;
+    background-color: #f8fafc;
+    z-index: 10;
+}
+.zone-commandes::-webkit-scrollbar {
+    width: 6px;
+}
+.zone-commandes::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.zone-commandes::-webkit-scrollbar-thumb {
+    background: #14532d;
+    border-radius: 10px;
+}
     </style>
   </head>
   <body>
@@ -303,22 +351,7 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
                   </tr>
                 </thead>
                 <tbody>
-                  <?php if(empty($commandes)): ?>
-                    <tr class="ligne-table">
-                      <td colspan="4" style="text-align: center;">Aucune commande passée</td>
-                    </tr>
-                  <?php else: ?>
-                    <?php foreach(array_slice($commandes, 0, 2) as $commande): ?>
-                      <tr class="ligne-table">
-                        <td class="cellule-commande">CMD<?= $commande['id_commande'] ?></td>
-                        <td class="cellule-date"><?= date('d/m/Y', strtotime($commande['date_commande'])) ?></td>
-                        <td class="cellule-montant"><?= number_format($commande['montant'], 2) ?> DT</td>
-                        <td class="cellule-statut <?= $commande['statut'] == 'Livré' ? 'statut-livre' : 'statut-encours' ?>">
-                          <?= htmlspecialchars($commande['statut'] ?? 'En attente') ?>
-                        </td>
-                      </tr>
-                    <?php endforeach; ?>
-                  <?php endif; ?>
+                <?php afficherTableauCommandes($commandesObjets); ?>
                 </tbody>
               </table>
             </div>
@@ -437,22 +470,7 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
                  </tr>
               </thead>
               <tbody>
-                <?php if(empty($commandes)): ?>
-                  <tr class="ligne-table">
-                    <td colspan="4" style="text-align: center;">Aucune commande passée</td>
-                  </tr>
-                <?php else: ?>
-                  <?php foreach($commandes as $commande): ?>
-                    <tr class="ligne-table">
-                      <td class="cellule-commande">CMD<?= $commande['id_commande'] ?></td>
-                      <td class="cellule-date"><?= date('d/m/Y', strtotime($commande['date_commande'])) ?></td>
-                      <td class="cellule-montant"><?= number_format($commande['montant'], 2) ?> DT</td>
-                      <td class="cellule-statut <?= $commande['statut'] == 'Livré' ? 'statut-livre' : 'statut-encours' ?>">
-                        <?= htmlspecialchars($commande['statut'] ?? 'En attente') ?>
-                      </td>
-                    </tr>
-                  <?php endforeach; ?>
-                <?php endif; ?>
+              <?php afficherTableauCommandes($commandesObjets); ?>
               </tbody>
             </table>
           </div>
