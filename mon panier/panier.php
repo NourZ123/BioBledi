@@ -152,21 +152,18 @@ if (!empty($_SESSION['panier'])) {
                   </div>
                 </div>
                 <div class="quantité">
-    <a href="?action=moins&id=<?= $item['id'] ?>"><button>-</button></a>
-    
-    <span class="Q"><?= $item['qte'] ?></span>
-    
-    <?php 
-    $stmt_stock = $db->prepare("SELECT quantité FROM produit WHERE ID = ?");
-    $stmt_stock->execute([$item['id']]);
-    $stock_disponible = $stmt_stock->fetchColumn();
-
-    if ($item['qte'] < $stock_disponible): ?>
-        <a href="?action=plus&id=<?= $item['id'] ?>"><button>+</button></a>
-    <?php else: ?>
-        <button disabled style="background: #ccc; cursor: not-allowed; opacity: 0.6;" title="Stock maximum atteint">+</button>
-    <?php endif; ?>
-</div>
+                  <a href="?action=moins&id=<?= $item['id'] ?>"><button>-</button></a>
+                    <span class="Q"><?= $item['qte'] ?></span>
+                     <?php 
+                      $stmt_stock = $db->prepare("SELECT quantité FROM produit WHERE ID = ?");
+                      $stmt_stock->execute([$item['id']]);
+                      $stock_disponible = $stmt_stock->fetchColumn();
+                  if ($item['qte'] < $stock_disponible): ?>
+                  <a href="?action=plus&id=<?= $item['id'] ?>"><button>+</button></a>
+                  <?php else: ?>
+                    <button disabled style="background: #ccc; cursor: not-allowed; opacity: 0.6;" title="Stock maximum atteint">+</button>
+                  <?php endif; ?>
+                </div>
                 <div class="Total">
                   <div class="price"><?= number_format($item['sous_total'], 2) ?> DT</div>
                   <div style="margin-right: 20px">
