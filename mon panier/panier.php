@@ -69,6 +69,7 @@ if (!empty($_SESSION['panier'])) {
     <link rel="stylesheet" href="panier.css" />
     <link rel="icon" href="image/cart-2-svgrepo-com.svg" />
     <link rel="stylesheet" href="../code footer.css" />
+    <link rel="stylesheet" href="../code css commun.css">
   </head>
   <body>
     <header>

@@ -38,6 +38,7 @@ $categorie_filter = $donnees['filtre_actif'];
     <link rel="stylesheet" href="../Epicerie bio/epicerie bio.css" />
     <link rel="icon" href="image/carrot-svgrepo-com.svg" />
     <link rel="stylesheet" href="../code footer.css" />
+    <link rel="stylesheet" href="../code css commun.css">
     <style>
         .container { display: grid !important; grid-template-columns: repeat(5, 1fr) !important; gap: 30px !important; padding: 30px 5% !important; }
         .btn:disabled { background: #ccc !important; cursor: not-allowed !important; opacity: 0.6; }

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="finaliser ma commande.css" />
     <link rel="icon" href="image/credit-card-svgrepo-com.svg" />
     <link rel="stylesheet" href="../code footer.css" />
+    <link rel="stylesheet" href="../code css commun.css">
     <style>
       * {
         margin: 0;

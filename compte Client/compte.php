@@ -72,6 +72,7 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
     <link rel="stylesheet" href="compte.css" />
     <link rel="icon" href="image/screen-alt-2-svgrepo-com.svg" />
     <link rel="stylesheet" href="../code footer.css" />
+    <link rel="stylesheet" href="../code css commun.css">
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font-family: "Poppins", sans-serif; background-color: #f3f5f8; min-height: 100vh; display: flex; flex-direction: column; width: 100%; overflow-x: hidden; }
