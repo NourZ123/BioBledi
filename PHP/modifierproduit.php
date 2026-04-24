@@ -155,8 +155,10 @@ if (!$produit) { exit("Produit introuvable"); }
         </div>
 
         <div style="margin-top: 25px; display: flex; align-items: center; gap: 20px;">
+           
+            <a href="../agriculteur/agriculteur.php" style="flex: 1; text-decoration: none; background-color: #f8faf8; text-align:center ; color:#14532d"   class="submit-btn">Annuler</a>
             <button type="submit" class="submit-btn" style="flex: 2;"> Mettre à Jour</button>
-            <a href="../agriculteur/agriculteur.php" style="flex: 1; text-align: center; color: #dc3545; text-decoration: none; font-weight: bold; border: 1px solid #dc3545; padding: 10px; border-radius: 8px;">Annuler</a>
+
         </div>
     </form>
 </div>
