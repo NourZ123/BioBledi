@@ -1,3 +1,15 @@
+let phone = document.getElementById("phone");
+phone.addEventListener("input", function (e) {
+  let digits = e.target.value.replace(/\D/g, "").substring(0, 8);
+  let formatted = "";
+
+  if (digits.length > 0) {
+    formatted = digits.substring(0, 2);
+    if (digits.length > 2) formatted += " " + digits.substring(2, 5);
+    if (digits.length > 5) formatted += " " + digits.substring(5, 8);
+  }
+  e.target.value = formatted;
+});
 function afficherHeure() {
   let now = new Date();
   let date = now.toLocaleDateString("fr-Fr");

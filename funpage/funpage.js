@@ -379,7 +379,7 @@ function terminerPartie() {
     `Partie terminée ! Score final : ${scoretotal} points`,
     "info"
   );
-  //cette fonction servira à tester si le jouur est eligible à tourner la roue ou non
+  //cette fonction servira à tester si le joueur est eligible à tourner la roue ou non
   function Eligible() {
     const message = document.getElementById("eligibilité");
     const container = document.getElementById("second-container");

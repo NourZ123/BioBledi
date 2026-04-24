@@ -13,59 +13,6 @@ body {
     display: flex;
     flex-direction: column;
 }
-
-.head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 40px;
-    background: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.head-left {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    width: 740px;        
-    flex-shrink: 0;      
-}
-
-/* Logo */
-.logo {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
-}
-
-.navigation {
-    display: flex;
-    gap: 1.4rem;
-    flex-wrap: nowrap;  
-}
-
-.navigation a {
-    text-decoration: none;
-    color: #2c3e2f;
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: color 0.3s ease;
-    white-space: nowrap;  
-}
-
-.navigation a:hover {
-    color: #4caf50;
-}
-
-/* Partie droite : titre + icônes */
-.head-right {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex-shrink: 1;      /* Peut se rétrécir si besoin */
-}
 .page-title-container {
     width: 150px;
     text-align: right;
@@ -81,55 +28,14 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;  /* Ajoute "..." si trop long */
 }
-
-/* Conteneur des icônes (profil + panier) */
-.head-actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-shrink: 0;
+.error{
+    color: red;
+    font-size:16px;
+    font-weight: bold;
+    font-family: inherit;
+    display: block;
+    margin-top: 10px;
 }
-
-/* Icônes utilisateur et panier */
-.user-icon, .cart-icon {
-    width: 34px;
-    height: 34px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.user-icon:hover, .cart-icon:hover {
-    transform: scale(1.1);
-}
-
-
-hr {
-    border: none;
-    border-top: 2px solid #cbd5c0;
-    width: 100%;
-    margin: 0;
-}
-
-/* Icônes utilisateur et panier */
-.user-icon, .cart-icon {
-    width: 34px;
-    height: 34px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.user-icon:hover, .cart-icon:hover {
-    transform: scale(1.1);
-}
-
-
-hr {
-    border: none;
-    border-top: 2px solid #cbd5c0;
-    width: 100%;
-    margin: 0;
-}
-/**/
 
 .page-container{
     display:flex;
@@ -174,6 +80,14 @@ input{
     background:#F8FAFC;
     margin-top:5px;
     font-size:15px;
+}
+#errEmail{
+    color: red;
+    font-size:16px;
+    font-weight: bold;
+    font-family: 14px;
+    display: block;
+    margin-top: 10px;
 }
 
 .buttons{

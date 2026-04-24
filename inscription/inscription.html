@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="inscription.css" />
     <link rel="icon" href="image/sign-in-svgrepo-com.svg" />
     <link rel="stylesheet" href="../code footer.css" />
+    <link rel="stylesheet" href="../code css commun.css" />
     <style>
       * {
         margin: 0;
@@ -37,12 +38,10 @@
         </div>
         <nav class="navigation">
           <a href="../index/index.html" class="menu-item">Accueil</a>
-          <a
-            href="../fruits et légumes/fruits et légumes.html"
-            class="menu-item"
+          <a href="../fruits et légumes/fruits et légumes.php" class="menu-item"
             >Marché</a
           >
-          <a href="../Epicerie bio/epicerie bio.html" class="menu-item"
+          <a href="../Epicerie bio/epicerie bio.php" class="menu-item"
             >Epicerie</a
           >
           <a href="../se connecter/bienvenue.html" class="menu-item"
@@ -51,7 +50,7 @@
           <a href="../inscription/inscription.html" class="menu-item"
             >Inscription</a
           >
-          <a href="../about us/about us.html" class="menu-item">About US</a>
+          <a href="../about us/about us.php" class="menu-item">About US</a>
           <a href="../contact us/contact us.html" class="menu-item"
             >Contact US</a
           >
@@ -63,14 +62,14 @@
       </div>
       <div class="head-right">
         <div class="head-actions">
-          <a href="../compte Client/compte.html">
+          <a href="../check_compte.php">
             <img
               src="image/person-svgrepo-com.svg"
               alt="person"
               class="user-icon"
             />
           </a>
-          <a href="../mon panier/panier.html">
+          <a href="../mon panier/panier.php">
             <img
               src="image/cart-2-svgrepo-com.svg"
               alt="cart"
@@ -82,45 +81,77 @@
     </div>
     <hr />
     <div class="Container">
-      <form action="https://httpbin.org/get" method="post" name="inscription">
+      <form action="inscription.php" method="post" id="inscription">
         <div class="signup-card">
           <h1 class="signup-title">Inscription</h1>
+
           <div class="form-group">
-            <label class="form-label">Nom et Prénom</label>
+            <label class="form-label">Nom</label>
             <input
               type="text"
               class="form-input"
-              placeholder="ex: Jean Dupont"
+              id="nom"
+              name="nom"
+              placeholder="ex : Dupont"
             />
+            <span id="errNom" class="error"></span>
           </div>
-
+          <div class="form-group">
+            <label class="form-label">Prénom</label>
+            <input
+              type="text"
+              class="form-input"
+              id="prename"
+              name="prename"
+              placeholder="ex: Jean"
+            />
+            <span id="errPrename" class="error"></span>
+          </div>
           <div class="form-group">
             <label class="form-label">Email</label>
             <input
               type="email"
               class="form-input"
+              id="email"
+              name="email"
               placeholder="demo@biobladi.com"
             />
+            <span id="errEmail" class="error"></span>
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-input" placeholder="......" />
+            <input
+              type="password"
+              class="form-input"
+              id="password"
+              placeholder="................."
+              minlength="8"
+              name="password"
+            />
+            <span id="errPass" class="error"></span>
           </div>
           <div class="form-group">
             <label class="form-label">Adresse</label>
             <input
               type="text"
               class="form-input"
+              id="adress"
               placeholder="ex: 123 rue de la Paix"
+              name="adress"
             />
+            <span id="errAdress" class="error"></span>
           </div>
           <div class="form-group">
             <label class="form-label">Téléphone</label>
             <input
               type="tel"
               class="form-input"
-              placeholder="+216 12 345 678"
+              id="phone"
+              placeholder="12 345 678"
+              name="phone"
+              pattern="[0-9]{2} [0-9]{3} [0-9]{3}"
             />
+            <span id="errPhone" class="error"></span>
           </div>
           <div class="form-group">
             <label class="form-label" for="P/A">
@@ -143,12 +174,13 @@
                   id="agriculteur"
                   name="type"
                   value="agriculteur"
+                  required
                 />
                 Agriculteur
               </label>
             </div>
           </div>
-          <button class="signup-btn">S'inscrire</button>
+          <button class="signup-btn" name="signupbtn">S'inscrire</button>
           <p class="login-link">
             Déjà un compte ?
             <a href="../se connecter/bienvenue.html">Se connecter</a>
@@ -167,8 +199,8 @@
         </div>
         <div class="footer-links">
           <h4>Liens utiles</h4>
-          <a href="../about us/about us.html">About Us</a>
-          <a href="../fruits et légumes/fruits et légumes.html">Marché</a>
+          <a href="../about us/about us.php">About Us</a>
+          <a href="../fruits et légumes/fruits et légumes.php">Marché</a>
         </div>
         <div class="footer-contact">
           <h4>Contactez-nous</h4>
@@ -231,5 +263,91 @@
         </p>
       </div>
     </footer>
+    <script>
+      let form = document.getElementById("inscription");
+      let phone = document.getElementById("phone");
+      phone.addEventListener("input", function (e) {
+        let digits = e.target.value.replace(/\D/g, "").substring(0, 8);
+        let formatted = "";
+
+        if (digits.length > 0) {
+          formatted = digits.substring(0, 2);
+          if (digits.length > 2) formatted += " " + digits.substring(2, 5);
+          if (digits.length > 5) formatted += " " + digits.substring(5, 8);
+        }
+        e.target.value = formatted;
+      });
+      form.addEventListener("submit", function (event) {
+        let error = document.getElementsByClassName("error");
+        for (let span of error) {
+          span.innerHTML = "";
+        }
+        let nom = document.getElementById("nom");
+        let prename = document.getElementById("prename");
+        let email = document.getElementById("email");
+        let password = document.getElementById("password");
+        let adress = document.getElementById("adress");
+        let alpha = /^[a-zA-Z ]+$/;
+        if (
+          nom.value === "" ||
+          prename.value === "" ||
+          email.value === "" ||
+          adress.value === "" ||
+          phone.value === "" ||
+          password.value === ""
+        ) {
+          alert(
+            "Veuillez remplir tous les champs obligatoires (Nom,Prenom, Email, Password , Adresse  et Téléphone)."
+          );
+          event.preventDefault();
+          return;
+        }
+        // Le nom du client doit etre valide: ne contient que des caractères alphabétiques
+        if (!alpha.test(nom.value)) {
+          document.getElementById("errNom").innerHTML =
+            "Veuillez saisir un nom valide.";
+          event.preventDefault();
+        }
+        if (!alpha.test(prename.value)) {
+          document.getElementById("errPrename").innerHTML =
+            "Veuillez saisir prénom valide.";
+          event.preventDefault();
+        }
+        // l'adressse mail doit être valide
+        if (!email.value.includes("@")) {
+          document.getElementById("errEmail").innerHTML =
+            "Veuillez saisir une adresse mail valide.";
+          event.preventDefault();
+        }
+        let reg = /[!@#$%^&*(),.?":{}|<>]/;
+        if (password.value.length > 7) {
+          if (!/[A-Z]/.test(password.value)) {
+            document.getElementById("errPass").innerHTML =
+              "Veuillez saisir un password qui contient une lettre majuscule ";
+            event.preventDefault();
+          }
+          if (!/[0-9]/.test(password.value)) {
+            document.getElementById("errPass").innerHTML =
+              "Veuillez saisir un password qui contient un chiffre ";
+            event.preventDefault();
+          }
+          if (!/[!@#$%^&*(),.?":{}|<>]/.test(password.value)) {
+            document.getElementById("errPass").innerHTML =
+              "Veuillez saisir un password qui contient un carac spécial ";
+            event.preventDefault();
+          }
+        } else {
+          document.getElementById("errPass").innerHTML =
+            "saisir un password de 8 caractères min !!";
+        }
+
+        let regexTel = /^\+?[0-9][0-9\s]*[0-9]$/;
+        if (!regexTel.test(phone.value)) {
+          document.getElementById("errPhone").innerHTML =
+            "Veuillez saisir un numéro de téléphone valide.";
+          event.preventDefault();
+        }
+      });
+    </script>
   </body>
 </html>
