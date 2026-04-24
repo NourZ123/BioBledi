@@ -25,7 +25,7 @@
     flex-shrink: 0;
 }
 .page-title-container {
-    width: 170px;
+    width: 200px;
     text-align: right;
     flex-shrink: 0;
 }
@@ -43,7 +43,7 @@
     display: flex;
     gap: 1.4rem;
     flex-wrap: nowrap; /* les éléments ne retournent jamais à la ligne */ 
-    margin-left: 30px; 
+    margin-left: 10px; 
 }
 
 .navigation a {

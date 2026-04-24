@@ -176,7 +176,6 @@ try {
             <tr class="titre-tableau">
               <td colspan="5" class="titre-cellule">
                 <img src="image/logo.jpg" class="logo" alt="logo" />
-                <!--Affiche "Nos meilleures offres du moment" si la barre de recherche est vide, sinon affiche "Résultats de votre recherche"-->
                 <?php echo empty($search_val) ? "Nos meilleures offres du moment" : "Résultats de votre recherche"; ?>
               </td>
             </tr>
