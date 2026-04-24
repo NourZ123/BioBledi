@@ -4,26 +4,27 @@ require_once '../database_connection.php';
 
 if (isset($_GET['ajax']) && $_GET['ajax'] === '1' && isset($_GET['action']) && $_GET['action'] === 'ajouter' && isset($_GET['id'])) {
     $id = intval($_GET['id']);
+    
     $stmt = $db->prepare("SELECT quantité FROM produit WHERE ID = ?");
     $stmt->execute([$id]);
     $produit = $stmt->fetch(PDO::FETCH_ASSOC);
     
-    if ($produit && $produit['quantité'] > 0) {
-        $stmt = $db->prepare("UPDATE produit SET quantité = quantité - 1 WHERE ID = ?");
-        $stmt->execute([$id]);
-         if (!isset($_SESSION['panier'])) {
-            $_SESSION['panier'] = [];
-        }
-        
-        if (isset($_SESSION['panier'][$id])) {
-            $_SESSION['panier'][$id]++;
+    if ($produit) {
+        if (!isset($_SESSION['panier'])) { $_SESSION['panier'] = []; }
+
+        $qte_panier = isset($_SESSION['panier'][$id]) ? $_SESSION['panier'][$id] : 0;
+        $stock_reel = intval($produit['quantité']);
+
+        if ($qte_panier < $stock_reel) {
+            $_SESSION['panier'][$id] = $qte_panier + 1;
+            
+            echo json_encode([
+                'success' => true, 
+                'new_stock' => $stock_reel - $_SESSION['panier'][$id]
+            ]);
         } else {
-            $_SESSION['panier'][$id] = 1;
+            echo json_encode(['success' => false, 'message' => 'Stock épuisé']);
         }
-        
-        echo json_encode(['success' => true, 'new_stock' => $produit['quantité'] - 1]);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Stock épuisé']);
     }
     exit();
 }
@@ -180,19 +181,23 @@ $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
 
                     <div class="Row3">
-                        <img src="image/box.svg" alt="stock" class="icon" />
-                        <p class="stock-value" id="stock-<?= $produit['ID'] ?>"><?= intval($produit['quantité']) ?></p>
+    <img src="image/box.svg" alt="stock" class="icon" />
+    <?php 
+        $qte_session = isset($_SESSION['panier'][$produit['ID']]) ? $_SESSION['panier'][$produit['ID']] : 0;
+        $stock_virtuel = intval($produit['quantité']) - $qte_session;
+    ?>
+    <p class="stock-value" id="stock-<?= $produit['ID'] ?>"><?= $stock_virtuel ?></p>
 
-                        <?php if ($produit['quantité'] > 0): ?>
-                            <button class="btn add-to-cart" data-id="<?= $produit['ID'] ?>" style="text-decoration: none;">
-                                <b>+Ajouter</b>
-                            </button>
-                        <?php else: ?>
-                            <button class="btn" disabled style="background: #ccc; cursor: not-allowed;">
-                                <b>Rupture</b>
-                            </button>
-                        <?php endif; ?>
-                    </div>
+    <?php if ($stock_virtuel > 0): ?>
+        <button class="btn add-to-cart" data-id="<?= $produit['ID'] ?>">
+            <b>+Ajouter</b>
+        </button>
+    <?php else: ?>
+        <button class="btn" disabled style="background: #ccc;">
+            <b>Rupture</b>
+        </button>
+    <?php endif; ?>
+</div>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>

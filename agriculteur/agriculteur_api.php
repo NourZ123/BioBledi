@@ -9,7 +9,6 @@ $action = $_GET['action'] ?? $_POST['action'] ?? '';
 
 switch ($action) {
 
-    // ─── INFOS AGRICULTEUR ────────────────────────────────────────────────────
     case 'get_agriculteur':
         $id   = intval($_GET['id'] ?? 1);
         $stmt = $db->prepare("SELECT * FROM agriculteur WHERE ID = ?");
@@ -21,7 +20,6 @@ switch ($action) {
         );
         break;
 
-    // ─── PRODUITS D'UN AGRICULTEUR ────────────────────────────────────────────
     case 'get_produits':
         $id   = intval($_GET['id_agriculteur'] ?? 1);
         $stmt = $db->prepare("SELECT * FROM produit WHERE ID_agriculteur = ?");
@@ -29,7 +27,6 @@ switch ($action) {
         echo json_encode(['succes' => true, 'produits' => $stmt->fetchAll()]);
         break;
 
-    // ─── AJOUTER UN PRODUIT (avec photo) ─────────────────────────────────────
     case 'ajouter_produit':
         $nom         = trim($_POST['nom_produit']     ?? '');
         $prix        = floatval($_POST['prix']         ?? 0);
@@ -41,13 +38,11 @@ switch ($action) {
         $unite       = trim($_POST['unite']            ?? 'kg');
         $id_agri     = intval($_POST['id_agriculteur'] ?? 1);
 
-        // Vérification champs obligatoires
         if (!$nom || !$prix || !$quantite) {
             echo json_encode(['succes' => false, 'erreur' => 'Champs obligatoires manquants (nom, prix, stock)']);
             break;
         }
 
-        // ── Vérification photo obligatoire ──
         if (!isset($_FILES['photo']) || $_FILES['photo']['error'] !== UPLOAD_ERR_OK) {
             echo json_encode(['succes' => false, 'erreur' => 'La photo est obligatoire']);
             break;
@@ -61,7 +56,6 @@ switch ($action) {
             break;
         }
 
-        // Vérifier le type MIME réel
         $finfo    = finfo_open(FILEINFO_MIME_TYPE);
         $mimeType = finfo_file($finfo, $file['tmp_name']);
         finfo_close($finfo);
@@ -72,14 +66,11 @@ switch ($action) {
             break;
         }
 
-        // ── Dossier commun pour toutes les images ──
-        // Chemin physique : BioBledi/images/produits/
         $uploadDir = dirname(__DIR__) . '/images/produits/';
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0755, true);
         }
 
-        // Générer un nom de fichier unique
         $extension = match($mimeType) {
             'image/jpeg' => 'jpg',
             'image/png'  => 'png',
@@ -88,14 +79,13 @@ switch ($action) {
         };
         $nomFichier = 'produit_' . time() . '_' . rand(1000, 9999) . '.' . $extension;
         $cheminFull = $uploadDir . $nomFichier;
-        $cheminBDD  = 'images/produits/' . $nomFichier; // chemin relatif depuis BioBledi/
+        $cheminBDD  = 'images/produits/' . $nomFichier; 
 
         if (!move_uploaded_file($file['tmp_name'], $cheminFull)) {
             echo json_encode(['succes' => false, 'erreur' => 'Erreur lors de l\'enregistrement de la photo']);
             break;
         }
 
-        // Insertion en BDD
         $stmt = $db->prepare("
             INSERT INTO produit
                 (nom_produit, prix, `quantité`, `catégorie`, offre, `région`, description, `unité`, ID_agriculteur, image)
@@ -141,13 +131,11 @@ switch ($action) {
             break;
         }
 
-        // Récupérer le chemin image pour supprimer le fichier
         $stmt = $db->prepare("SELECT image FROM produit WHERE ID = ?");
         $stmt->execute([$id]);
         $produit = $stmt->fetch();
 
         if ($produit && !empty($produit['image'])) {
-            // Le chemin en BDD est relatif à BioBledi/, donc on remonte depuis agriculteur/
             $cheminImage = dirname(__DIR__) . '/' . $produit['image'];
             if (file_exists($cheminImage)) {
                 unlink($cheminImage);

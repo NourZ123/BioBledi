@@ -181,7 +181,7 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
             </div>
             <div class="form-group">
               <label for="prix-produit">Prix (DT) *</label>
-              <input type="number" id="prix-produit" name="prix" class="form-input" placeholder="0.00" step="0.01" required />
+              <input type="number" id="prix-produit" name="prix" class="form-input" placeholder="0.00" step="0.1" min="1" required />
             </div>
           </div>
 

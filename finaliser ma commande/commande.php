@@ -44,6 +44,9 @@ if (isset($_SESSION['user_data']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
             foreach ($_SESSION['panier'] as $id_produit => $quantite) {
                 $stmt_panier->execute([$id_commande, $id_produit, $quantite]);
+                $sql_update = "UPDATE produit SET quantité = quantité - ? WHERE ID = ?";
+                $stmt_update = $db->prepare($sql_update);
+                $stmt_update->execute([$quantite, $id_produit]);
             }
             
             unset($_SESSION['panier']);
