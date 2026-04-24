@@ -43,6 +43,7 @@ try {
     <link rel="stylesheet" href="about us.css" />
     <link rel="icon" href="image/information-button-svgrepo-com (1).svg" />
     <link rel="stylesheet" href="../code footer.css" />
+    <link rel="stylesheet" href="../code css commun.css">
   </head>
 
   <body>

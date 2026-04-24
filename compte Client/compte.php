@@ -98,7 +98,7 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
           <a href="../Epicerie bio/epicerie bio.php" class="menu-item">Epicerie</a>
           <a href="../se connecter/bienvenue.html" class="menu-item">Connexion</a>
           <a href="../inscription/inscription.html" class="menu-item">Inscription</a>
-          <a href="../about us/about us.html" class="menu-item">About US</a>
+          <a href="../about us/about us.php" class="menu-item">About US</a>
           <a href="../contact us/contact us.html" class="menu-item">Contact US</a>
           <a href="../Questionnaire/questionnaire.html" class="menu-item">Questionnaire</a>
           <a href="../funpage/funpage.html" class="menu-item">Fun page</a>
@@ -220,7 +220,7 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
         </div>
         <div class="footer-links">
           <h4>Liens utiles</h4>
-          <a href="../about us/about us.html">About Us</a>
+          <a href="../about us/about us.php">About Us</a>
           <a href="../fruits et légumes/fruits et légumes.php">Marché</a>
         </div>
         <div class="footer-contact">
