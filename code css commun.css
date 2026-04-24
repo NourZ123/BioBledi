@@ -1,0 +1,176 @@
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+
+.head-left {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    width: 740px;        
+    flex-shrink: 0;     
+}
+
+
+.logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* pour le rendre arrondi */
+    object-fit: cover; /* pour remplir toute la zone 50px*50px */
+    flex-shrink: 0;
+}
+.page-title-container {
+    width: 170px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.page-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #14532d;
+    font-size: 28px;
+    margin: 0; /* car les <p> ont une marge automatique */
+    white-space: nowrap; /* pas de retour à la ligne */
+    overflow: hidden; /* quand le titre est trop long il sera masqué */
+}
+.navigation {
+    display: flex;
+    gap: 1.4rem;
+    flex-wrap: nowrap; /* les éléments ne retournent jamais à la ligne */ 
+    margin-left: 30px; 
+}
+
+.navigation a {
+    text-decoration: none; /* par défaut le lien est souligné donc on enlève les lignes avec cette propriété */
+    color: #2c3e2f;
+    font-size:16px;
+    font-weight: 500;
+    transition: color 0.3s ease;/* la couleur change progressivement en 0.3 secondes -- ease decrit le type d'accélération par défaut rapide puis lent puis rapide */
+    white-space: nowrap; /* pas de retour à la ligne */
+}
+
+.navigation a:hover {
+    color: #4caf50;
+}
+
+
+.head-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;     
+}
+
+.head-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.user-icon, .cart-icon {
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.user-icon:hover, .cart-icon:hover {
+    transform: scale(1.1);
+}
+
+hr {
+    border: none; /* pour supprimer le style par défaut*/
+    border-top: 2px solid #cbd5c0;
+    width: 100%;
+    margin: 0;
+}
+
+@media (max-width: 1275px) {
+    .head {
+        flex-direction:column ; 
+        padding: 15px;
+        gap: 15px;
+    }
+    .page-title-container {
+        width: 150px;
+        text-align: left;
+        flex-shrink: 0;
+    }
+
+    .head-left {
+        width: 100%; 
+        flex-direction:column;
+       
+        gap: 10px;
+    }
+
+    .page-title-container {
+        width: auto;
+        text-align: center;
+    }
+
+    .navigation {
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .intro-area h1, .intro-area h2 {
+        font-size: 32px; 
+    }
+}
+
+   @media (max-width: 600px) {
+    .head {
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .head-left {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+    }
+
+    
+    .navigation {
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 12px 20px; 
+        width: 100%;
+        
+    }
+
+    .navigation a {
+        background: none;
+        border: none;     
+        font-size: 0.9rem;
+        color: #2c3e2f;
+        padding: 5px 0;   
+        text-decoration: underline transparent; 
+        transition: all 0.3s ease;
+    }
+
+    .navigation a:hover {
+        color: #4caf50;
+        text-decoration: underline #4caf50;
+    }
+
+    .head-right {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+        gap: 40px; 
+    }
+
+    .intro-area h1 {
+        font-size: 24px;
+    }
+}

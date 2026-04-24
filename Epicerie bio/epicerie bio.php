@@ -40,6 +40,7 @@ $categorie_filter = $donnees['filtre_actif'];
     <link rel="stylesheet" href="epicerie bio.css" />
     <link rel="icon" href="image/honey.svg" />
     <link rel="stylesheet" href="../code footer.css" />
+    <link rel="stylesheet" href="../code css commun.css">
     <style>
         .container {
             display: grid !important;
