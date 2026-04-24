@@ -8,8 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $quantite = intval($_POST['quantite']);
     $categorie = $_POST['categorie'];
     $id_agri = intval($_POST['id_agriculteur']);
-    // ... récupérez les autres champs (région, unité, etc.)
-
     if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
         $uploadDir = '../images/produits/';
         $nomFichier = time() . '_' . $_FILES['photo']['name'];

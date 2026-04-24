@@ -1,7 +1,13 @@
 <?php
 session_start();
 require_once '../PHP/database_connection.php';
-$id_agriculteur = 1; 
+if (!isset($_SESSION['user_data']) || $_SESSION['type'] !== 'agriculteur') {
+  header('Location: ../se connecter/bienvenue.html?msg=auth');
+  exit();
+}
+$id_agriculteur = $_SESSION['user_data']['id_agriculteur'] 
+               ?? $_SESSION['user_data']['ID'] 
+               ?? $_SESSION['user_data']['id'];
 $stmt = $db->prepare("SELECT * FROM agriculteur WHERE ID = ?");
 $stmt->execute([$id_agriculteur]);
 $agriculteur = $stmt->fetch();
@@ -95,7 +101,7 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
       </div>
       <div class="head-right">
         <div class="head-actions">
-          <a href="../compte Client/compte.php">
+          <a href="../check_compte.php">
             <img src="image/person-svgrepo-com.svg" alt="person" class="user-icon" />
           </a>
           <a href="../mon panier/panier.php">
@@ -270,7 +276,7 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
             <div id="preview-container">
               <img id="preview-img" src="" alt="Aperçu" />
               <p id="preview-name"></p>
-              <span class="remove-photo" onclick="supprimerPhoto()">✕ Supprimer la photo</span>
+              <span class="remove-photo" onclick="supprimerPhoto()"> Supprimer la photo</span>
             </div>
           </div>
 

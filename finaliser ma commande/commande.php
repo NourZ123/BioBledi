@@ -52,7 +52,7 @@ if (isset($_SESSION['user_data']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
             unset($_SESSION['panier']);
         }
 
-        header("Location: ../compte Client/compte.php");
+        header("Location: ../check_compte.php");
         exit();
     }
 }

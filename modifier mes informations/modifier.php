@@ -12,7 +12,7 @@ if ($connexion){
   $phone_nouv=$_POST['phone'];
   if($adress_nouv=="" && $phone_nouv=="" && $email_nouv=="")
   {
-      header("Location: ../compte Client/compte.php");
+      header("Location: ../check_compte.php");
       exit();
   }else{
   if ($adress_nouv!="")
@@ -80,7 +80,7 @@ if ($connexion){
 } 
   }
 }
-header("Location: ../compte Client/compte.php?modif=ok");
+header("Location: ../check_compte.php?modif=ok");
 
 
 }
