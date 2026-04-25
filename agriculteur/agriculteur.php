@@ -114,17 +114,12 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
       </div>
       <div class="head-right">
         <div class="head-actions">
-<<<<<<< HEAD
-          <a href="../compte Client/compte.php"><img src="image/person-svgrepo-com.svg" class="user-icon" /></a>
-          <a href="../mon panier/panier.php"><img src="image/cart-2-svgrepo-com.svg" class="cart-icon" /></a>
-=======
           <a href="../check_compte.php">
             <img src="image/person-svgrepo-com.svg" alt="person" class="user-icon" />
           </a>
           <a href="../mon panier/panier.php">
             <img src="image/cart-2-svgrepo-com.svg" alt="cart" class="cart-icon" />
           </a>
->>>>>>> 7e521747821090e5bb9028e1ad0fa95c894a3d99
         </div>
       </div>
     </div>
@@ -430,31 +425,71 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
         setTimeout(() => { el.style.display = 'none'; }, 4000);
       }
 
+
+
       document.getElementById('productForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const photoInput = document.getElementById('photo-produit');
-        if (!photoInput.files || photoInput.files.length === 0) {
-          afficherMessage('Veuillez choisir une photo pour le produit', false);
-          return;
-        }
-        const formData = new FormData(this);
-        formData.append('action', 'ajouter_produit');
+  e.preventDefault();
 
-        fetch('agriculteur_api.php', { method: 'POST', body: formData })
-          .then(r => r.json())
-          .then(data => {
-            if (data.succes) {
-              afficherMessage(data.message, true);
-              document.getElementById('productForm').reset();
-              supprimerPhoto();
-              rechargerProduits();
-            } else {
-              afficherMessage(data.erreur || 'Erreur inconnue', false);
-            }
-          })
-          .catch(() => afficherMessage('Erreur réseau', false));
-      });
+  // ─── VALIDATION JS ───────────────────────────────────────────
+  const nom    = document.getElementById('nom-produit').value.trim();
+  const prix   = parseFloat(document.getElementById('prix-produit').value);
+  const stock  = document.getElementById('stock-produit').value;
+  const offre  = document.getElementById('offre-produit').value;
+  const unite  = document.getElementById('unite-produit').value.trim();
 
+  if (nom === '') {
+    afficherMessage(' Le nom du produit est obligatoire.', false);
+    return;
+  }
+  if (isNaN(prix) || prix <= 0) {
+    afficherMessage(' Le prix doit être un nombre positif (ex: 2.5).', false);
+    return;
+  }
+  if (!/^\d+$/.test(stock) || parseInt(stock) <= 0) {
+    afficherMessage(' Le stock doit être un nombre entier positif.', false);
+    return;
+  }
+  if (offre !== '' && (!/^\d+$/.test(offre) || parseInt(offre) < 0 || parseInt(offre) > 50)) {
+    afficherMessage(' L\'offre doit être un entier entre 0 et 50.', false);
+    return;
+  }
+  if (unite === '') {
+    afficherMessage(' L\'unité est obligatoire (ex: kg, litre, pièce).', false);
+    return;
+  }
+  
+
+  const photoInput = document.getElementById('photo-produit');
+  if (!photoInput.files || photoInput.files.length === 0) {
+    afficherMessage('Veuillez choisir une photo pour le produit', false);
+    return;
+  }
+
+  const formData = new FormData(this);
+  formData.append('action', 'ajouter_produit');
+
+  fetch('agriculteur_api.php', { method: 'POST', body: formData })
+    .then(r => r.json())
+    .then(data => {
+      if (data.succes) {
+        afficherMessage(data.message, true);
+        document.getElementById('productForm').reset();
+        supprimerPhoto();
+        rechargerProduits();
+      } else {
+        afficherMessage(data.erreur || 'Erreur inconnue', false);
+      }
+    })
+    .catch(() => afficherMessage('Erreur réseau', false));
+});
+
+
+
+
+
+
+
+      
       function rechargerProduits() {
         fetch(`agriculteur_api.php?action=get_produits&id_agriculteur=${ID_AGRICULTEUR}`)
           .then(r => r.json())
