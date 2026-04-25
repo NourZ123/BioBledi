@@ -1,7 +1,5 @@
 <?php
 require_once 'PHP/database_connection.php';
- //verifier les contraintes clé etrangères
- // ajouter les enregistrements
     $sql = "CREATE TABLE IF NOT EXISTS client (
         Nom VARCHAR(255) NOT NULL,
         Prénom VARCHAR(255) NOT NULL,

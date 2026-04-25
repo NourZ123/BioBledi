@@ -114,17 +114,12 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
       </div>
       <div class="head-right">
         <div class="head-actions">
-<<<<<<< HEAD
-          <a href="../compte Client/compte.php"><img src="image/person-svgrepo-com.svg" class="user-icon" /></a>
-          <a href="../mon panier/panier.php"><img src="image/cart-2-svgrepo-com.svg" class="cart-icon" /></a>
-=======
           <a href="../check_compte.php">
             <img src="image/person-svgrepo-com.svg" alt="person" class="user-icon" />
           </a>
           <a href="../mon panier/panier.php">
             <img src="image/cart-2-svgrepo-com.svg" alt="cart" class="cart-icon" />
           </a>
->>>>>>> 7e521747821090e5bb9028e1ad0fa95c894a3d99
         </div>
       </div>
     </div>
