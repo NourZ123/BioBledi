@@ -1,3 +1,13 @@
+<?php 
+session_start();
+require_once '../PHP/database_connection.php';
+if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
+  header('Location: ../se connecter/bienvenue.html?msg=is_agri');
+  exit();  
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
   <head>

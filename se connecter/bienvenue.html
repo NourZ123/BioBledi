@@ -269,8 +269,27 @@
           alert(
             "Accès refusé : Veuillez vous connecter à votre compte agriculteur."
           );
+          window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+          );
+        }
+      };
+      window.onload = function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const message = urlParams.get("msg");
 
-          // Optionnel : Nettoyer l'URL après l'alerte pour éviter qu'elle revienne au refresh
+        if (message === "is_agri") {
+          alert(
+            "Action réservée aux clients : Veuillez vous connecter avec un compte Client pour passer votre commande."
+          );
+        } else if (message === "auth") {
+          alert(
+            "Accès refusé : Veuillez vous connecter pour accéder à cet espace."
+          );
+        }
+        if (message) {
           window.history.replaceState(
             {},
             document.title,
