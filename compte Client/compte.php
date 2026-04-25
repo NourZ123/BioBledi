@@ -101,7 +101,7 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
           <a href="../about us/about us.php" class="menu-item">About US</a>
           <a href="../contact us/contact us.html" class="menu-item">Contact US</a>
           <a href="../Questionnaire/questionnaire.html" class="menu-item">Questionnaire</a>
-          <a href="../funpage/funpage.html" class="menu-item">Fun page</a>
+          <a href="../funpage/funpage.php" class="menu-item">Fun page</a>
         </nav>
       </div>
       <div class="head-right">

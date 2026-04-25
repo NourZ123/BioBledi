@@ -56,6 +56,7 @@ if (!empty($_SESSION['panier'])) {
         ];
     }
 }
+
 ?>
 
 
@@ -107,7 +108,7 @@ if (!empty($_SESSION['panier'])) {
             <a href="../Questionnaire/questionnaire.html" class="menu-item"
               >Questionnaire</a
             >
-            <a href="../funpage/funpage.html" class="menu-item">Fun page</a>
+            <a href="../funpage/funpage.php" class="menu-item">Fun page</a>
           </nav>
         </div>
         <div class="head-right">
@@ -201,16 +202,38 @@ if (!empty($_SESSION['panier'])) {
             <hr />
           </div>
           <div class="middle">
-            <div>Total des articles:</div>
-            <div><?= number_format($total_articles, 2) ?> DT</div>
-            <div style="color: #c6c1c1">Livraison:</div>
-            <div style="color: #c6c1c1"><?= number_format($frais_livraison, 2) ?> DT</div>
-            <div style="font-weight: bold;">Total à payer</div>
-            <div style="font-weight: bold; color: #14532d;">
-              <?= number_format($total_articles + $frais_livraison, 2) ;
-              $_SESSION['totalàpayer']= $total_articles + $frais_livraison ;?> DT
+    <div>Total des articles:</div>
+    <div><?= number_format($total_articles, 2) ?> DT</div>
+
+    <?php 
+    $remise = 0;
+    if (isset($_SESSION['promo'])) {
+        $p = $_SESSION['promo'];
+        if ($p == "10") $remise = $total_articles * 0.10;
+        if ($p == "15") $remise = $total_articles * 0.15;
+        if ($p == "5")  $remise = $total_articles * 0.05;
+        if ($p == "FREE") $frais_livraison = 0;
+
+        if ($remise > 0 || $p == "FREE"): ?>
+            <div style="color: #28a745;">Cadeau :</div>
+            <div style="color: #28a745;">
+                <?= ($p == "FREE") ? "Gratuit" : "- " . number_format($remise, 2) . " DT" ?>
             </div>
-          </div>
+        <?php endif; 
+    } ?>
+
+    <div style="color: #c6c1c1">Livraison:</div>
+    <div style="color: #c6c1c1"><?= number_format($frais_livraison, 2) ?> DT</div>
+
+    <div style="font-weight: bold;">Total à payer</div>
+    <div style="font-weight: bold; color: #14532d;">
+        <?php 
+          $net = ($total_articles - $remise) + $frais_livraison;
+          echo number_format($net, 2); 
+          $_SESSION['totalàpayer'] = $net; 
+        ?> DT
+    </div>
+</div>
           <div class="bottom">
           <a href="../finaliser ma commande/finaliser ma commande.php" 
        onclick="return verifierPanierVide(event)">

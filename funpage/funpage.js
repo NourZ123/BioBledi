@@ -549,11 +549,13 @@ button.addEventListener("click", () => {
     //de la tour qu'elle a fait la roue modulo 360degré
     const finalDeg = deg % 360;
     const index = Math.floor((360 - finalDeg) / segmentAngle) % Cadeau.length;
+    let promo = "";
     // selon l'indice on trouve le cadeau
     switch (index + 1) {
       case 1:
         result.textContent =
           "Vous avez gagné une remise de-10% sur votre panier  !";
+        promo = "10";
         break;
       case 2:
         result.textContent = "Tourner la roue une deuxième fois !";
@@ -561,6 +563,8 @@ button.addEventListener("click", () => {
       case 3:
         result.textContent =
           "Vous avez gagné une remise de -15% sur votre panier  !";
+        promo = "15";
+
         break;
       case 4:
         result.textContent = "Pas de Chance cette fois-ci !  ";
@@ -568,11 +572,18 @@ button.addEventListener("click", () => {
       case 5:
         result.textContent =
           "Vous avez gagné une livraison gratuite pour tout achat supèrieur à 50DT!";
+        promo = "free";
+
         break;
       case 6:
         result.textContent =
           "Vous avez gagné une remise de  -5% sur votre panier  !";
+        promo = "5";
+
         break;
+    }
+    if (promo !== "") {
+      fetch(`funpage.php?cadeau=${promo}`);
     }
     // la roue tourne pendant 4 seconde
   }, 4000);

@@ -48,7 +48,7 @@ if (isset($_SESSION['user_data']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt_update = $db->prepare($sql_update);
                 $stmt_update->execute([$quantite, $id_produit]);
             }
-            
+            $_SESSION['promo']="";
             unset($_SESSION['panier']);
         }
 

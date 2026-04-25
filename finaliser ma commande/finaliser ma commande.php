@@ -69,7 +69,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
           <a href="../Questionnaire/questionnaire.html" class="menu-item"
             >Questionnaire</a
           >
-          <a href="../funpage/funpage.html" class="menu-item">Fun page</a>
+          <a href="../funpage/funpage.php" class="menu-item">Fun page</a>
         </nav>
       </div>
       <div class="head-right">
