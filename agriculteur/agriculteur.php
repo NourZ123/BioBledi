@@ -1,7 +1,13 @@
 <?php
 session_start();
 require_once '../PHP/database_connection.php';
-$id_agriculteur = 1; 
+if (!isset($_SESSION['user_data']) || $_SESSION['type'] !== 'agriculteur') {
+  header('Location: ../se connecter/bienvenue.html?msg=auth');
+  exit();
+}
+$id_agriculteur = $_SESSION['user_data']['id_agriculteur'] 
+               ?? $_SESSION['user_data']['ID'] 
+               ?? $_SESSION['user_data']['id'];
 $stmt = $db->prepare("SELECT * FROM agriculteur WHERE ID = ?");
 $stmt->execute([$id_agriculteur]);
 $agriculteur = $stmt->fetch();
@@ -26,10 +32,23 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BioBladi - Espace Agriculteur</title>
+    <title>BioBladi - Tableau de bord</title>
     <link rel="stylesheet" href="agriculteur (1).css" />
+    <link rel="icon" href="image/screen-alt-2-svgrepo-com.svg" />
     <link rel="stylesheet" href="../code footer.css" />
+    <link rel="stylesheet" href="../code css commun.css">
     <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font-family: "Poppins", sans-serif; background-color: #f3f5f8; min-height: 100vh; display: flex; flex-direction: column; width: 100%; overflow-x: hidden; }
+      hr { border: none; border-top: 2px solid #cbd5c0; width: 100%; margin: 0; }
+      .option-menu { cursor: pointer; }
+      .option-menu:hover { background-color: #e2e8f0; border-radius: 8px; }
+      .lien_nav { text-decoration: none; color: #2c3e2f; font-size: 16px; font-weight: 500; transition: color 0.3s ease; }
+      
+      .zone-commandes { max-height: 300px; overflow-y: auto; border: 1px solid #e2e8f0; border-radius: 8px; background: white; }
+      .tableau-commandes thead { position: sticky; top: 0; background-color: #f8fafc; z-index: 10; }
+      .zone-commandes::-webkit-scrollbar { width: 6px; }
+      .zone-commandes::-webkit-scrollbar-thumb { background: #14532d; border-radius: 10px; }
       .upload-zone {
         border: 2px dashed #2E8B57;
         border-radius: 12px;
@@ -95,19 +114,28 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
       </div>
       <div class="head-right">
         <div class="head-actions">
-          <a href="../compte Client/compte.php">
-            <img src="image/person-svgrepo-com.svg" alt="person" class="user-icon" />
-          </a>
-          <a href="../mon panier/panier.php">
-            <img src="image/cart-2-svgrepo-com.svg" alt="cart" class="cart-icon" />
-          </a>
+          <a href="../compte Client/compte.php"><img src="image/person-svgrepo-com.svg" class="user-icon" /></a>
+          <a href="../mon panier/panier.php"><img src="image/cart-2-svgrepo-com.svg" class="cart-icon" /></a>
         </div>
       </div>
     </div>
 
-    <hr />
+    <div class="page-compte">
+      <div class="menu-lateral">
+        <div class="titre-section"><img src="image/person-svgrepo-com.svg" class="icone-titre" /> Compte Agriculteur</div>
+        <div class="liste-options">
+          
+          <div id="btn-infos" class="option-menu" style="padding: 10px"><img src="image/information-point-svgrepo-com.svg" class="icone-menu" /> Mes informations</div>
+          <div id="btn-dashboard" class="option-menu" style="padding: 10px"><img src="image/screen-alt-2-svgrepo-com (1).svg" class="icone-menu" /> Statistiques</div>
+          <div id="btn-Commande" class="option-menu" style="padding: 10px"><img src="image/cart-large-2-svgrepo-com.svg" class="icone-menu" /> Mes produits</div>
+          <div id="btn-ajout" class="option-menu" style="padding: 10px">
+            <img src="image/plus-large-svgrepo-com.svg" class="icone-menu" /> Ajouter un produit
+            </div>
+          <div class="option-menu" style="padding: 10px"><a href="logout.php" class="lien_nav">Déconnexion</a></div>
+        </div>
+      </div>
 
-    <main class="page-agriculteur">
+      <div class="page-agriculteur">
 
       <div class="info-section">
         <h2 class="section-title">
@@ -270,7 +298,7 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
             <div id="preview-container">
               <img id="preview-img" src="" alt="Aperçu" />
               <p id="preview-name"></p>
-              <span class="remove-photo" onclick="supprimerPhoto()">✕ Supprimer la photo</span>
+              <span class="remove-photo" onclick="supprimerPhoto()"> Supprimer la photo</span>
             </div>
           </div>
 
@@ -311,13 +339,13 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
                 <?php endif; ?>
                 <div class="product-actions">
                 <a href="../PHP/modifierproduit.php?id=<?= $produit['ID'] ?>" class="edit-btn">
-    Modifier
-</a>
-                  <a href="../PHP/supprimerproduit.php?id=<?= $produit['ID'] ?>" 
-   class="delete-btn" 
-   onclick="return confirm('Voulez-vous vraiment supprimer ce produit ?');">
-   Supprimer
-</a>
+                    Modifier
+                </a>
+                                <a href="../PHP/supprimerproduit.php?id=<?= $produit['ID'] ?>" 
+                class="delete-btn" 
+                onclick="return confirm('Voulez-vous vraiment supprimer ce produit ?');">
+                Supprimer
+                </a>
                 </div>
               </div>
             <?php endforeach; ?>
@@ -325,8 +353,8 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
         </div>
       </div>
 
-    </main>
-
+       </div>
+                </div>
     <footer class="footer">
       <div class="footer-container">
         <div class="footer-brand">
@@ -492,6 +520,22 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
             if (data.succes) rechargerProduits();
           });
       }
+
+
+
+      document.getElementById('btn-Commande').addEventListener('click', function() {
+      document.querySelector('.products-section').scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('btn-dashboard').addEventListener('click', function() {
+    document.querySelector('.stats-section').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.getElementById('btn-infos').addEventListener('click', function() {
+        document.querySelector('.info-section').scrollIntoView({ behavior: 'smooth' });
+    });
+    });
+    document.getElementById('btn-ajout').addEventListener('click', function() {
+        document.querySelector('.form-section').scrollIntoView({ behavior: 'smooth' });
+    });
     </script>
   </body>
 </html>
