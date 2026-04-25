@@ -71,7 +71,7 @@ try {
       </div>
       <div class="head-right">
         <div class="head-actions">
-          <a href="../compte Client/compte.php">
+          <a href="../check_compte.php">
             <img src="image/person-svgrepo-com.svg" alt="person" class="user-icon" />
           </a>
           <a href="../mon panier/panier.php">

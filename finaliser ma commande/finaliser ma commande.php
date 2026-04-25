@@ -1,3 +1,13 @@
+<?php 
+session_start();
+require_once '../PHP/database_connection.php';
+if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
+  header('Location: ../se connecter/bienvenue.html?msg=is_agri');
+  exit();  
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -64,7 +74,7 @@
       </div>
       <div class="head-right">
         <div class="head-actions">
-          <a href="../compte Client/compte.php">
+          <a href="../check_compte.php">
             <img
               src="image/person-svgrepo-com.svg"
               alt="person"
@@ -170,7 +180,7 @@
             <a href="../mon panier/panier.php"
               ><button class="btn2">Retour</button></a
             >
-            <a href="../compte Client/compte.php"><button class="btn1" name="btn1">Continuer</button></a>
+            <a href="../check_compte.php"><button class="btn1" name="btn1">Continuer</button></a>
           </div>
         </div>
       </form>
