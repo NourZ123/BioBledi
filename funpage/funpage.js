@@ -407,6 +407,13 @@ function terminerPartie() {
         message.innerHTML =
           "Bravo vous êtes éligible à tenter votre chance avec la Roue Magique !";
         container.style.display = "block";
+        const yOffset = -150; // Ajuste ce nombre (ex: -100 ou -200) pour voir plus ou moins le score
+        const y =
+          container.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        container.scrollIntoView({
+          top: y,
+          behavior: "smooth",
+        });
       } else {
         container.style.display = "none";
         message.innerHTML =

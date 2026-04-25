@@ -59,7 +59,8 @@ if (isset($_GET['cadeau'])) {
       <hr />
 
     <main class="game-container">
-      <div class="game-header">
+     <div id="game">
+     <div class="game-header">
         <h1 class="game-title">
           <img
             src="image/vegetables-salad-svgrepo-com.svg"
@@ -160,10 +161,12 @@ if (isset($_GET['cadeau'])) {
         </div>
         <div id="vegetablesContainer" class="vegetables-container"></div>
       </div>
-
+<div id="resultat" >
+  
       <!-- Message de feedback -->
       <div id="feedbackMessage" class="feedback-message"></div>
 
+     </div >
       <!-- Message de fin de jeu -->
       <div id="gameOverMessage" class="gameover-message"></div>
 
@@ -198,6 +201,7 @@ if (isset($_GET['cadeau'])) {
         <button id="spin">Tourner</button>
         <div id="result"></div>
       </div>
+</div>
     </main>
 
     <footer class="footer">

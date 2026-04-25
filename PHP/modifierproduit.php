@@ -47,6 +47,7 @@ if (!$produit) { exit("Produit introuvable"); }
     <title>Modifier <?= htmlspecialchars($produit['nom_produit']) ?></title>
     <link rel="stylesheet" href="../agriculteur/agriculteur (1).css">
     <link rel="stylesheet" href="../code footer.css">
+    <link rel="stylesheet" href="../code css commun.css">
     <style>
         .form-section { max-width: 600px; margin: 20px auto; padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .current-val { font-size: 0.85rem; color: #28a745; margin-bottom: 5px; display: block; }
