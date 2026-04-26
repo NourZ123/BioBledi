@@ -447,7 +447,7 @@ $total_stock = array_sum(array_column($produits, 'quantité'));
           <div class="form-group">
             <label>Photo du produit *</label>
             <div class="upload-zone" id="uploadZone">
-              <input type="file" id="photo-produit" name="photo" accept="../images/jpeg,image/png,image/webp" />
+              <input type="file" id="photo-produit" name="photo" accept="../image/jpeg,image/png,image/webp" />
               <span class="upload-icon">📷</span>
               <span class="upload-text">Cliquez pour choisir une photo</span>
               <p class="upload-subtext">JPG, PNG, WEBP — max 5 Mo</p>
