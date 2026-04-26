@@ -38,26 +38,26 @@ $categorie_filter = $donnees['filtre_actif'];
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fruits & Légumes</title>
-    <link rel="stylesheet" href="../css/epicerie bio.css" />
+    <link rel="stylesheet" href="../css/fruits et légumes.css" />
     <link rel="icon" href="../images/carrot-svgrepo-com.svg" />
     <link rel="stylesheet" href="../css/code footer.css" />
     <link rel="stylesheet" href="../css/code css commun.css">
     <style>
         .container {
-            display: grid !important;
-            grid-template-columns: repeat(5, 1fr) !important;
-            gap: 30px !important;
-            padding: 30px 5% !important;
+            display: grid ;
+            grid-template-columns: repeat(5, 1fr) ;
+            gap: 30px ;
+            padding: 30px 5% ;
         }
 
         .btn:disabled {
-            background: #ccc !important;
-            cursor: not-allowed !important;
+            background: #ccc ;
+            cursor: not-allowed ;
             opacity: 0.6;
         }
 
         a.btn {
-            text-decoration: none !important;
+            text-decoration: none ;
         }
 
         .search-bar {
@@ -142,12 +142,13 @@ $categorie_filter = $donnees['filtre_actif'];
                             <div style="color: #14532d; font-size: 20px; margin: 0%">
                                 <?php if (!empty($produit['offre']) && $produit['offre'] > 0):
                                     $prixReduit = $produit['prix'] * (1 - $produit['offre'] / 100); ?>
-                                    <strong>
-                                        <?= number_format($prixReduit, 2) ?> dt
+                                    <strong style="display:block;">
+                                     <?= number_format($prixReduit, 2) ?> dt
                                     </strong>
-                                    <span style="text-decoration:line-through; color:#aaa; font-size:14px; margin-left:5px;">
-                                        <?= number_format($produit['prix'], 2) ?> dt
+                                    <span style="display:block; text-decoration:line-through; color:#aaa; font-size:14px;">
+                                     <?= number_format($produit['prix'], 2) ?> dt
                                     </span>
+                                    
                                 <?php else: ?>
                                     <strong>
                                         <?= number_format($produit['prix'], 2) ?> dt
@@ -178,7 +179,9 @@ $categorie_filter = $donnees['filtre_actif'];
                         $qte_sess = isset($_SESSION['panier'][$produit['ID']]) ? $_SESSION['panier'][$produit['ID']] : 0;
                         $stock_v = intval($produit['quantité']) - $qte_sess;
                         ?>
-                        <p class="stock-value" id="stock-<?= $produit['ID'] ?>"><?= $stock_v ?></p>
+                        <p class="stock-value <?= ($stock_v < 10) ? 'low-stock' : '' ?>" id="stock-<?= $produit['ID'] ?>">
+                        <?= $stock_v ?>
+                        </p>                        
                         <?php if ($stock_v > 0): ?>
                             <button class="btn add-to-cart" data-id="<?= $produit['ID'] ?>"><b>+Ajouter</b></button>
                         <?php else: ?>
