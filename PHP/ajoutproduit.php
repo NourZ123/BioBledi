@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $unite
             ]);
 
-            header("Location: ../agriculteur/agriculteur.php?msg=Produit ajouté");
+            header("Location: ../PHP/agriculteur.php?msg=Produit ajouté");
             exit();
         }
     }

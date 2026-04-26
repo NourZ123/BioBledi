@@ -68,7 +68,7 @@ if (!empty($_SESSION['panier'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mon panier</title>
     <link rel="stylesheet" href="../css/panier.css" />
-    <link rel="icon" href="image/cart-2-svgrepo-com.svg" />
+    <link rel="icon" href="../images/cart-2-svgrepo-com.svg" />
     <link rel="stylesheet" href="../css/code footer.css" />
     <link rel="stylesheet" href="../css/code css commun.css">
   </head>
@@ -77,7 +77,7 @@ if (!empty($_SESSION['panier'])) {
       <div class="head">
         <div class="head-left">
           <div>
-            <img src="image/logo.jpg" alt="logo" class="logo" />
+            <img src="../images/logo.jpg" alt="logo" class="logo" />
           </div>
           <div class="page-title-container">
             <p class="page-title">
@@ -115,14 +115,14 @@ if (!empty($_SESSION['panier'])) {
           <div class="head-actions">
             <a href="../PHP/check_compte.php">
               <img
-                src="image/person-svgrepo-com.svg"
+                src="../images/person-svgrepo-com.svg"
                 alt="person"
                 class="user-icon"
               />
             </a>
             <a href="../PHP/panier.php">
               <img
-                src="image/cart-2-svgrepo-com.svg"
+                src="../images/cart-2-svgrepo-com.svg"
                 alt="cart"
                 class="cart-icon"
               />
@@ -169,7 +169,7 @@ if (!empty($_SESSION['panier'])) {
                   <div class="price"><?= number_format($item['sous_total'], 2) ?> DT</div>
                   <div style="margin-right: 20px">
                     <a href="?action=supprimer&id=<?= $item['id'] ?>" style="text-decoration:none; color:inherit;">
-                      <img src="image/bin-svgrepo-com.svg" alt="bin" />
+                      <img src="../images/bin-svgrepo-com.svg" alt="bin" />
                       <span>Retirer</span>
                     </a>
                   </div>
@@ -249,7 +249,7 @@ if (!empty($_SESSION['panier'])) {
     <footer class="footer">
       <div class="footer-container">
         <div class="footer-brand">
-          <img src="image/logo.jpg" class="logo" alt="BioBladi logo" />
+          <img src="../images/logo.jpg" class="logo" alt="BioBladi logo" />
           <span style="color: white; font-weight: bold"
             >BioBladi — Du champ à votre assiette, produits locaux et bio
           </span>
@@ -263,7 +263,7 @@ if (!empty($_SESSION['panier'])) {
           <h4>Contactez-nous</h4>
           <p>
             <img
-              src="image/phone-svgrepo-com (1).svg"
+              src="../images/phone-svgrepo-com (1).svg"
               alt="Téléphone"
               class="footer-icon"
             />
@@ -271,7 +271,7 @@ if (!empty($_SESSION['panier'])) {
           </p>
           <p>
             <img
-              src="image/mail-check-svgrepo-com.svg"
+              src="../images/mail-check-svgrepo-com.svg"
               alt="Email"
               class="footer-icon"
             />
@@ -279,7 +279,7 @@ if (!empty($_SESSION['panier'])) {
           </p>
           <p>
             <img
-              src="image/location-svgrepo-com.svg"
+              src="../images/location-svgrepo-com.svg"
               alt="Adresse"
               class="footer-icon"
             />
@@ -287,7 +287,7 @@ if (!empty($_SESSION['panier'])) {
           </p>
           <p>
             <img
-              src="image/time-svgrepo-com.svg"
+              src="../images/time-svgrepo-com.svg"
               alt="Horaires"
               class="footer-icon"
             />
@@ -298,19 +298,19 @@ if (!empty($_SESSION['panier'])) {
           <h4>Suivez-nous</h4>
           <a href="#"
             ><img
-              src="image/facebook-svgrepo-com (1).svg"
+              src="../images/facebook-svgrepo-com (1).svg"
               alt="Facebook"
               class="social-icon"
           /></a>
           <a href="#"
             ><img
-              src="image/instagram-167-svgrepo-com.svg"
+              src="../images/instagram-167-svgrepo-com.svg"
               alt="Instagram"
               class="social-icon"
           /></a>
           <a href="#"
             ><img
-              src="image/linkedin-svgrepo-com (1).svg"
+              src="../images/linkedin-svgrepo-com (1).svg"
               alt="LinkedIn"
               class="social-icon"
           /></a>

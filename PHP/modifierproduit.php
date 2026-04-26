@@ -80,11 +80,11 @@ if (!$produit) { exit("Produit introuvable"); }
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="agriculteur (1).css">
+    <link rel="stylesheet" href="../css/agriculteur (1).css">
     <title>Modifier <?= htmlspecialchars($produit['nom_produit']) ?></title>
     <link rel="stylesheet" href="../agriculteur/agriculteur (1).css">
-    <link rel="stylesheet" href="../code footer.css">
-    <link rel="stylesheet" href="../code css commun.css">
+    <link rel="stylesheet" href="../css/code footer.css">
+    <link rel="stylesheet" href="../css/code css commun.css">
     <style>
         .form-section { max-width: 600px; margin: 20px auto; padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .current-val { font-size: 0.85rem; color: #28a745; margin-bottom: 5px; display: block; }
@@ -118,11 +118,11 @@ if (!$produit) { exit("Produit introuvable"); }
         </div>
         <nav class="navigation">
           <a href="../index/index.html" class="menu-item">Accueil</a>
-          <a href="../fruits et légumes/fruits et légumes.php" class="menu-item">Marché</a>
-          <a href="../Epicerie bio/epicerie bio.php" class="menu-item">Epicerie</a>
+          <a href="../PHP/fruits et légumes.php" class="menu-item">Marché</a>
+          <a href="../PHP/epicerie bio.php" class="menu-item">Epicerie</a>
           <a href="../se connecter/bienvenue.html" class="menu-item">Connexion</a>
           <a href="../inscription/inscription.php" class="menu-item">Inscription</a>
-          <a href="../about us/about us.php" class="menu-item">About US</a>
+          <a href="../PHP/about us.php" class="menu-item">About US</a>
           <a href="../contact us/contact us.html" class="menu-item">Contact US</a>
           <a href="../Questionnaire/questionnaire.html" class="menu-item">Questionnaire</a>
           <a href="../funpage/funpage.php" class="menu-item">Fun page</a>
@@ -130,10 +130,10 @@ if (!$produit) { exit("Produit introuvable"); }
       </div>
       <div class="head-right">
         <div class="head-actions">
-          <a href="../check_compte.php">
+          <a href="../PHP/check_compte.php">
             <img src="image/person-svgrepo-com.svg" alt="person" class="user-icon" />
           </a>
-          <a href="../mon panier/panier.php">
+          <a href="../PHP/panier.php">
             <img src="image/cart-2-svgrepo-com.svg" alt="cart" class="cart-icon" />
           </a>
         </div>
@@ -204,7 +204,7 @@ if (!$produit) { exit("Produit introuvable"); }
 
         <div style="margin-top: 25px; display: flex; align-items: center; gap: 20px;">
            
-            <a href="../agriculteur/agriculteur.php" style="flex: 1; text-decoration: none; background-color: #f8faf8; text-align:center ; color:#14532d"   class="submit-btn">Annuler</a>
+            <a href="../PHP/agriculteur.php" style="flex: 1; text-decoration: none; background-color: #f8faf8; text-align:center ; color:#14532d"   class="submit-btn">Annuler</a>
             <button type="submit" class="submit-btn" style="flex: 2;"> Mettre à Jour</button>
 
         </div>
@@ -218,8 +218,8 @@ if (!$produit) { exit("Produit introuvable"); }
         </div>
         <div class="footer-links">
           <h4>Liens utiles</h4>
-          <a href="../about us/about us.php">About Us</a>
-          <a href="../fruits et légumes/fruits et légumes.php">Marché</a>
+          <a href="../PHP/about us.php">About Us</a>
+          <a href="../PHP/fruits et légumes.php">Marché</a>
         </div>
         <div class="footer-contact">
           <h4>Contactez-nous</h4>

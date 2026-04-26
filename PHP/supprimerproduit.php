@@ -15,5 +15,5 @@ if (isset($_GET['id'])) {
     $stmt->execute([$id]);
 }
 
-header("Location: ../agriculteur/agriculteur.php?msg=Produit supprimé");
+header("Location: ../PHP/agriculteur.php?msg=Produit supprimé");
 exit();

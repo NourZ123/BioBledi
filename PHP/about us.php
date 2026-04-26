@@ -41,7 +41,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BioBladi - À propos</title>
     <link rel="stylesheet" href="../css/about us.css" />
-    <link rel="icon" href="image/information-button-svgrepo-com (1).svg" />
+    <link rel="icon" href="../images/information-button-svgrepo-com (1).svg" />
     <link rel="stylesheet" href="../css/code footer.css" />
     <link rel="stylesheet" href="../css/code css commun.css">
   </head>
@@ -50,7 +50,7 @@ try {
     <div class="head">
       <div class="head-left">
         <div>
-          <img src="image/logo.jpg" alt="logo" class="logo" />
+          <img src="../images/logo.jpg" alt="logo" class="logo" />
         </div>
         <div class="page-title-container">
           <p class="page-title">
@@ -72,10 +72,10 @@ try {
       <div class="head-right">
         <div class="head-actions">
           <a href="../PHP/check_compte.php">
-            <img src="image/person-svgrepo-com.svg" alt="person" class="user-icon" />
+            <img src="../images/person-svgrepo-com.svg" alt="person" class="user-icon" />
           </a>
           <a href="../PHP/panier.php">
-            <img src="image/cart-2-svgrepo-com.svg" alt="cart" class="cart-icon" />
+            <img src="../images/cart-2-svgrepo-com.svg" alt="cart" class="cart-icon" />
           </a>
         </div>
       </div>
@@ -85,7 +85,7 @@ try {
     <section class="section-presentation">
       <div class="carte-presentation">
         <div class="entete-carte">
-          <img src="image/leaves-svgrepo-com.svg" alt="leaves" class="icone" />
+          <img src="../images/leaves-svgrepo-com.svg" alt="leaves" class="icone" />
           <div><h2>Qui sommes-nous ?</h2></div>
         </div>
 
@@ -104,11 +104,11 @@ try {
 
         <div class="entete-carte">
           <p class="phrase">Du champ à votre assiette, naturellement</p>
-          <img src="image/plant-svgrepo-com.svg" alt="plant" class="icone" />
+          <img src="../images/plant-svgrepo-com.svg" alt="plant" class="icone" />
         </div>
         <div class="liste">
           <div class="entete-carte">
-            <img src="image/leaves-svgrepo-com.svg" alt="leaves" class="icone" />
+            <img src="../images/leaves-svgrepo-com.svg" alt="leaves" class="icone" />
             <div><h3>Pourquoi choisir BioBladi ?</h3></div>
           </div>
           <ul>
@@ -130,7 +130,7 @@ try {
       <div class="conteneur-gestion">
         <div class="formulaire-recherche" style="max-width: 550px; margin: 0 auto;">
           <h3>
-            <img src="image/search-svgrepo-com.svg" alt="recherche" class="icone" />
+            <img src="../images/search-svgrepo-com.svg" alt="recherche" class="icone" />
             Rechercher un produit
           </h3>
           <form method="GET" action="about us.php#resultats">
@@ -157,7 +157,7 @@ try {
             </div>
             <div class="btn-group-recherche">
               <button type="submit" class="btn-rechercher">
-                <img src="image/search-svgrepo-com.svg" alt="recherche" class="icone" />
+                <img src="../images/search-svgrepo-com.svg" alt="recherche" class="icone" />
                 Rechercher
               </button>
               <a href="about us.php#resultats" class="btn-tous" style="text-decoration:none;line-height: 1.1; display:flex; align-items:center; justify-content:center; background-color: #fff; border: 2px solid #2e7d32; color: #2e7d32; font-weight: bold; flex: 1; border-radius: 40px; height: 45px;font-size: 0.85rem;">
@@ -175,13 +175,13 @@ try {
           <thead>
             <tr class="titre-tableau">
               <td colspan="5" class="titre-cellule">
-                <img src="image/logo.jpg" class="logo" alt="logo" />
+                <img src="../images/logo.jpg" class="logo" alt="logo" />
                 <?php echo empty($search_val) ? "Nos meilleures offres du moment" : "Résultats de votre recherche"; ?>
               </td>
             </tr>
             <tr class="en-tete-section">
               <td colspan="5">
-                <img src="image/star-fall-minimalistic-2-svgrepo-com.svg" alt="étoile" class="icone" />
+                <img src="../images/star-fall-minimalistic-2-svgrepo-com.svg" alt="étoile" class="icone" />
                 Nos produits vedettes par région
               </td>
             </tr>
@@ -239,7 +239,7 @@ try {
     <footer class="footer">
       <div class="footer-container">
         <div class="footer-brand">
-          <img src="image/logo.jpg" class="logo" alt="BioBladi logo" />
+          <img src="../images/logo.jpg" class="logo" alt="BioBladi logo" />
           <span style="color: white; font-weight: bold">
             BioBladi — Du champ à votre assiette, produits locaux et bio
           </span>
@@ -252,27 +252,27 @@ try {
         <div class="footer-contact">
           <h4>Contactez-nous</h4>
           <p>
-            <img src="image/phone-svgrepo-com (1).svg" alt="Téléphone" class="footer-icon" />
+            <img src="../images/phone-svgrepo-com (1).svg" alt="Téléphone" class="footer-icon" />
             +216 12 345 678
           </p>
           <p>
-            <img src="image/mail-check-svgrepo-com.svg" alt="Email" class="footer-icon" />
+            <img src="../images/mail-check-svgrepo-com.svg" alt="Email" class="footer-icon" />
             contact@biobladi.tn
           </p>
           <p>
-            <img src="image/location-svgrepo-com.svg" alt="Adresse" class="footer-icon" />
+            <img src="../images/location-svgrepo-com.svg" alt="Adresse" class="footer-icon" />
             Tunis, Tunisie
           </p>
           <p>
-            <img src="image/time-svgrepo-com.svg" alt="Horaires" class="footer-icon" />
+            <img src="../images/time-svgrepo-com.svg" alt="Horaires" class="footer-icon" />
             Lun-Ven: 8h - 18h
           </p>
         </div>
         <div class="footer-social">
           <h4>Suivez-nous</h4>
-          <a href="#"><img src="image/facebook-svgrepo-com (1).svg" alt="Facebook" class="social-icon" /></a>
-          <a href="#"><img src="image/instagram-167-svgrepo-com.svg" alt="Instagram" class="social-icon" /></a>
-          <a href="#"><img src="image/linkedin-svgrepo-com (1).svg" alt="LinkedIn" class="social-icon" /></a>
+          <a href="#"><img src="../images/facebook-svgrepo-com (1).svg" alt="Facebook" class="social-icon" /></a>
+          <a href="#"><img src="../images/instagram-167-svgrepo-com.svg" alt="Instagram" class="social-icon" /></a>
+          <a href="#"><img src="../images/linkedin-svgrepo-com (1).svg" alt="LinkedIn" class="social-icon" /></a>
         </div>
         <p class="footer-copy">
           © 2025 BioBladi — Tous droits réservés — Fièrement tunisien 🇹🇳

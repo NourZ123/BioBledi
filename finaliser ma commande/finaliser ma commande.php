@@ -16,10 +16,10 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
 
     <title>Finaliser ma commande</title>
 
-    <link rel="stylesheet" href="finaliser ma commande.css" />
+    <link rel="stylesheet" href="../css/finaliser ma commande.css" />
     <link rel="icon" href="image/credit-card-svgrepo-com.svg" />
-    <link rel="stylesheet" href="../code footer.css" />
-    <link rel="stylesheet" href="../code css commun.css">
+    <link rel="stylesheet" href="../css/code footer.css" />
+    <link rel="stylesheet" href="../css/code css commun.css">
     <style>
       * {
         margin: 0;
@@ -50,10 +50,10 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
 
         <nav class="navigation">
           <a href="../index/index.html" class="menu-item">Accueil</a>
-          <a href="../fruits et légumes/fruits et légumes.php" class="menu-item"
+          <a href="../PHP/fruits et légumes.php" class="menu-item"
             >Marché</a
           >
-          <a href="../Epicerie bio/epicerie bio.php" class="menu-item"
+          <a href="../PHP/epicerie bio.php" class="menu-item"
             >Epicerie</a
           >
           <a href="../se connecter/bienvenue.html" class="menu-item"
@@ -62,7 +62,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
           <a href="../inscription/inscription.php" class="menu-item"
             >Inscription</a
           >
-          <a href="../about us/about us.php" class="menu-item">About US</a>
+          <a href="../PHP/about us.php" class="menu-item">About US</a>
           <a href="../contact us/contact us.html" class="menu-item"
             >Contact US</a
           >
@@ -74,14 +74,14 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
       </div>
       <div class="head-right">
         <div class="head-actions">
-          <a href="../check_compte.php">
+          <a href="../PHP/check_compte.php">
             <img
               src="image/person-svgrepo-com.svg"
               alt="person"
               class="user-icon"
             />
           </a>
-          <a href="../mon panier/panier.php">
+          <a href="../PHP/panier.php">
             <img
               src="image/cart-2-svgrepo-com.svg"
               alt="cart"
@@ -177,10 +177,10 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
           </div>
 
           <div class="buttons">
-            <a href="../mon panier/panier.php"
+            <a href="../PHP/panier.php"
               ><button class="btn2">Retour</button></a
             >
-            <a href="../check_compte.php"><button class="btn1" name="btn1">Continuer</button></a>
+            <a href="../PHP/check_compte.php"><button class="btn1" name="btn1">Continuer</button></a>
           </div>
         </div>
       </form>
@@ -197,7 +197,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
         </div>
         <div class="footer-links">
           <h4>Liens utiles</h4>
-          <a href="../about us/about us.php">About Us</a>
+          <a href="../PHP/about us.php">About Us</a>
           <a href="../fruitsetlegumesfruits et légumes.php">Marché</a>
         </div>
         <div class="footer-contact">
