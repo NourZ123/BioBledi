@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once '../PHP/database_connection.php';
+$err = $_SESSION['erreurs_produit'] ?? [];
+unset($_SESSION['erreurs_produit']);
 if (!isset($_SESSION['user_data']) || $_SESSION['type'] !== 'agriculteur') {
   header('Location: ../se connecter/bienvenue.html?msg=auth');
   exit();
@@ -209,22 +211,28 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
           <div class="form-row">
             <div class="form-group">
               <label for="nom-produit">Nom du produit *</label>
-              <input type="text" id="nom-produit" name="nom_produit" class="form-input" placeholder="Ex: Pommes Gala" required />
+              <input type="text" id="nom-produit" name="nom_produit" class="form-input" placeholder="Ex: Pommes Gala"  />
+              <span id="errNom" class="error"><?php echo $err['nom_produit'] ?? ''; ?></span>
+
             </div>
             <div class="form-group">
               <label for="prix-produit">Prix (DT) *</label>
-              <input type="number" id="prix-produit" name="prix" class="form-input" placeholder="0.00" step="0.1" min="1" required />
+              <input type="number" id="prix-produit" name="prix" class="form-input" placeholder="0.00" step="0.1" min="1"  />
+              <span id="errPix" class="error"><?php echo $err['prix'] ?? ''; ?></span>
+
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label for="stock-produit">Stock *</label>
-              <input type="number" id="stock-produit" name="quantite" class="form-input" placeholder="Quantité" required />
+              <input type="number" id="stock-produit" name="quantite" class="form-input" placeholder="Quantité"  />
+              <span id="errStock" class="error"><?php echo $err['quantite'] ?? ''; ?></span>
+
             </div>
             <div class="form-group">
               <label for="categorie-produit">Catégorie*</label>
-              <select id="categorie-produit" name="categorie" class="form-input" required>
+              <select id="categorie-produit" name="categorie" class="form-input" >
                 <option value="Fruits">Fruits</option>
                 <option value="Légumes">Légumes</option>
                 <option value="Epicerie">Épicerie</option>
@@ -248,21 +256,25 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
             </div>
             <div class="form-group">
               <label for="offre-produit">Offre spéciale (%)</label>
-              <input type="number" id="offre-produit" name="offre" class="form-input" placeholder="0" min="0" max="50" />
+              <input type="number" id="offre-produit" name="offre" class="form-input" placeholder="0" min="0" />
+              <span id="errOffre" class="error"><?php echo $err['offre'] ?? ''; ?></span>
+
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label for="unite-produit">Unité*</label>
-              <input type="text" id="unite-produit" name="unite" class="form-input" placeholder="kg, litre, pièce..." required />
+              <input type="text" id="unite-produit" name="unite" class="form-input" placeholder="kg, litre, pièce..."  />
+              <span id="errUnite" class="error"><?php echo $err['unite'] ?? ''; ?></span>
+
             </div>
           
             
             
             <div class="form-group">
               <label for="region-produit">Région du produit *</label>
-              <select id="region-produit" name="region" class="form-input" required>
+              <select id="region-produit" name="region" class="form-input" >
                 <option value="">-- Sélectionnez un gouvernorat --</option>
                 <option value="Tunis">Tunis</option>
                 <option value="Ariana">Ariana</option>
@@ -303,6 +315,8 @@ $total_stock    = array_sum(array_column($produits, 'quantité'));
               <img id="preview-img" src="" alt="Aperçu" />
               <p id="preview-name"></p>
               <span class="remove-photo" onclick="supprimerPhoto()"> Supprimer la photo</span>
+              <span id="errIMage" class="error"><?php echo $err['image'] ?? ''; ?></span>
+
             </div>
           </div>
 

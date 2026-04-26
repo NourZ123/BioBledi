@@ -22,6 +22,19 @@ require_once 'PHP/database_connection.php';
         Nom_ferme VARCHAR(255) DEFAULT NULL
     );";
     $db->exec($sql1);
+    $sql5="CREATE TABLE IF NOT EXISTS produit (
+        image VARCHAR(255) NOT NULL,
+        ID INT(11) AUTO_INCREMENT PRIMARY KEY,
+        quantité INT(11) NOT NULL,
+        nom_produit VARCHAR(255) NOT NULL,
+        catégorie VARCHAR(255) NOT NULL,
+        offre FLOAT NOT NULL,
+        prix FLOAT NOT NULL,
+        unité VARCHAR(255) NOT NULL,
+        région VARCHAR(255) NOT NULL,
+        ID_agriculteur INT(11) NOT NULL,
+        description TEXT DEFAULT NULL
+    );";
     $sql2="CREATE TABLE commande (
         id_commande INT AUTO_INCREMENT PRIMARY KEY,
         montant DECIMAL(10, 2) NOT NULL,
@@ -53,19 +66,7 @@ require_once 'PHP/database_connection.php';
     $sql4="ALTER TABLE commande
     ADD status VARCHAR(50);";
 
-    $sql5="CREATE TABLE IF NOT EXISTS produit (
-        image VARCHAR(255) NOT NULL,
-        ID INT(11) AUTO_INCREMENT PRIMARY KEY,
-        quantité INT(11) NOT NULL,
-        nom_produit VARCHAR(255) NOT NULL,
-        catégorie VARCHAR(255) NOT NULL,
-        offre FLOAT NOT NULL,
-        prix FLOAT NOT NULL,
-        unité VARCHAR(255) NOT NULL,
-        région VARCHAR(255) NOT NULL,
-        ID_agriculteur INT(11) NOT NULL,
-        description TEXT DEFAULT NULL
-    );";
+    
    
 
 

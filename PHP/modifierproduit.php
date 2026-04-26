@@ -1,6 +1,9 @@
 <?php
 session_start();
 require_once '../PHP/database_connection.php';
+$err = $_SESSION['erreurs_modif'] ?? [];
+unset($_SESSION['erreurs_modif']);
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_produit'])) {
     $id = intval($_POST['id_produit']);
     
@@ -9,27 +12,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_produit'])) {
     $actuel = $stmt->fetch();
 
     if ($actuel) {
-        $nom       = !empty($_POST['nom_produit']) ? $_POST['nom_produit'] : $actuel['nom_produit'];
-        $prix      = !empty($_POST['prix'])        ? $_POST['prix']        : $actuel['prix'];
-        $quantite  = !empty($_POST['quantite'])    ? $_POST['quantite']    : $actuel['quantité'];
-        $offre     = ($_POST['offre'] !== '')      ? $_POST['offre']       : $actuel['offre'];
-        
-        $cheminImage = $actuel['image'];
-        if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
-            $uploadDir = '../images/produits/';
-            $nomFichier = time() . '_' . $_FILES['photo']['name'];
-            if (move_uploaded_file($_FILES['photo']['tmp_name'], $uploadDir . $nomFichier)) {
-                $cheminImage = 'images/produits/' . $nomFichier;
-            }
+        $erreurs = []; 
+
+        $nom_input      = trim($_POST['nom_produit']);
+        $prix_input     = $_POST['prix'];
+        $quantite_input = $_POST['quantite'];
+        $offre_input    = $_POST['offre'];
+
+        // --- VALIDATION ---
+        if (!empty($nom_input) && !preg_match("/^[a-zA-ZÀ-ÿ0-9\s\-]{2,255}$/", $nom_input)) {
+            $erreurs['nom'] = "Nom invalide.";
         }
 
-        $sql = "UPDATE produit SET nom_produit = ?, prix = ?, quantité = ?, offre = ?, image = ? WHERE ID = ?";
-        $db->prepare($sql)->execute([$nom, $prix, $quantite, $offre, $cheminImage, $id]);
-        header("Location: modifierproduit.php?id=$id&success=1");
-        exit();
+        if ($prix_input !== '' && floatval($prix_input) <= 0) {
+            $erreurs['prix'] = "Le prix doit être positif.";
+        }
+
+        if ($quantite_input !== '' && intval($quantite_input) < 0) {
+            $erreurs['quantite'] = "Le stock ne peut pas être négatif.";
+        }
+
+        if ($offre_input !== '' && (floatval($offre_input) < 0 || floatval($offre_input) > 100)) {
+            $erreurs['offre'] = "L'offre doit être entre 0 et 100%.";
+        }
+
+        $cheminImage = $actuel['image']; 
+        if (isset($_FILES['photo']) && $_FILES['photo']['error'] === 0) {
+            $extension = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
+            if (!in_array($extension, ['jpg', 'jpeg', 'png', 'webp'])) {
+                $erreurs['image'] = "Format non supporté.";
+            } else {
+                $uploadDir = '../images/produits/';
+                $nomFichier = time() . '_' . basename($_FILES['photo']['name']);
+                if (move_uploaded_file($_FILES['photo']['tmp_name'], $uploadDir . $nomFichier)) {
+                    $cheminImage = 'images/produits/' . $nomFichier;
+                }
+            }
+        }
+        if (!empty($erreurs)) {
+            $_SESSION['erreurs_modif'] = $erreurs;
+            header("Location: " . $_SERVER['HTTP_REFERER']);
+            exit();
+        } else {
+            $finalNom      = !empty($nom_input)      ? $nom_input              : $actuel['nom_produit'];
+            $finalPrix     = ($prix_input !== '')    ? floatval($prix_input)   : $actuel['prix'];
+            $finalQuantite = ($quantite_input !== '') ? intval($quantite_input) : $actuel['quantité'];
+            $finalOffre    = ($offre_input !== '')   ? floatval($offre_input)  : $actuel['offre'];
+
+            $sql = "UPDATE produit SET nom_produit = ?, prix = ?, quantité = ?, offre = ?, image = ? WHERE ID = ?";
+            $db->prepare($sql)->execute([$finalNom, $finalPrix, $finalQuantite, $finalOffre, $cheminImage, $id]);
+            
+            header("Location: modifierproduit.php?id=$id&success=1");
+            exit();
+        }
     }
 }
-
 if (!isset($_GET['id'])) { exit("ID manquant"); }
 $id_aff = intval($_GET['id']);
 $stmt = $db->prepare("SELECT * FROM produit WHERE ID = ?");
@@ -121,11 +158,15 @@ if (!$produit) { exit("Produit introuvable"); }
                 <label>Nom du produit</label>
                 <span class="current-val">Actuel : <?= htmlspecialchars($produit['nom_produit']) ?></span>
                 <input type="text" name="nom_produit" class="form-input" placeholder="nouveau nom" />
+                <span id="errNom" class="error"><?php echo $err['nom'] ?? ''; ?></span>
+
             </div>
             <div class="form-group">
                 <label>Prix (DT)</label>
                 <span class="current-val">Actuel : <?= $produit['prix'] ?> DT</span>
                 <input type="number" name="prix" class="form-input" step="0.1" placeholder="Nouveau prix..." />
+                <span id="errPix" class="error"><?php echo $err['prix'] ?? ''; ?></span>
+
             </div>
         </div>
 
@@ -134,11 +175,15 @@ if (!$produit) { exit("Produit introuvable"); }
                 <label>Stock disponible</label>
                 <span class="current-val">Actuel : <?= $produit['quantité'] ?></span>
                 <input type="number" name="quantite" class="form-input" placeholder="Nouvelle quantité..." />
+                <span id="errStock" class="error"><?php echo $err['quantite'] ?? ''; ?></span>
+
             </div>
             <div class="form-group">
                 <label>Remise (%)</label>
                 <span class="current-val">Actuelle : <?= $produit['offre'] ?? 0 ?> %</span>
                 <input type="number" name="offre" class="form-input" placeholder="Ex: 10" />
+                <span id="errOffre" class="error"><?php echo $err['offre'] ?? ''; ?></span>
+
             </div>
         </div>
 
@@ -152,6 +197,8 @@ if (!$produit) { exit("Produit introuvable"); }
               <span class="upload-icon">📷</span>
               <span class="upload-text">Cliquez pour choisir une photo</span>
               <p class="upload-subtext">JPG, PNG, WEBP — max 5 Mo</p>
+              <span id="errImage" class="error"><?php echo $err['image'] ?? ''; ?></span>
+
             </div>
         </div>
 
@@ -190,6 +237,44 @@ if (!$produit) { exit("Produit introuvable"); }
         <p class="footer-copy">© 2025 BioBladi — Tous droits réservés — Fièrement tunisien 🇹🇳</p>
       </div>
     </footer>
+    <script>
+  let modifForm = document.querySelector(".product-form");
+
+  modifForm.addEventListener("submit", function (event) {
+    let errorSpans = document.querySelectorAll(".error");
+    errorSpans.forEach(span => span.innerHTML = "");
+
+    let nom = document.getElementsByName("nom_produit")[0];
+    let prix = document.getElementsByName("prix")[0];
+    let stock = document.getElementsByName("quantite")[0];
+    let offre = document.getElementsByName("offre")[0];
+
+    let alphaNum = /^[a-zA-ZÀ-ÿ0-9\s\-]{2,255}$/;
+
+    if (nom.value.trim() !== "" && !alphaNum.test(nom.value)) {
+      document.getElementById("errNom").innerHTML = "Format invalide.";
+      event.preventDefault();
+    }
+
+    if (prix.value !== "" && (isNaN(prix.value) || parseFloat(prix.value) <= 0)) {
+      document.getElementById("errPix").innerHTML = "Prix positif requis.";
+      event.preventDefault();
+    }
+
+    if (stock.value !== "" && !/^\d+$/.test(stock.value)) {
+      document.getElementById("errStock").innerHTML = "Nombre entier requis.";
+      event.preventDefault();
+    }
+
+    if (offre.value !== "") {
+      let valOffre = parseFloat(offre.value);
+      if (isNaN(valOffre) || valOffre < 0 || valOffre > 100) {
+        document.getElementById("errOffre").innerHTML = "Valeur entre 0 et 100.";
+        event.preventDefault();
+      }
+    }
+  });
+</script>
     
 </body>
 </html>

@@ -159,7 +159,7 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
                 <p class="element-personnel"><span class="label-personnel">Téléphone :</span> <?= htmlspecialchars($phone ?: '12 345 678') ?></p>
                 <p class="element-personnel"><span class="label-personnel">Adresse :</span> <?= htmlspecialchars($adress ?: 'Tunis, El Manar, 2092') ?></p>
               </div>
-              <div class="conteneur-modifier"><a href="../modifier mes informations/modifier.html" class="lien-modifier">Modifier mes informations</a></div>
+              <div class="conteneur-modifier"><a href="../modifier mes informations/modifier.php" class="lien-modifier">Modifier mes informations</a></div>
             </div>
             <div class="zone-commandes">
               <h3 class="titre-commandes" style="padding:15px;">Mes Commandes Récentes</h3>
@@ -186,7 +186,7 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
               <p class="element-personnel" style="grid-column: span 2"><span class="label-personnel">Adresse :</span> <?= htmlspecialchars($adress ?: 'Tunis, El Manar, 2092') ?></p>
             </div>
             <div class="conteneur-modifier" style="margin-top: 30px">
-              <a href="../modifier mes informations/modifier.html" class="lien-modifier" style="padding: 10px 20px; background-color: #14532d; color: white; border-radius: 5px; text-decoration: none;">Modifier mes informations</a>
+              <a href="../modifier mes informations/modifier.php" class="lien-modifier" style="padding: 10px 20px; background-color: #14532d; color: white; border-radius: 5px; text-decoration: none;">Modifier mes informations</a>
             </div>
           </div>
         </div>
