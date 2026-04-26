@@ -85,7 +85,7 @@ $categorie_filter = $donnees['filtre_actif'];
                 <a href="../PHP/fruits et légumes.php" class="menu-item">Marché</a>
                 <a href="../PHP/epicerie bio.php" class="menu-item">Epicerie</a>
                 <a href="../se connecter/bienvenue.html" class="menu-item">Connexion</a>
-                <a href="../inscription/inscription.php" class="menu-item">Inscription</a>
+                <a href="../PHP/inscription.php" class="menu-item">Inscription</a>
                 <a href="../PHP/about us.php" class="menu-item">About US</a>
                 <a href="../contact us/contact us.html" class="menu-item">Contact US</a>
                 <a href="../Questionnaire/questionnaire.html" class="menu-item">Questionnaire</a>

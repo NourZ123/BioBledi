@@ -98,7 +98,7 @@ if (!empty($_SESSION['panier'])) {
             <a href="../se connecter/bienvenue.html" class="menu-item"
               >Connexion</a
             >
-            <a href="../inscription/inscription.php" class="menu-item"
+            <a href="../PHP/inscription.php" class="menu-item"
               >Inscription</a
             >
             <a href="../PHP/about us.php" class="menu-item">About US</a>
@@ -235,7 +235,7 @@ if (!empty($_SESSION['panier'])) {
     </div>
 </div>
           <div class="bottom">
-          <a href="../finaliser ma commande/finaliser ma commande.php" 
+          <a href="../PHP/finaliser ma commande.php" 
        onclick="return verifierPanierVide(event)">
         <button class="valider">Valider ma commande</button>
     </a>

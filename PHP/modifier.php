@@ -54,7 +54,7 @@ unset($_SESSION['erreurs_produit']);
           <a href="../se connecter/bienvenue.html" class="menu-item"
             >Connexion</a
           >
-          <a href="../inscription/inscription.php" class="menu-item"
+          <a href="../PHP/inscription.php" class="menu-item"
             >Inscription</a
           >
           <a href="../PHP/about us.php" class="menu-item">About US</a>

@@ -15,7 +15,7 @@ require_once '../PHP/database_connection.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BioBladi - Inscription</title>
     <link rel="stylesheet" href="../css/inscription.css" />
-    <link rel="icon" href="image/sign-in-svgrepo-com.svg" />
+    <link rel="icon" href="../images/sign-in-svgrepo-com.svg" />
     <link rel="stylesheet" href="../css/code footer.css" />
     <link rel="stylesheet" href="../css/code css commun.css" />
     <style>
@@ -39,7 +39,7 @@ require_once '../PHP/database_connection.php';
     <div class="head">
       <div class="head-left">
         <div>
-          <img src="image/logo.jpg" alt="logo" class="logo" />
+          <img src="../images/logo.jpg" alt="logo" class="logo" />
         </div>
         <div class="page-title-container">
           <p class="page-title">
@@ -57,7 +57,7 @@ require_once '../PHP/database_connection.php';
           <a href="../se connecter/bienvenue.html" class="menu-item"
             >Connexion</a
           >
-          <a href="../inscription/inscription.php" class="menu-item"
+          <a href="../PHP/inscription.php" class="menu-item"
             >Inscription</a
           >
           <a href="../PHP/about us.php" class="menu-item">About US</a>
@@ -74,14 +74,14 @@ require_once '../PHP/database_connection.php';
         <div class="head-actions">
           <a href="../PHP/check_compte.php">
             <img
-              src="image/person-svgrepo-com.svg"
+              src="../images/person-svgrepo-com.svg"
               alt="person"
               class="user-icon"
             />
           </a>
           <a href="../PHP/panier.php">
             <img
-              src="image/cart-2-svgrepo-com.svg"
+              src="../images/cart-2-svgrepo-com.svg"
               alt="cart"
               class="cart-icon"
             />
@@ -202,7 +202,7 @@ require_once '../PHP/database_connection.php';
     <footer class="footer">
       <div class="footer-container">
         <div class="footer-brand">
-          <img src="image/logo.jpg" class="logo" alt="BioBladi logo" />
+          <img src="../images/logo.jpg" class="logo" alt="BioBladi logo" />
           <span style="color: white; font-weight: bold"
             >BioBladi — Du champ à votre assiette, produits locaux et bio
           </span>
@@ -216,7 +216,7 @@ require_once '../PHP/database_connection.php';
           <h4>Contactez-nous</h4>
           <p>
             <img
-              src="image/phone-svgrepo-com (1).svg"
+              src="../images/phone-svgrepo-com (1).svg"
               alt="Téléphone"
               class="footer-icon"
             />
@@ -224,7 +224,7 @@ require_once '../PHP/database_connection.php';
           </p>
           <p>
             <img
-              src="image/mail-check-svgrepo-com.svg"
+              src="../images/mail-check-svgrepo-com.svg"
               alt="Email"
               class="footer-icon"
             />
@@ -232,7 +232,7 @@ require_once '../PHP/database_connection.php';
           </p>
           <p>
             <img
-              src="image/location-svgrepo-com.svg"
+              src="../images/location-svgrepo-com.svg"
               alt="Adresse"
               class="footer-icon"
             />
@@ -240,7 +240,7 @@ require_once '../PHP/database_connection.php';
           </p>
           <p>
             <img
-              src="image/time-svgrepo-com.svg"
+              src="../images/time-svgrepo-com.svg"
               alt="Horaires"
               class="footer-icon"
             />
@@ -251,19 +251,19 @@ require_once '../PHP/database_connection.php';
           <h4>Suivez-nous</h4>
           <a href="#"
             ><img
-              src="image/facebook-svgrepo-com (1).svg"
+              src="../images/facebook-svgrepo-com (1).svg"
               alt="Facebook"
               class="social-icon"
           /></a>
           <a href="#"
             ><img
-              src="image/instagram-167-svgrepo-com.svg"
+              src="../images/instagram-167-svgrepo-com.svg"
               alt="Instagram"
               class="social-icon"
           /></a>
           <a href="#"
             ><img
-              src="image/linkedin-svgrepo-com (1).svg"
+              src="../images/linkedin-svgrepo-com (1).svg"
               alt="LinkedIn"
               class="social-icon"
           /></a>

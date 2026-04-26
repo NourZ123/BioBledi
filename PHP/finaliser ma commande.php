@@ -17,7 +17,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
     <title>Finaliser ma commande</title>
 
     <link rel="stylesheet" href="../css/finaliser ma commande.css" />
-    <link rel="icon" href="image/credit-card-svgrepo-com.svg" />
+    <link rel="icon" href="../images/credit-card-svgrepo-com.svg" />
     <link rel="stylesheet" href="../css/code footer.css" />
     <link rel="stylesheet" href="../css/code css commun.css">
     <style>
@@ -40,7 +40,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
     <div class="head">
       <div class="head-left">
         <div>
-          <img src="image/logo.jpg" alt="logo" class="logo" />
+          <img src="../images/logo.jpg" alt="logo" class="logo" />
         </div>
         <div class="page-title-container">
           <p class="title">
@@ -59,7 +59,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
           <a href="../se connecter/bienvenue.html" class="menu-item"
             >Connexion</a
           >
-          <a href="../inscription/inscription.php" class="menu-item"
+          <a href="../PHP/inscription.php" class="menu-item"
             >Inscription</a
           >
           <a href="../PHP/about us.php" class="menu-item">About US</a>
@@ -76,14 +76,14 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
         <div class="head-actions">
           <a href="../PHP/check_compte.php">
             <img
-              src="image/person-svgrepo-com.svg"
+              src="../images/person-svgrepo-com.svg"
               alt="person"
               class="user-icon"
             />
           </a>
           <a href="../PHP/panier.php">
             <img
-              src="image/cart-2-svgrepo-com.svg"
+              src="../images/cart-2-svgrepo-com.svg"
               alt="cart"
               class="cart-icon"
             />
@@ -129,10 +129,10 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
     <input type="hidden" name="choix_paiement" id="hidden_paiement" value="">
     <div class="choice-group">
         <button type="button"" name="mode_paiement" value="carte" class="choice payment" id="cardpayment" style="font-weight: bold;  font-size: 16px;">
-            <img src="image/credit-card-svgrepo-com.svg" alt="card" /> Carte bancaire
+            <img src="../images/credit-card-svgrepo-com.svg" alt="card" /> Carte bancaire
         </button>
         <button type="button" name="mode_paiement" value="cash" class="choice payment" id="cash" style="font-weight: bold;  font-size: 16px;">
-            <img src="image/truck-svgrepo-com.svg" alt="truck" /> A la livraison
+            <img src="../images/truck-svgrepo-com.svg" alt="truck" /> A la livraison
         </button>
     </div>
 </div>
@@ -190,7 +190,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
       
       <div class="footer-container">
         <div class="footer-brand">
-          <img src="image/logo.jpg" class="logo" alt="BioBladi logo" />
+          <img src="../images/logo.jpg" class="logo" alt="BioBladi logo" />
           <span style="color: white; font-weight: bold"
             >BioBladi — Du champ à votre assiette, produits locaux et bio
           </span>
@@ -204,7 +204,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
           <h4>Contactez-nous</h4>
           <p>
             <img
-              src="image/phone-svgrepo-com (1).svg"
+              src="../images/phone-svgrepo-com (1).svg"
               alt="Téléphone"
               class="footer-icon"
             />
@@ -212,7 +212,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
           </p>
           <p>
             <img
-              src="image/mail-check-svgrepo-com.svg"
+              src="../images/mail-check-svgrepo-com.svg"
               alt="Email"
               class="footer-icon"
             />
@@ -220,7 +220,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
           </p>
           <p>
             <img
-              src="image/location-svgrepo-com.svg"
+              src="../images/location-svgrepo-com.svg"
               alt="Adresse"
               class="footer-icon"
             />
@@ -228,7 +228,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
           </p>
           <p>
             <img
-              src="image/time-svgrepo-com.svg"
+              src="../images/time-svgrepo-com.svg"
               alt="Horaires"
               class="footer-icon"
             />
@@ -239,19 +239,19 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'agriculteur') {
           <h4>Suivez-nous</h4>
           <a href="#"
             ><img
-              src="image/facebook-svgrepo-com (1).svg"
+              src="../images/facebook-svgrepo-com (1).svg"
               alt="Facebook"
               class="social-icon"
           /></a>
           <a href="#"
             ><img
-              src="image/instagram-167-svgrepo-com.svg"
+              src="../images/instagram-167-svgrepo-com.svg"
               alt="Instagram"
               class="social-icon"
           /></a>
           <a href="#"
             ><img
-              src="image/linkedin-svgrepo-com (1).svg"
+              src="../images/linkedin-svgrepo-com (1).svg"
               alt="LinkedIn"
               class="social-icon"
           /></a>
