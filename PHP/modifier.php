@@ -46,7 +46,7 @@ unset($_SESSION['erreurs_produit']);
       </div>
 
       <nav class="navigation">
-        <a href="../html/index.html" class="menu-item">Accueil</a>
+        <a href="../index.html" class="menu-item">Accueil</a>
         <a href="../PHP/fruits et légumes.php" class="menu-item">Marché</a>
         <a href="../PHP/epicerie bio.php" class="menu-item">Epicerie</a>
         <a href="../html/bienvenue.html" class="menu-item">Connexion</a>
