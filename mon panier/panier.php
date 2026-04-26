@@ -98,7 +98,7 @@ if (!empty($_SESSION['panier'])) {
             <a href="../se connecter/bienvenue.html" class="menu-item"
               >Connexion</a
             >
-            <a href="../inscription/inscription.html" class="menu-item"
+            <a href="../inscription/inscription.php" class="menu-item"
               >Inscription</a
             >
             <a href="../about us/about us.php" class="menu-item">About US</a>

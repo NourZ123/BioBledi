@@ -17,6 +17,11 @@ if (isset($_GET['cadeau'])) {
     <link rel="stylesheet" href="../code css commun.css">
     <link rel="icon" href="image/logo.jpg" />
     <script src="funpage.js" defer></script>
+    <style>
+      #second-container {
+    scroll-margin-top: 400px; 
+}
+    </style>
   </head>
   <body>
     <div class="header">
@@ -36,7 +41,7 @@ if (isset($_GET['cadeau'])) {
                   <a href="../fruits et légumes/fruits et légumes.php" class="menu-item">Marché</a>
                   <a href="../Epicerie bio/epicerie bio.php" class="menu-item">Epicerie</a>
                   <a href="../se connecter/bienvenue.html" class="menu-item">Connexion</a>
-                  <a href="../inscription/inscription.html" class="menu-item">Inscription</a>
+                  <a href="../inscription/inscription.php" class="menu-item">Inscription</a>
                   <a href="../about us/about us.php" class="menu-item">About US</a>
                   <a href="../contact us/contact us.html" class="menu-item">Contact US</a>
                   <a href="../Questionnaire/questionnaire.html" class="menu-item">Questionnaire</a>
