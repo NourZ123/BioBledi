@@ -17,13 +17,13 @@ if (isset($_POST["connexion"])) {
             $_SESSION['user_data'] = $user; 
             $_SESSION['type'] = $user_type; 
             if ($user_type === "agriculteur") {
-                header("Location: ../agriculteur/");
+                header("Location: ../PHP/agriculteur.php");
             } else {
-                header("Location: ../fruits et légumes/fruits et légumes.php");
+                header("Location: ../PHP/fruits et légumes.php");
             }
             exit();
         } else {
-            header("Location: bienvenue.html?error=pass");
+            header("Location: ../html/bienvenue.html?error=pass");
             exit();
         }
     }
