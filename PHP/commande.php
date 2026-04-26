@@ -54,5 +54,8 @@ if (isset($_SESSION['user_data']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: ../PHP/check_compte.php");
         exit();
     }
+}else{
+    header("Location: ../html/bienvenue.html?conn");
+        exit();
 }
 ?>

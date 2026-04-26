@@ -65,7 +65,7 @@ if ($existe > 0) {
     exit();
 }
 if($type == "particulier"){
-    $requete = $db->prepare("INSERT INTO client (Nom, Prénom, Email, Telephone, Adresse, Password,nom_ferme,Type_de_production) VALUES (?, ?, ?, ?, ?, ?,?,?)");
+    $requete = $db->prepare("INSERT INTO client (Nom, Prénom, Email, Telephone, Adresse, Password) VALUES (?, ?, ?, ?, ?, ?)");
 } else {
     $requete = $db->prepare("INSERT INTO agriculteur (Nom, Prénom, Email, Telephone, Adresse, Password,nom_ferme,Type_de_production) VALUES (?, ?, ?, ?, ?, ?,?,?)");
 }
