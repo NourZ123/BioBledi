@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require_once '../PHP/database_connection.php';
 $err = $_SESSION['erreurs_produit'] ?? [];
@@ -7,93 +7,75 @@ unset($_SESSION['erreurs_produit']);
 
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Modifier mes informations</title>
-    <link rel="icon" href="../images/information-svgrepo-com.svg" />
-    <link rel="stylesheet" href="../css/modifier.css" />
-    <link rel="stylesheet" href="../css/code footer.css" />
-    <link rel="stylesheet" href="../css/code css commun.css" />
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
 
-      body {
-        font-family: "Poppins", sans-serif;
-        background: #f6f9f6;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="head">
-      <div class="head-left">
-        <div>
-          <img src="../images/logo.jpg" alt="logo" class="logo" />
-        </div>
-        <div class="page-title-container">
-          <p class="title">
-            <strong>Mes INFOS</strong>
-          </p>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modifier mes informations</title>
+  <link rel="icon" href="../images/information-svgrepo-com.svg" />
+  <link rel="stylesheet" href="../css/modifier.css" />
+  <link rel="stylesheet" href="../css/code footer.css" />
+  <link rel="stylesheet" href="../css/code css commun.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        <nav class="navigation">
-          <a href="../index/index.html" class="menu-item">Accueil</a>
-          <a href="../PHP/fruits et légumes.php" class="menu-item"
-            >Marché</a
-          >
-          <a href="../PHP/epicerie bio.php" class="menu-item"
-            >Epicerie</a
-          >
-          <a href="../se connecter/bienvenue.html" class="menu-item"
-            >Connexion</a
-          >
-          <a href="../PHP/inscription.php" class="menu-item"
-            >Inscription</a
-          >
-          <a href="../PHP/about us.php" class="menu-item">About US</a>
-          <a href="../contact us/contact us.html" class="menu-item"
-            >Contact US</a
-          >
-          <a href="../Questionnaire/questionnaire.html" class="menu-item"
-            >Questionnaire</a
-          >
-          <a href="../funpage/funpage.php" class="menu-item">Fun page</a>
-        </nav>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f6f9f6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="head">
+    <div class="head-left">
+      <div>
+        <img src="../images/logo.jpg" alt="logo" class="logo" />
       </div>
-      <div class="head-right">
-        <div class="head-actions">
-          <a href="../PHP/check_compte.php">
-            <img
-              src="../images/person-svgrepo-com.svg"
-              alt="person"
-              class="user-icon"
-            />
-          </a>
-          <a href="../PHP/panier.php">
-            <img
-              src="../images/cart-2-svgrepo-com.svg"
-              alt="cart"
-              class="cart-icon"
-            />
-          </a>
-        </div>
+      <div class="page-title-container">
+        <p class="title">
+          <strong>Mes INFOS</strong>
+        </p>
+      </div>
+
+      <nav class="navigation">
+        <a href="../html/index.html" class="menu-item">Accueil</a>
+        <a href="../PHP/fruits et légumes.php" class="menu-item">Marché</a>
+        <a href="../PHP/epicerie bio.php" class="menu-item">Epicerie</a>
+        <a href="../html/bienvenue.html" class="menu-item">Connexion</a>
+        <a href="../PHP/inscription.php" class="menu-item">Inscription</a>
+        <a href="../PHP/about us.php" class="menu-item">About US</a>
+        <a href="../html/contact us.html" class="menu-item">Contact US</a>
+        <a href="../html/questionnaire.html" class="menu-item">Questionnaire</a>
+        <a href="../PHP/funpage.php" class="menu-item">Fun page</a>
+      </nav>
+    </div>
+    <div class="head-right">
+      <div class="head-actions">
+        <a href="../PHP/check_compte.php">
+          <img src="../images/person-svgrepo-com.svg" alt="person" class="user-icon" />
+        </a>
+        <a href="../PHP/panier.php">
+          <img src="../images/cart-2-svgrepo-com.svg" alt="cart" class="cart-icon" />
+        </a>
       </div>
     </div>
+  </div>
 
-    <hr />
+  <hr />
 
-    <div class="page-container">
-      <form action="modifiermesinfos.php" id="form" name="modification" method="post">
-        <div class="card">
-          <h1 class="page-title">Modifier mes informations</h1>
-          <!-- <div class="form-group">
+  <div class="page-container">
+    <form action="modifiermesinfos.php" id="form" name="modification" method="post">
+      <div class="card">
+        <h1 class="page-title">Modifier mes informations</h1>
+        <!-- <div class="form-group">
             <label for="nom et prenom">Nom et Prénom</label>
             <input
               type="text"
@@ -103,136 +85,101 @@ unset($_SESSION['erreurs_produit']);
               placeholder="nom"
             />
           </div>-->
-          <div class="form-group">
-            <label>Adresse</label>
-            <input
-              type="text"
-              name="adress"
-              placeholder="123 rue de la République"
-            />
-            <span id="errNom" class="error"><?php echo $err['Adresse'] ?? ''; ?></span>
+        <div class="form-group">
+          <label>Adresse</label>
+          <input type="text" name="adress" placeholder="123 rue de la République" />
+          <span id="errNom" class="error">
+            <?php echo $err['Adresse'] ?? ''; ?>
+          </span>
 
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="demo@biobladi.com" />
+          <span id="errEmail" class="error">
+            <?php echo $err['email'] ?? ''; ?>
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Téléphone</label>
+          <input type="tel" placeholder=" 12 345 678" id="phone" maxlength="10" name="phone" />
+          <span id="errPhone" class="error">
+            <?php echo $err['Telephone'] ?? ''; ?>
+          </span>
+        </div>
+        <div class="buttons">
+          <div>
+            <a href="../PHP/check_compte.php"><button class="btn2" type="reset">Annuler</button>
+            </a>
           </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="email" placeholder="demo@biobladi.com" />
-            <span id="errEmail" class="error"><?php echo $err['email'] ?? ''; ?></span>
-          </div>
-          <div class="form-group">
-            <label>Téléphone</label>
-            <input
-              type="tel"
-              placeholder=" 12 345 678"
-              id="phone"
-              maxlength="10"
-              name="phone"
-            />
-            <span id="errPhone" class="error"><?php echo $err['Telephone'] ?? ''; ?></span>
-          </div>
-          <div class="buttons">
-            <div>
-              <a href="../PHP/check_compte.php"
-                ><button class="btn2" type="reset">Annuler</button>
-              </a>
-            </div>
-            <div>
-              <a href="../PHP/check_compte.php"
-                ><button class="btn1" type="submit" name="submit">
-                  Enregistrer
-                </button></a
-              >
-            </div>
+          <div>
+            <a href="../PHP/check_compte.php"><button class="btn1" type="submit" name="submit">
+                Enregistrer
+              </button></a>
           </div>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
+  </div>
 
-    <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-brand">
-          <img src="../images/logo.jpg" class="logo" alt="BioBladi logo" />
-          <span
-            >BioBladi — Du champ à votre assiette, produits locaux et bio</span
-          >
-        </div>
-        <div class="footer-links">
-          <h4>Liens utiles</h4>
-          <a href="../PHP/about us.php">About Us</a>
-          <a href="../PHP/fruits et légumes.php">Marché</a>
-        </div>
-        <div class="footer-contact">
-          <h4>Contactez-nous</h4>
-          <p>
-            <img
-              src="../images/phone-svgrepo-com (1).svg"
-              alt="Téléphone"
-              class="footer-icon"
-            />
-            +216 12 345 678
-          </p>
-          <p>
-            <img
-              src="../images/mail-check-svgrepo-com.svg"
-              alt="Email"
-              class="footer-icon"
-            />
-            contact@biobladi.tn
-          </p>
-          <p>
-            <img
-              src="../images/location-svgrepo-com.svg"
-              alt="Adresse"
-              class="footer-icon"
-            />
-            Tunis, Tunisie
-          </p>
-        </div>
-        <div class="footer-social">
-          <h4>Suivez-nous</h4>
-          <a href="#"
-            ><img
-              src="../images/facebook-svgrepo-com (1).svg"
-              alt="Facebook"
-              class="social-icon"
-          /></a>
-          <a href="#"
-            ><img
-              src="../images/instagram-167-svgrepo-com.svg"
-              alt="Instagram"
-              class="social-icon"
-          /></a>
-          <a href="#"
-            ><img
-              src="../images/linkedin-svgrepo-com (1).svg"
-              alt="LinkedIn"
-              class="social-icon"
-          /></a>
-        </div>
-        <p class="footer-copy">
-          © 2025 BioBladi — Tous droits réservés — Fièrement tunisien 🇹🇳
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="../images/logo.jpg" class="logo" alt="BioBladi logo" />
+        <span>BioBladi — Du champ à votre assiette, produits locaux et bio</span>
+      </div>
+      <div class="footer-links">
+        <h4>Liens utiles</h4>
+        <a href="../PHP/about us.php">About Us</a>
+        <a href="../PHP/fruits et légumes.php">Marché</a>
+      </div>
+      <div class="footer-contact">
+        <h4>Contactez-nous</h4>
+        <p>
+          <img src="../images/phone-svgrepo-com (1).svg" alt="Téléphone" class="footer-icon" />
+          +216 12 345 678
+        </p>
+        <p>
+          <img src="../images/mail-check-svgrepo-com.svg" alt="Email" class="footer-icon" />
+          contact@biobladi.tn
+        </p>
+        <p>
+          <img src="../images/location-svgrepo-com.svg" alt="Adresse" class="footer-icon" />
+          Tunis, Tunisie
         </p>
       </div>
-    </footer>
-    <script>
-      let phone = document.getElementById("phone");
+      <div class="footer-social">
+        <h4>Suivez-nous</h4>
+        <a href="#"><img src="../images/facebook-svgrepo-com (1).svg" alt="Facebook" class="social-icon" /></a>
+        <a href="#"><img src="../images/instagram-167-svgrepo-com.svg" alt="Instagram" class="social-icon" /></a>
+        <a href="#"><img src="../images/linkedin-svgrepo-com (1).svg" alt="LinkedIn" class="social-icon" /></a>
+      </div>
+      <p class="footer-copy">
+        © 2025 BioBladi — Tous droits réservés — Fièrement tunisien 🇹🇳
+      </p>
+    </div>
+  </footer>
+  <script>
+    let phone = document.getElementById("phone");
 
-      phone.addEventListener("input", function (e) {
-        let digits = e.target.value.replace(/\D/g, "").substring(0, 8);
-        let formatted = "";
+    phone.addEventListener("input", function (e) {
+      let digits = e.target.value.replace(/\D/g, "").substring(0, 8);
+      let formatted = "";
 
-        if (digits.length > 0) {
-          formatted = digits.substring(0, 2);
-          if (digits.length > 2) formatted += " " + digits.substring(2, 5);
-          if (digits.length > 5) formatted += " " + digits.substring(5, 8);
-        }
-
-        e.target.value = formatted;
-      });
-      const params = new URLSearchParams(window.location.search);
-      if (params.has("error")) {
-        document.getElementById("errEmail").innerHTML =
-          "Email déjà existant ! ";
+      if (digits.length > 0) {
+        formatted = digits.substring(0, 2);
+        if (digits.length > 2) formatted += " " + digits.substring(2, 5);
+        if (digits.length > 5) formatted += " " + digits.substring(5, 8);
       }
-    </script>
-  </body>
+
+      e.target.value = formatted;
+    });
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("error")) {
+      document.getElementById("errEmail").innerHTML =
+        "Email déjà existant ! ";
+    }
+  </script>
+</body>
+
 </html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BioBladi - Connexion</title>
+    <link rel="stylesheet" href="../css/bienvenue.css" />
+    <link rel="icon" href="../images/logo.jpg" />
+    <link rel="stylesheet" href="../css/code footer.css" />
+    <link rel="stylesheet" href="../css/code css commun.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      hr {
+        color: #14532d;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f3f5f8;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="head">
+      <div class="head-left">
+        <div>
+          <img src="../images/logo.jpg" alt="logo" class="logo" />
+        </div>
+        <div class="page-title-container">
+          <p class="page-title">
+            <strong>Connexion</strong>
+          </p>
+        </div>
+        <nav class="navigation">
+          <a href="../html/index.html" class="menu-item">Accueil</a>
+          <a href="../PHP/fruits et légumes.php" class="menu-item">Marché</a>
+          <a href="../PHP/epicerie bio.php" class="menu-item">Epicerie</a>
+          <a href="../html/bienvenue.html" class="menu-item">Connexion</a>
+          <a href="../PHP/inscription.php" class="menu-item">Inscription</a>
+          <a href="../PHP/about us.php" class="menu-item">About US</a>
+          <a href="../html/contact us.html" class="menu-item">Contact US</a>
+          <a href="../html/questionnaire.html" class="menu-item"
+            >Questionnaire</a
+          >
+          <a href="../PHP/funpage.php" class="menu-item">Fun page</a>
+        </nav>
+      </div>
+      <div class="head-right">
+        <div class="head-actions">
+          <a href="../PHP/check_compte.php">
+            <img
+              src="../images/person-svgrepo-com.svg"
+              alt="person"
+              class="user-icon"
+            />
+          </a>
+          <a href="../PHP/panier.php">
+            <img
+              src="../images/cart-2-svgrepo-com.svg"
+              alt="cart"
+              class="cart-icon"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="login-container">
+      <div class="login-card">
+        <h1 id="login-title">Bienvenue sur BioBladi</h1>
+        <p id="login-subtitle">Connectez-vous pour continuer</p>
+        <form action="../PHP/bienvenue.php" method="post" name="connexion">
+          <div class="user-type">
+            <button type="button" id="client-btn" name="client">
+              <img
+                src="../images/person-line-drawing-svgrepo-com (1).svg"
+                alt="client"
+                class="btn-icon"
+              />
+              Client
+            </button>
+            <button type="button" id="agriculteur-btn" name="agriculteur">
+              <img
+                src="../images/tractor-svgrepo-com.svg"
+                alt="agriculteur"
+                class="btn-icon"
+              />
+              Agriculteur
+            </button>
+          </div>
+          <input type="hidden" name="user_type" id="user_type" value="client" />
+          <div class="form-group">
+            <label for="email" class="form-label">EMAIL</label>
+            <input
+              type="email"
+              id="email"
+              class="form-input"
+              placeholder="demo@biobladi.com"
+              name="email"
+              required
+            />
+            <span
+              id="errEmail"
+              name="errEmail"
+              style="color: red; font-weight: bold"
+            ></span>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label">MOT DE PASSE</label>
+            <input
+              type="password"
+              id="password"
+              class="form-input"
+              placeholder="......"
+              name="password"
+              required
+            />
+            <span
+              id="errPass"
+              name="errPass"
+              style="color: red; font-weight: bold"
+            ></span>
+          </div>
+
+          <button type="submit" id="connexion" name="connexion">
+            Se connecter
+          </button>
+        </form>
+        <p class="signup-link">
+          Pas de compte encore ?
+          <a href="../PHP/inscription.php" class="signup-link">s'inscrire</a>
+        </p>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <img src="../images/logo.jpg" class="logo" alt="BioBladi logo" />
+          <span style="color: white; font-weight: bold"
+            >BioBladi — Du champ à votre assiette, produits locaux et bio
+          </span>
+        </div>
+        <div class="footer-links">
+          <h4>Liens utiles</h4>
+          <a href="../PHP/about us.php">About Us</a>
+          <a href="../PHP/fruits et légumes.php">Marché</a>
+        </div>
+        <div class="footer-contact">
+          <h4>Contactez-nous</h4>
+          <p>
+            <img
+              src="../images/phone-svgrepo-com (1).svg"
+              alt="Téléphone"
+              class="footer-icon"
+            />
+            +216 12 345 678
+          </p>
+          <p>
+            <img
+              src="../images/mail-check-svgrepo-com.svg"
+              alt="Email"
+              class="footer-icon"
+            />
+            contact@biobladi.tn
+          </p>
+          <p>
+            <img
+              src="../images/location-svgrepo-com.svg"
+              alt="Adresse"
+              class="footer-icon"
+            />
+            Tunis, Tunisie
+          </p>
+          <p>
+            <img
+              src="../images/time-svgrepo-com.svg"
+              alt="Horaires"
+              class="footer-icon"
+            />
+            Lun-Ven: 8h - 18h
+          </p>
+        </div>
+        <div class="footer-social">
+          <h4>Suivez-nous</h4>
+          <a href="#"
+            ><img
+              src="../images/facebook-svgrepo-com (1).svg"
+              alt="Facebook"
+              class="social-icon"
+          /></a>
+          <a href="#"
+            ><img
+              src="../images/instagram-167-svgrepo-com.svg"
+              alt="Instagram"
+              class="social-icon"
+          /></a>
+          <a href="#"
+            ><img
+              src="../images/linkedin-svgrepo-com (1).svg"
+              alt="LinkedIn"
+              class="social-icon"
+          /></a>
+        </div>
+        <p class="footer-copy">
+          © 2025 BioBladi — Tous droits réservés — Fièrement tunisien 🇹🇳
+        </p>
+      </div>
+    </footer>
+    <script>
+      const btnClient = document.getElementById("client-btn");
+      const btnAgri = document.getElementById("agriculteur-btn");
+      const btnconnexion = document.getElementById("connexion");
+      let typeclient = "";
+      btnClient.addEventListener("click", () => {
+        document.getElementById("user_type").value = "client";
+        typeclient = "client";
+        btnClient.style.border = "2px solid #14532d";
+        btnAgri.style.border = "1px  solid #ccc ";
+      });
+      btnAgri.addEventListener("click", () => {
+        document.getElementById("user_type").value = "agriculteur";
+        typeclient = "agriculteur";
+        btnAgri.style.border = "2px solid #14532d";
+        btnClient.style.border = "1px solid #ccc";
+      });
+      btnconnexion.addEventListener("click", () => {
+        errEmail = document.getElementById("errEmail");
+        errPass = document.getElementById("errPass");
+        errEmail.style.color = "red";
+      });
+      // 1. On récupère les paramètres de l'URL
+      const params = new URLSearchParams(window.location.search);
+      // 2. On vérifie si "error" existe
+      if (params.has("error")) {
+        const type = params.get("error");
+        if (type === "email") {
+          document.getElementById("errEmail").innerHTML =
+            "Aucun compte client trouvé !";
+        } else if (type === "pass") {
+          document.getElementById("errPass").innerHTML =
+            "Mot de passe erroné !";
+        }
+      }
+      const urlParams = new URLSearchParams(window.location.search);
+      window.onload = function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get("msg") === "auth") {
+          alert(
+            "Accès refusé : Veuillez vous connecter à votre compte agriculteur."
+          );
+          window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+          );
+        }
+      };
+      window.onload = function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const message = urlParams.get("msg");
+
+        if (message === "is_agri") {
+          alert(
+            "Action réservée aux clients : Veuillez vous connecter avec un compte Client pour passer votre commande."
+          );
+        } else if (message === "auth") {
+          alert(
+            "Accès refusé : Veuillez vous connecter pour accéder à cet espace."
+          );
+        }
+        if (message) {
+          window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+          );
+        }
+      };
+    </script>
+  </body>
+</html>
