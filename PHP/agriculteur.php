@@ -4,7 +4,7 @@ require_once '../PHP/database_connection.php';
 $err = $_SESSION['erreurs_produit'] ?? [];
 unset($_SESSION['erreurs_produit']);
 if (!isset($_SESSION['user_data']) || $_SESSION['type'] !== 'agriculteur') {
-  header('Location: ../se connecter/bienvenue.html?msg=auth');
+  header('Location: ../html/bienvenue.html?msg=auth');
   exit();
 }
 $id_agriculteur = $_SESSION['user_data']['id_agriculteur']

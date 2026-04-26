@@ -181,7 +181,7 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
             src="../images/information-point-svgrepo-com.svg" class="icone-menu" /> Mes informations</div>
         <div id="btn-Commande" class="option-menu" style="padding: 10px"><img
             src="../images/cart-large-2-svgrepo-com.svg" class="icone-menu" /> Mes commandes</div>
-        <div class="option-menu" style="padding: 10px"><a href="logout.php" class="lien_nav">Déconnexion</a></div>
+        <div class="option-menu" style="padding: 10px"><a href="../PHP/logout.php" class="lien_nav">Déconnexion</a></div>
       </div>
     </div>
 

@@ -10,7 +10,7 @@ if (isset($_POST["connexion"])) {
     $query->execute([$email]);
     $user = $query->fetch();
     if (!$user) {
-        header("Location: bienvenue.html?error=email");
+        header("Location: ../html/bienvenue.html?error=email");
         exit();
     } else {
         if ($user['Password'] === $password) {

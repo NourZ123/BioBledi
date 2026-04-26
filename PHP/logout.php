@@ -1,6 +1,6 @@
 <?php
 session_start();
 session_destroy();
-header("Location: ../se connecter/bienvenue.html");
+header("Location: ../html/bienvenue.html");
 exit();
 ?>
