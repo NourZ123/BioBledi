@@ -40,7 +40,7 @@ $categorie_filter = $donnees['filtre_actif'];
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Epicerie bio</title>
-    <link rel="stylesheet" href="../css/epicerie bio.css" />
+    <link rel="stylesheet" href="../css/fruits et légumes.css" />
     <link rel="icon" href="../images/honey.svg" />
     <link rel="stylesheet" href="../css/code footer.css" />
     <link rel="stylesheet" href="../css/code css commun.css">
