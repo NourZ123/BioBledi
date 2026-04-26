@@ -216,6 +216,12 @@ $categorie_filter = $donnees['filtre_actif'];
                 <h4>Suivez-nous</h4>
                 <a href="#"><img src="../images/facebook-svgrepo-com (1).svg" alt="FB" class="social-icon" /></a>
                 <a href="#"><img src="../images/instagram-167-svgrepo-com.svg" alt="IG" class="social-icon" /></a>
+                <a href="#"
+            ><img
+              src="../images/linkedin-svgrepo-com (1).svg"
+              alt="LinkedIn"
+              class="social-icon"
+          /></a>
             </div>
             <p class="footer-copy">© 2025 BioBladi — Tous droits réservés — Fièrement tunisien 🇹🇳</p>
         </div>
