@@ -19,13 +19,12 @@ if (isset($_SESSION['user_data']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $paiement = $_POST['choix_paiement'] ?? '';
-
-    if ($paiement === "cardpayment") {
+    
+    if ($paiement === "card") {
         $nom = trim($_POST['nom'] ?? '');
         $num = trim($_POST['cardnumber'] ?? '');
         $exp = trim($_POST['dateexp'] ?? '');
         $cvc = trim($_POST['cvc'] ?? '');
-
         if (!empty($nom) && !empty($num) && !empty($exp) && !empty($cvc)) {
             $status = "payé";
         }
