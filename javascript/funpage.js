@@ -519,7 +519,6 @@ function reinitialiserComplet() {
 // Cette fonction s'exécute quand la page est complètement chargée
 
 function initialiserPage() {
-  // ÉTAPE 2 : Trouver les boutons dans la page
   const boutonDemarrer = document.getElementById("startGame");
   const boutonReinitialiser = document.getElementById("resetGame");
   const selectDifficulte = document.getElementById("difficulty");
