@@ -11,6 +11,8 @@ if (isset($_POST["signupbtn"]))
     $type=$_POST['type'] ?? '';
     $phone=$_POST['phone'] ?? '';
     $prename=$_POST['prename'] ?? '';
+    $nomferme=$_POST['nom_ferme'] ?? '';
+    $prod=$_POST['production'] ?? '';
 
 $erreurs = [];
 
@@ -36,6 +38,13 @@ if (!preg_match("/^[0-9\s]{10,20}$/", $phone)) {
 if (!preg_match("/^[a-zA-ZÀ-ÿ\s\-]{2,255}$/", $prename)) {
     $erreurs['prename'] = "Le prénom est invalide (lettres uniquement, max 255).";
 }
+ if (strlen($nom_ferme) > 255) {
+    $err['nom_ferme'] = "Le nom de la ferme ne doit pas dépasser 255 caractères.";
+}
+
+ if (strlen($production) > 255) {
+    $err['production'] = "Le type de production ne doit pas dépasser 255 caractères.";
+}
 if (!empty($erreurs)) {
     $_SESSION['mes_erreurs'] = $erreurs;
     $_SESSION['anciennes_valeurs'] = $_POST; // Pour ne pas vider le formulaire
@@ -56,9 +65,9 @@ if ($existe > 0) {
     exit();
 }
 if($type == "particulier"){
-    $requete = $db->prepare("INSERT INTO client (Nom, Prénom, Email, Telephone, Adresse, Password) VALUES (?, ?, ?, ?, ?, ?)");
+    $requete = $db->prepare("INSERT INTO client (Nom, Prénom, Email, Telephone, Adresse, Password,nom_ferme,Type_de_production) VALUES (?, ?, ?, ?, ?, ?,?,?)");
 } else {
-    $requete = $db->prepare("INSERT INTO agriculteur (Nom, Prénom, Email, Telephone, Adresse, Password) VALUES (?, ?, ?, ?, ?, ?)");
+    $requete = $db->prepare("INSERT INTO agriculteur (Nom, Prénom, Email, Telephone, Adresse, Password,nom_ferme,Type_de_production) VALUES (?, ?, ?, ?, ?, ?,?,?)");
 }
 
 $requete->execute([$nom, $prename, $email, $phone, $adress, $password]);
