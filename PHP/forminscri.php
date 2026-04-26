@@ -30,8 +30,8 @@ if (!preg_match("/^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?\":{}|<>]).{8,255}$/", $passwor
 if (empty($type)) {
     $erreurs['type'] = "Veuillez choisir votre profil (Client ou Agriculteur).";
 }
-if (!preg_match("/^[0-9]{8}$/", $phone)) {
-    $erreurs['phone'] = "Le téléphone doit contenir exactement 8 chiffres.";
+if (!preg_match("/^[0-9\s]{10,20}$/", $phone)) {
+    $erreurs['phone'] = "Le téléphone ne doit contenir que des chiffres.";
 }
 if (!preg_match("/^[a-zA-ZÀ-ÿ\s\-]{2,255}$/", $prename)) {
     $erreurs['prename'] = "Le prénom est invalide (lettres uniquement, max 255).";
@@ -43,18 +43,27 @@ if (!empty($erreurs)) {
 } else {
     unset($_SESSION['mes_erreurs']);
     
-if($type=="particulier"){
-    $requete = $db->prepare("INSERT INTO client (Nom, Prénom, Email, Telephone, Adresse, Password) 
-   VALUES (?, ?, ?, ?, ?, ?)");
 }
-else {
-    $requete = $db->prepare("INSERT INTO agriculteur (Nom, Prénom, Email, Telephone, Adresse, Password) 
-   VALUES (?, ?, ?, ?, ?, ?)");
-}
-$requete->execute([$nom, $prename, $email,$phone,$adress,$password]);
-header("Location: ../fruits et légumes/fruits et légumes.php");
+$table = ($type == "particulier") ? "client" : "agriculteur";
+$verif = $db->prepare("SELECT COUNT(*) FROM $table WHERE Email = ?");
+$verif->execute([$email]);
+$existe = $verif->fetchColumn();
+
+if ($existe > 0) {
+    $_SESSION['mes_erreurs']['email'] = "Cette adresse email est déjà utilisée.";
+    $_SESSION['anciennes_valeurs'] = $_POST;
+    header("Location: inscription.php");
     exit();
 }
+if($type == "particulier"){
+    $requete = $db->prepare("INSERT INTO client (Nom, Prénom, Email, Telephone, Adresse, Password) VALUES (?, ?, ?, ?, ?, ?)");
+} else {
+    $requete = $db->prepare("INSERT INTO agriculteur (Nom, Prénom, Email, Telephone, Adresse, Password) VALUES (?, ?, ?, ?, ?, ?)");
+}
+
+$requete->execute([$nom, $prename, $email, $phone, $adress, $password]);
+header("Location: ../PHP/fruits et légumes.php");
+exit();
 }
 
 ?>
