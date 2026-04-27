@@ -177,7 +177,7 @@ if (!empty($_SESSION['panier'])) {
           </div>
         </div>
       </div>
-      <div class="rightC" style="height: 550px !important; width: 1000px !important">
+      <div class="rightC" style="height: 550px !important; width: 700px">
 
         <div class="top">
           <p style="color: #14532d"><b>Récapitulatif</b></p>

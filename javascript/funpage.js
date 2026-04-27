@@ -4,10 +4,14 @@
 const liste_des_legumes = [
   // Chaque légume est un objet avec 3 informations
   //lors de la récolte les points seront ajoutés au score
-  { nom: "Fraise", image: "food-strawberry-svgrepo-com.svg", points: 15 },
+  {
+    nom: "Fraise",
+    image: "../images/food-strawberry-svgrepo-com.svg",
+    points: 15,
+  },
   {
     nom: "Carotte",
-    image: "carrot-salad-vegetables-svgrepo-com.svg",
+    image: "../images/carrot-salad-vegetables-svgrepo-com.svg",
     points: 12,
   },
   {
@@ -78,13 +82,13 @@ function afficherMessage(message, type) {
   let icone = "";
   if (type === "success") {
     // Pour les succès (quand on attrape un légume)
-    icone = `<img src="image/success.svg" class="message-icon" alt="succès"> `;
+    icone = `<img src="../images/success.svg" class="message-icon" alt="succès"> `;
   } else if (type === "error") {
     // Pour les erreurs (quand un légume tombe)
-    icone = `<img src="image/error.svg" class="message-icon" alt="erreur"> `;
+    icone = `<img src="../images/error.svg" class="message-icon" alt="erreur"> `;
   } else if (type === "info") {
     // Pour les informations (bienvenue, changement de difficulté)
-    icone = `<img src="image/info.svg" class="message-icon" alt="info"> `;
+    icone = `<img src="/images/info.svg" class="message-icon" alt="info"> `;
   }
 
   // Mettre l'icône et le message ensemble dans zoneMessage( la balise qui a l'id 'feedbackMessage')
@@ -189,7 +193,7 @@ function faireTomberLegume(legume) {
 
   //  Ajouter l'image et le nom du légume à l'intérieur
   elementLegume.innerHTML = `
-        <img src="image/${legume.image}" class="vegetable-img" alt="${legume.nom}">
+        <img src="../images/${legume.image}" class="vegetable-img" alt="${legume.nom}">
         <div class="vegetable-name">${legume.nom}</div>
     `;
 

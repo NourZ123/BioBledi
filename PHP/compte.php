@@ -8,7 +8,7 @@ $total_commandes = 0;
 $derniere_commande = null;
 $commandesObjets = [];
 
-class CommandeObjet
+class Commande
 {
   public $id_commande;
   public $montant;
@@ -56,7 +56,7 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
     $stmt = $db->prepare("SELECT id_commande, montant, date_commande, statut, adresse FROM commande WHERE id_client = ? ORDER BY date_commande DESC");
     $stmt->execute([$id_client]);
 
-    while ($obj = $stmt->fetchObject('CommandeObjet')) {
+    while ($obj = $stmt->fetchObject('Commande')) {
       $commandesObjets[] = $obj;
     }
 

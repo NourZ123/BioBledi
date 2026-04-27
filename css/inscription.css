@@ -183,7 +183,9 @@ body{
         width: auto;
         text-align: center;
     }
-
+    .login-container {
+        padding: 20px 10%; 
+    }
     .navigation {
         flex-wrap: wrap; 
         justify-content: center;

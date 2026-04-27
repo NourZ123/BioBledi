@@ -297,12 +297,16 @@ button:hover{
        
         gap: 10px;
     }
-
+    .rightC{
+        width: 490px!important;
+    }
     .page-title-container {
         width: auto;
         text-align: center;
     }
-
+    .container{
+        align-items: center;
+    }
     .navigation {
         flex-wrap: wrap; 
         justify-content: center;
@@ -334,7 +338,12 @@ button:hover{
         gap: 12px 20px; 
         width: 100%;
     }
-
+    .rightC{
+        width: 400px!important;
+    }
+    .leftC{
+        width: 400px;
+    }
     .navigation a {
         background: none;
         border: none;     

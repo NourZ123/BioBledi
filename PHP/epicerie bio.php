@@ -45,16 +45,10 @@ $categorie_filter = $donnees['filtre_actif'];
     <link rel="stylesheet" href="../css/code footer.css" />
     <link rel="stylesheet" href="../css/code css commun.css">
     <style>
-        .container {
-            display: grid !important;
-            grid-template-columns: repeat(5, 1fr) !important;
-            gap: 30px !important;
-            padding: 30px 5% !important;
-        }
-
+       
         .btn:disabled {
-            background: #ccc !important;
-            cursor: not-allowed !important;
+            background: #ccc ;
+            cursor: not-allowed ;
             opacity: 0.6;
         }
 
