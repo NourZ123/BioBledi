@@ -4,6 +4,18 @@ require_once '../PHP/database_connection.php';
 $err = $_SESSION['erreurs_modif'] ?? [];
 unset($_SESSION['erreurs_modif']);
 
+if (!isset($_GET['id'])) {
+  exit("ID manquant");
+}
+$id_aff = intval($_GET['id']);
+$stmt = $db->prepare("SELECT * FROM produit WHERE ID = ?");
+$stmt->execute([$id_aff]);
+$produit = $stmt->fetch();
+
+if (!$produit) {
+  exit("Produit introuvable");
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_produit'])) {
   $id = intval($_POST['id_produit']);
 
@@ -67,17 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_produit'])) {
     }
   }
 }
-if (!isset($_GET['id'])) {
-  exit("ID manquant");
-}
-$id_aff = intval($_GET['id']);
-$stmt = $db->prepare("SELECT * FROM produit WHERE ID = ?");
-$stmt->execute([$id_aff]);
-$produit = $stmt->fetch();
 
-if (!$produit) {
-  exit("Produit introuvable");
-}
 ?>
 
 <!DOCTYPE html>
@@ -167,7 +169,7 @@ if (!$produit) {
 <body>
   <div class="head">
     <div class="head-left">
-      <div><img src="image/logo.jpg" alt="logo" class="logo" /></div>
+      <div><img src="../images/logo.jpg" alt="logo" class="logo" /></div>
       <div class="page-title-container">
         <p class="page-title"><strong>Mise à Jour</strong></p>
       </div>
@@ -186,10 +188,10 @@ if (!$produit) {
     <div class="head-right">
       <div class="head-actions">
         <a href="../PHP/check_compte.php">
-          <img src="image/person-svgrepo-com.svg" alt="person" class="user-icon" />
+          <img src="../images/person-svgrepo-com.svg" alt="person" class="user-icon" />
         </a>
         <a href="../PHP/panier.php">
-          <img src="image/cart-2-svgrepo-com.svg" alt="cart" class="cart-icon" />
+          <img src="../images/cart-2-svgrepo-com.svg" alt="cart" class="cart-icon" />
         </a>
       </div>
     </div>
@@ -290,7 +292,7 @@ if (!$produit) {
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-brand">
-        <img src="image/logo.jpg" class="logo" alt="Logo BioBladi" />
+        <img src="../images/logo.jpg" class="logo" alt="Logo BioBladi" />
         <span style="color: white; font-weight: bold">BioBladi — Du champ à votre assiette, produits locaux et
           bio</span>
       </div>
@@ -301,16 +303,16 @@ if (!$produit) {
       </div>
       <div class="footer-contact">
         <h4>Contactez-nous</h4>
-        <p><img src="image/phone-svgrepo-com (1).svg" alt="" class="footer-icon" /> +216 12 345 678</p>
-        <p><img src="image/mail-check-svgrepo-com.svg" alt="" class="footer-icon" /> contact@biobladi.tn</p>
-        <p><img src="image/location-svgrepo-com.svg" alt="" class="footer-icon" /> Tunis, Tunisie</p>
-        <p><img src="image/time-svgrepo-com.svg" alt="" class="footer-icon" /> Lun-Ven: 8h - 18h</p>
+        <p><img src="../images/phone-svgrepo-com (1).svg" alt="" class="footer-icon" /> +216 12 345 678</p>
+        <p><img src="../images/mail-check-svgrepo-com.svg" alt="" class="footer-icon" /> contact@biobladi.tn</p>
+        <p><img src="../images/location-svgrepo-com.svg" alt="" class="footer-icon" /> Tunis, Tunisie</p>
+        <p><img src="../images/time-svgrepo-com.svg" alt="" class="footer-icon" /> Lun-Ven: 8h - 18h</p>
       </div>
       <div class="footer-social">
         <h4>Suivez-nous</h4>
-        <a href="#"><img src="image/facebook-svgrepo-com (1).svg" alt="Facebook" class="social-icon" /></a>
-        <a href="#"><img src="image/instagram-167-svgrepo-com.svg" alt="Instagram" class="social-icon" /></a>
-        <a href="#"><img src="image/linkedin-svgrepo-com (1).svg" alt="LinkedIn" class="social-icon" /></a>
+        <a href="#"><img src="../images/facebook-svgrepo-com (1).svg" alt="Facebook" class="social-icon" /></a>
+        <a href="#"><img src="../images/instagram-167-svgrepo-com.svg" alt="Instagram" class="social-icon" /></a>
+        <a href="#"><img src="../images/linkedin-svgrepo-com (1).svg" alt="LinkedIn" class="social-icon" /></a>
       </div>
       <p class="footer-copy">© 2025 BioBladi — Tous droits réservés — Fièrement tunisien 🇹🇳</p>
     </div>
