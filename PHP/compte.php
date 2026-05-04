@@ -46,16 +46,14 @@ if ($connexion && isset($_SESSION['type']) && $_SESSION['type'] === "client") {
   $adress = $user['Adresse'] ?? '';
   $phone = $user['Telephone'] ?? '';
   $email = $user['Email'] ?? '';
-  $id_client = $user['id_client'] ?? $user['ID'] ?? $user['id'] ?? null;
+  $id_client = $user['ID']?? null;
 
   if ($id_client) {
     $stmtCount = $db->prepare("SELECT COUNT(*) as total FROM commande WHERE id_client = ?");
     $stmtCount->execute([$id_client]);
     $total_commandes = $stmtCount->fetch(PDO::FETCH_ASSOC)['total'] ?? 0;
-
     $stmt = $db->prepare("SELECT id_commande, montant, date_commande, statut, adresse FROM commande WHERE id_client = ? ORDER BY date_commande DESC");
     $stmt->execute([$id_client]);
-
     while ($obj = $stmt->fetchObject('Commande')) {
       $commandesObjets[] = $obj;
     }

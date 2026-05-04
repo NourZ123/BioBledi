@@ -133,6 +133,9 @@ margin-left: 0px !important;
     gap:0px;
     margin-top: auto !important;
 }
+.low-stock {
+    color: red;   
+  }
 
 .icon{
     height:16px !important;
